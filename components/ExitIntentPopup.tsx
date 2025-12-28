@@ -50,7 +50,7 @@ export const ExitIntentPopup: React.FC = () => {
         {/* Left Side: Image */}
         <div className="hidden md:block md:w-5/12 relative">
           <img 
-            src="https://images.unsplash.com/photo-1623129532585-1e375db0c660?q=80&w=1200&auto=format&fit=crop" 
+            src="https://i.imgur.com/Os17LF8.png" 
             alt="Luxury Patio Design" 
             className="w-full h-full object-cover opacity-80"
           />
