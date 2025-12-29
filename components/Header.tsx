@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Phone } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  isHidden?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMobileLogo, setShowMobileLogo] = useState(false);
 
@@ -29,6 +33,8 @@ export const Header: React.FC = () => {
     <>
       <header 
         className={`fixed w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          isHidden ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+        } ${
           isScrolled 
             ? 'bg-white/90 backdrop-blur-xl shadow-lg py-3 border-b border-white/20' 
             : 'bg-transparent py-6'

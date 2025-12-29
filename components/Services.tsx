@@ -101,17 +101,23 @@ const services: ServiceItem[] = [
   }
 ];
 
-export const Services: React.FC = () => {
+interface ServicesProps {
+  onModalChange?: (isOpen: boolean) => void;
+}
+
+export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
 
   const openModal = (service: ServiceItem) => {
     setSelectedService(service);
     document.body.style.overflow = 'hidden';
+    if (onModalChange) onModalChange(true);
   };
 
   const closeModal = () => {
     setSelectedService(null);
     document.body.style.overflow = 'unset';
+    if (onModalChange) onModalChange(false);
   };
 
   const getGridClass = (index: number) => {

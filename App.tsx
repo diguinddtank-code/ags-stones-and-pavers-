@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ZParallaxShowcase } from './components/ZParallaxShowcase';
@@ -15,6 +15,8 @@ import { FloatingWidget } from './components/FloatingWidget';
 import { ExitIntentPopup } from './components/ExitIntentPopup';
 
 const App: React.FC = () => {
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+
   useEffect(() => {
     // Intersection Observer for scroll animations
     const observer = new IntersectionObserver((entries) => {
@@ -36,11 +38,11 @@ const App: React.FC = () => {
 
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
-      <Header />
+      <Header isHidden={isServiceModalOpen} />
       <main>
         <Hero />
         <ZParallaxShowcase />
-        <Services />
+        <Services onModalChange={setIsServiceModalOpen} />
         <WhyChooseUs />
         <BeforeAfter />
         <DayNightSlider />
