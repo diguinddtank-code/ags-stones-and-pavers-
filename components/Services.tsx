@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Plus } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 const services: ServiceItem[] = [
@@ -101,21 +101,154 @@ const services: ServiceItem[] = [
   }
 ];
 
+// --- 3D ENGINE COMPONENT ---
+const Paver3DViewer = () => {
+  const [rotation, setRotation] = useState({ x: 60, z: 45 });
+  const [zoom, setZoom] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const lastMouse = useRef({ x: 0, y: 0 });
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    lastMouse.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    const deltaX = e.clientX - lastMouse.current.x;
+    const deltaY = e.clientY - lastMouse.current.y;
+    
+    setRotation(prev => ({
+      x: Math.max(0, Math.min(90, prev.x - deltaY * 0.5)), // Limit X rotation to keep it distinct
+      z: prev.z + deltaX * 0.5
+    }));
+    
+    lastMouse.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.stopPropagation(); // Prevent page scroll
+    setZoom(prev => Math.max(0.5, Math.min(2, prev - e.deltaY * 0.001)));
+  };
+
+  // Generate a procedural Herringbone pattern
+  const pavers = [];
+  const rows = 6;
+  const cols = 6;
+  
+  // Logic for simple block pattern (not strictly herringbone for CSS simplicity, but staggered)
+  for (let i = -rows/2; i < rows/2; i++) {
+    for (let j = -cols/2; j < cols/2; j++) {
+       pavers.push({ x: i * 60, y: j * 35 + (i % 2 ? 17.5 : 0), color: '#e2e8f0' });
+    }
+  }
+
+  return (
+    <div 
+      ref={containerRef}
+      className="w-full h-full bg-[#1a1a1a] relative overflow-hidden cursor-move flex items-center justify-center rounded-l-2xl md:rounded-l-none select-none"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onWheel={handleWheel}
+    >
+       {/* 3D Scene Container */}
+       <div 
+         className="relative w-0 h-0"
+         style={{
+            transformStyle: 'preserve-3d',
+            transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateZ(${rotation.z}deg) scale(${zoom})`
+         }}
+       >
+          {/* Base Platform */}
+          <div 
+             className="absolute bg-[#2a2a2a] border-4 border-brand-gold/30 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+             style={{
+                width: '400px',
+                height: '400px',
+                transform: 'translate(-50%, -50%) translateZ(-10px)',
+             }}
+          />
+
+          {/* Pavers */}
+          {pavers.map((p, idx) => (
+             <div
+               key={idx}
+               className="absolute"
+               style={{
+                  width: '56px',
+                  height: '30px',
+                  transform: `translate3d(${p.x}px, ${p.y}px, 0)`,
+                  transformStyle: 'preserve-3d'
+               }}
+             >
+                {/* Top Face */}
+                <div className="absolute inset-0 bg-gray-300 border border-white/20" style={{ transform: 'translateZ(8px)' }}>
+                   {/* Texture Noise */}
+                   <div className="w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/concrete-seamless.png')]"></div>
+                </div>
+                {/* Side Face (South) */}
+                <div className="absolute bottom-0 left-0 w-full h-[8px] bg-gray-500 origin-bottom" style={{ transform: 'rotateX(-90deg)' }}></div>
+                {/* Side Face (East) */}
+                <div className="absolute right-0 top-0 h-full w-[8px] bg-gray-400 origin-right" style={{ transform: 'rotateY(90deg)' }}></div>
+                {/* Side Face (West) */}
+                <div className="absolute left-0 top-0 h-full w-[8px] bg-gray-400 origin-left" style={{ transform: 'rotateY(-90deg)' }}></div>
+             </div>
+          ))}
+
+          {/* Holographic Grid Overlay */}
+          <div 
+            className="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-brand-gold/20 rounded-full opacity-30 pointer-events-none"
+            style={{ transform: 'translate(-50%, -50%)' }}
+          ></div>
+       </div>
+
+       {/* HUD Controls */}
+       <div className="absolute bottom-6 right-6 flex flex-col gap-2 pointer-events-none">
+          <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
+             <Move3d size={14} className="text-brand-gold" /> Drag to Rotate
+          </div>
+          <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
+             <ZoomIn size={14} className="text-brand-gold" /> Scroll to Zoom
+          </div>
+       </div>
+
+       {/* Label */}
+       <div className="absolute top-6 left-6 pointer-events-none">
+          <div className="flex items-center gap-2 text-brand-gold font-bold uppercase tracking-widest text-xs mb-1">
+             <Box size={14} /> Interactive Preview
+          </div>
+          <h3 className="text-white font-serif text-xl">Standard Herringbone</h3>
+       </div>
+    </div>
+  );
+};
+
 interface ServicesProps {
   onModalChange?: (isOpen: boolean) => void;
 }
 
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [show3DModel, setShow3DModel] = useState(false);
 
   const openModal = (service: ServiceItem) => {
     setSelectedService(service);
+    // Auto-enable 3D model view for Pavers only initially
+    setShow3DModel(false);
     document.body.style.overflow = 'hidden';
     if (onModalChange) onModalChange(true);
   };
 
   const closeModal = () => {
     setSelectedService(null);
+    setShow3DModel(false);
     document.body.style.overflow = 'unset';
     if (onModalChange) onModalChange(false);
   };
@@ -226,20 +359,42 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 <X size={24} />
              </button>
 
-             {/* Modal Image */}
-             <div className="w-full md:w-1/2 h-64 md:h-auto relative">
-                <img 
-                  src={selectedService.image} 
-                  alt={selectedService.title} 
-                  className="w-full h-full object-cover" 
-                />
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute bottom-8 left-8 text-white">
-                   <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex">
-                      {selectedService.icon} Premium Service
-                   </div>
-                   <h2 className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
-                </div>
+             {/* Modal Left Side: Image OR 3D Model */}
+             <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
+                
+                {/* 3D Model Logic: Only for Pavers (id: 1) */}
+                {selectedService.id === '1' && show3DModel ? (
+                    <Paver3DViewer />
+                ) : (
+                    <>
+                        <img 
+                          src={selectedService.image} 
+                          alt={selectedService.title} 
+                          className="w-full h-full object-cover" 
+                        />
+                        <div className="absolute inset-0 bg-black/20"></div>
+                        <div className="absolute bottom-8 left-8 text-white">
+                           <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex">
+                              {selectedService.icon} Premium Service
+                           </div>
+                           <h2 className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
+                        </div>
+                    </>
+                )}
+
+                {/* Toggle Button for Pavers */}
+                {selectedService.id === '1' && (
+                    <button
+                        onClick={() => setShow3DModel(!show3DModel)}
+                        className="absolute bottom-6 right-6 z-20 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-brand-gold hover:border-brand-gold transition-all flex items-center gap-2"
+                    >
+                        {show3DModel ? (
+                            <> <LayoutGrid size={14} /> View Photo </>
+                        ) : (
+                            <> <Box size={14} /> View 3D Model </>
+                        )}
+                    </button>
+                )}
              </div>
 
              {/* Modal Content */}
