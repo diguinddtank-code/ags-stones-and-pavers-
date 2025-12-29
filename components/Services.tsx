@@ -180,7 +180,7 @@ export const Services: React.FC = () => {
 
       {/* SERVICE MODAL POPUP */}
       {selectedService && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           
           {/* Backdrop with Fade In */}
           <div 
@@ -191,6 +191,14 @@ export const Services: React.FC = () => {
           {/* Modal Container with Zoom/Scale Animation */}
           <div className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
              
+             {/* Close Button - Fixed Position on Card */}
+             <button 
+                onClick={closeModal} 
+                className="absolute top-4 right-4 z-50 p-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-brand-dark hover:bg-brand-gold hover:text-white transition-all"
+             >
+                <X size={20} />
+             </button>
+
              {/* Modal Image - Slide In Effect */}
              <div className="w-full md:w-1/2 h-48 md:h-auto relative overflow-hidden group">
                 <img 
@@ -206,11 +214,8 @@ export const Services: React.FC = () => {
              {/* Modal Content */}
              <div className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto bg-white flex flex-col h-full">
                 <div className="flex-grow">
-                  <button onClick={closeModal} className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-10">
-                    <X size={20} className="text-brand-dark" />
-                  </button>
                   
-                  <div className="animate-[fadeUp_0.5s_ease-out_0.1s_both]">
+                  <div className="animate-[fadeUp_0.5s_ease-out_0.1s_both] mt-2 md:mt-0">
                     <div className="text-brand-gold mb-4 p-3 bg-brand-gold/10 rounded-full inline-block">
                         {selectedService.icon}
                     </div>
