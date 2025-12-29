@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Plus } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 const services: ServiceItem[] = [
   {
     id: '1',
     title: 'Custom Pavers',
-    description: 'Transforming driveways and walkways into grand entrances with premium interlocking stones.',
+    description: 'Driveways, walkways, and patios crafted with premium interlocking stones for durability and curb appeal.',
     icon: <LayoutGrid className="w-6 h-6" />,
     image: 'https://i.imgur.com/by6FzIk.png',
     benefits: [
@@ -18,7 +18,7 @@ const services: ServiceItem[] = [
   {
     id: '2',
     title: 'Outdoor Kitchens',
-    description: 'Culinary masterpieces designed for the open air. BBQ islands, pizza ovens, and full bars.',
+    description: 'Fully equipped culinary stations with BBQ islands, pizza ovens, and bars designed for entertaining.',
     icon: <Utensils className="w-6 h-6" />,
     image: 'https://i.imgur.com/SIBIdiF.png',
     benefits: [
@@ -30,7 +30,7 @@ const services: ServiceItem[] = [
   {
     id: '3',
     title: 'Retaining Walls',
-    description: 'Engineering meets aesthetics. Structural walls that carve out functional space from slopes.',
+    description: 'Structural mastery to prevent erosion and create usable flat space on sloped terrains.',
     icon: <Layers className="w-6 h-6" />,
     image: 'https://i.imgur.com/dZstK86.png',
     benefits: [
@@ -42,7 +42,7 @@ const services: ServiceItem[] = [
   {
     id: '4',
     title: 'Luxury Fireplaces',
-    description: 'The heart of your backyard. Stone fireplaces and pits for year-round warmth.',
+    description: 'Custom masonry fire pits and grand fireplaces that become the warm heart of your backyard.',
     icon: <Flame className="w-6 h-6" />,
     image: 'https://i.imgur.com/G2N5Chs.png',
     benefits: [
@@ -54,7 +54,7 @@ const services: ServiceItem[] = [
   {
     id: '5',
     title: 'Custom Decks',
-    description: 'Premium wood and composite deck building. Multi-level structures designed for entertainment.',
+    description: 'Multi-level wood and composite decks engineered for safety, longevity, and aesthetics.',
     icon: <Hammer className="w-6 h-6" />,
     image: 'https://i.imgur.com/6f4H9fL.png',
     benefits: [
@@ -66,7 +66,7 @@ const services: ServiceItem[] = [
   {
     id: '6',
     title: 'Pool Hardscapes',
-    description: 'Slip-resistant tile work and coping. We create the perfect resort vibe around your pool.',
+    description: 'Slip-resistant coping and pool decks designed to create a resort-style atmosphere.',
     icon: <Waves className="w-6 h-6" />,
     image: 'https://i.imgur.com/vEHS8LG.png',
     benefits: [
@@ -77,8 +77,8 @@ const services: ServiceItem[] = [
   },
   {
     id: '7',
-    title: 'Stone Veneer & Steps',
-    description: 'Custom stone surface installation for walls, pillars, and grand staircases.',
+    title: 'Stone Veneer',
+    description: 'Elegant stone facing for house exteriors, pillars, and steps to elevate architectural detail.',
     icon: <Mountain className="w-6 h-6" />,
     image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
     benefits: [
@@ -90,7 +90,7 @@ const services: ServiceItem[] = [
   {
     id: '8',
     title: 'Landscape Design',
-    description: 'Complete softscape and hardscape integration. We design the flow of your entire property.',
+    description: 'Comprehensive 3D planning and softscape integration to complement your stone features.',
     icon: <Ruler className="w-6 h-6" />,
     image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDFb-Jx8ZF4z2mEWM84aEgZIf_Xpw',
     benefits: [
@@ -120,65 +120,89 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
     if (onModalChange) onModalChange(false);
   };
 
-  const getGridClass = (index: number) => {
-    switch(index) {
-      case 0: return "md:col-span-8"; 
-      case 1: return "md:col-span-4"; 
-      case 2: return "md:col-span-5"; 
-      case 3: return "md:col-span-7"; 
-      case 4: return "md:col-span-4"; 
-      case 5: return "md:col-span-8"; 
-      case 6: return "md:col-span-6"; 
-      case 7: return "md:col-span-6"; 
-      default: return "md:col-span-6";
-    }
-  };
-
   return (
-    <section id="services" className="pt-32 pb-32 bg-white relative z-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="pt-24 pb-32 bg-slate-50 relative z-20">
+      {/* Decorative background line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-brand-gold/50"></div>
+
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 fade-in-section">
-          <div className="max-w-2xl">
-            <h3 className="text-brand-gold font-bold tracking-[0.2em] uppercase mb-4 text-sm">Our Expertise</h3>
-            <h2 className="font-serif text-5xl md:text-6xl font-bold text-brand-dark leading-none">
-              Complete <span className="italic font-serif text-brand-gold">Outdoor Living</span> Solutions
+        {/* Section Header */}
+        <div className="text-center mb-20 fade-in-section">
+            <h3 className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
+               World-Class Craftsmanship
+            </h3>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
+              Our Services
             </h2>
-          </div>
+            <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light">
+              We don't just install stone; we architect lifestyles. Choose a category below to explore our engineering and design standards.
+            </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px] md:auto-rows-[350px]">
+        {/* Cinematic Grid System - Symmetrical 4 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div 
               key={service.id}
-              onClick={() => openModal(service)} 
-              className={`${getGridClass(index)} group relative rounded-3xl overflow-hidden cursor-pointer fade-in-section shadow-lg hover:shadow-2xl transition-all duration-500`}
+              onClick={() => openModal(service)}
+              className="group relative h-[450px] rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 fade-in-section bg-brand-dark border border-gray-200"
             >
-              <img 
-                src={service.image} 
-                alt={service.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-              />
-              
-              <div className={`absolute inset-0 p-8 flex flex-col justify-end transition-colors duration-500 ${
-                index === 1 || index === 4 ? 'bg-black/40 group-hover:bg-black/20' : 'bg-gradient-to-t from-black/90 via-black/20 to-transparent'
-              }`}>
-                <div className={`transition-transform duration-500 ${index === 1 || index === 4 ? 'translate-y-0' : 'translate-y-4 group-hover:translate-y-0'}`}>
-                   <div className="mb-2">
-                      <div className={`inline-flex items-center gap-2 mb-2 ${index === 2 ? 'bg-white/10 p-2 rounded-full text-brand-gold backdrop-blur-md' : 'text-brand-gold'}`}>
-                        {service.icon}
-                        {(index === 0 || index === 5) && <span className="uppercase tracking-widest text-[10px] font-bold text-white/80">Top Rated</span>}
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-serif text-white font-medium leading-tight">{service.title}</h3>
-                   </div>
-                   <div className={`overflow-hidden transition-all duration-500 ${index === 1 || index === 4 ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100'}`}>
-                      <p className="text-gray-300 text-sm leading-relaxed line-clamp-2">{service.description}</p>
-                   </div>
-                   <div className={`mt-4 flex items-center gap-2 text-brand-gold text-xs font-bold uppercase tracking-widest transition-opacity duration-300 ${index === 1 || index === 4 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                      See Details <ArrowUpRight size={14} />
+              {/* Image Layer */}
+              <div className="absolute inset-0 overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
+                />
+                
+                {/* Permanent Gradient for Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-80"></div>
+                
+                {/* Golden Overlay on Hover */}
+                <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              </div>
+
+              {/* Content Layer */}
+              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
+                
+                {/* Top Bar: Number & Icon */}
+                <div className="flex justify-between items-start w-full">
+                   <span className="font-serif text-4xl text-white/10 font-bold group-hover:text-white/20 transition-colors duration-500">
+                      0{index + 1}
+                   </span>
+                   
+                   {/* Floating Glass Icon */}
+                   <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-gold group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-lg">
+                      {service.icon}
                    </div>
                 </div>
+
+                {/* Bottom Bar: Text Info */}
+                <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                   
+                   <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300">
+                     {service.title}
+                   </h3>
+                   
+                   {/* Description */}
+                   <p className="text-gray-300 text-xs leading-relaxed mb-6 opacity-90 group-hover:opacity-100 line-clamp-3">
+                     {service.description}
+                   </p>
+
+                   {/* Call to Action Line */}
+                   <div className="flex items-center gap-3">
+                      <div className="h-px w-8 bg-white/30 group-hover:bg-brand-gold transition-colors duration-300"></div>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/80 group-hover:text-white transition-colors flex items-center gap-2">
+                        View Details <ArrowUpRight size={12} className="text-brand-gold" />
+                      </span>
+                   </div>
+                </div>
+
               </div>
+              
+              {/* Interactive Border */}
+              <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-brand-gold/50 transition-colors duration-500 pointer-events-none"></div>
             </div>
           ))}
         </div>
@@ -187,76 +211,69 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       {/* SERVICE MODAL POPUP */}
       {selectedService && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
-          
-          {/* Backdrop with Fade In */}
           <div 
-            className="absolute inset-0 bg-brand-dark/90 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]" 
+            className="absolute inset-0 bg-brand-dark/95 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]" 
             onClick={closeModal}
           ></div>
           
-          {/* Modal Container with Zoom/Scale Animation */}
-          <div className="relative w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
+          <div className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
              
-             {/* Close Button - Fixed Position on Card */}
+             {/* Close Button */}
              <button 
                 onClick={closeModal} 
-                className="absolute top-4 right-4 z-50 p-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-brand-dark hover:bg-brand-gold hover:text-white transition-all"
+                className="absolute top-4 right-4 z-50 p-2 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-brand-gold transition-all"
              >
-                <X size={20} />
+                <X size={24} />
              </button>
 
-             {/* Modal Image - Slide In Effect */}
-             <div className="w-full md:w-1/2 h-48 md:h-auto relative overflow-hidden group">
+             {/* Modal Image */}
+             <div className="w-full md:w-1/2 h-64 md:h-auto relative">
                 <img 
                   src={selectedService.image} 
                   alt={selectedService.title} 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 animate-[slideRight_0.6s_ease-out]" 
+                  className="w-full h-full object-cover" 
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest animate-[fadeUp_0.6s_ease-out_0.2s_both]">
-                  Premium Service
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="absolute bottom-8 left-8 text-white">
+                   <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex">
+                      {selectedService.icon} Premium Service
+                   </div>
+                   <h2 className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
                 </div>
              </div>
 
              {/* Modal Content */}
-             <div className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto bg-white flex flex-col h-full">
-                <div className="flex-grow">
-                  
-                  <div className="animate-[fadeUp_0.5s_ease-out_0.1s_both] mt-2 md:mt-0">
-                    <div className="text-brand-gold mb-4 p-3 bg-brand-gold/10 rounded-full inline-block">
-                        {selectedService.icon}
-                    </div>
-                    <h3 className="text-3xl font-serif font-bold text-brand-dark mb-4">
-                        {selectedService.title}
-                    </h3>
-                  </div>
+             <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto bg-white flex flex-col">
+                
+                <p className="text-xl text-brand-dark font-serif italic mb-6">
+                  "{selectedService.description}"
+                </p>
+                
+                <div className="space-y-6 mb-10">
+                   <p className="text-gray-600 leading-relaxed">
+                     At AGS Stones, our {selectedService.title.toLowerCase()} process is rigorous. 
+                     We combine aesthetic vision with structural integrity, ensuring your investment stands the test of time and Georgia weather.
+                   </p>
 
-                  <p className="text-gray-600 leading-relaxed mb-6 text-sm md:text-base animate-[fadeUp_0.5s_ease-out_0.2s_both]">
-                    Enhance your property with our expert {selectedService.title.toLowerCase()}. 
-                    At AGS Stones, we combine engineering precision with artistic design. 
-                    {selectedService.description} We ensure every project meets local codes and exceeds your expectations.
-                  </p>
-
-                  <div className="space-y-3 mb-8 bg-brand-gold/5 border border-brand-gold/10 p-6 rounded-xl animate-[fadeUp_0.5s_ease-out_0.3s_both]">
-                    <h4 className="font-bold text-brand-dark text-xs uppercase tracking-wider mb-2">Service Highlights</h4>
-                    <ul className="space-y-2">
-                      {selectedService.benefits.map((benefit, i) => (
-                        <li 
-                          key={i} 
-                          className="flex items-start gap-3 text-brand-dark text-xs md:text-sm opacity-0 animate-[fadeUp_0.4s_ease-out_both]"
-                          style={{ animationDelay: `${400 + i * 100}ms` }}
-                        >
-                          <CheckCircle2 className="w-4 h-4 text-brand-gold flex-shrink-0 mt-0.5" /> 
-                          <span className="leading-snug">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                   <div>
+                      <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-100 pb-2">What's Included</h4>
+                      <ul className="space-y-3">
+                        {selectedService.benefits.map((benefit, i) => (
+                          <li key={i} className="flex items-start gap-3 text-gray-700">
+                             <div className="mt-1 w-5 h-5 rounded-full bg-brand-gold/10 flex items-center justify-center flex-shrink-0">
+                                <CheckCircle2 className="w-3 h-3 text-brand-gold" />
+                             </div>
+                             <span className="text-sm font-medium">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-gray-100 mt-auto animate-[fadeUp_0.5s_ease-out_0.5s_both]">
-                  <a href="tel:6784287630" onClick={closeModal} className="block w-full text-center bg-brand-dark text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-brand-gold transition-colors shadow-lg">
-                    Get Quote for {selectedService.title}
-                  </a>
+                <div className="mt-auto pt-6 border-t border-gray-100">
+                   <a href="tel:6784287630" className="block w-full text-center bg-brand-dark text-white py-4 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-brand-gold transition-colors shadow-lg">
+                     Get Free Quote
+                   </a>
                 </div>
              </div>
           </div>

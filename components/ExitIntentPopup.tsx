@@ -67,35 +67,40 @@ export const ExitIntentPopup: React.FC = () => {
         </div>
 
         {/* Right Side: Content */}
-        <div className="w-full md:w-7/12 p-8 md:p-12 text-white flex flex-col justify-center">
-           <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-white">
+        <div className="w-full md:w-7/12 p-6 md:p-12 text-white flex flex-col justify-center">
+           <h3 className="font-serif text-2xl md:text-4xl font-bold mb-4 text-white text-center md:text-left">
              Wait! Start with a <br/>
              <span className="text-brand-gold">Complimentary 3D Design</span>
            </h3>
            
-           <p className="text-gray-400 mb-8 leading-relaxed">
+           <p className="text-gray-400 mb-8 leading-relaxed text-sm md:text-base text-center md:text-left">
              Before you decide, let us show you what's possible. We provide professional 3D visualization so you can see your future retaining wall, patio, or kitchen before we build it.
            </p>
 
-           <div className="space-y-4">
+           <div className="space-y-3 md:space-y-4">
               <a 
                 href="tel:6784287630" 
-                className="flex items-center justify-center gap-3 w-full py-4 bg-brand-gold hover:bg-white text-white hover:text-brand-dark font-bold rounded-xl transition-all uppercase tracking-wide shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                className="flex items-center justify-center gap-2 md:gap-3 w-full py-3 md:py-4 bg-brand-gold hover:bg-white text-white hover:text-brand-dark font-bold rounded-xl transition-all uppercase tracking-wide shadow-[0_0_20px_rgba(212,175,55,0.3)] text-xs md:text-sm"
               >
-                <Phone size={18} /> Call to Schedule: (678) 428-7630
+                <Phone size={16} /> 
+                <span>
+                   <span className="hidden sm:inline">Call to Schedule: </span>
+                   (678) 428-7630
+                </span>
               </a>
               
               <a 
                 href="tel:6784287630"
                 onClick={() => setIsVisible(false)}
-                className="flex items-center justify-center gap-2 w-full py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition-all"
+                className="flex items-center justify-center gap-2 w-full py-3 md:py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition-all text-xs md:text-sm"
               >
-                <span>Request Quote & Design Info</span>
+                <span className="hidden sm:inline">Request Quote & Design Info</span>
+                <span className="sm:hidden">Request Quote</span>
                 <ArrowRight size={16} />
               </a>
            </div>
            
-           <p className="text-center text-xs text-gray-500 mt-6">
+           <p className="text-center text-[10px] md:text-xs text-gray-500 mt-6">
              No obligation consultation. Expert Advice.
            </p>
         </div>
