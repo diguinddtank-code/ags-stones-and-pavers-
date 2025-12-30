@@ -8,7 +8,8 @@ const services: ServiceItem[] = [
     title: 'Custom Pavers',
     description: 'Driveways, walkways, and patios crafted with premium interlocking stones for durability and curb appeal.',
     icon: <LayoutGrid className="w-6 h-6" />,
-    image: 'https://i.imgur.com/by6FzIk.png',
+    // SEO Alt Tag Injection via the image source name logic or explicit alt prop usage below
+    image: 'https://i.imgur.com/by6FzIk.png', 
     benefits: [
       '5-Year Installation Warranty',
       'Wide Range of Premium Stone Options',
@@ -120,7 +121,7 @@ const Paver3DViewer = () => {
     const deltaY = e.clientY - lastMouse.current.y;
     
     setRotation(prev => ({
-      x: Math.max(0, Math.min(90, prev.x - deltaY * 0.5)), // Limit X rotation to keep it distinct
+      x: Math.max(0, Math.min(90, prev.x - deltaY * 0.5)), 
       z: prev.z + deltaX * 0.5
     }));
     
@@ -141,7 +142,6 @@ const Paver3DViewer = () => {
   const rows = 6;
   const cols = 6;
   
-  // Logic for simple block pattern (not strictly herringbone for CSS simplicity, but staggered)
   for (let i = -rows/2; i < rows/2; i++) {
     for (let j = -cols/2; j < cols/2; j++) {
        pavers.push({ x: i * 60, y: j * 35 + (i % 2 ? 17.5 : 0), color: '#e2e8f0' });
@@ -157,8 +157,9 @@ const Paver3DViewer = () => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onWheel={handleWheel}
+      role="img"
+      aria-label="Interactive 3D Paver Model Viewer"
     >
-       {/* 3D Scene Container */}
        <div 
          className="relative w-0 h-0"
          style={{
@@ -166,7 +167,6 @@ const Paver3DViewer = () => {
             transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateZ(${rotation.z}deg) scale(${zoom})`
          }}
        >
-          {/* Base Platform */}
           <div 
              className="absolute bg-[#2a2a2a] border-4 border-brand-gold/30 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
              style={{
@@ -175,8 +175,6 @@ const Paver3DViewer = () => {
                 transform: 'translate(-50%, -50%) translateZ(-10px)',
              }}
           />
-
-          {/* Pavers */}
           {pavers.map((p, idx) => (
              <div
                key={idx}
@@ -188,28 +186,20 @@ const Paver3DViewer = () => {
                   transformStyle: 'preserve-3d'
                }}
              >
-                {/* Top Face */}
                 <div className="absolute inset-0 bg-gray-300 border border-white/20" style={{ transform: 'translateZ(8px)' }}>
-                   {/* Texture Noise */}
                    <div className="w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/concrete-seamless.png')]"></div>
                 </div>
-                {/* Side Face (South) */}
                 <div className="absolute bottom-0 left-0 w-full h-[8px] bg-gray-500 origin-bottom" style={{ transform: 'rotateX(-90deg)' }}></div>
-                {/* Side Face (East) */}
                 <div className="absolute right-0 top-0 h-full w-[8px] bg-gray-400 origin-right" style={{ transform: 'rotateY(90deg)' }}></div>
-                {/* Side Face (West) */}
                 <div className="absolute left-0 top-0 h-full w-[8px] bg-gray-400 origin-left" style={{ transform: 'rotateY(-90deg)' }}></div>
              </div>
           ))}
-
-          {/* Holographic Grid Overlay */}
           <div 
             className="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-brand-gold/20 rounded-full opacity-30 pointer-events-none"
             style={{ transform: 'translate(-50%, -50%)' }}
           ></div>
        </div>
 
-       {/* HUD Controls */}
        <div className="absolute bottom-6 right-6 flex flex-col gap-2 pointer-events-none">
           <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
              <Move3d size={14} className="text-brand-gold" /> Drag to Rotate
@@ -219,7 +209,6 @@ const Paver3DViewer = () => {
           </div>
        </div>
 
-       {/* Label */}
        <div className="absolute top-6 left-6 pointer-events-none">
           <div className="flex items-center gap-2 text-brand-gold font-bold uppercase tracking-widest text-xs mb-1">
              <Box size={14} /> Interactive Preview
@@ -240,7 +229,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
   const openModal = (service: ServiceItem) => {
     setSelectedService(service);
-    // Auto-enable 3D model view for Pavers only initially
     setShow3DModel(false);
     document.body.style.overflow = 'hidden';
     if (onModalChange) onModalChange(true);
@@ -255,12 +243,10 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
   return (
     <section id="services" className="pt-24 pb-32 bg-slate-50 relative z-20">
-      {/* Decorative background line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-brand-gold/50"></div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
         <div className="text-center mb-20 fade-in-section">
             <h3 className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
                World-Class Craftsmanship
@@ -273,57 +259,46 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </p>
         </div>
 
-        {/* Cinematic Grid System - Symmetrical 4 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <div 
+            <article 
               key={service.id}
               onClick={() => openModal(service)}
               className="group relative h-[450px] rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 fade-in-section bg-brand-dark border border-gray-200"
+              itemScope
+              itemType="https://schema.org/Service"
             >
-              {/* Image Layer */}
+              <meta itemProp="serviceType" content={service.title} />
               <div className="absolute inset-0 overflow-hidden">
                 <img 
                   src={service.image} 
-                  alt={service.title} 
+                  alt={`${service.title} installation service in Atlanta, GA - AGS Stones`} 
                   className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
+                  loading="lazy"
+                  width="400"
+                  height="600"
                 />
-                
-                {/* Permanent Gradient for Readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-80"></div>
-                
-                {/* Golden Overlay on Hover */}
                 <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </div>
 
-              {/* Content Layer */}
               <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
-                
-                {/* Top Bar: Number & Icon */}
                 <div className="flex justify-between items-start w-full">
                    <span className="font-serif text-4xl text-white/10 font-bold group-hover:text-white/20 transition-colors duration-500">
                       0{index + 1}
                    </span>
-                   
-                   {/* Floating Glass Icon */}
                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-gold group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-lg">
                       {service.icon}
                    </div>
                 </div>
 
-                {/* Bottom Bar: Text Info */}
                 <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                   
-                   <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300">
+                   <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300" itemProp="name">
                      {service.title}
                    </h3>
-                   
-                   {/* Description */}
-                   <p className="text-gray-300 text-xs leading-relaxed mb-6 opacity-90 group-hover:opacity-100 line-clamp-3">
+                   <p className="text-gray-300 text-xs leading-relaxed mb-6 opacity-90 group-hover:opacity-100 line-clamp-3" itemProp="description">
                      {service.description}
                    </p>
-
-                   {/* Call to Action Line */}
                    <div className="flex items-center gap-3">
                       <div className="h-px w-8 bg-white/30 group-hover:bg-brand-gold transition-colors duration-300"></div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-white/80 group-hover:text-white transition-colors flex items-center gap-2">
@@ -331,17 +306,13 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       </span>
                    </div>
                 </div>
-
               </div>
-              
-              {/* Interactive Border */}
               <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-brand-gold/50 transition-colors duration-500 pointer-events-none"></div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
 
-      {/* SERVICE MODAL POPUP */}
       {selectedService && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
           <div 
@@ -350,26 +321,22 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
           ></div>
           
           <div className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
-             
-             {/* Close Button */}
              <button 
                 onClick={closeModal} 
                 className="absolute top-4 right-4 z-50 p-2 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-brand-gold transition-all"
+                aria-label="Close Modal"
              >
                 <X size={24} />
              </button>
 
-             {/* Modal Left Side: Image OR 3D Model */}
              <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
-                
-                {/* 3D Model Logic: Only for Pavers (id: 1) */}
                 {selectedService.id === '1' && show3DModel ? (
                     <Paver3DViewer />
                 ) : (
                     <>
                         <img 
                           src={selectedService.image} 
-                          alt={selectedService.title} 
+                          alt={`Detail view of ${selectedService.title} by AGS Stones`} 
                           className="w-full h-full object-cover" 
                         />
                         <div className="absolute inset-0 bg-black/20"></div>
@@ -382,7 +349,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                     </>
                 )}
 
-                {/* Toggle Button for Pavers */}
                 {selectedService.id === '1' && (
                     <button
                         onClick={() => setShow3DModel(!show3DModel)}
@@ -397,19 +363,15 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 )}
              </div>
 
-             {/* Modal Content */}
              <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto bg-white flex flex-col">
-                
                 <p className="text-xl text-brand-dark font-serif italic mb-6">
                   "{selectedService.description}"
                 </p>
-                
                 <div className="space-y-6 mb-10">
                    <p className="text-gray-600 leading-relaxed">
                      At AGS Stones, our {selectedService.title.toLowerCase()} process is rigorous. 
                      We combine aesthetic vision with structural integrity, ensuring your investment stands the test of time and Georgia weather.
                    </p>
-
                    <div>
                       <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-100 pb-2">What's Included</h4>
                       <ul className="space-y-3">
@@ -424,7 +386,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       </ul>
                    </div>
                 </div>
-
                 <div className="mt-auto pt-6 border-t border-gray-100">
                    <a href="tel:6784287630" className="block w-full text-center bg-brand-dark text-white py-4 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-brand-gold transition-colors shadow-lg">
                      Get Free Quote

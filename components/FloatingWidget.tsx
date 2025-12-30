@@ -26,11 +26,12 @@ export const FloatingWidget: React.FC = () => {
   if (!isOpen) return null;
 
   return (
-    // Positioned to sit nicely above the Mobile Nav (bottom-24) and bottom-right on Desktop
-    <div className="fixed bottom-28 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-[60] flex flex-col items-center md:items-end animate-[fade-up_0.5s_ease-out]">
+    // Positioned above Mobile Nav (bottom-24) on mobile, bottom-6 on desktop
+    // Added padding adjustments to make it smaller
+    <div className="fixed bottom-24 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-[60] flex flex-col items-center md:items-end animate-[fade-up_0.5s_ease-out]">
        
-       {/* Popup Bubble */}
-       <div className="bg-white p-5 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] w-full max-w-xs relative border border-gray-100">
+       {/* Popup Bubble - Reduced padding (p-4) and max-width (max-w-[260px]) */}
+       <div className="bg-white p-4 rounded-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] w-full max-w-[280px] relative border border-gray-100">
           
           {/* Close Button */}
           <button 
@@ -41,24 +42,24 @@ export const FloatingWidget: React.FC = () => {
           </button>
 
           {/* Online Indicator Inside Popup */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="relative flex h-2 w-2">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Online Now</span>
+            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">Online Now</span>
           </div>
 
-          <h4 className="font-serif font-bold text-brand-dark text-lg mb-1">Questions?</h4>
-          <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+          <h4 className="font-serif font-bold text-brand-dark text-base mb-1">Questions?</h4>
+          <p className="text-xs text-gray-600 mb-3 leading-relaxed">
             Our design team is available to discuss your project instantly.
           </p>
           
           <a 
             href="tel:6784287630" 
-            className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-3 px-4 rounded-xl font-bold text-sm w-full shadow-lg"
+            className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-2.5 px-4 rounded-lg font-bold text-xs w-full shadow-lg"
           >
-             <Phone size={16} />
+             <Phone size={14} />
              Call (678) 428-7630
           </a>
        </div>

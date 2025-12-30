@@ -13,14 +13,15 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section id="home" className="relative h-screen min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-20 pb-40"> 
+    <section id="home" className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-24 pb-24 md:pt-20 md:pb-40"> 
       
-      {/* Background with Parallax & Zoom */}
+      {/* Background with Parallax & Zoom - Added Title/Alt for SEO */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
-          alt="Luxury Outdoor Kitchen and Pavers Atlanta"
-          className="w-full h-full object-cover animate-slow-zoom opacity-60"
+          alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
+          title="Custom Paver Patio and Outdoor Living by AGS Stones"
+          className="w-full h-full object-cover object-center animate-slow-zoom opacity-60"
           style={{ transform: `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-black/40" />
@@ -29,10 +30,9 @@ export const Hero: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center mt-0">
         
-        {/* LOGO CONTAINER (Mobile Only Animation) */}
-        {/* Desktop: Removed central logo as requested. Mobile: Animates up to header. */}
+        {/* LOGO CONTAINER */}
         <div 
-          className="md:hidden mb-6 transition-all duration-300 ease-out will-change-transform"
+          className="md:hidden mb-4 transition-all duration-300 ease-out will-change-transform"
           style={{ 
             opacity: Math.max(0, 1 - offset / 250), 
             transform: `translateY(${offset * -0.5}px) scale(${Math.max(0.8, 1 - offset / 500)})` 
@@ -40,8 +40,8 @@ export const Hero: React.FC = () => {
         >
           <img 
             src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
-            alt="AGS Stones Logo"
-            className="h-32 w-auto mx-auto drop-shadow-2xl"
+            alt="AGS Stones and Pavers Logo - Duluth GA"
+            className="h-24 w-auto mx-auto drop-shadow-2xl"
           />
         </div>
 
@@ -50,29 +50,30 @@ export const Hero: React.FC = () => {
            style={{ opacity: Math.max(0, 1 - offset / 400), transform: `translateY(${offset * -0.2}px)` }}
         >
           {/* Trust Badge */}
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md animate-[fade-up_1s_ease-out]">
-            <div className="flex gap-1">
-              {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 text-brand-gold fill-brand-gold" />)}
+          <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md animate-[fade-up_1s_ease-out]">
+            <div className="flex gap-0.5">
+              {[1,2,3,4,5].map(i => <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 text-brand-gold fill-brand-gold" />)}
             </div>
-            <span className="text-white/90 text-xs font-semibold tracking-widest uppercase">#1 Rated in Metro Atlanta</span>
+            <span className="text-white/90 text-[10px] md:text-xs font-semibold tracking-widest uppercase">#1 Rated Hardscape in Atlanta</span>
           </div>
           
-          <h1 className="font-serif text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-6 drop-shadow-2xl animate-[fade-up_1s_ease-out_0.2s_both]">
-            Outdoor Living <br/>
-            <span className="text-brand-gold italic">Perfection</span>
+          {/* PRIMARY H1 FOR SEO - Keyword Dense - Responsive Sizing */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-2xl animate-[fade-up_1s_ease-out_0.2s_both]">
+            Atlanta's Premier <br/>
+            <span className="text-brand-gold italic">Pavers & Retaining Walls</span>
           </h1>
           
-          {/* Updated Subtitle */}
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-xl mx-auto font-light leading-relaxed animate-[fade-up_1s_ease-out_0.4s_both]">
-            Proudly serving Atlanta and the entire Metro Area. We transform ordinary properties into award-winning outdoor retreats.
+          {/* Updated Subtitle with Geo-Keywords */}
+          <p className="text-base md:text-xl text-gray-200 mb-8 md:mb-10 max-w-xl mx-auto font-light leading-relaxed animate-[fade-up_1s_ease-out_0.4s_both] px-2">
+            Transforming properties in <strong>Duluth, Alpharetta, and Roswell</strong>. We specialize in luxury outdoor kitchens, driveways, and structural retaining walls.
           </p>
           
           <div className="flex justify-center animate-[fade-up_1s_ease-out_0.6s_both]">
             <a 
               href="tel:6784287630" 
-              className="group relative overflow-hidden px-10 py-5 bg-brand-gold text-white font-bold rounded-sm shadow-[0_0_40px_-10px_rgba(212,175,55,0.6)] transition-all hover:scale-105"
+              className="group relative overflow-hidden px-8 py-4 md:px-10 md:py-5 bg-brand-gold text-white font-bold rounded-sm shadow-[0_0_40px_-10px_rgba(212,175,55,0.6)] transition-all hover:scale-105"
             >
-              <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest text-sm">
+              <span className="relative z-10 flex items-center gap-2 uppercase tracking-widest text-xs md:text-sm">
                 Request Free Estimate
               </span>
               <div className="absolute inset-0 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
@@ -83,7 +84,7 @@ export const Hero: React.FC = () => {
 
       {/* Floating Scroll Indicator */}
       <div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
         style={{ opacity: Math.max(0, 1 - offset / 200) }}
       >
         <span className="text-[10px] uppercase tracking-[0.3em] animate-pulse">Scroll</span>
