@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Phone } from 'lucide-react';
 
 interface HeaderProps {
   isHidden?: boolean;
@@ -13,7 +12,6 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 20);
-      // On mobile, show header logo only after passing the Hero section substantially
       setShowMobileLogo(scrollY > 350);
     };
     window.addEventListener('scroll', handleScroll);
@@ -45,12 +43,6 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
           {/* Logo Container */}
           <div className="flex-shrink-0 z-50">
              <a href="#" className="flex items-center gap-3 group">
-                {/* 
-                   Logo Contrast Logic:
-                   - Top of page (Dark BG): brightness-0 invert (Turns logo WHITE)
-                   - Scrolled (White BG): brightness-0 (Turns logo BLACK)
-                   This ensures maximum visibility on mobile and desktop.
-                */}
                 <img 
                   src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
                   alt="AGS Stones and Pavers" 
@@ -87,19 +79,25 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                </span>
-              <Phone size={14} className="fill-current" />
+               {/* Inline SVG Phone */}
+               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="fill-current">
+                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+               </svg>
               Free Estimate
             </a>
           </nav>
 
-          {/* Mobile Phone Icon (visible only when scrolled, simple alternative to bottom nav) */}
+          {/* Mobile Phone Icon */}
            <a
               href="tel:+16784287630"
               className={`md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ${
                  isScrolled ? 'bg-brand-gold text-white shadow-md opacity-100 translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'
               }`}
+              aria-label="Call Now"
             >
-              <Phone size={18} className="fill-current" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="fill-current">
+                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+               </svg>
             </a>
 
         </div>

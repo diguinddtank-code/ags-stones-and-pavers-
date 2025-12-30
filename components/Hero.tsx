@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { ArrowDown, Star } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [offset, setOffset] = useState(0);
@@ -16,7 +15,7 @@ export const Hero: React.FC = () => {
     let animationFrameId: number;
     
     const handleScroll = () => {
-      // Performance: DESKTOP ONLY parallax
+      // PERFORMANCE: Disable Parallax Math on Mobile
       if (window.innerWidth < 768) return;
 
       if (sectionRef.current) {
@@ -52,7 +51,6 @@ export const Hero: React.FC = () => {
             ${isMobile ? 'animate-[zoom_20s_infinite_alternate]' : ''} 
           `}
           style={{ 
-             // Desktop: Scroll Parallax | Mobile: CSS Animation
              transform: isMobile ? 'none' : `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`,
              willChange: 'transform' 
           }}
@@ -71,7 +69,6 @@ export const Hero: React.FC = () => {
         <div 
           className="md:hidden mb-4 transition-all duration-300 ease-out"
           style={{ 
-             // Simple fade out on desktop scroll, static on mobile
              opacity: isMobile ? 1 : Math.max(0, 1 - offset / 250),
              transform: isMobile ? 'none' : `translateY(${offset * -0.5}px)`
           }}
@@ -95,7 +92,12 @@ export const Hero: React.FC = () => {
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md animate-[fade-up_1s_ease-out]">
             <div className="flex gap-0.5">
-              {[1,2,3,4,5].map(i => <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 text-brand-gold fill-brand-gold" />)}
+               {/* 5 Stars Inline SVG */}
+               {[1,2,3,4,5].map(i => (
+                 <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-2.5 h-2.5 md:w-3 md:h-3 text-brand-gold">
+                    <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+                 </svg>
+               ))}
             </div>
             <span className="text-white/90 text-[10px] md:text-xs font-semibold tracking-widest uppercase">#1 Rated Hardscape Contractor</span>
           </div>
@@ -128,7 +130,9 @@ export const Hero: React.FC = () => {
         style={{ opacity: isMobile ? 1 : Math.max(0, 1 - offset / 200) }}
       >
         <span className="text-[10px] uppercase tracking-[0.3em] animate-pulse">Scroll</span>
-        <ArrowDown className="w-5 h-5 animate-bounce" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 animate-bounce">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
       </div>
     </section>
   );
