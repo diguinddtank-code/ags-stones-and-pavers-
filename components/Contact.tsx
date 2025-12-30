@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, ArrowRight, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const Contact: React.FC = () => {
@@ -11,6 +11,24 @@ export const Contact: React.FC = () => {
   });
   
   const [status, setStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
+  const [loadMap, setLoadMap] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  // Performance: Lazy load map only when in view
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setLoadMap(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "200px" });
+
+    if (mapContainerRef.current) {
+      observer.observe(mapContainerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +39,6 @@ export const Contact: React.FC = () => {
     setStatus('LOADING');
 
     try {
-      // Using FormSubmit.co for backend-less email handling
       const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
         method: "POST",
         headers: { 
@@ -34,14 +51,13 @@ export const Contact: React.FC = () => {
             email: formData.email,
             phone: formData.phone,
             message: formData.details,
-            _template: "table" // Formats the email nicely
+            _template: "table"
         })
       });
 
       if (response.ok) {
         setStatus('SUCCESS');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', details: '' });
-        // Reset success message after 5 seconds
         setTimeout(() => setStatus('IDLE'), 5000);
       } else {
         setStatus('ERROR');
@@ -54,7 +70,6 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-24 bg-brand-light relative overflow-hidden">
-      {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -77,7 +92,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <h3 className="font-serif text-2xl font-bold text-brand-dark mb-2">Request Received!</h3>
                     <p className="text-gray-500">
-                      Thank you, {formData.firstName || 'Customer'}. We have received your project details and will contact you shortly to schedule your consultation.
+                      Thank you, {formData.firstName || 'Customer'}. We have received your project details and will contact you shortly.
                     </p>
                     <button 
                       onClick={() => setStatus('IDLE')}
@@ -191,26 +206,33 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Enhanced Map Widget */}
+          {/* Enhanced Map Widget with Lazy Loading */}
           <div className="flex flex-col gap-6 fade-in-section delay-200 h-full">
              
-             {/* Map Container */}
-            <div className="relative flex-grow min-h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border border-gray-200 group">
-              {/* The Map - Added title for accessibility */}
-              <iframe 
-                title="Map of AGS Stones Location in Duluth, GA"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.857642594639!2d-84.1802526848419!3d34.04753698060684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2zMzTCsDAyJzUxLjEiTiA4NMKwMTAnNDEuMCJX!5e0!3m2!1sen!2sus!4v1689000000000!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={true} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
-              ></iframe>
+            <div ref={mapContainerRef} className="relative flex-grow min-h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border border-gray-200 group bg-gray-100">
+              {loadMap ? (
+                <iframe 
+                  title="Map of AGS Stones Location in Duluth, GA"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.857642594639!2d-84.1802526848419!3d34.04753698060684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2zMzTCsDAyJzUxLjEiTiA4NMKwMTAnNDEuMCJX!5e0!3m2!1sen!2sus!4v1689000000000!5m2!1sen!2sus" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                ></iframe>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                  <div className="text-gray-400 flex flex-col items-center">
+                     <MapPin size={32} className="mb-2 opacity-50"/>
+                     <span className="text-xs uppercase tracking-widest">Loading Map...</span>
+                  </div>
+                </div>
+              )}
 
               {/* Overlay Location Card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20">
+              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 z-10">
                  <div className="flex items-start justify-between gap-4">
                     <div>
                         <h4 className="font-serif font-bold text-brand-dark text-lg mb-1">AGS Stones & Pavers</h4>
@@ -223,9 +245,6 @@ export const Contact: React.FC = () => {
                             <a href="tel:6784287630" className="flex items-center gap-2 text-brand-dark hover:text-brand-gold transition-colors">
                                 <Phone size={14} /> (678) 428-7630
                             </a>
-                            <a href="mailto:agstones.pavers@gmail.com" className="hidden sm:flex items-center gap-2 text-brand-dark hover:text-brand-gold transition-colors">
-                                <Mail size={14} /> Email Us
-                            </a>
                         </div>
                     </div>
                     
@@ -235,7 +254,6 @@ export const Contact: React.FC = () => {
                         rel="noreferrer"
                         className="flex-shrink-0 w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
                         title="Get Directions"
-                        aria-label="Get Directions on Google Maps"
                     >
                         <Navigation size={20} />
                     </a>
@@ -243,7 +261,6 @@ export const Contact: React.FC = () => {
               </div>
             </div>
 
-            {/* Simple Service Area Text */}
             <p className="text-center text-gray-400 text-sm">
                 Proudly Serving: Duluth • Alpharetta • Johns Creek • Suwanee • Roswell • Milton
             </p>

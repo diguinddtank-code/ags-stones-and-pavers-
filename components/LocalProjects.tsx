@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Tag, ArrowRight } from 'lucide-react';
 
-// Data structure designed to hit specific keyword combinations: [Service] + [Location]
 const projects = [
   {
     id: 1,
@@ -17,7 +16,7 @@ const projects = [
     title: 'Structural Retaining Wall',
     location: 'Roswell, GA',
     category: 'Retaining Walls',
-    image: 'https://i.imgur.com/dZstK86l.webp', // Imgur optimized: l suffix (640px) + webp
+    image: 'https://i.imgur.com/dZstK86l.webp', 
     tags: ['#ErosionControl', '#ModularBlock', '#DrainageSolutions'],
     description: '6ft engineered wall to level a sloped backyard. Included heavy-duty drainage and geogrid reinforcement.'
   },
@@ -63,10 +62,29 @@ const filters = ['All', 'Alpharetta', 'Duluth', 'Roswell', 'Marietta', 'Johns Cr
 
 export const LocalProjects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
+  const sectionRef = useRef<HTMLElement>(null);
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
     : projects.filter(p => p.location.includes(activeFilter));
+
+  // Local Observer to trigger animations on mount since we removed global MutationObserver
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionRef.current) {
+        sectionRef.current.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, [filteredProjects]); // Re-run when filter changes to animate new items
 
   // Dynamic Schema Generation
   const schemaData = {
@@ -90,7 +108,7 @@ export const LocalProjects: React.FC = () => {
   };
 
   return (
-    <section id="local-projects" className="py-24 bg-white relative">
+    <section ref={sectionRef} id="local-projects" className="py-24 bg-white relative">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>
@@ -105,7 +123,7 @@ export const LocalProjects: React.FC = () => {
           </p>
         </div>
 
-        {/* City Filter Tabs - Accessibility Enhanced */}
+        {/* City Filter Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-12 fade-in-section" role="group" aria-label="Filter projects by city">
           {filters.map((filter) => (
             <button

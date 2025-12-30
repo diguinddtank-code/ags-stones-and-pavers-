@@ -6,17 +6,27 @@ export const MobileNav: React.FC = () => {
   const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
+    let timeoutId: number | null = null;
+
     const handleScroll = () => {
-      const sections = ['home', 'services', 'contact'];
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= 100) {
-            setActiveSection(sectionId);
+      // Throttle: only check every 150ms
+      if (timeoutId) return;
+
+      timeoutId = window.setTimeout(() => {
+        const sections = ['home', 'services', 'contact'];
+        for (const sectionId of sections) {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            // Simple logic: if top is somewhat visible
+            if (rect.top <= window.innerHeight / 2 && rect.bottom >= 100) {
+              setActiveSection(sectionId);
+              break; // Found the top-most active section
+            }
           }
         }
-      }
+        timeoutId = null;
+      }, 150);
     };
 
     // Listen for the popup close event to trigger the notification badge
@@ -24,12 +34,13 @@ export const MobileNav: React.FC = () => {
       setShowNotification(true);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('ags-popup-closed', handlePopupClose);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('ags-popup-closed', handlePopupClose);
+      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 

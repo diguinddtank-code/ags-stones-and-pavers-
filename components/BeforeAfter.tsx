@@ -4,7 +4,26 @@ import { MoveHorizontal, ArrowRight, ArrowLeft } from 'lucide-react';
 export const BeforeAfter: React.FC = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const isDragging = useRef(false);
+
+  // Observer local para ativar animações (fade-in) já que o componente é Lazy Loaded
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionRef.current) {
+        sectionRef.current.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleMove = (clientX: number) => {
     if (containerRef.current) {
@@ -27,7 +46,7 @@ export const BeforeAfter: React.FC = () => {
   }, []);
 
   return (
-    <section id="portfolio" className="pt-32 pb-48 bg-white relative">
+    <section ref={sectionRef} id="portfolio" className="pt-32 pb-48 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-12 items-center">
           

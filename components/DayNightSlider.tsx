@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Sun, Moon, Lightbulb } from 'lucide-react';
 
 export const DayNightSlider: React.FC = () => {
   const [isNight, setIsNight] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Observer local para ativar animações (fade-in) já que o componente é Lazy Loaded
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionRef.current) {
+        sectionRef.current.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="pt-32 pb-48 bg-brand-dark relative overflow-hidden">
+    <section ref={sectionRef} className="pt-32 pb-48 bg-brand-dark relative overflow-hidden">
       {/* Background Ambience */}
       <div className={`absolute inset-0 transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}>
          <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[150px]"></div>

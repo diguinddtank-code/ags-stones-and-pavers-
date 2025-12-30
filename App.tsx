@@ -21,49 +21,28 @@ const App: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
 
   useEffect(() => {
-    // 1. Setup Intersection Observer (The Animation Trigger)
+    // 1. Optimized Intersection Observer
+    // We only observe elements currently in the DOM. We REMOVED the MutationObserver
+    // because watching document.body subtree is too expensive for mobile main-thread.
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          // Optional: Stop observing once visible to save resources
-          // revealObserver.unobserve(entry.target); 
+          // Performance: Stop observing once visible to free up resources
+          revealObserver.unobserve(entry.target); 
         }
       });
     }, {
-      threshold: 0.15, // Trigger when 15% visible
-      rootMargin: "0px 0px -50px 0px"
+      threshold: 0.1, 
+      rootMargin: "50px" // Pre-load slightly before into view
     });
 
-    // 2. Initial scan for static elements
+    // Observe currently existing static sections
     document.querySelectorAll('.fade-in-section').forEach((el) => revealObserver.observe(el));
 
-    // 3. Setup Mutation Observer (The Watcher for Lazy Loaded Components)
-    // This watches the DOM for new elements (like BeforeAfter) being added after the initial load
-    const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement) {
-            // Check if the new node itself has the class
-            if (node.classList.contains('fade-in-section')) {
-              revealObserver.observe(node);
-            }
-            // Check if the new node contains children with the class
-            node.querySelectorAll('.fade-in-section').forEach((el) => revealObserver.observe(el));
-          }
-        });
-      });
-    });
-
-    // Start watching the body for changes
-    mutationObserver.observe(document.body, { 
-      childList: true, 
-      subtree: true 
-    });
-
+    // Cleanup
     return () => {
       revealObserver.disconnect();
-      mutationObserver.disconnect();
     };
   }, []);
 
@@ -73,8 +52,7 @@ const App: React.FC = () => {
       <main>
         <Hero />
         
-        {/* ZParallax has specific height requirements, ensure wrapper handles loading gracefully */}
-        <Suspense fallback={<div className="h-screen w-full bg-[#0f1115] flex items-center justify-center"><div className="animate-pulse text-brand-gold tracking-widest text-xs font-bold uppercase">Loading Experience...</div></div>}>
+        <Suspense fallback={<div className="h-screen w-full bg-[#0f1115]"></div>}>
           <ZParallaxShowcase />
         </Suspense>
 

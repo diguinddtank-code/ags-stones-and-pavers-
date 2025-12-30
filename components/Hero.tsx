@@ -1,23 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ArrowDown, Star } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [offset, setOffset] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let animationFrameId: number;
+    
     const handleScroll = () => {
-      requestAnimationFrame(() => setOffset(window.scrollY));
+      // Performance: Only calculate parallax if the section is visible
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        if (rect.bottom > 0) {
+           // We are visible
+           animationFrameId = requestAnimationFrame(() => setOffset(window.scrollY));
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
-    <section id="home" className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-24 pb-24 md:pt-20 md:pb-40"> 
+    <section ref={sectionRef} id="home" className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-24 pb-24 md:pt-20 md:pb-40"> 
       
-      {/* Background with Parallax & Zoom - Added Title/Alt for SEO */}
+      {/* Background with Parallax & Zoom */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* LCP OPTIMIZATION: srcSet for mobile/desktop, fetchpriority high, explicit dimensions */}
         <img
           srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop 800w,
                   https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop 1600w,
@@ -27,7 +40,7 @@ export const Hero: React.FC = () => {
           alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
           title="Custom Paver Patio and Outdoor Living by AGS Stones"
           className="w-full h-full object-cover object-center animate-slow-zoom opacity-60"
-          style={{ transform: `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})` }}
+          style={{ transform: `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`, willChange: 'transform' }}
           // @ts-ignore
           fetchpriority="high"
           loading="eager"
@@ -41,10 +54,11 @@ export const Hero: React.FC = () => {
         
         {/* LOGO CONTAINER */}
         <div 
-          className="md:hidden mb-4 transition-all duration-300 ease-out will-change-transform"
+          className="md:hidden mb-4 transition-all duration-300 ease-out"
           style={{ 
             opacity: Math.max(0, 1 - offset / 250), 
-            transform: `translateY(${offset * -0.5}px) scale(${Math.max(0.8, 1 - offset / 500)})` 
+            transform: `translateY(${offset * -0.5}px) scale(${Math.max(0.8, 1 - offset / 500)})`,
+            willChange: 'opacity, transform'
           }}
         >
           <img 
@@ -58,7 +72,11 @@ export const Hero: React.FC = () => {
 
         <div 
            className="max-w-4xl mx-auto transition-all duration-300"
-           style={{ opacity: Math.max(0, 1 - offset / 400), transform: `translateY(${offset * -0.2}px)` }}
+           style={{ 
+             opacity: Math.max(0, 1 - offset / 400), 
+             transform: `translateY(${offset * -0.2}px)`,
+             willChange: 'opacity, transform'
+           }}
         >
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 md:px-4 md:py-2 border border-white/20 rounded-full bg-white/5 backdrop-blur-md animate-[fade-up_1s_ease-out]">
@@ -68,13 +86,11 @@ export const Hero: React.FC = () => {
             <span className="text-white/90 text-[10px] md:text-xs font-semibold tracking-widest uppercase">#1 Rated Hardscape Contractor</span>
           </div>
           
-          {/* PRIMARY H1 FOR SEO - Keyword Dense - Responsive Sizing */}
           <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-2xl animate-[fade-up_1s_ease-out_0.2s_both]">
             Atlanta's Premier <br/>
             <span className="text-brand-gold italic">Paver & Wall Installation</span>
           </h1>
           
-          {/* Updated Subtitle with Geo-Keywords - BROADENED SCOPE */}
           <p className="text-base md:text-xl text-gray-200 mb-8 md:mb-10 max-w-xl mx-auto font-light leading-relaxed animate-[fade-up_1s_ease-out_0.4s_both] px-2">
             Transforming properties across <strong>Metro Atlanta</strong>. We are the top-rated contractors for driveway pavers, retaining walls, and outdoor patios.
           </p>
@@ -93,7 +109,6 @@ export const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Scroll Indicator */}
       <div 
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
         style={{ opacity: Math.max(0, 1 - offset / 200) }}
