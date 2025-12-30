@@ -57,14 +57,45 @@ export const Testimonials: React.FC = () => {
   // Duplicate reviews to create seamless loop
   const marqueeReviews = [...reviews, ...reviews];
 
+  // Schema for aggregate rating
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "AGS Stones and Pavers",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": reviews.length,
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": reviews.map(r => ({
+      "@type": "Review",
+      "author": {
+         "@type": "Person",
+         "name": r.name
+      },
+      "reviewRating": {
+         "@type": "Rating",
+         "ratingValue": r.rating,
+         "bestRating": "5"
+      },
+      "reviewBody": r.text
+    }))
+  };
+
   return (
     <section id="testimonials" className="py-24 bg-brand-light relative overflow-hidden">
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="text-center fade-in-section">
            <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm">Client Stories</span>
            <h2 className="mt-2 font-serif text-4xl md:text-5xl font-bold text-brand-dark">Loved by Locals</h2>
            <div className="mt-4 flex justify-center items-center gap-2">
-              <div className="flex gap-0.5">
+              <div className="flex gap-0.5" aria-hidden="true">
                  {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 text-brand-gold fill-brand-gold" />)}
               </div>
               <span className="text-sm font-bold text-brand-dark">5.0/5 Average Rating</span>
@@ -73,7 +104,11 @@ export const Testimonials: React.FC = () => {
       </div>
 
       {/* Marquee Container */}
-      <div className="relative w-full overflow-hidden">
+      <div 
+        className="relative w-full overflow-hidden" 
+        aria-label="Scrolling list of client reviews"
+        role="region"
+      >
         {/* Gradients to fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-brand-light to-transparent z-10"></div>
         <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-brand-light to-transparent z-10"></div>
@@ -81,37 +116,37 @@ export const Testimonials: React.FC = () => {
         {/* Moving Track */}
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] py-10">
            {marqueeReviews.map((review, index) => (
-             <div 
+             <article 
                 key={`${review.id}-${index}`} 
                 className="w-[300px] md:w-[400px] mx-4 bg-white p-8 rounded-2xl shadow-[0_5px_30px_-5px_rgba(0,0,0,0.05)] border border-gray-100 flex-shrink-0 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] hover:border-brand-gold/30 cursor-default"
              >
                 <div className="flex justify-between items-start mb-6">
                    <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden border border-brand-gold/20">
-                         <img src={review.image} alt={review.name} className="w-full h-full object-cover" />
+                         <img src={review.image} alt={`${review.name} from ${review.location}`} className="w-full h-full object-cover" loading="lazy" />
                       </div>
                       <div>
-                         <h4 className="font-bold text-brand-dark leading-tight text-sm">{review.name}</h4>
+                         <h3 className="font-bold text-brand-dark leading-tight text-sm">{review.name}</h3>
                          <div className="flex items-center gap-1 text-[10px] text-gray-400 mt-0.5">
-                            <MapPin size={10} /> {review.location}
+                            <MapPin size={10} aria-hidden="true" /> {review.location}
                          </div>
                       </div>
                    </div>
-                   <Quote className="text-brand-gold/20 w-6 h-6" />
+                   <Quote className="text-brand-gold/20 w-6 h-6" aria-hidden="true" />
                 </div>
                 
-                <div className="flex gap-1 mb-3">
+                <div className="flex gap-1 mb-3" aria-label={`Rated ${review.rating} out of 5 stars`}>
                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-brand-gold fill-brand-gold" />
+                      <Star key={i} className="w-3 h-3 text-brand-gold fill-brand-gold" aria-hidden="true" />
                    ))}
                 </div>
 
                 <p className="text-gray-600 text-sm leading-relaxed italic mb-4 line-clamp-3">"{review.text}"</p>
                 
                 <div className="pt-3 border-t border-gray-50 flex items-center gap-1.5 text-[10px] font-bold text-green-700 uppercase tracking-wider">
-                   <CheckCircle size={12} /> Verified Project
+                   <CheckCircle size={12} aria-hidden="true" /> Verified Project
                 </div>
-             </div>
+             </article>
            ))}
         </div>
       </div>

@@ -70,7 +70,9 @@ export const FAQ: React.FC = () => {
             >
               <button 
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                className="w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-inset rounded-2xl"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
               >
                 <span className={`font-serif text-lg font-bold ${openIndex === index ? 'text-brand-dark' : 'text-gray-700'}`}>
                   {faq.question}
@@ -83,6 +85,9 @@ export const FAQ: React.FC = () => {
               </button>
               
               <div 
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${
                   openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}

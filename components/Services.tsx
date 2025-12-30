@@ -248,9 +248,10 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-20 fade-in-section">
-            <h3 className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
+            {/* Fixed SEO Hierarchy: Changed h3 to div.eyebrow to ensure h2 is the first heading in section */}
+            <div className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
                Metro Atlanta Hardscapes
-            </h3>
+            </div>
             <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
               Services Near You
             </h2>
@@ -259,7 +260,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
           {services.map((service, index) => (
             <article 
               key={service.id}
@@ -267,6 +268,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               className="group relative h-[450px] rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 fade-in-section bg-brand-dark border border-gray-200"
               itemScope
               itemType="https://schema.org/Service"
+              role="listitem"
             >
               <meta itemProp="serviceType" content={service.title} />
               <div className="absolute inset-0 overflow-hidden">
@@ -294,6 +296,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 </div>
 
                 <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                   {/* H3 is correct here as child of H2 Section */}
                    <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300" itemProp="name">
                      {service.title}
                    </h3>
@@ -315,10 +318,16 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       </div>
 
       {selectedService && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+        <div 
+          className="fixed inset-0 z-[110] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
           <div 
             className="absolute inset-0 bg-brand-dark/95 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]" 
             onClick={closeModal}
+            aria-hidden="true"
           ></div>
           
           <div className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
@@ -345,7 +354,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                            <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex">
                               {selectedService.icon} Premium Service
                            </div>
-                           <h2 className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
+                           <h2 id="modal-title" className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
                         </div>
                     </>
                 )}

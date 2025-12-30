@@ -68,8 +68,33 @@ export const LocalProjects: React.FC = () => {
     ? projects 
     : projects.filter(p => p.location.includes(activeFilter));
 
+  // Dynamic Schema Generation
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": `Hardscape Projects in ${activeFilter === 'All' ? 'Atlanta' : activeFilter}`,
+    "itemListElement": filteredProjects.map((project, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "CreativeWork",
+        "name": project.title,
+        "description": project.description,
+        "contentLocation": {
+          "@type": "Place",
+          "name": project.location
+        },
+        "image": project.image
+      }
+    }))
+  };
+
   return (
     <section id="local-projects" className="py-24 bg-white relative">
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-12 fade-in-section">
@@ -80,13 +105,14 @@ export const LocalProjects: React.FC = () => {
           </p>
         </div>
 
-        {/* City Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 fade-in-section">
+        {/* City Filter Tabs - Accessibility Enhanced */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12 fade-in-section" role="group" aria-label="Filter projects by city">
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 border ${
+              aria-pressed={activeFilter === filter}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 border focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 ${
                 activeFilter === filter
                   ? 'bg-brand-dark text-white border-brand-dark shadow-lg scale-105'
                   : 'bg-white text-gray-500 border-gray-200 hover:border-brand-gold hover:text-brand-gold'
@@ -107,8 +133,9 @@ export const LocalProjects: React.FC = () => {
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={project.image} 
-                  alt={`${project.title} in ${project.location}`}
+                  alt={`${project.title} installation in ${project.location}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 left-4 bg-brand-dark/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
                   <MapPin size={10} className="text-brand-gold" /> {project.location}
@@ -128,7 +155,7 @@ export const LocalProjects: React.FC = () => {
                 </p>
                 
                 {/* Keyword Tags for SEO */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-6" aria-label="Project Tags">
                   {project.tags.map((tag, i) => (
                     <span key={i} className="text-[10px] font-medium text-gray-400 bg-gray-50 px-2 py-1 rounded-md border border-gray-100">
                       {tag}
@@ -136,7 +163,7 @@ export const LocalProjects: React.FC = () => {
                   ))}
                 </div>
 
-                <a href="tel:6784287630" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-dark group-hover:gap-3 transition-all">
+                <a href="tel:6784287630" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-dark group-hover:gap-3 transition-all" aria-label={`Get quote for ${project.title}`}>
                   Get Quote for this Look <ArrowRight size={14} className="text-brand-gold" />
                 </a>
               </div>
