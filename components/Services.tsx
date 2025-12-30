@@ -2,102 +2,102 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn } from 'lucide-react';
 import { ServiceItem } from '../types';
 
+// Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
 const services: ServiceItem[] = [
   {
     id: '1',
-    title: 'Custom Pavers',
-    description: 'Driveways, walkways, and patios crafted with premium interlocking stones for durability and curb appeal.',
+    title: 'Driveway Pavers',
+    description: 'Expert driveway installation contractors near you. We replace concrete with premium interlocking pavers.',
     icon: <LayoutGrid className="w-6 h-6" />,
-    // SEO Alt Tag Injection via the image source name logic or explicit alt prop usage below
-    image: 'https://i.imgur.com/by6FzIk.png', 
+    image: 'https://i.imgur.com/by6FzIk.png', // Optimized via Imgur automatically, add size param below
     benefits: [
-      '5-Year Installation Warranty',
-      'Wide Range of Premium Stone Options',
-      'Expert Drainage Solutions'
+      'Best Driveway Contractors Near Me',
+      'High-Load Bearing Installation',
+      'Permeable & Standard Paver Options'
     ]
   },
   {
     id: '2',
-    title: 'Outdoor Kitchens',
-    description: 'Fully equipped culinary stations with BBQ islands, pizza ovens, and bars designed for entertaining.',
+    title: 'Outdoor Patio Builders',
+    description: 'Leading patio contractors in your area. We design and build custom stone patios for luxury outdoor living.',
     icon: <Utensils className="w-6 h-6" />,
     image: 'https://i.imgur.com/SIBIdiF.png',
     benefits: [
-      'Weatherproof Stainless Steel Appliances',
-      'Custom Granite & Stone Countertops',
-      'Gas, Water & Electrical Integration'
+      'Custom Outdoor Kitchen Builders',
+      'Patio Paver Companies Near Me',
+      'Granite & Stone Fabrication'
     ]
   },
   {
     id: '3',
-    title: 'Retaining Walls',
-    description: 'Structural mastery to prevent erosion and create usable flat space on sloped terrains.',
+    title: 'Retaining Wall Installation',
+    description: 'Certified retaining wall contractors near you. We fix erosion and level yards with engineered stone walls.',
     icon: <Layers className="w-6 h-6" />,
     image: 'https://i.imgur.com/dZstK86.png',
     benefits: [
-      'Structural Engineering & Stabilization',
-      'Proper Drainage & Erosion Control',
-      'Natural Stone & Modular Options'
+      'Structural Masonry Contractors',
+      'Landscape Wall Installation',
+      'Drainage & Erosion Solutions'
     ]
   },
   {
     id: '4',
-    title: 'Luxury Fireplaces',
-    description: 'Custom masonry fire pits and grand fireplaces that become the warm heart of your backyard.',
+    title: 'Masonry & Fireplaces',
+    description: 'Skilled stone work contractors near you. Custom stone masonry for fire pits, columns, and veneers.',
     icon: <Flame className="w-6 h-6" />,
     image: 'https://i.imgur.com/G2N5Chs.png',
     benefits: [
-      'Gas & Wood Burning Configurations',
-      'High-Heat Resistant Firebrick',
-      'Custom Masonry & Veneer'
+      'Outdoor Fireplace Builders',
+      'Stone Masonry Company',
+      'Veneer & Natural Stone'
     ]
   },
   {
     id: '5',
-    title: 'Custom Decks',
-    description: 'Multi-level wood and composite decks engineered for safety, longevity, and aesthetics.',
+    title: 'Deck Builders',
+    description: 'Professional deck builders near me. Composite and wood decking integrated with stone hardscapes.',
     icon: <Hammer className="w-6 h-6" />,
     image: 'https://i.imgur.com/6f4H9fL.png',
     benefits: [
-      'Premium Pressure-Treated & Composite',
-      'Code-Compliant Structural Framing',
-      'Hidden Fastener Systems'
+      'Composite & Wood Decking',
+      'Structural Framing',
+      'Under-Deck Drainage Systems'
     ]
   },
   {
     id: '6',
-    title: 'Pool Hardscapes',
-    description: 'Slip-resistant coping and pool decks designed to create a resort-style atmosphere.',
+    title: 'Pool Deck Pavers',
+    description: 'Specialized pavers for pool decks. Slip-resistant coping and resort-style hardscapes.',
     icon: <Waves className="w-6 h-6" />,
     image: 'https://i.imgur.com/vEHS8LG.png',
     benefits: [
-      'Slip-Resistant Safety Surfaces',
-      'Seamless Coping Installation',
-      'Cool-Touch Stone Technology'
+      'Slip-Resistant Travertine',
+      'Pool Coping Installation',
+      'Cool-Touch Technology'
     ]
   },
   {
     id: '7',
     title: 'Stone Veneer',
-    description: 'Elegant stone facing for house exteriors, pillars, and steps to elevate architectural detail.',
+    description: 'Enhance your home with stone veneer. The best local masonry companies for architectural facing.',
     icon: <Mountain className="w-6 h-6" />,
     image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
     benefits: [
-      'High-Adhesion Polymer Modified Mortar',
-      'Moisture Barrier Protection',
-      'Hand-Crafted Detailing'
+      'House Facing & Columns',
+      'Stone Work Contractors',
+      'Polymer Modified Mortar'
     ]
   },
   {
     id: '8',
     title: 'Landscape Design',
-    description: 'Comprehensive 3D planning and softscape integration to complement your stone features.',
+    description: 'Advanced landscape services and 3D design. We visualize your hardscape before we build.',
     icon: <Ruler className="w-6 h-6" />,
     image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDFb-Jx8ZF4z2mEWM84aEgZIf_Xpw',
     benefits: [
-      '3D Visualization Included',
-      'Native & Low-Maintenance Plants',
-      'Integrated Irrigation Systems'
+      '3D Hardscape Design',
+      'Landscapers Near Me',
+      'Full Project Planning'
     ]
   }
 ];
@@ -249,13 +249,13 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
         
         <div className="text-center mb-20 fade-in-section">
             <h3 className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
-               World-Class Craftsmanship
+               Metro Atlanta Hardscapes
             </h3>
             <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
-              Our Services
+              Services Near You
             </h2>
             <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light">
-              We don't just install stone; we architect lifestyles. Choose a category below to explore our engineering and design standards.
+               Looking for "patio contractors near me" or "paver installation"? We are Atlanta's top-rated specialists. Select a service below.
             </p>
         </div>
 
@@ -272,7 +272,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               <div className="absolute inset-0 overflow-hidden">
                 <img 
                   src={service.image} 
-                  alt={`${service.title} installation service in Atlanta, GA - AGS Stones`} 
+                  alt={`${service.title} - ${service.benefits[0]}`} 
+                  title={`${service.title} in Atlanta GA`}
                   className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
                   loading="lazy"
                   width="400"
@@ -369,8 +370,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 </p>
                 <div className="space-y-6 mb-10">
                    <p className="text-gray-600 leading-relaxed">
-                     At AGS Stones, our {selectedService.title.toLowerCase()} process is rigorous. 
-                     We combine aesthetic vision with structural integrity, ensuring your investment stands the test of time and Georgia weather.
+                     At AGS Stones, our {selectedService.title.toLowerCase()} process is designed to meet the highest standards. 
+                     Whether you are looking for "driveway pavers near me" or complex "retaining wall installation", our team provides warranty-backed craftsmanship.
                    </p>
                    <div>
                       <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-100 pb-2">What's Included</h4>

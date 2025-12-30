@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { ZParallaxShowcase } from './components/ZParallaxShowcase';
 import { Services } from './components/Services';
 import { WhyChooseUs } from './components/WhyChooseUs';
 import { Testimonials } from './components/Testimonials';
-import { BeforeAfter } from './components/BeforeAfter';
-import { DayNightSlider } from './components/DayNightSlider';
 import { FAQ } from './components/FAQ';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { MobileNav } from './components/MobileNav';
 import { FloatingWidget } from './components/FloatingWidget';
 import { ExitIntentPopup } from './components/ExitIntentPopup';
+
+// Lazy Load heavy components below the fold for Page Speed optimization
+const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
+const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
+const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
+const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
 
 const App: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
@@ -41,11 +44,26 @@ const App: React.FC = () => {
       <Header isHidden={isServiceModalOpen} />
       <main>
         <Hero />
-        <ZParallaxShowcase />
+        
+        <Suspense fallback={<div className="h-screen bg-[#0f1115]"></div>}>
+          <ZParallaxShowcase />
+        </Suspense>
+
         <Services onModalChange={setIsServiceModalOpen} />
         <WhyChooseUs />
-        <BeforeAfter />
-        <DayNightSlider />
+        
+        <Suspense fallback={<div className="h-96 bg-white"></div>}>
+           <BeforeAfter />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-96 bg-white"></div>}>
+           <LocalProjects />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-96 bg-brand-dark"></div>}>
+           <DayNightSlider />
+        </Suspense>
+
         <Testimonials />
         <FAQ />
         <Contact />

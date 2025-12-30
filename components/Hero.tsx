@@ -17,12 +17,21 @@ export const Hero: React.FC = () => {
       
       {/* Background with Parallax & Zoom - Added Title/Alt for SEO */}
       <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* LCP OPTIMIZATION: srcSet for mobile/desktop, fetchpriority high, explicit dimensions */}
         <img
+          srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop 800w,
+                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop 1600w,
+                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop 2670w"
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
+          sizes="(max-width: 768px) 800px, 100vw"
           alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
           title="Custom Paver Patio and Outdoor Living by AGS Stones"
           className="w-full h-full object-cover object-center animate-slow-zoom opacity-60"
           style={{ transform: `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})` }}
+          // @ts-ignore
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-black/40" />
       </div>
@@ -42,6 +51,8 @@ export const Hero: React.FC = () => {
             src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
             alt="AGS Stones and Pavers Logo - Duluth GA"
             className="h-24 w-auto mx-auto drop-shadow-2xl"
+            width="96"
+            height="96"
           />
         </div>
 
@@ -54,18 +65,18 @@ export const Hero: React.FC = () => {
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map(i => <Star key={i} className="w-2.5 h-2.5 md:w-3 md:h-3 text-brand-gold fill-brand-gold" />)}
             </div>
-            <span className="text-white/90 text-[10px] md:text-xs font-semibold tracking-widest uppercase">#1 Rated Hardscape in Atlanta</span>
+            <span className="text-white/90 text-[10px] md:text-xs font-semibold tracking-widest uppercase">#1 Rated Hardscape Contractor</span>
           </div>
           
           {/* PRIMARY H1 FOR SEO - Keyword Dense - Responsive Sizing */}
           <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-2xl animate-[fade-up_1s_ease-out_0.2s_both]">
             Atlanta's Premier <br/>
-            <span className="text-brand-gold italic">Pavers & Retaining Walls</span>
+            <span className="text-brand-gold italic">Paver & Wall Installation</span>
           </h1>
           
-          {/* Updated Subtitle with Geo-Keywords */}
+          {/* Updated Subtitle with Geo-Keywords - BROADENED SCOPE */}
           <p className="text-base md:text-xl text-gray-200 mb-8 md:mb-10 max-w-xl mx-auto font-light leading-relaxed animate-[fade-up_1s_ease-out_0.4s_both] px-2">
-            Transforming properties in <strong>Duluth, Alpharetta, and Roswell</strong>. We specialize in luxury outdoor kitchens, driveways, and structural retaining walls.
+            Transforming properties across <strong>Metro Atlanta</strong>. We are the top-rated contractors for driveway pavers, retaining walls, and outdoor patios.
           </p>
           
           <div className="flex justify-center animate-[fade-up_1s_ease-out_0.6s_both]">

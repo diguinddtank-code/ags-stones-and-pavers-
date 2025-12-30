@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
               <span className="text-brand-gold">AGS</span> STONES
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Atlanta's Premier Hardscape Contractor. We build the foundation for your best memories with warranty-backed craftsmanship.
+              Atlanta's Premier Hardscape Contractor. Specialists in Pavers, Retaining Walls, and Masonry.
             </p>
             <div className="flex gap-4">
               <a 
@@ -41,30 +41,34 @@ export const Footer: React.FC = () => {
 
           {/* Services Links (SEO Silo) */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-brand-gold">Our Services</h4>
+            <h4 className="font-bold text-lg mb-6 text-brand-gold">Popular Services</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
-              <li><a href="#services" className="hover:text-white transition-colors">Paver Driveways</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Retaining Walls</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Outdoor Kitchens</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Pool Decks</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Stone Fire Pits</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Patio Design</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Paver Driveway Installation</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Retaining Wall Contractors</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Patio Builders Near Me</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Pool Deck Pavers</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Stone Fireplace Builders</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Landscape Design</a></li>
             </ul>
           </div>
 
-          {/* Service Areas (SEO Keyword Cloud) */}
+          {/* Keyword Cloud (Strategic Long Tail Capture) */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-brand-gold">Serving Metro Atlanta</h4>
-            <div className="flex flex-wrap gap-2 text-xs text-gray-500">
-               {['Duluth', 'Johns Creek', 'Alpharetta', 'Suwanee', 'Roswell', 'Milton', 'Cumming', 'Sandy Springs', 'Marietta', 'Dunwoody', 'Norcross', 'Buford'].map((city) => (
-                  <span key={city} className="bg-white/5 px-2 py-1 rounded-sm border border-white/5 hover:border-brand-gold/50 transition-colors cursor-default">
-                     {city}
-                  </span>
-               ))}
-            </div>
-            <p className="mt-4 text-xs text-gray-500 italic">
-               Top-rated in Fulton, Gwinnett, and Forsyth Counties.
-            </p>
+             <h4 className="font-bold text-lg mb-6 text-brand-gold">Specialized Searches</h4>
+             <ul className="space-y-2 text-gray-500 text-xs">
+                <li><a href="#services" className="hover:text-white transition-colors">Stone work contractors near me</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Concrete driveway companies</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Masonry services near me</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Blacktop paving alternatives</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Landscapers around me</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">Brick paver installers</a></li>
+             </ul>
+             <div className="mt-6">
+                <h5 className="font-bold text-sm text-brand-gold mb-2">Service Areas</h5>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                   Duluth • Alpharetta • Roswell • Johns Creek • Suwanee • Milton • Cumming • Sandy Springs • Marietta • Dunwoody • Norcross
+                </p>
+             </div>
           </div>
 
           {/* Contact Info (Schema Consistency) */}
