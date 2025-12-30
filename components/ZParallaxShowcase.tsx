@@ -1,22 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Sparkles, Gem } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 export const ZParallaxShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    const checkMobile = () => {
-        setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-
     const handleScroll = () => {
-      // PERFORMANCE: Disable JS logic on mobile completely
-      if (window.innerWidth < 768) return;
-
+      // Enabled for all devices
       if (!containerRef.current) return;
       
       const rect = containerRef.current.getBoundingClientRect();
@@ -27,67 +18,15 @@ export const ZParallaxShowcase: React.FC = () => {
       requestAnimationFrame(() => setScrollProgress(progress));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
         window.removeEventListener('scroll', handleScroll);
-        window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
-  // --- MOBILE RENDER: LUXURY STATEMENT CARD ---
-  // Replaced the "portal" effect with a high-end architectural transition
-  if (isMobile) {
-    return (
-        <section className="relative min-h-[70vh] flex items-center justify-center bg-brand-dark overflow-hidden py-20">
-             
-             {/* 1. Background Image (Subtle Zoom) */}
-             <div className="absolute inset-0 z-0">
-                <img 
-                    src="https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=80&w=800&auto=format&fit=crop" 
-                    alt="Luxury Paver Detail Texture" 
-                    className="w-full h-full object-cover opacity-40 animate-[slow-zoom_25s_infinite_alternate]"
-                    loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0f1115] via-[#0f1115]/80 to-[#0f1115]"></div>
-             </div>
-
-             {/* 2. Glassmorphism Card */}
-             <div className="relative z-10 px-6 w-full max-w-sm">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] animate-[fade-up_0.8s_ease-out]">
-                    
-                    <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                        <div className="p-2 bg-brand-gold rounded-lg text-brand-dark shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-                            <Gem size={18} />
-                        </div>
-                        <span className="text-brand-gold font-bold uppercase tracking-[0.2em] text-[10px]">
-                            The AGS Standard
-                        </span>
-                    </div>
-
-                    <h2 className="font-serif text-3xl text-white font-bold leading-tight mb-4">
-                        Crafting <br/> 
-                        <span className="italic text-gray-400 font-light">Timeless Spaces.</span>
-                    </h2>
-                    
-                    <p className="text-gray-300 text-sm leading-relaxed mb-8 font-light border-l-2 border-brand-gold/50 pl-4">
-                        We don't just lay stones; we engineer lifestyles. Experience the intersection of structural durability and luxury design.
-                    </p>
-
-                    <div className="flex flex-col items-center gap-2">
-                        <span className="text-white/40 text-[10px] uppercase tracking-widest">
-                            Scroll to Explore
-                        </span>
-                        <ArrowDown size={16} className="text-brand-gold animate-bounce" />
-                    </div>
-                </div>
-             </div>
-        </section>
-    );
-  }
-
-  // --- DESKTOP RENDER (Unchanged) ---
   return (
-    <section ref={containerRef} className="relative h-[300vh] bg-[#0f1115]">
+    // Reduced height from 300vh to 220vh to minimize "dead scroll" space
+    <section ref={containerRef} className="relative h-[220vh] bg-[#0f1115]">
       
       <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" 
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/black-scales.png")` }}>
@@ -95,58 +34,67 @@ export const ZParallaxShowcase: React.FC = () => {
 
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-[100px]">
         
-        {/* Layer 3: The Destination */}
+        {/* Layer 3: The Destination (Background Image) */}
         <div 
            className="absolute inset-0 w-full h-full"
            style={{
-             opacity: Math.min(1, scrollProgress * 3), 
-             transform: `scale(${1.15 - (scrollProgress * 0.15)}) translate3d(0,0,0)`, 
+             // Accelerated fade in (factor 2.5 -> 4) so image appears sooner
+             opacity: Math.min(1, scrollProgress * 4), 
+             transform: `scale(${1.2 - (scrollProgress * 0.2)}) translate3d(0,0,0)`,
              zIndex: 10
            }}
         >
            <img 
-             src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2600&auto=format&fit=crop" 
-             alt="Luxury Destination" 
+             src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2600&auto=format&fit=crop" 
+             alt="Magnificent Outdoor Living and Pool Deck" 
              className="w-full h-full object-cover brightness-[0.85]"
            />
            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
         </div>
 
-        {/* Layer 2: The Portal */}
+        {/* Layer 2: The Portal (Black Mask with Hole) */}
         <div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{
-             transform: `scale(${1 + scrollProgress * 50}) translate3d(0,0,0)`, 
-             opacity: 1 - Math.pow(scrollProgress, 5), 
+             // Increased scale factor (60 -> 80) to open the hole faster
+             transform: `scale(${1 + scrollProgress * 80}) translate3d(0,0,0)`, 
+             opacity: 1, 
              zIndex: 20
           }}
         >
            <div className="w-[100vw] h-[100vh] flex items-center justify-center">
-              <div className="w-[50vw] h-[50vh] rounded-[20%] shadow-[0_0_0_100vmax_#0f1115] bg-transparent"></div>
+              {/* The "Hole" */}
+              <div className="w-[85vw] h-[50vh] md:w-[40vw] md:h-[40vh] rounded-[40%] md:rounded-[30%] shadow-[0_0_0_150vmax_#0f1115] bg-transparent"></div>
            </div>
         </div>
 
-        {/* Layer 1: Intro Text */}
+        {/* Layer 1: The Text (Welcome Message) */}
         <div 
-          className="absolute z-30 text-center px-4"
+          className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
           style={{
-             opacity: 1 - scrollProgress * 5, 
-             transform: `scale(${1 + scrollProgress}) translateY(${scrollProgress * -50}px) translate3d(0,0,0)`
+             // Adjusted Physics to match shorter scroll:
+             opacity: Math.max(0, 1 - scrollProgress * 4), 
+             // Moves up faster (translateY -150px)
+             transform: `scale(${1 + scrollProgress * 1.5}) translateY(${scrollProgress * -150}px) translate3d(0,0,0)`
           }}
         >
-           <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs mb-4 block">
-             The Transition
+           <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block drop-shadow-lg">
+             Welcome to
            </span>
-           <h2 className="font-serif text-5xl md:text-7xl text-white font-bold leading-none">
-             Beyond <br/> Expectations
+           <h2 className="font-serif text-5xl sm:text-7xl md:text-8xl text-white font-bold leading-none tracking-tight drop-shadow-2xl">
+             AGS Stones <br/>
+             <span className="text-lg md:text-3xl font-sans font-light text-gray-300 tracking-[0.2em] block mt-4 uppercase opacity-90">
+                Outdoor Living
+             </span>
            </h2>
         </div>
 
+        {/* Scroll Indicator (Fades out immediately) */}
         <div 
-           className="absolute bottom-10 z-50 text-white flex flex-col items-center gap-2 transition-opacity duration-500"
-           style={{ opacity: scrollProgress > 0.95 ? 1 : 0 }}
+           className="absolute bottom-10 z-50 text-white flex flex-col items-center gap-2 transition-opacity duration-300"
+           style={{ opacity: scrollProgress > 0.05 ? 0 : 1 }}
         >
-           <span className="text-[10px] uppercase tracking-widest drop-shadow-md">Explore Services</span>
+           <span className="text-[10px] uppercase tracking-widest drop-shadow-md">Scroll to Enter</span>
            <ArrowDown className="w-5 h-5 animate-bounce drop-shadow-md" />
         </div>
 
