@@ -14,7 +14,7 @@ export const ZParallaxShowcase: React.FC = () => {
     window.addEventListener('resize', checkMobile);
 
     const handleScroll = () => {
-      // PERFORMANCE: Disable JS logic on mobile
+      // PERFORMANCE: Disable JS logic on mobile completely
       if (window.innerWidth < 768) return;
 
       if (!containerRef.current) return;
@@ -35,52 +35,53 @@ export const ZParallaxShowcase: React.FC = () => {
   }, []);
 
   // --- MOBILE RENDER: "THE GATEWAY" ANIMATION ---
-  // A CSS-driven automatic sequence that simulates depth and entry
+  // Optimized for Mobile GPU (transform only)
   if (isMobile) {
     return (
-        <section className="relative h-[85vh] bg-[#0f1115] overflow-hidden flex flex-col items-center justify-center">
+        <section className="relative h-[85vh] bg-[#0f1115] overflow-hidden flex flex-col items-center justify-center will-change-transform">
              
-             {/* 1. Dynamic Background Layer - Slow Pulse */}
-             <div className="absolute inset-0 animate-[scaleIn_10s_ease-in-out_infinite_alternate]">
+             {/* 1. Dynamic Background Layer */}
+             <div className="absolute inset-0 animate-[scaleIn_15s_ease-in-out_infinite_alternate]">
                 <img 
-                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=75&w=800&auto=format&fit=crop" 
                     alt="Luxury Destination" 
-                    className="w-full h-full object-cover opacity-50"
+                    className="w-full h-full object-cover opacity-40"
+                    loading="eager"
                 />
-                <div className="absolute inset-0 bg-black/60"></div>
+                <div className="absolute inset-0 bg-black/50"></div>
              </div>
 
-             {/* 2. The Portal Ring - Rotating Glow */}
-             <div className="absolute w-[300px] h-[300px] rounded-full border border-brand-gold/30 opacity-60 animate-[spin_20s_linear_infinite]"></div>
-             <div className="absolute w-[280px] h-[280px] rounded-full border border-white/10 opacity-40 animate-[spin_15s_linear_infinite_reverse]"></div>
+             {/* 2. The Portal Ring */}
+             <div className="absolute w-[280px] h-[280px] rounded-full border border-brand-gold/30 opacity-60 animate-[spin_25s_linear_infinite]"></div>
+             <div className="absolute w-[260px] h-[260px] rounded-full border border-white/10 opacity-40 animate-[spin_20s_linear_infinite_reverse]"></div>
 
              {/* 3. Floating Content Layer */}
              <div className="relative z-10 text-center px-6">
-                <div className="inline-flex items-center gap-2 text-brand-gold font-bold tracking-[0.3em] uppercase text-[10px] mb-6 animate-[fade-up_1s_ease-out]">
+                <div className="inline-flex items-center gap-2 text-brand-gold font-bold tracking-[0.3em] uppercase text-[10px] mb-6 animate-[fade-up_0.8s_ease-out]">
                     <Sparkles size={12} /> The Experience
                 </div>
                 
-                <h2 className="font-serif text-5xl text-white font-bold leading-[0.9] mb-6 drop-shadow-2xl animate-[fade-up_1s_ease-out_0.2s_both]">
+                <h2 className="font-serif text-5xl text-white font-bold leading-[0.9] mb-6 drop-shadow-2xl animate-[fade-up_0.8s_ease-out_0.2s_both]">
                     Beyond <br/> 
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
                         Reality
                     </span>
                 </h2>
                 
-                <p className="text-gray-400 font-light max-w-xs mx-auto text-sm leading-relaxed mb-8 animate-[fade-up_1s_ease-out_0.4s_both]">
+                <p className="text-gray-400 font-light max-w-xs mx-auto text-sm leading-relaxed mb-8 animate-[fade-up_0.8s_ease-out_0.4s_both]">
                     Step into a world where design meets perfection. Your backyard, reimagined.
                 </p>
 
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-brand-gold to-transparent mx-auto animate-pulse"></div>
+                <div className="h-px w-24 bg-gradient-to-r from-transparent via-brand-gold to-transparent mx-auto"></div>
              </div>
 
-             {/* Bottom Fade */}
-             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-50 to-transparent z-20"></div>
+             {/* Bottom Fade for smooth transition to next section */}
+             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-20"></div>
         </section>
     );
   }
 
-  // --- DESKTOP RENDER: Interactive Scroll Parallax ---
+  // --- DESKTOP RENDER ---
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-[#0f1115]">
       
@@ -95,7 +96,7 @@ export const ZParallaxShowcase: React.FC = () => {
            className="absolute inset-0 w-full h-full"
            style={{
              opacity: Math.min(1, scrollProgress * 3), 
-             transform: `scale(${1.15 - (scrollProgress * 0.15)})`, 
+             transform: `scale(${1.15 - (scrollProgress * 0.15)}) translate3d(0,0,0)`, 
              zIndex: 10
            }}
         >
@@ -111,7 +112,7 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{
-             transform: `scale(${1 + scrollProgress * 50})`, 
+             transform: `scale(${1 + scrollProgress * 50}) translate3d(0,0,0)`, 
              opacity: 1 - Math.pow(scrollProgress, 5), 
              zIndex: 20
           }}
@@ -126,7 +127,7 @@ export const ZParallaxShowcase: React.FC = () => {
           className="absolute z-30 text-center px-4"
           style={{
              opacity: 1 - scrollProgress * 5, 
-             transform: `scale(${1 + scrollProgress}) translateY(${scrollProgress * -50}px)`
+             transform: `scale(${1 + scrollProgress}) translateY(${scrollProgress * -50}px) translate3d(0,0,0)`
           }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs mb-4 block">
@@ -135,30 +136,6 @@ export const ZParallaxShowcase: React.FC = () => {
            <h2 className="font-serif text-5xl md:text-7xl text-white font-bold leading-none">
              Beyond <br/> Expectations
            </h2>
-        </div>
-
-        {/* FINAL IMPACT TEXT */}
-        <div 
-            className="absolute z-40 inset-0 pointer-events-none transition-opacity duration-500"
-            style={{ 
-                background: 'radial-gradient(circle, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%)',
-                opacity: scrollProgress > 0.8 ? (scrollProgress - 0.8) * 5 : 0
-            }}
-        ></div>
-
-        <div 
-           className="absolute z-50 inset-0 flex flex-col items-center justify-center text-center pointer-events-none"
-           style={{ 
-             opacity: scrollProgress > 0.8 ? (scrollProgress - 0.8) * 5 : 0,
-             transform: `scale(${2 - scrollProgress})` 
-           }}
-        >
-           <h2 className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-white tracking-tighter leading-none drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
-             WELCOME
-           </h2>
-           <p className="font-sans text-xl md:text-3xl text-white font-light uppercase tracking-[0.5em] mt-4 drop-shadow-md text-shadow-lg">
-             To Your New Lifestyle
-           </p>
         </div>
 
         <div 

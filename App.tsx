@@ -2,61 +2,78 @@ import React, { useEffect, useState, useRef, Suspense } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 
-// LAZY LOADED COMPONENTS (Chunked for Performance)
+// --- COMPONENT CHUNKS ---
+const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
+
+// Block 1: Core Value Proposition
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
 const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
+
+// Block 2: Visual Proof
+const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
+const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
+const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
+
+// Block 3: Trust & Conversion
 const Testimonials = React.lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
+
+// Aux
 const MobileNav = React.lazy(() => import('./components/MobileNav').then(module => ({ default: module.MobileNav })));
 const FloatingWidget = React.lazy(() => import('./components/FloatingWidget').then(module => ({ default: module.FloatingWidget })));
 const ExitIntentPopup = React.lazy(() => import('./components/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
-const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
-const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
-const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
-const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
+// --- ERROR BOUNDARY ---
+// Prevents the entire site from crashing if one lazy chunk fails to load
+class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasError: boolean}> {
+  constructor(props: {children: React.ReactNode}) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return <div className="p-8 text-center text-gray-500 text-sm">Content temporarily unavailable. Please refresh.</div>;
+    }
+    return this.props.children;
+  }
+}
 
-// --- ROBUST LAZY SECTION WRAPPER ---
-// Correctly handles viewport hydration without unmounting during Suspense
-const LazySection: React.FC<{ children: React.ReactNode, minHeight?: string, className?: string }> = ({ 
-  children, 
-  minHeight = "400px",
-  className = "" 
-}) => {
+// --- LIGHTWEIGHT LAZY WRAPPER ---
+const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = ({ children, minHeight = "500px" }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 1. Safety Timeout: Ensure content eventually loads even if Observer fails
-    const safetyTimer = setTimeout(() => setIsVisible(true), 4000);
+    // 1. Immediate mobile check to avoid waiting
+    if (typeof window !== 'undefined' && window.scrollY > 200) {
+       // If user already scrolled down on reload, show immediately
+       setIsVisible(true);
+       return;
+    }
 
-    // 2. Intersection Observer for Performance
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true);
-        clearTimeout(safetyTimer);
         observer.disconnect();
       }
-    }, { rootMargin: "300px" }); // Pre-load 300px before scrolling into view
+    }, { rootMargin: "600px" }); // Huge margin to load well before user arrives
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
+    if (ref.current) observer.observe(ref.current);
+    
+    // Safety fallback
+    const timer = setTimeout(() => setIsVisible(true), 3000);
+    
     return () => {
-      observer.disconnect();
-      clearTimeout(safetyTimer);
+        observer.disconnect();
+        clearTimeout(timer);
     };
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={`w-full ${className}`}
-      style={{ minHeight: isVisible ? 'auto' : minHeight }}
-    >
+    <div ref={ref} style={{ minHeight: isVisible ? 'auto' : minHeight }}>
       {isVisible ? children : null}
     </div>
   );
@@ -65,7 +82,7 @@ const LazySection: React.FC<{ children: React.ReactNode, minHeight?: string, cla
 const App: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
 
-  // Global Animation Trigger
+  // Global Animation Observer (Optimized: Single Instance)
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -75,7 +92,7 @@ const App: React.FC = () => {
       });
     }, { threshold: 0.1 });
 
-    // Use MutationObserver to attach animations to new content as it loads
+    // Attach to body to catch new elements as they hydrate
     const mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach(mutation => {
         mutation.addedNodes.forEach(node => {
@@ -88,10 +105,7 @@ const App: React.FC = () => {
     });
 
     mutationObserver.observe(document.body, { childList: true, subtree: true });
-    return () => {
-      observer.disconnect();
-      mutationObserver.disconnect();
-    }
+    return () => { observer.disconnect(); mutationObserver.disconnect(); }
   }, []);
 
   return (
@@ -99,74 +113,58 @@ const App: React.FC = () => {
       <Header isHidden={isServiceModalOpen} />
       
       <main>
-        {/* Critical Path: Render Immediately */}
+        {/* CRITICAL: Hero Loads Instantly */}
         <Hero />
         
-        {/* Viewport Hydration Strategy */}
-        {/* Note: Suspense is INSIDE LazySection to maintain layout stability */}
+        {/* PRIORITY 1: Immediate Below Fold (No LazyBlock wrapper to prevent gaps) */}
+        <ErrorBoundary>
+          <Suspense fallback={<div className="h-[85vh] bg-[#0f1115] w-full" />}>
+             <ZParallaxShowcase />
+          </Suspense>
+        </ErrorBoundary>
+
+        {/* PRIORITY 2: Core Services (Batched) */}
+        <LazyBlock minHeight="1000px">
+           <ErrorBoundary>
+              <Suspense fallback={<div className="h-96 w-full bg-slate-50 animate-pulse" />}>
+                 <Services onModalChange={setIsServiceModalOpen} />
+                 <WhyChooseUs />
+              </Suspense>
+           </ErrorBoundary>
+        </LazyBlock>
         
-        <LazySection minHeight="80vh" className="bg-[#0f1115]">
-           <Suspense fallback={<div className="h-full w-full animate-pulse bg-gray-900" />}>
-              <ZParallaxShowcase />
-           </Suspense>
-        </LazySection>
+        {/* PRIORITY 3: Visual Proof (Batched) */}
+        <LazyBlock minHeight="1200px">
+           <ErrorBoundary>
+              <Suspense fallback={<div className="h-96 w-full bg-white" />}>
+                 <BeforeAfter />
+                 <LocalProjects />
+                 <DayNightSlider />
+              </Suspense>
+           </ErrorBoundary>
+        </LazyBlock>
 
-        <LazySection minHeight="800px">
-           <Suspense fallback={<div className="h-96 w-full bg-slate-50 flex items-center justify-center"><div className="w-8 h-8 border-4 border-brand-gold border-t-transparent rounded-full animate-spin"></div></div>}>
-              <Services onModalChange={setIsServiceModalOpen} />
-           </Suspense>
-        </LazySection>
-        
-        <LazySection minHeight="400px" className="bg-brand-dark">
-           <Suspense fallback={<div className="h-full w-full bg-brand-dark" />}>
-              <WhyChooseUs />
-           </Suspense>
-        </LazySection>
-        
-        <LazySection minHeight="500px">
-           <Suspense fallback={<div className="h-96 w-full bg-white" />}>
-              <BeforeAfter />
-           </Suspense>
-        </LazySection>
-
-        <LazySection minHeight="600px">
-           <Suspense fallback={<div className="h-96 w-full bg-white" />}>
-              <LocalProjects />
-           </Suspense>
-        </LazySection>
-
-        <LazySection minHeight="500px" className="bg-brand-dark">
-           <Suspense fallback={<div className="h-96 w-full bg-brand-dark" />}>
-              <DayNightSlider />
-           </Suspense>
-        </LazySection>
-
-        <LazySection minHeight="400px" className="bg-brand-light">
-           <Suspense fallback={<div className="h-64 w-full bg-brand-light" />}>
-              <Testimonials />
-           </Suspense>
-        </LazySection>
-
-        <LazySection minHeight="300px">
-           <Suspense fallback={<div className="h-48 w-full bg-white" />}>
-              <FAQ />
-           </Suspense>
-        </LazySection>
-
-        <LazySection minHeight="600px" className="bg-brand-light">
-           <Suspense fallback={<div className="h-96 w-full bg-brand-light" />}>
-              <Contact />
-           </Suspense>
-        </LazySection>
+        {/* PRIORITY 4: Trust & Contact (Batched) */}
+        <LazyBlock minHeight="1000px">
+           <ErrorBoundary>
+              <Suspense fallback={<div className="h-96 w-full bg-brand-light" />}>
+                 <Testimonials />
+                 <FAQ />
+                 <Contact />
+              </Suspense>
+           </ErrorBoundary>
+        </LazyBlock>
       </main>
       
-      <LazySection minHeight="300px" className="bg-brand-dark">
-         <Suspense fallback={<div className="h-40 w-full bg-brand-dark" />}>
-            <Footer />
-         </Suspense>
-      </LazySection>
+      <LazyBlock minHeight="300px">
+         <ErrorBoundary>
+            <Suspense fallback={<div className="h-40 w-full bg-brand-dark" />}>
+               <Footer />
+            </Suspense>
+         </ErrorBoundary>
+      </LazyBlock>
 
-      {/* Auxiliary Components - Low Priority */}
+      {/* AUXILIARY: Load last, completely separate */}
       <Suspense fallback={null}>
          <div className="hidden md:block">
             <FloatingWidget />
