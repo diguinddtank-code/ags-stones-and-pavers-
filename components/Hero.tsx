@@ -35,7 +35,11 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="home" className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-24 pb-24 md:pt-20 md:pb-40"> 
+    <section 
+      ref={sectionRef} 
+      id="home" 
+      className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-20 pb-48 md:pt-20 md:pb-40"
+    > 
       
       {/* Background Image Container */}
       <div className="absolute inset-0 z-0 overflow-hidden">

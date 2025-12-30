@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown, Sparkles, Gem } from 'lucide-react';
 
 export const ZParallaxShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,54 +34,58 @@ export const ZParallaxShowcase: React.FC = () => {
     };
   }, []);
 
-  // --- MOBILE RENDER: "THE GATEWAY" ANIMATION ---
-  // Optimized for Mobile GPU (transform only)
+  // --- MOBILE RENDER: LUXURY STATEMENT CARD ---
+  // Replaced the "portal" effect with a high-end architectural transition
   if (isMobile) {
     return (
-        <section className="relative h-[85vh] bg-[#0f1115] overflow-hidden flex flex-col items-center justify-center will-change-transform">
+        <section className="relative min-h-[70vh] flex items-center justify-center bg-brand-dark overflow-hidden py-20">
              
-             {/* 1. Dynamic Background Layer */}
-             <div className="absolute inset-0 animate-[scaleIn_15s_ease-in-out_infinite_alternate]">
+             {/* 1. Background Image (Subtle Zoom) */}
+             <div className="absolute inset-0 z-0">
                 <img 
-                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=75&w=800&auto=format&fit=crop" 
-                    alt="Luxury Destination" 
-                    className="w-full h-full object-cover opacity-40"
+                    src="https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=80&w=800&auto=format&fit=crop" 
+                    alt="Luxury Paver Detail Texture" 
+                    className="w-full h-full object-cover opacity-40 animate-[slow-zoom_25s_infinite_alternate]"
                     loading="eager"
                 />
-                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0f1115] via-[#0f1115]/80 to-[#0f1115]"></div>
              </div>
 
-             {/* 2. The Portal Ring */}
-             <div className="absolute w-[280px] h-[280px] rounded-full border border-brand-gold/30 opacity-60 animate-[spin_25s_linear_infinite]"></div>
-             <div className="absolute w-[260px] h-[260px] rounded-full border border-white/10 opacity-40 animate-[spin_20s_linear_infinite_reverse]"></div>
+             {/* 2. Glassmorphism Card */}
+             <div className="relative z-10 px-6 w-full max-w-sm">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] animate-[fade-up_0.8s_ease-out]">
+                    
+                    <div className="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                        <div className="p-2 bg-brand-gold rounded-lg text-brand-dark shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                            <Gem size={18} />
+                        </div>
+                        <span className="text-brand-gold font-bold uppercase tracking-[0.2em] text-[10px]">
+                            The AGS Standard
+                        </span>
+                    </div>
 
-             {/* 3. Floating Content Layer */}
-             <div className="relative z-10 text-center px-6">
-                <div className="inline-flex items-center gap-2 text-brand-gold font-bold tracking-[0.3em] uppercase text-[10px] mb-6 animate-[fade-up_0.8s_ease-out]">
-                    <Sparkles size={12} /> The Experience
+                    <h2 className="font-serif text-3xl text-white font-bold leading-tight mb-4">
+                        Crafting <br/> 
+                        <span className="italic text-gray-400 font-light">Timeless Spaces.</span>
+                    </h2>
+                    
+                    <p className="text-gray-300 text-sm leading-relaxed mb-8 font-light border-l-2 border-brand-gold/50 pl-4">
+                        We don't just lay stones; we engineer lifestyles. Experience the intersection of structural durability and luxury design.
+                    </p>
+
+                    <div className="flex flex-col items-center gap-2">
+                        <span className="text-white/40 text-[10px] uppercase tracking-widest">
+                            Scroll to Explore
+                        </span>
+                        <ArrowDown size={16} className="text-brand-gold animate-bounce" />
+                    </div>
                 </div>
-                
-                <h2 className="font-serif text-5xl text-white font-bold leading-[0.9] mb-6 drop-shadow-2xl animate-[fade-up_0.8s_ease-out_0.2s_both]">
-                    Beyond <br/> 
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
-                        Reality
-                    </span>
-                </h2>
-                
-                <p className="text-gray-400 font-light max-w-xs mx-auto text-sm leading-relaxed mb-8 animate-[fade-up_0.8s_ease-out_0.4s_both]">
-                    Step into a world where design meets perfection. Your backyard, reimagined.
-                </p>
-
-                <div className="h-px w-24 bg-gradient-to-r from-transparent via-brand-gold to-transparent mx-auto"></div>
              </div>
-
-             {/* Bottom Fade for smooth transition to next section */}
-             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-slate-50 to-transparent z-20"></div>
         </section>
     );
   }
 
-  // --- DESKTOP RENDER ---
+  // --- DESKTOP RENDER (Unchanged) ---
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-[#0f1115]">
       
