@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { MapPin, Tag, ArrowRight } from 'lucide-react';
 
 // Data structure designed to hit specific keyword combinations: [Service] + [Location]
-// OPTIMIZATION: Added &q=75&w=600&fm=webp to all images to serve optimized mobile/tablet sizes instead of 4k originals
 const projects = [
   {
     id: 1,
@@ -18,7 +17,7 @@ const projects = [
     title: 'Structural Retaining Wall',
     location: 'Roswell, GA',
     category: 'Retaining Walls',
-    image: 'https://i.imgur.com/dZstK86.png', // Imgur doesn't support easy URL parameter resizing like Unsplash without specific API/Thumbnail logic, handled in img tag
+    image: 'https://i.imgur.com/dZstK86l.webp', // Imgur optimized: l suffix (640px) + webp
     tags: ['#ErosionControl', '#ModularBlock', '#DrainageSolutions'],
     description: '6ft engineered wall to level a sloped backyard. Included heavy-duty drainage and geogrid reinforcement.'
   },
@@ -137,9 +136,6 @@ export const LocalProjects: React.FC = () => {
                   alt={`${project.title} installation in ${project.location}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="300"
                 />
                 <div className="absolute top-4 left-4 bg-brand-dark/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
                   <MapPin size={10} className="text-brand-gold" /> {project.location}

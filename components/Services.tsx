@@ -3,13 +3,14 @@ import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Ham
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
+// OPTIMIZATION: Imgur links converted to WebP (.webp) and used 'l' suffix (Large Thumbnail) for better mobile performance
 const services: ServiceItem[] = [
   {
     id: '1',
     title: 'Driveway Pavers',
     description: 'Expert driveway installation contractors near you. We replace concrete with premium interlocking pavers.',
     icon: <LayoutGrid className="w-6 h-6" />,
-    image: 'https://i.imgur.com/by6FzIk.png', // Optimized via Imgur automatically, add size param below
+    image: 'https://i.imgur.com/by6FzIkl.webp', // 'l' suffix = 640px max width, perfect for cards
     benefits: [
       'Best Driveway Contractors Near Me',
       'High-Load Bearing Installation',
@@ -21,7 +22,7 @@ const services: ServiceItem[] = [
     title: 'Outdoor Patio Builders',
     description: 'Leading patio contractors in your area. We design and build custom stone patios for luxury outdoor living.',
     icon: <Utensils className="w-6 h-6" />,
-    image: 'https://i.imgur.com/SIBIdiF.png',
+    image: 'https://i.imgur.com/SIBIdiFl.webp',
     benefits: [
       'Custom Outdoor Kitchen Builders',
       'Patio Paver Companies Near Me',
@@ -33,7 +34,7 @@ const services: ServiceItem[] = [
     title: 'Retaining Wall Installation',
     description: 'Certified retaining wall contractors near you. We fix erosion and level yards with engineered stone walls.',
     icon: <Layers className="w-6 h-6" />,
-    image: 'https://i.imgur.com/dZstK86.png',
+    image: 'https://i.imgur.com/dZstK86l.webp',
     benefits: [
       'Structural Masonry Contractors',
       'Landscape Wall Installation',
@@ -45,7 +46,7 @@ const services: ServiceItem[] = [
     title: 'Masonry & Fireplaces',
     description: 'Skilled stone work contractors near you. Custom stone masonry for fire pits, columns, and veneers.',
     icon: <Flame className="w-6 h-6" />,
-    image: 'https://i.imgur.com/G2N5Chs.png',
+    image: 'https://i.imgur.com/G2N5Chsl.webp',
     benefits: [
       'Outdoor Fireplace Builders',
       'Stone Masonry Company',
@@ -57,7 +58,7 @@ const services: ServiceItem[] = [
     title: 'Deck Builders',
     description: 'Professional deck builders near me. Composite and wood decking integrated with stone hardscapes.',
     icon: <Hammer className="w-6 h-6" />,
-    image: 'https://i.imgur.com/6f4H9fL.png',
+    image: 'https://i.imgur.com/6f4H9fLl.webp',
     benefits: [
       'Composite & Wood Decking',
       'Structural Framing',
@@ -69,7 +70,7 @@ const services: ServiceItem[] = [
     title: 'Pool Deck Pavers',
     description: 'Specialized pavers for pool decks. Slip-resistant coping and resort-style hardscapes.',
     icon: <Waves className="w-6 h-6" />,
-    image: 'https://i.imgur.com/vEHS8LG.png',
+    image: 'https://i.imgur.com/vEHS8LGl.webp',
     benefits: [
       'Slip-Resistant Travertine',
       'Pool Coping Installation',
@@ -81,7 +82,7 @@ const services: ServiceItem[] = [
     title: 'Stone Veneer',
     description: 'Enhance your home with stone veneer. The best local masonry companies for architectural facing.',
     icon: <Mountain className="w-6 h-6" />,
-    image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
+    image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg', // Pinimg doesn't support easy resizing params, leaving as is
     benefits: [
       'House Facing & Columns',
       'Stone Work Contractors',
@@ -93,7 +94,7 @@ const services: ServiceItem[] = [
     title: 'Landscape Design',
     description: 'Advanced landscape services and 3D design. We visualize your hardscape before we build.',
     icon: <Ruler className="w-6 h-6" />,
-    image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDFb-Jx8ZF4z2mEWM84aEgZIf_Xpw',
+    image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg', // YouTube thumbnail is reasonably optimized
     benefits: [
       '3D Hardscape Design',
       'Landscapers Near Me',
@@ -248,7 +249,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-20 fade-in-section">
-            {/* Fixed SEO Hierarchy: Changed h3 to div.eyebrow to ensure h2 is the first heading in section */}
             <div className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
                Metro Atlanta Hardscapes
             </div>
@@ -271,7 +271,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               role="listitem"
             >
               <meta itemProp="serviceType" content={service.title} />
-              <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0 overflow-hidden bg-gray-900">
                 <img 
                   src={service.image} 
                   alt={`${service.title} - ${service.benefits[0]}`} 
@@ -296,7 +296,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 </div>
 
                 <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                   {/* H3 is correct here as child of H2 Section */}
                    <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300" itemProp="name">
                      {service.title}
                    </h3>
@@ -344,8 +343,9 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                     <Paver3DViewer />
                 ) : (
                     <>
+                        {/* Logic: remove the 'l' suffix to get higher res for modal, and ensure webp */}
                         <img 
-                          src={selectedService.image} 
+                          src={selectedService.image.replace('l.webp', 'h.webp').replace('.jpg', '.webp')} 
                           alt={`Detail view of ${selectedService.title} by AGS Stones`} 
                           className="w-full h-full object-cover" 
                         />

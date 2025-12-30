@@ -2,7 +2,6 @@ import React from 'react';
 import { Star, Quote, MapPin, CheckCircle } from 'lucide-react';
 import { Testimonial } from '../types';
 
-// OPTIMIZED: Avatars now use &w=200&h=200&fit=crop&fm=webp to drastically reduce size for small circles
 const reviews: Testimonial[] = [
   {
     id: '1',
@@ -10,7 +9,7 @@ const reviews: Testimonial[] = [
     location: 'Duluth, GA',
     rating: 5,
     text: 'AGS transformed our backyard into a resort. The retaining wall is both functional and beautiful, and the paver patio is flawless.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200'
   },
   {
     id: '2',
@@ -18,7 +17,7 @@ const reviews: Testimonial[] = [
     location: 'Alpharetta, GA',
     rating: 5,
     text: 'Incredible craftsmanship on our outdoor kitchen. The team was professional, clean, and finished ahead of schedule.',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200'
   },
   {
     id: '3',
@@ -26,7 +25,7 @@ const reviews: Testimonial[] = [
     location: 'Suwanee, GA',
     rating: 5,
     text: 'We hired them for a custom pool deck. The attention to detail with the stone work was amazing. Looks luxury.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200'
   },
   {
     id: '4',
@@ -34,7 +33,7 @@ const reviews: Testimonial[] = [
     location: 'Johns Creek, GA',
     rating: 5,
     text: 'Best contractor experience I have had in Atlanta. The final driveway looks like a magazine cover.',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200'
   },
   {
     id: '5',
@@ -42,7 +41,7 @@ const reviews: Testimonial[] = [
     location: 'Roswell, GA',
     rating: 5,
     text: 'They fixed a bad retaining wall job from another company and made it look incredible. Highly recommend AGS.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'
   },
   {
     id: '6',
@@ -50,7 +49,7 @@ const reviews: Testimonial[] = [
     location: 'Marietta, GA',
     rating: 5,
     text: 'Our fire pit area is now the family favorite spot. The team cleaned up daily. A class act company.',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200&fm=webp'
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200'
   }
 ];
 
@@ -123,16 +122,8 @@ export const Testimonials: React.FC = () => {
              >
                 <div className="flex justify-between items-start mb-6">
                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full overflow-hidden border border-brand-gold/20 bg-gray-100">
-                         <img 
-                           src={review.image} 
-                           alt={`${review.name} from ${review.location}`} 
-                           className="w-full h-full object-cover" 
-                           loading="lazy"
-                           decoding="async"
-                           width="40"
-                           height="40"
-                         />
+                      <div className="w-10 h-10 rounded-full overflow-hidden border border-brand-gold/20">
+                         <img src={review.image} alt={`${review.name} from ${review.location}`} className="w-full h-full object-cover" loading="lazy" />
                       </div>
                       <div>
                          <h3 className="font-bold text-brand-dark leading-tight text-sm">{review.name}</h3>

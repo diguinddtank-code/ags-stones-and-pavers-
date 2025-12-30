@@ -45,15 +45,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://i.imgur.com">
+    <link rel="dns-prefetch" href="https://i.imgur.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     
     <!-- PRELOAD HERO IMAGE (LCP OPTIMIZATION) -->
-    <!-- Using WebP format in preload to match the app usage -->
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=1200&auto=format&fit=crop&fm=webp" media="(max-width: 768px)">
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=2000&auto=format&fit=crop&fm=webp" media="(min-width: 769px)">
 
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Optimization: Load non-blocking css -->
+    <!-- Font Optimization: Load non-blocking css (Media Print Trick) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">

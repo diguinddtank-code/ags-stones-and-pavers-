@@ -47,19 +47,21 @@ export const DayNightSlider: React.FC = () => {
            {/* Interactive Display */}
            <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 group fade-in-section delay-200">
               
-              {/* Day Image */}
+              {/* Day Image - OPTIMIZED: Imgur 'h' + .webp */}
               <img 
-                src="https://i.imgur.com/lCsQQav.png" 
+                src="https://i.imgur.com/lCsQQavh.webp" 
                 alt="Patio Day" 
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isNight ? 'opacity-0' : 'opacity-100'}`}
+                loading="lazy"
               />
               
-              {/* Night Image (Simulated with CSS filters for demo, ideally real diverse images) */}
+              {/* Night Image - OPTIMIZED: Imgur 'h' + .webp */}
               <div className={`absolute inset-0 bg-brand-dark/40 mix-blend-multiply transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}></div>
               <img 
-                 src="https://i.imgur.com/qKxvJdM.png"
+                 src="https://i.imgur.com/qKxvJdh.webp"
                  alt="Patio Night"
                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${isNight ? 'opacity-100 grayscale-[20%] brightness-75 contrast-125' : 'opacity-0'}`}
+                 loading="lazy"
               />
               
               {/* Fake Lighting Effects overlay when night */}

@@ -44,33 +44,35 @@ export const BeforeAfter: React.FC = () => {
           <div className="md:col-span-2 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl select-none fade-in-section group">
             <div 
               ref={containerRef}
-              className="relative w-full h-full cursor-ew-resize"
+              className="relative w-full h-full cursor-ew-resize bg-gray-200"
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onTouchMove={handleTouchMove}
             >
-              {/* After Image */}
+              {/* After Image - OPTIMIZED: Imgur 'h' (huge 1024px) + .webp */}
               <div className="absolute inset-0">
                  <img 
-                   src="https://i.imgur.com/KPsOHF5.png" 
+                   src="https://i.imgur.com/KPsOHF5h.webp" 
                    alt="After transformation" 
                    className="w-full h-full object-cover"
                    draggable={false}
+                   loading="lazy"
                  />
                  <div className="absolute top-6 right-6 bg-brand-gold text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">After</div>
               </div>
 
-              {/* Before Image */}
+              {/* Before Image - OPTIMIZED: Imgur 'h' (huge 1024px) + .webp */}
               <div 
                 className="absolute inset-0 overflow-hidden border-r-4 border-white"
                 style={{ width: `${sliderPosition}%` }}
               >
                 <img 
-                  src="https://i.imgur.com/ajYqmx2.png" 
+                  src="https://i.imgur.com/ajYqmx2h.webp" 
                   alt="Before transformation" 
                   className="w-full h-full object-cover max-w-none grayscale"
                   style={{ width: containerRef.current?.offsetWidth || '100%' }}
                   draggable={false}
+                  loading="lazy"
                 />
                 <div className="absolute top-6 left-6 bg-brand-dark/80 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Before</div>
               </div>
