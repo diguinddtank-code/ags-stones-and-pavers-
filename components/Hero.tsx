@@ -17,12 +17,12 @@ export const Hero: React.FC = () => {
       
       {/* Background with Parallax & Zoom - Added Title/Alt for SEO */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* LCP OPTIMIZATION: srcSet for mobile/desktop, fetchpriority high, explicit dimensions */}
+        {/* LCP OPTIMIZATION: Updated URLs to request WebP (fm=webp) and lower quality (q=75) to significantly reduce size */}
         <img
-          srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop 800w,
-                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop 1600w,
-                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop 2670w"
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
+          srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=800&auto=format&fit=crop&fm=webp 800w,
+                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=1600&auto=format&fit=crop&fm=webp 1600w,
+                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=2670&auto=format&fit=crop&fm=webp 2670w"
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=1600&auto=format&fit=crop&fm=webp"
           sizes="(max-width: 768px) 800px, 100vw"
           alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
           title="Custom Paver Patio and Outdoor Living by AGS Stones"

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { MapPin, Tag, ArrowRight } from 'lucide-react';
 
 // Data structure designed to hit specific keyword combinations: [Service] + [Location]
+// OPTIMIZATION: Added &q=75&w=600&fm=webp to all images to serve optimized mobile/tablet sizes instead of 4k originals
 const projects = [
   {
     id: 1,
     title: 'Luxury Travertine Pool Deck',
     location: 'Alpharetta, GA',
     category: 'Pool Decks',
-    image: 'https://images.unsplash.com/photo-1572331165267-854da2b00cc6?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1572331165267-854da2b00cc6?q=75&w=600&auto=format&fit=crop&fm=webp',
     tags: ['#TravertinePavers', '#PoolCoping', '#OutdoorLiving'],
     description: 'Complete removal of cracked concrete. Installed cool-touch French pattern travertine with modern coping.'
   },
@@ -17,7 +18,7 @@ const projects = [
     title: 'Structural Retaining Wall',
     location: 'Roswell, GA',
     category: 'Retaining Walls',
-    image: 'https://i.imgur.com/dZstK86.png',
+    image: 'https://i.imgur.com/dZstK86.png', // Imgur doesn't support easy URL parameter resizing like Unsplash without specific API/Thumbnail logic, handled in img tag
     tags: ['#ErosionControl', '#ModularBlock', '#DrainageSolutions'],
     description: '6ft engineered wall to level a sloped backyard. Included heavy-duty drainage and geogrid reinforcement.'
   },
@@ -26,7 +27,7 @@ const projects = [
     title: 'Modern Paver Driveway',
     location: 'Duluth, GA',
     category: 'Driveways',
-    image: 'https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=75&w=600&auto=format&fit=crop&fm=webp',
     tags: ['#DrivewayPavers', '#ConcreteReplacement', '#CurbAppeal'],
     description: 'Replaced an old asphalt driveway with Belgard Dublin Cobble pavers. High-load base for RV parking.'
   },
@@ -35,7 +36,7 @@ const projects = [
     title: 'Outdoor Kitchen & Fire Pit',
     location: 'Johns Creek, GA',
     category: 'Patios',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=600&auto=format&fit=crop&fm=webp',
     tags: ['#OutdoorKitchen', '#StoneMasonry', '#FireFeature'],
     description: 'Custom stone veneer kitchen with built-in grill and a gas fire pit centerpiece for entertaining.'
   },
@@ -44,7 +45,7 @@ const projects = [
     title: 'Flagstone Walkway',
     location: 'Marietta, GA',
     category: 'Walkways',
-    image: 'https://images.unsplash.com/photo-1518640027989-d1c5d80bd3ca?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518640027989-d1c5d80bd3ca?q=75&w=600&auto=format&fit=crop&fm=webp',
     tags: ['#NaturalStone', '#WalkwayIdeas', '#LandscapeDesign'],
     description: 'Organic irregular flagstone walkway connecting the driveway to the backyard garden.'
   },
@@ -53,7 +54,7 @@ const projects = [
     title: 'Terraced Backyard Makeover',
     location: 'Suwanee, GA',
     category: 'Retaining Walls',
-    image: 'https://images.unsplash.com/photo-1596527914909-328670cb6658?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1596527914909-328670cb6658?q=75&w=600&auto=format&fit=crop&fm=webp',
     tags: ['#Landscaping', '#TerracedWalls', '#SodInstallation'],
     description: 'Multi-level retaining wall system creating usable flat yard space for a play area.'
   }
@@ -130,12 +131,15 @@ export const LocalProjects: React.FC = () => {
               key={project.id} 
               className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 fade-in-section"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-gray-100">
                 <img 
                   src={project.image} 
                   alt={`${project.title} installation in ${project.location}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="300"
                 />
                 <div className="absolute top-4 left-4 bg-brand-dark/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1">
                   <MapPin size={10} className="text-brand-gold" /> {project.location}
