@@ -4,16 +4,24 @@ import { ArrowDown, Star } from 'lucide-react';
 export const Hero: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+    const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     let animationFrameId: number;
     
     const handleScroll = () => {
-      // Performance: Only calculate parallax if the section is visible
+      // Performance: DESKTOP ONLY parallax
+      if (window.innerWidth < 768) return;
+
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         if (rect.bottom > 0) {
-           // We are visible
            animationFrameId = requestAnimationFrame(() => setOffset(window.scrollY));
         }
       }
@@ -22,6 +30,7 @@ export const Hero: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -29,7 +38,7 @@ export const Hero: React.FC = () => {
   return (
     <section ref={sectionRef} id="home" className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-24 pb-24 md:pt-20 md:pb-40"> 
       
-      {/* Background with Parallax & Zoom */}
+      {/* Background Image Container */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
           srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop 800w,
@@ -39,8 +48,14 @@ export const Hero: React.FC = () => {
           sizes="(max-width: 768px) 800px, 100vw"
           alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
           title="Custom Paver Patio and Outdoor Living by AGS Stones"
-          className="w-full h-full object-cover object-center animate-slow-zoom opacity-60"
-          style={{ transform: `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`, willChange: 'transform' }}
+          className={`w-full h-full object-cover object-center opacity-60 transition-transform duration-100 ease-linear
+            ${isMobile ? 'animate-[zoom_20s_infinite_alternate]' : ''} 
+          `}
+          style={{ 
+             // Desktop: Scroll Parallax | Mobile: CSS Animation
+             transform: isMobile ? 'none' : `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`,
+             willChange: 'transform' 
+          }}
           // @ts-ignore
           fetchpriority="high"
           loading="eager"
@@ -56,9 +71,9 @@ export const Hero: React.FC = () => {
         <div 
           className="md:hidden mb-4 transition-all duration-300 ease-out"
           style={{ 
-            opacity: Math.max(0, 1 - offset / 250), 
-            transform: `translateY(${offset * -0.5}px) scale(${Math.max(0.8, 1 - offset / 500)})`,
-            willChange: 'opacity, transform'
+             // Simple fade out on desktop scroll, static on mobile
+             opacity: isMobile ? 1 : Math.max(0, 1 - offset / 250),
+             transform: isMobile ? 'none' : `translateY(${offset * -0.5}px)`
           }}
         >
           <img 
@@ -73,9 +88,8 @@ export const Hero: React.FC = () => {
         <div 
            className="max-w-4xl mx-auto transition-all duration-300"
            style={{ 
-             opacity: Math.max(0, 1 - offset / 400), 
-             transform: `translateY(${offset * -0.2}px)`,
-             willChange: 'opacity, transform'
+             opacity: isMobile ? 1 : Math.max(0, 1 - offset / 400), 
+             transform: isMobile ? 'none' : `translateY(${offset * -0.2}px)`
            }}
         >
           {/* Trust Badge */}
@@ -111,7 +125,7 @@ export const Hero: React.FC = () => {
 
       <div 
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/60"
-        style={{ opacity: Math.max(0, 1 - offset / 200) }}
+        style={{ opacity: isMobile ? 1 : Math.max(0, 1 - offset / 200) }}
       >
         <span className="text-[10px] uppercase tracking-[0.3em] animate-pulse">Scroll</span>
         <ArrowDown className="w-5 h-5 animate-bounce" />
