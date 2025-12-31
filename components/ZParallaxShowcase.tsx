@@ -44,11 +44,18 @@ export const ZParallaxShowcase: React.FC = () => {
              zIndex: 10
            }}
         >
-           <img 
-             src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2600&auto=format&fit=crop" 
-             alt="Magnificent Outdoor Living and Pool Deck" 
-             className="w-full h-full object-cover brightness-[0.85]"
-           />
+           {/* Responsive Image Switching */}
+           <picture className="w-full h-full">
+              {/* Mobile Image */}
+              <source media="(max-width: 768px)" srcSet="https://i.imgur.com/TVqAe9D.jpeg" />
+              {/* Desktop Image */}
+              <img 
+                src="https://i.imgur.com/6rQRJxs.jpeg" 
+                alt="Magnificent Outdoor Living and Pool Deck" 
+                className="w-full h-full object-cover brightness-[0.85]"
+              />
+           </picture>
+           
            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
         </div>
 

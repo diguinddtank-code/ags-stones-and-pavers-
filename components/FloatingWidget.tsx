@@ -1,68 +1,108 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, X } from 'lucide-react';
+import { Phone, X, MessageSquare } from 'lucide-react';
+
+type WidgetState = 'HIDDEN' | 'TYPING' | 'VISIBLE';
 
 export const FloatingWidget: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [stage, setStage] = useState<WidgetState>('HIDDEN');
   const [hasBeenClosed, setHasBeenClosed] = useState(false);
 
   useEffect(() => {
-    // Auto-open popup after 5 seconds if it hasn't been closed before
-    const timer = setTimeout(() => {
-      if (!hasBeenClosed) {
-        setIsOpen(true);
-      }
-    }, 5000);
+    if (hasBeenClosed) return;
 
-    return () => clearTimeout(timer);
+    // Timeline:
+    // 0s: Hidden
+    // 4s: Starts "Typing"
+    // 6.5s: Shows Message
+    
+    const typingTimer = setTimeout(() => {
+      setStage('TYPING');
+    }, 4000);
+
+    const messageTimer = setTimeout(() => {
+      setStage('VISIBLE');
+    }, 6500);
+
+    return () => {
+      clearTimeout(typingTimer);
+      clearTimeout(messageTimer);
+    };
   }, [hasBeenClosed]);
 
   const handleClose = () => {
-    setIsOpen(false);
+    setStage('HIDDEN');
     setHasBeenClosed(true);
-    // Dispatch event to notify MobileNav to show the notification badge
+    // Notify MobileNav to show badge
     window.dispatchEvent(new CustomEvent('ags-popup-closed'));
   };
 
-  if (!isOpen) return null;
+  if (stage === 'HIDDEN') return null;
 
   return (
-    // Positioned above Mobile Nav (bottom-24) on mobile, bottom-6 on desktop
-    // Added padding adjustments to make it smaller
-    <div className="fixed bottom-24 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-[60] flex flex-col items-center md:items-end animate-[fade-up_0.5s_ease-out]">
+    <div className="fixed bottom-24 left-4 right-4 md:left-auto md:right-8 md:bottom-8 z-[60] flex flex-col items-end pointer-events-none">
        
-       {/* Popup Bubble - Reduced padding (p-4) and max-width (max-w-[260px]) */}
-       <div className="bg-white p-4 rounded-xl shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] w-full max-w-[280px] relative border border-gray-100">
+       <div className="pointer-events-auto flex items-end gap-3 max-w-[350px]">
           
-          {/* Close Button */}
-          <button 
-            onClick={handleClose}
-            className="absolute top-2 right-2 p-1 text-gray-300 hover:text-gray-500 transition-colors"
-          >
-             <X size={14} />
-          </button>
-
-          {/* Online Indicator Inside Popup */}
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-            </span>
-            <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">Online Now</span>
+          {/* Avatar (Visible in both Typing and Visible states) */}
+          <div className="relative flex-shrink-0">
+             <div className="w-12 h-12 rounded-full border-2 border-white shadow-lg overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200" 
+                  alt="AGS Design Specialist" 
+                  className="w-full h-full object-cover"
+                />
+             </div>
+             {/* Online Status Dot */}
+             <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
           </div>
 
-          <h4 className="font-serif font-bold text-brand-dark text-base mb-1">Questions?</h4>
-          <p className="text-xs text-gray-600 mb-3 leading-relaxed">
-            Our design team is available to discuss your project instantly.
-          </p>
-          
-          <a 
-            href="tel:6784287630" 
-            className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-2.5 px-4 rounded-lg font-bold text-xs w-full shadow-lg"
-          >
-             <Phone size={14} />
-             Call (678) 428-7630
-          </a>
+          {/* Chat Bubble Container */}
+          <div className="flex flex-col items-start shadow-2xl rounded-2xl rounded-bl-none border border-gray-100 bg-white overflow-hidden transition-all duration-300 origin-bottom-left animate-[scaleIn_0.3s_ease-out]">
+             
+            {stage === 'TYPING' ? (
+              // TYPING STATE
+              <div className="p-4 flex items-center gap-1.5">
+                 <span className="text-xs text-gray-400 font-medium mr-1">Jessica is typing</span>
+                 <div className="flex gap-1">
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.15s]"></span>
+                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.3s]"></span>
+                 </div>
+              </div>
+            ) : (
+              // VISIBLE MESSAGE STATE
+              <div className="relative p-5 w-full max-w-[280px] md:max-w-[300px]">
+                 <button 
+                    onClick={handleClose}
+                    className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1"
+                    aria-label="Close chat"
+                 >
+                    <X size={14} />
+                 </button>
+
+                 <div className="mb-1">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Design Specialist</span>
+                    <h4 className="font-serif font-bold text-brand-dark text-lg leading-tight">
+                       Hi! Thinking about a new patio?
+                    </h4>
+                 </div>
+                 
+                 <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+                    I can give you a quick estimate or schedule a 3D design consultation right now.
+                 </p>
+
+                 <a 
+                   href="tel:6784287630" 
+                   className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-3 px-4 rounded-lg font-bold text-xs w-full shadow-md group"
+                 >
+                    <Phone size={14} className="group-hover:rotate-12 transition-transform" />
+                    Call Now: (678) 428-7630
+                 </a>
+              </div>
+            )}
+          </div>
        </div>
+
     </div>
   );
 };

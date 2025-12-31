@@ -7,7 +7,7 @@ const projects = [
     title: 'Luxury Travertine Pool Deck',
     location: 'Alpharetta, GA',
     category: 'Pool Decks',
-    image: 'https://images.unsplash.com/photo-1572331165267-854da2b00cc6?q=75&w=600&auto=format&fit=crop&fm=webp',
+    image: 'https://i.imgur.com/uDiqFSl.jpeg', // Updated
     tags: ['#TravertinePavers', '#PoolCoping', '#OutdoorLiving'],
     description: 'Complete removal of cracked concrete. Installed cool-touch French pattern travertine with modern coping.'
   },
@@ -25,7 +25,7 @@ const projects = [
     title: 'Modern Paver Driveway',
     location: 'Duluth, GA',
     category: 'Driveways',
-    image: 'https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=75&w=600&auto=format&fit=crop&fm=webp',
+    image: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp', // Updated
     tags: ['#DrivewayPavers', '#ConcreteReplacement', '#CurbAppeal'],
     description: 'Replaced an old asphalt driveway with Belgard Dublin Cobble pavers. High-load base for RV parking.'
   },
@@ -34,7 +34,7 @@ const projects = [
     title: 'Outdoor Kitchen & Fire Pit',
     location: 'Johns Creek, GA',
     category: 'Patios',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=600&auto=format&fit=crop&fm=webp',
+    image: 'https://i.imgur.com/h3NCvta.jpeg', // Updated
     tags: ['#OutdoorKitchen', '#StoneMasonry', '#FireFeature'],
     description: 'Custom stone veneer kitchen with built-in grill and a gas fire pit centerpiece for entertaining.'
   },
@@ -43,7 +43,7 @@ const projects = [
     title: 'Flagstone Walkway',
     location: 'Marietta, GA',
     category: 'Walkways',
-    image: 'https://images.unsplash.com/photo-1518640027989-d1c5d80bd3ca?q=75&w=600&auto=format&fit=crop&fm=webp',
+    image: 'https://i.imgur.com/7OGGsuS.jpeg', // Updated
     tags: ['#NaturalStone', '#WalkwayIdeas', '#LandscapeDesign'],
     description: 'Organic irregular flagstone walkway connecting the driveway to the backyard garden.'
   },
@@ -52,7 +52,7 @@ const projects = [
     title: 'Terraced Backyard Makeover',
     location: 'Suwanee, GA',
     category: 'Retaining Walls',
-    image: 'https://images.unsplash.com/photo-1596527914909-328670cb6658?q=75&w=600&auto=format&fit=crop&fm=webp',
+    image: 'https://i.imgur.com/lR45oIm.jpeg', // Updated
     tags: ['#Landscaping', '#TerracedWalls', '#SodInstallation'],
     description: 'Multi-level retaining wall system creating usable flat yard space for a play area.'
   }

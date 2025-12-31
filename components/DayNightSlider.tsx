@@ -74,10 +74,10 @@ export const DayNightSlider: React.FC = () => {
                 loading="lazy"
               />
               
-              {/* Night Image - OPTIMIZED: Imgur 'h' + .webp */}
+              {/* Night Image - Replaced broken link with stable Unsplash image */}
               <div className={`absolute inset-0 bg-brand-dark/40 mix-blend-multiply transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}></div>
               <img 
-                 src="https://i.imgur.com/qKxvJdh.webp"
+                 src="https://images.unsplash.com/photo-1632684999326-e172834b7f73?q=80&w=1600&auto=format&fit=crop"
                  alt="Patio Night"
                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${isNight ? 'opacity-100 grayscale-[20%] brightness-75 contrast-125' : 'opacity-0'}`}
                  loading="lazy"
