@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, Suspense, Component, ReactNode, ErrorInfo } from 'react';
+import React, { Component, useEffect, useState, useRef, Suspense, ReactNode, ErrorInfo } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 
@@ -104,6 +104,7 @@ const App: React.FC = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
+          entry.target.classList.remove('fade-in-section'); // Cleanup class
         }
       });
     }, { threshold: 0.1 });
@@ -182,9 +183,7 @@ const App: React.FC = () => {
 
       {/* AUXILIARY: Load last, completely separate */}
       <Suspense fallback={null}>
-         <div className="hidden md:block">
-            <FloatingWidget />
-         </div>
+         <FloatingWidget />
          <MobileNav />
          <ExitIntentPopup />
       </Suspense>

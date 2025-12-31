@@ -41,29 +41,31 @@ export const Hero: React.FC = () => {
       className="relative h-screen min-h-[600px] md:min-h-[800px] flex flex-col justify-center items-center overflow-hidden bg-brand-dark pt-20 pb-48 md:pt-20 md:pb-40"
     > 
       
-      {/* Background Image Container */}
+      {/* Background Video Container */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img
-          srcSet="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop 800w,
-                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop 1600w,
-                  https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop 2670w"
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
-          sizes="(max-width: 768px) 800px, 100vw"
-          alt="Luxury Outdoor Kitchen and Paver Patio Installation in Atlanta, GA"
-          title="Custom Paver Patio and Outdoor Living by AGS Stones"
-          className={`w-full h-full object-cover object-center opacity-60 transition-transform duration-100 ease-linear
-            ${isMobile ? 'animate-[zoom_20s_infinite_alternate]' : ''} 
-          `}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
+          className="w-full h-full object-cover object-center opacity-60 transition-transform duration-100 ease-linear"
           style={{ 
              transform: isMobile ? 'none' : `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`,
              willChange: 'transform' 
           }}
-          // @ts-ignore
-          fetchpriority="high"
-          loading="eager"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-black/40" />
+        >
+          {/* Changed to a specific Outdoor/Hardscape video (Pool deck & Pavers) */}
+          <source src="https://videos.pexels.com/video-files/2957819/2957819-hd_1920_1080_24fps.mp4" type="video/mp4" />
+          <img 
+             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop" 
+             alt="Luxury Outdoor Living" 
+             className="w-full h-full object-cover"
+          />
+        </video>
+        
+        {/* Dark Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/50 to-black/40" />
       </div>
 
       {/* Content */}

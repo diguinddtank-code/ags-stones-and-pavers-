@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, X, MessageSquare } from 'lucide-react';
+import { Phone, X } from 'lucide-react';
 
-type WidgetState = 'HIDDEN' | 'TYPING' | 'VISIBLE';
+type WidgetState = 'HIDDEN' | 'TYPING' | 'VISIBLE' | 'MINIMIZED';
 
 export const FloatingWidget: React.FC = () => {
   const [stage, setStage] = useState<WidgetState>('HIDDEN');
@@ -30,77 +30,105 @@ export const FloatingWidget: React.FC = () => {
   }, [hasBeenClosed]);
 
   const handleClose = () => {
-    setStage('HIDDEN');
+    setStage('MINIMIZED');
     setHasBeenClosed(true);
-    // Notify MobileNav to show badge
-    window.dispatchEvent(new CustomEvent('ags-popup-closed'));
+  };
+
+  const handleOpen = () => {
+    setStage('VISIBLE');
   };
 
   if (stage === 'HIDDEN') return null;
 
   return (
-    <div className="fixed bottom-24 left-4 right-4 md:left-auto md:right-8 md:bottom-8 z-[60] flex flex-col items-end pointer-events-none">
+    // MAIN CONTAINER: Fixed Bottom Right.
+    // Mobile: Bottom-24 (above nav), Right-2 (tight to edge)
+    // Desktop: Bottom-8, Right-8
+    <div className="fixed bottom-24 right-2 md:bottom-8 md:right-8 z-[60] flex flex-col items-end pointer-events-none">
        
-       <div className="pointer-events-auto flex items-end gap-3 max-w-[350px]">
+       {/* INNER CONTAINER: Stack Vertically (Reverse) */}
+       <div className="pointer-events-auto flex flex-col-reverse items-end gap-2 md:gap-3 w-auto">
           
-          {/* Avatar (Visible in both Typing and Visible states) */}
-          <div className="relative flex-shrink-0">
-             <div className="w-12 h-12 rounded-full border-2 border-white shadow-lg overflow-hidden">
+          {/* 1. AVATAR (Bottom Element) */}
+          <div 
+            className={`relative flex-shrink-0 transition-transform duration-300 ${stage === 'MINIMIZED' ? 'cursor-pointer hover:scale-110' : ''}`}
+            onClick={stage === 'MINIMIZED' ? handleOpen : undefined}
+          >
+             {/* Mobile: w-9 h-9 (36px) | Desktop: w-14 h-14 (56px) */}
+             <div className="w-9 h-9 md:w-14 md:h-14 rounded-full border-2 border-white shadow-lg overflow-hidden relative z-10">
                 <img 
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200" 
                   alt="AGS Design Specialist" 
                   className="w-full h-full object-cover"
                 />
              </div>
-             {/* Online Status Dot */}
-             <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></div>
-          </div>
-
-          {/* Chat Bubble Container */}
-          <div className="flex flex-col items-start shadow-2xl rounded-2xl rounded-bl-none border border-gray-100 bg-white overflow-hidden transition-all duration-300 origin-bottom-left animate-[scaleIn_0.3s_ease-out]">
              
-            {stage === 'TYPING' ? (
-              // TYPING STATE
-              <div className="p-4 flex items-center gap-1.5">
-                 <span className="text-xs text-gray-400 font-medium mr-1">Jessica is typing</span>
-                 <div className="flex gap-1">
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.15s]"></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:0.3s]"></span>
-                 </div>
-              </div>
-            ) : (
-              // VISIBLE MESSAGE STATE
-              <div className="relative p-5 w-full max-w-[280px] md:max-w-[300px]">
-                 <button 
-                    onClick={handleClose}
-                    className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1"
-                    aria-label="Close chat"
-                 >
-                    <X size={14} />
-                 </button>
+             {/* Notification Badge (Only when MINIMIZED) */}
+             {stage === 'MINIMIZED' && (
+               <div className="absolute -top-1 -right-1 z-20 flex h-4 w-4 md:h-5 md:w-5 animate-[bounce_2s_infinite]">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-full w-full bg-red-500 text-white text-[9px] md:text-[10px] font-bold items-center justify-center border-2 border-white">
+                    1
+                  </span>
+               </div>
+             )}
 
-                 <div className="mb-1">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Design Specialist</span>
-                    <h4 className="font-serif font-bold text-brand-dark text-lg leading-tight">
-                       Hi! Thinking about a new patio?
-                    </h4>
-                 </div>
-                 
-                 <p className="text-xs text-gray-500 mb-4 leading-relaxed">
-                    I can give you a quick estimate or schedule a 3D design consultation right now.
-                 </p>
-
-                 <a 
-                   href="tel:6784287630" 
-                   className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-3 px-4 rounded-lg font-bold text-xs w-full shadow-md group"
-                 >
-                    <Phone size={14} className="group-hover:rotate-12 transition-transform" />
-                    Call Now: (678) 428-7630
-                 </a>
-              </div>
-            )}
+             {/* Online Status Dot (Only when NOT minimized) */}
+             {stage !== 'MINIMIZED' && (
+                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 md:w-3.5 md:h-3.5 bg-green-500 border-2 border-white rounded-full z-20"></div>
+             )}
           </div>
+
+          {/* 2. CHAT BUBBLE (Top Element) */}
+          {stage !== 'MINIMIZED' && (
+            <div className="origin-bottom-right animate-[scaleIn_0.3s_ease-out] flex flex-col items-end shadow-xl rounded-2xl rounded-br-none border border-gray-100 bg-white overflow-hidden transition-all duration-300 max-w-[200px] md:max-w-[280px]">
+               
+              {stage === 'TYPING' ? (
+                // TYPING STATE
+                <div className="p-2 md:p-3 flex items-center gap-1.5">
+                   <span className="text-[9px] md:text-[10px] text-gray-400 font-medium mr-1">Jessica is typing</span>
+                   <div className="flex gap-1">
+                      <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce"></span>
+                      <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce [animation-delay:0.15s]"></span>
+                      <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce [animation-delay:0.3s]"></span>
+                   </div>
+                </div>
+              ) : (
+                // VISIBLE MESSAGE STATE
+                // Mobile: p-3 | Desktop: p-4
+                <div className="relative p-3 md:p-5 w-full">
+                   <button 
+                      onClick={handleClose}
+                      className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1"
+                      aria-label="Close chat"
+                   >
+                      <X size={12} className="md:w-4 md:h-4" />
+                   </button>
+
+                   <div className="mb-1 text-left">
+                      <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-brand-gold">Design Specialist</span>
+                      {/* Mobile: Text-xs | Desktop: Text-sm */}
+                      <h4 className="font-serif font-bold text-brand-dark text-xs md:text-sm leading-tight mt-0.5">
+                         Hi! Thinking about a new patio?
+                      </h4>
+                   </div>
+                   
+                   {/* Mobile: Text-[10px] | Desktop: Text-xs */}
+                   <p className="text-[10px] md:text-xs text-gray-500 mb-3 leading-relaxed text-left">
+                      I can schedule a free estimate or 3D design consultation for you.
+                   </p>
+
+                   <a 
+                     href="tel:6784287630" 
+                     className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-2 px-3 rounded-md font-bold text-[9px] md:text-[10px] uppercase tracking-wide w-full shadow-md group"
+                   >
+                      <Phone size={12} className="group-hover:rotate-12 transition-transform" />
+                      Call: (678) 428-7630
+                   </a>
+                </div>
+              )}
+            </div>
+          )}
        </div>
 
     </div>
