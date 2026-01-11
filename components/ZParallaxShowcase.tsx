@@ -25,8 +25,8 @@ export const ZParallaxShowcase: React.FC = () => {
   }, []);
 
   return (
-    // Reduced height from 300vh to 220vh to minimize "dead scroll" space
-    <section ref={containerRef} className="relative h-[220vh] bg-[#0f1115]">
+    // Increased height to 250vh to allow for slower, smoother animation pacing
+    <section ref={containerRef} className="relative h-[250vh] bg-[#0f1115]">
       
       <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" 
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/black-scales.png")` }}>
@@ -38,8 +38,8 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
            className="absolute inset-0 w-full h-full"
            style={{
-             // Accelerated fade in (factor 2.5 -> 4) so image appears sooner
-             opacity: Math.min(1, scrollProgress * 4), 
+             // More gradual fade in (factor reduced from 4 to 2.5)
+             opacity: Math.min(1, scrollProgress * 2.5), 
              transform: `scale(${1.2 - (scrollProgress * 0.2)}) translate3d(0,0,0)`,
              zIndex: 10
            }}
@@ -63,8 +63,8 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{
-             // Increased scale factor (60 -> 80) to open the hole faster
-             transform: `scale(${1 + scrollProgress * 80}) translate3d(0,0,0)`, 
+             // Slower opening pace (scale factor reduced from 80 to 50)
+             transform: `scale(${1 + scrollProgress * 50}) translate3d(0,0,0)`, 
              opacity: 1, 
              zIndex: 20
           }}
@@ -79,10 +79,10 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
           style={{
-             // Adjusted Physics to match shorter scroll:
-             opacity: Math.max(0, 1 - scrollProgress * 4), 
-             // Moves up faster (translateY -150px)
-             transform: `scale(${1 + scrollProgress * 1.5}) translateY(${scrollProgress * -150}px) translate3d(0,0,0)`
+             // Text stays visible slightly longer (factor reduced from 4 to 3)
+             opacity: Math.max(0, 1 - scrollProgress * 3), 
+             // Smoother scale up effect, reduced vertical movement for stability
+             transform: `scale(${1 + scrollProgress * 2}) translateY(${scrollProgress * -50}px) translate3d(0,0,0)`
           }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block drop-shadow-lg">

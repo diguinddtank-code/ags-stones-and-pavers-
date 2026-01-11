@@ -1,6 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, ArrowRight, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
+const serviceAreas = [
+  "Atlanta, GA",
+  "Bill Arp, GA",
+  "Brookhaven, GA",
+  "College Park, GA",
+  "Douglasville, GA",
+  "Fairburn, GA",
+  "Hiram, GA",
+  "Mableton, GA",
+  "Marietta, GA",
+  "Powder Springs, GA",
+  "Sandy Springs, GA",
+  "South Fulton, GA",
+  "Villa Rica, GA",
+  "Vinings, GA"
+];
+
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -206,64 +223,52 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Enhanced Map Widget with Lazy Loading */}
-          <div className="flex flex-col gap-6 fade-in-section delay-200 h-full">
+          {/* Enhanced Service Area Layout */}
+          <div className="fade-in-section delay-200 flex flex-col gap-6">
              
-            <div ref={mapContainerRef} className="relative flex-grow min-h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl border border-gray-200 group bg-gray-100">
-              {loadMap ? (
-                <iframe 
-                  title="Map of AGS Stones Location in Duluth, GA"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.857642594639!2d-84.1802526848419!3d34.04753698060684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2zMzTCsDAyJzUxLjEiTiA4NMKwMTAnNDEuMCJX!5e0!3m2!1sen!2sus!4v1689000000000!5m2!1sen!2sus" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen={true} 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0 w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
-                ></iframe>
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-                  <div className="text-gray-400 flex flex-col items-center">
-                     <MapPin size={32} className="mb-2 opacity-50"/>
-                     <span className="text-xs uppercase tracking-widest">Loading Map...</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Overlay Location Card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/20 z-10">
-                 <div className="flex items-start justify-between gap-4">
-                    <div>
-                        <h4 className="font-serif font-bold text-brand-dark text-lg mb-1">AGS Stones & Pavers</h4>
-                        <p className="text-sm text-gray-500 mb-4 flex items-center gap-1">
-                            <MapPin size={14} className="text-brand-gold" aria-hidden="true" /> 
-                            4579 Abbotts Bridge Rd, Duluth, GA
-                        </p>
-                        
-                        <div className="flex gap-4 text-sm font-medium">
-                            <a href="tel:6784287630" className="flex items-center gap-2 text-brand-dark hover:text-brand-gold transition-colors">
-                                <Phone size={14} /> (678) 428-7630
-                            </a>
-                        </div>
+             {/* Map Container - Full Width in this column */}
+             <div ref={mapContainerRef} className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 group bg-gray-100">
+                {loadMap ? (
+                  <iframe 
+                    title="Map of AGS Stones Location in Duluth, GA"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.857642594639!2d-84.1802526848419!3d34.04753698060684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2zMzTCsDAyJzUxLjEiTiA4NMKwMTAnNDEuMCJX!5e0!3m2!1sen!2sus!4v1689000000000!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen={true} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 w-full h-full grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                  ></iframe>
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                    <div className="text-gray-400 flex flex-col items-center">
+                       <MapPin size={32} className="mb-2 opacity-50"/>
+                       <span className="text-xs uppercase tracking-widest">Loading Map...</span>
                     </div>
-                    
-                    <a 
-                        href="https://www.google.com/maps/dir//4579+Abbotts+Bridge+Rd+Suite+-10,+Duluth,+GA+30097" 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="flex-shrink-0 w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"
-                        title="Get Directions"
-                    >
-                        <Navigation size={20} />
-                    </a>
-                 </div>
-              </div>
-            </div>
+                  </div>
+                )}
+             </div>
 
-            <p className="text-center text-gray-400 text-sm">
-                Proudly Serving: Duluth • Alpharetta • Johns Creek • Suwanee • Roswell • Milton
-            </p>
+             {/* SEO Location List - Visual Layout matches request */}
+             <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+                 <h4 className="font-serif font-bold text-xl text-brand-dark mb-4 flex items-center gap-2">
+                    <MapPin className="text-brand-gold" size={24} /> Service Areas
+                 </h4>
+                 <div className="grid grid-cols-2 md:grid-cols-2 gap-y-3 gap-x-4">
+                    {serviceAreas.map((area, index) => (
+                       <div key={index} className="flex items-center gap-2 group cursor-default">
+                          <MapPin size={14} className="text-red-600 flex-shrink-0 group-hover:scale-125 transition-transform" fill="currentColor" />
+                          <span className="text-sm font-bold text-brand-dark underline decoration-gray-300 underline-offset-4 decoration-1 group-hover:decoration-brand-gold transition-all">
+                             {area}
+                          </span>
+                       </div>
+                    ))}
+                 </div>
+                 <p className="mt-6 text-xs text-gray-400 border-t border-gray-100 pt-3">
+                    Proudly serving Metro Atlanta and surrounding communities.
+                 </p>
+             </div>
 
           </div>
 

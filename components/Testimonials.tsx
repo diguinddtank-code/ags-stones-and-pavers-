@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Quote, MapPin, CheckCircle } from 'lucide-react';
+import { Star, Quote, MapPin, CheckCircle, ArrowRight, Phone } from 'lucide-react';
 import { Testimonial } from '../types';
 
 const reviews: Testimonial[] = [
@@ -85,7 +85,7 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-brand-light relative overflow-hidden">
+    <section id="testimonials" className="pt-24 pb-12 bg-brand-light relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>
@@ -105,7 +105,7 @@ export const Testimonials: React.FC = () => {
 
       {/* Marquee Container */}
       <div 
-        className="relative w-full overflow-hidden" 
+        className="relative w-full overflow-hidden mb-16" 
         aria-label="Scrolling list of client reviews"
         role="region"
       >
@@ -114,7 +114,7 @@ export const Testimonials: React.FC = () => {
         <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-brand-light to-transparent z-10"></div>
 
         {/* Moving Track */}
-        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] py-10">
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] py-4">
            {marqueeReviews.map((review, index) => (
              <article 
                 key={`${review.id}-${index}`} 
@@ -151,11 +151,52 @@ export const Testimonials: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-12 text-center">
-         <a href="https://www.google.com" target="_blank" rel="noreferrer" className="inline-block px-8 py-3 bg-white border border-gray-200 text-brand-dark font-bold text-sm rounded-full shadow-sm hover:bg-brand-gold hover:text-white hover:border-brand-gold transition-all">
-            See All Reviews on Google
-         </a>
+      {/* STRATEGIC CONVERSION BLOCK - HIGH VISIBILITY CTA */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section">
+         <div className="relative rounded-3xl overflow-hidden bg-brand-dark shadow-2xl border border-white/10 group">
+            {/* Background Effects */}
+            <div className="absolute inset-0">
+               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-[100px] group-hover:bg-brand-gold/20 transition-all duration-1000"></div>
+               <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-900/20 rounded-full blur-[80px]"></div>
+            </div>
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-8 md:gap-12">
+               
+               {/* Left: Persuasion Text */}
+               <div className="text-center md:text-left flex-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest mb-4">
+                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                     Accepting New Projects for {new Date().toLocaleString('default', { month: 'long' })}
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">
+                     Ready to Start <br className="hidden md:block" />
+                     <span className="text-brand-gold">Your Project?</span>
+                  </h3>
+                  <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto md:mx-0">
+                     Don't wait until the season is over. Secure your spot on our calendar today and let's build the backyard of your dreams.
+                  </p>
+               </div>
+
+               {/* Right: Action Buttons */}
+               <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                  <a 
+                    href="#contact" 
+                    className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-gold text-white font-bold rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:bg-white hover:text-brand-dark hover:scale-105 transition-all duration-300 uppercase tracking-wide text-xs md:text-sm group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]"
+                  >
+                     Get Free Estimate <ArrowRight size={16} />
+                  </a>
+                  <a 
+                    href="tel:6784287630" 
+                    className="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 uppercase tracking-wide text-xs md:text-sm"
+                  >
+                     <Phone size={16} /> Call Now
+                  </a>
+               </div>
+
+            </div>
+         </div>
       </div>
+
     </section>
   );
 };

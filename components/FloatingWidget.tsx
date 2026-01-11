@@ -54,8 +54,8 @@ export const FloatingWidget: React.FC = () => {
             className={`relative flex-shrink-0 transition-transform duration-300 ${stage === 'MINIMIZED' ? 'cursor-pointer hover:scale-110' : ''}`}
             onClick={stage === 'MINIMIZED' ? handleOpen : undefined}
           >
-             {/* Mobile: w-9 h-9 (36px) | Desktop: w-14 h-14 (56px) */}
-             <div className="w-9 h-9 md:w-14 md:h-14 rounded-full border-2 border-white shadow-lg overflow-hidden relative z-10">
+             {/* INCREASED SIZE: w-12 h-12 (48px) mobile, w-16 h-16 (64px) desktop */}
+             <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-white shadow-lg overflow-hidden relative z-10">
                 <img 
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200" 
                   alt="AGS Design Specialist" 
@@ -75,18 +75,18 @@ export const FloatingWidget: React.FC = () => {
 
              {/* Online Status Dot (Only when NOT minimized) */}
              {stage !== 'MINIMIZED' && (
-                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 md:w-3.5 md:h-3.5 bg-green-500 border-2 border-white rounded-full z-20"></div>
+                <div className="absolute bottom-0 right-0 w-3 h-3 md:w-4 md:h-4 bg-green-500 border-2 border-white rounded-full z-20"></div>
              )}
           </div>
 
           {/* 2. CHAT BUBBLE (Top Element) */}
           {stage !== 'MINIMIZED' && (
-            <div className="origin-bottom-right animate-[scaleIn_0.3s_ease-out] flex flex-col items-end shadow-xl rounded-2xl rounded-br-none border border-gray-100 bg-white overflow-hidden transition-all duration-300 max-w-[200px] md:max-w-[280px]">
+            <div className="origin-bottom-right animate-[scaleIn_0.3s_ease-out] flex flex-col items-end shadow-xl rounded-2xl rounded-br-none border border-gray-100 bg-white overflow-hidden transition-all duration-300 max-w-[240px] md:max-w-[320px]">
                
               {stage === 'TYPING' ? (
                 // TYPING STATE
-                <div className="p-2 md:p-3 flex items-center gap-1.5">
-                   <span className="text-[9px] md:text-[10px] text-gray-400 font-medium mr-1">Jessica is typing</span>
+                <div className="p-3 md:p-4 flex items-center gap-1.5">
+                   <span className="text-[10px] md:text-xs text-gray-400 font-medium mr-1">Jessica is typing</span>
                    <div className="flex gap-1">
                       <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce"></span>
                       <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce [animation-delay:0.15s]"></span>
@@ -95,34 +95,35 @@ export const FloatingWidget: React.FC = () => {
                 </div>
               ) : (
                 // VISIBLE MESSAGE STATE
-                // Mobile: p-3 | Desktop: p-4
-                <div className="relative p-3 md:p-5 w-full">
+                // Increased padding and font sizes slightly
+                <div className="relative p-4 md:p-5 w-full">
                    <button 
                       onClick={handleClose}
                       className="absolute top-2 right-2 text-gray-300 hover:text-gray-500 p-1"
                       aria-label="Close chat"
                    >
-                      <X size={12} className="md:w-4 md:h-4" />
+                      <X size={14} className="md:w-5 md:h-5" />
                    </button>
 
                    <div className="mb-1 text-left">
-                      <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-brand-gold">Design Specialist</span>
-                      {/* Mobile: Text-xs | Desktop: Text-sm */}
-                      <h4 className="font-serif font-bold text-brand-dark text-xs md:text-sm leading-tight mt-0.5">
+                      <span className="text-[9px] md:text-[11px] font-bold uppercase tracking-widest text-brand-gold">Design Specialist</span>
+                      {/* Mobile: Text-sm | Desktop: Text-base */}
+                      <h4 className="font-serif font-bold text-brand-dark text-sm md:text-base leading-tight mt-0.5">
                          Hi! Thinking about a new patio?
                       </h4>
                    </div>
                    
-                   {/* Mobile: Text-[10px] | Desktop: Text-xs */}
-                   <p className="text-[10px] md:text-xs text-gray-500 mb-3 leading-relaxed text-left">
+                   {/* Mobile: Text-xs | Desktop: Text-sm */}
+                   <p className="text-xs md:text-sm text-gray-500 mb-4 leading-relaxed text-left">
                       I can schedule a free estimate or 3D design consultation for you.
                    </p>
 
+                   {/* INCREASED BUTTON SIZE AND PADDING FOR BETTER TAP TARGET */}
                    <a 
                      href="tel:6784287630" 
-                     className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-2 px-3 rounded-md font-bold text-[9px] md:text-[10px] uppercase tracking-wide w-full shadow-md group"
+                     className="flex items-center justify-center gap-2 bg-brand-dark text-white hover:bg-brand-gold transition-colors py-3 px-4 rounded-md font-bold text-xs md:text-sm uppercase tracking-wide w-full shadow-md group"
                    >
-                      <Phone size={12} className="group-hover:rotate-12 transition-transform" />
+                      <Phone size={16} className="group-hover:rotate-12 transition-transform" />
                       Call: (678) 428-7630
                    </a>
                 </div>

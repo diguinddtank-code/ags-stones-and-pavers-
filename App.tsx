@@ -140,11 +140,13 @@ const App: React.FC = () => {
           </Suspense>
         </ErrorBoundary>
 
-        {/* PRIORITY 2: Core Services (Batched) */}
+        {/* PRIORITY 2: Core Services & Social Proof (Batched) */}
         <LazyBlock minHeight="1000px">
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-slate-50 animate-pulse" />}>
                  <Services onModalChange={setIsServiceModalOpen} />
+                 {/* MOVED TESTIMONIALS HERE FOR DYNAMIC FLOW */}
+                 <Testimonials />
                  <WhyChooseUs />
               </Suspense>
            </ErrorBoundary>
@@ -165,7 +167,6 @@ const App: React.FC = () => {
         <LazyBlock minHeight="1000px">
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-brand-light" />}>
-                 <Testimonials />
                  <FAQ />
                  <Contact />
               </Suspense>

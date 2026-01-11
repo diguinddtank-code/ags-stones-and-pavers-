@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn, ChevronRight } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
-// OPTIMIZATION: Imgur links converted to WebP (.webp) and used 'l' suffix (Large Thumbnail) for better mobile performance
 const services: ServiceItem[] = [
   {
     id: '1',
     title: 'Driveway Pavers',
     description: 'Expert driveway installation contractors near you. We replace concrete with premium interlocking pavers.',
-    icon: <LayoutGrid className="w-6 h-6" />,
-    image: 'https://i.imgur.com/by6FzIkl.webp', // 'l' suffix = 640px max width, perfect for cards
+    icon: <LayoutGrid className="w-5 h-5" />,
+    image: 'https://i.imgur.com/by6FzIkl.webp',
     benefits: [
       'Best Driveway Contractors Near Me',
       'High-Load Bearing Installation',
@@ -21,7 +20,7 @@ const services: ServiceItem[] = [
     id: '2',
     title: 'Outdoor Patio Builders',
     description: 'Leading patio contractors in your area. We design and build custom stone patios for luxury outdoor living.',
-    icon: <Utensils className="w-6 h-6" />,
+    icon: <Utensils className="w-5 h-5" />,
     image: 'https://i.imgur.com/SIBIdiFl.webp',
     benefits: [
       'Custom Outdoor Kitchen Builders',
@@ -33,7 +32,7 @@ const services: ServiceItem[] = [
     id: '3',
     title: 'Retaining Wall Installation',
     description: 'Certified retaining wall contractors near you. We fix erosion and level yards with engineered stone walls.',
-    icon: <Layers className="w-6 h-6" />,
+    icon: <Layers className="w-5 h-5" />,
     image: 'https://i.imgur.com/dZstK86l.webp',
     benefits: [
       'Structural Masonry Contractors',
@@ -45,7 +44,7 @@ const services: ServiceItem[] = [
     id: '4',
     title: 'Masonry & Fireplaces',
     description: 'Skilled stone work contractors near you. Custom stone masonry for fire pits, columns, and veneers.',
-    icon: <Flame className="w-6 h-6" />,
+    icon: <Flame className="w-5 h-5" />,
     image: 'https://i.imgur.com/G2N5Chsl.webp',
     benefits: [
       'Outdoor Fireplace Builders',
@@ -57,7 +56,7 @@ const services: ServiceItem[] = [
     id: '5',
     title: 'Deck Builders',
     description: 'Professional deck builders near me. Composite and wood decking integrated with stone hardscapes.',
-    icon: <Hammer className="w-6 h-6" />,
+    icon: <Hammer className="w-5 h-5" />,
     image: 'https://i.imgur.com/6f4H9fLl.webp',
     benefits: [
       'Composite & Wood Decking',
@@ -69,7 +68,7 @@ const services: ServiceItem[] = [
     id: '6',
     title: 'Pool Deck Pavers',
     description: 'Specialized pavers for pool decks. Slip-resistant coping and resort-style hardscapes.',
-    icon: <Waves className="w-6 h-6" />,
+    icon: <Waves className="w-5 h-5" />,
     image: 'https://i.imgur.com/vEHS8LGl.webp',
     benefits: [
       'Slip-Resistant Travertine',
@@ -81,8 +80,8 @@ const services: ServiceItem[] = [
     id: '7',
     title: 'Stone Veneer',
     description: 'Enhance your home with stone veneer. The best local masonry companies for architectural facing.',
-    icon: <Mountain className="w-6 h-6" />,
-    image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg', // Pinimg doesn't support easy resizing params, leaving as is
+    icon: <Mountain className="w-5 h-5" />,
+    image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
     benefits: [
       'House Facing & Columns',
       'Stone Work Contractors',
@@ -93,8 +92,8 @@ const services: ServiceItem[] = [
     id: '8',
     title: 'Landscape Design',
     description: 'Advanced landscape services and 3D design. We visualize your hardscape before we build.',
-    icon: <Ruler className="w-6 h-6" />,
-    image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg', // YouTube thumbnail is reasonably optimized
+    icon: <Ruler className="w-5 h-5" />,
+    image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg',
     benefits: [
       '3D Hardscape Design',
       'Landscapers Near Me',
@@ -138,7 +137,6 @@ const Paver3DViewer = () => {
     setZoom(prev => Math.max(0.5, Math.min(2, prev - e.deltaY * 0.001)));
   };
 
-  // Generate a procedural Herringbone pattern
   const pavers = [];
   const rows = 6;
   const cols = 6;
@@ -205,16 +203,6 @@ const Paver3DViewer = () => {
           <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
              <Move3d size={14} className="text-brand-gold" /> Drag to Rotate
           </div>
-          <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
-             <ZoomIn size={14} className="text-brand-gold" /> Scroll to Zoom
-          </div>
-       </div>
-
-       <div className="absolute top-6 left-6 pointer-events-none">
-          <div className="flex items-center gap-2 text-brand-gold font-bold uppercase tracking-widest text-xs mb-1">
-             <Box size={14} /> Interactive Preview
-          </div>
-          <h3 className="text-white font-serif text-xl">Standard Herringbone</h3>
        </div>
     </div>
   );
@@ -227,6 +215,31 @@ interface ServicesProps {
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [show3DModel, setShow3DModel] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Dedicated Observer for Fluid Card Animation
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Add 'show' class to trigger CSS transition
+          entry.target.classList.remove('opacity-0', 'translate-y-12', 'scale-95');
+          entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { 
+      threshold: 0.15, // Trigger when 15% visible
+      rootMargin: '50px' // Start slightly before
+    });
+
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll('.service-card-anim');
+      cards.forEach(card => observer.observe(card));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const openModal = (service: ServiceItem) => {
     setSelectedService(service);
@@ -244,78 +257,137 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
   return (
     <section id="services" className="pt-24 pb-32 bg-slate-50 relative z-20">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent to-brand-gold/50"></div>
+      
+      {/* Decorative center line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent via-brand-gold/50 to-transparent"></div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-20 fade-in-section">
-            <div className="text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
-               Metro Atlanta Hardscapes
+        <div className="text-center mb-16 fade-in-section">
+            <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-4 py-1.5 rounded-full bg-white mb-6">
+               <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+               <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">Metro Atlanta Hardscapes</span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
               Services Near You
             </h2>
-            <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light">
-               Looking for "patio contractors near me" or "paver installation"? We are Atlanta's top-rated specialists. Select a service below.
+            <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+               Craftsmanship that defines luxury. Select a category below to explore our "paver installation" and design capabilities.
             </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8" role="list">
           {services.map((service, index) => (
             <article 
               key={service.id}
               onClick={() => openModal(service)}
-              className="group relative h-[450px] rounded-xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-700 fade-in-section bg-brand-dark border border-gray-200"
+              // Initial state: Invisible, shifted down, slightly scaled down
+              className="service-card-anim group cursor-pointer opacity-0 translate-y-12 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.2,1,0.3,1)]"
+              // Staggered Delay for fluid wave effect
+              style={{ 
+                transitionDelay: `${index * 120}ms`,
+                willChange: 'opacity, transform' 
+              }}
               itemScope
               itemType="https://schema.org/Service"
               role="listitem"
             >
-              <meta itemProp="serviceType" content={service.title} />
-              <div className="absolute inset-0 overflow-hidden bg-gray-900">
-                <img 
-                  src={service.image} 
-                  alt={`${service.title} - ${service.benefits[0]}`} 
-                  title={`${service.title} in Atlanta GA`}
-                  className="w-full h-full object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
-                  loading="lazy"
-                  width="400"
-                  height="600"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-80"></div>
-                <div className="absolute inset-0 bg-brand-gold/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              
+              {/* MOBILE LAYOUT: "Premium Ticket" Style with Slide-In Animation */}
+              <div className="md:hidden flex h-36 bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-gray-100 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg">
+                 {/* Left: Image (35% width) */}
+                 <div className="w-[35%] relative overflow-hidden">
+                    <img 
+                      src={service.image} 
+                      alt={service.title} 
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-brand-dark/10"></div>
+                 </div>
+
+                 {/* Right: Content */}
+                 <div className="w-[65%] p-4 flex flex-col justify-center relative">
+                    <div className="absolute top-3 right-3 text-gray-300">
+                       <span className="text-[10px] font-bold">0{index + 1}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-brand-gold mb-1.5">
+                       {React.cloneElement(service.icon as React.ReactElement<any>, { size: 14 })}
+                       <span className="text-[9px] font-bold uppercase tracking-widest">Premium Service</span>
+                    </div>
+                    
+                    <h3 className="font-serif text-lg font-bold text-brand-dark leading-tight mb-2 line-clamp-2">
+                      {service.title}
+                    </h3>
+                    
+                    <div className="flex items-center gap-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide group-active:text-brand-gold transition-colors">
+                       View Details <ChevronRight size={12} className="group-active:translate-x-1 transition-transform" />
+                    </div>
+                 </div>
               </div>
 
-              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
-                <div className="flex justify-between items-start w-full">
-                   <span className="font-serif text-4xl text-white/10 font-bold group-hover:text-white/20 transition-colors duration-500">
+
+              {/* DESKTOP LAYOUT: "Immersive Vertical" (Full Image, Overlay, Hover Effects) */}
+              <div className="hidden md:block relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
+                
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
+                    loading="lazy"
+                  />
+                  {/* Base Gradient - Always Visible for readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90"></div>
+                  
+                  {/* Gold Sheen on Hover */}
+                  <div className="absolute inset-0 bg-brand-gold/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                </div>
+
+                {/* Content */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                   
+                   {/* Top Number */}
+                   <div className="absolute top-8 right-8 text-white/10 font-serif text-6xl font-bold transition-all duration-500 group-hover:text-white/20 group-hover:scale-110 select-none">
                       0{index + 1}
-                   </span>
-                   <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-brand-gold group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-lg">
-                      {service.icon}
+                   </div>
+
+                   {/* Icon */}
+                   <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white mb-6 group-hover:bg-brand-gold group-hover:border-brand-gold group-hover:scale-110 transition-all duration-500 shadow-lg origin-bottom-left">
+                      {React.cloneElement(service.icon as React.ReactElement<any>, { size: 24 })}
+                   </div>
+
+                   {/* Text Block */}
+                   <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+                      <h3 className="text-3xl font-serif text-white font-medium mb-3 leading-tight group-hover:text-brand-gold transition-colors">
+                        {service.title}
+                      </h3>
+                      
+                      <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+                        <p className="text-gray-300 text-sm leading-relaxed mb-6 line-clamp-3">
+                          {service.description}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-3 pt-4 border-t border-white/10 group-hover:border-brand-gold/50 transition-colors">
+                         <span className="text-xs font-bold uppercase tracking-widest text-white group-hover:text-brand-gold transition-colors">Explore</span>
+                         <div className="w-8 h-px bg-white/50 group-hover:w-16 group-hover:bg-brand-gold transition-all duration-500"></div>
+                      </div>
                    </div>
                 </div>
 
-                <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                   <h3 className="text-2xl font-serif font-medium text-white mb-3 leading-tight group-hover:text-brand-gold transition-colors duration-300" itemProp="name">
-                     {service.title}
-                   </h3>
-                   <p className="text-gray-300 text-xs leading-relaxed mb-6 opacity-90 group-hover:opacity-100 line-clamp-3" itemProp="description">
-                     {service.description}
-                   </p>
-                   <div className="flex items-center gap-3">
-                      <div className="h-px w-8 bg-white/30 group-hover:bg-brand-gold transition-colors duration-300"></div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-white/80 group-hover:text-white transition-colors flex items-center gap-2">
-                        View Details <ArrowUpRight size={12} className="text-brand-gold" />
-                      </span>
-                   </div>
-                </div>
+                {/* Border Hover Effect */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-gold/30 rounded-2xl transition-colors duration-500 pointer-events-none"></div>
               </div>
-              <div className="absolute inset-0 border border-white/10 rounded-xl group-hover:border-brand-gold/50 transition-colors duration-500 pointer-events-none"></div>
+
             </article>
           ))}
         </div>
       </div>
 
+      {/* MODAL (Unchanged Logic, just ensuring it renders correctly) */}
       {selectedService && (
         <div 
           className="fixed inset-0 z-[110] flex items-center justify-center p-4"
@@ -343,10 +415,9 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                     <Paver3DViewer />
                 ) : (
                     <>
-                        {/* Logic: remove the 'l' suffix to get higher res for modal, and ensure webp */}
                         <img 
                           src={selectedService.image.replace('l.webp', 'h.webp').replace('.jpg', '.webp')} 
-                          alt={`Detail view of ${selectedService.title} by AGS Stones`} 
+                          alt={`Detail view of ${selectedService.title}`} 
                           className="w-full h-full object-cover" 
                         />
                         <div className="absolute inset-0 bg-black/20"></div>
