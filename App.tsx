@@ -35,7 +35,7 @@ interface ErrorBoundaryState {
 }
 
 // Prevents the entire site from crashing if one lazy chunk fails to load
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };

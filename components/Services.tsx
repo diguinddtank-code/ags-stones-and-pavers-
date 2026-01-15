@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn, ChevronRight } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn, ChevronRight, ShieldCheck } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
@@ -294,7 +294,12 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             >
               
               {/* MOBILE LAYOUT: "Premium Ticket" Style with Slide-In Animation */}
-              <div className="md:hidden flex h-36 bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-gray-100 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg">
+              <div className="md:hidden flex h-36 bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-gray-100 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg relative">
+                 {/* VALUE BADGE - MOBILE */}
+                 <div className="absolute top-0 left-0 bg-brand-gold text-white text-[9px] font-bold px-2 py-0.5 z-20 rounded-br-lg uppercase tracking-wider flex items-center gap-1">
+                    <ShieldCheck size={10} /> 5-Yr Warranty
+                 </div>
+
                  {/* Left: Image (35% width) */}
                  <div className="w-[35%] relative overflow-hidden">
                     <img 
@@ -312,7 +317,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                        <span className="text-[10px] font-bold">0{index + 1}</span>
                     </div>
                     
-                    <div className="flex items-center gap-2 text-brand-gold mb-1.5">
+                    <div className="flex items-center gap-2 text-brand-gold mb-1.5 mt-2">
                        {React.cloneElement(service.icon as React.ReactElement<any>, { size: 14 })}
                        <span className="text-[9px] font-bold uppercase tracking-widest">Premium Service</span>
                     </div>
@@ -331,6 +336,11 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               {/* DESKTOP LAYOUT: "Immersive Vertical" (Full Image, Overlay, Hover Effects) */}
               <div className="hidden md:block relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
                 
+                {/* VALUE BADGE - DESKTOP */}
+                <div className="absolute top-6 left-6 z-30 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 delay-100">
+                    <ShieldCheck size={12} className="text-brand-gold" /> Warranty Protected
+                </div>
+
                 {/* Background Image */}
                 <div className="absolute inset-0">
                   <img 
@@ -387,7 +397,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
         </div>
       </div>
 
-      {/* MODAL (Unchanged Logic, just ensuring it renders correctly) */}
+      {/* MODAL */}
       {selectedService && (
         <div 
           className="fixed inset-0 z-[110] flex items-center justify-center p-4"
@@ -416,7 +426,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 ) : (
                     <>
                         <img 
-                          src={selectedService.image.replace('l.webp', 'h.webp').replace('.jpg', '.webp')} 
+                          src={selectedService.image.includes('imgur') ? selectedService.image.replace('l.webp', 'h.webp') : selectedService.image} 
                           alt={`Detail view of ${selectedService.title}`} 
                           className="w-full h-full object-cover" 
                         />

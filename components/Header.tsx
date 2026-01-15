@@ -6,13 +6,11 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showMobileLogo, setShowMobileLogo] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 20);
-      setShowMobileLogo(scrollY > 350);
+      setIsScrolled(scrollY > 50); // Threshold to trigger sticky header
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -40,16 +38,17 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center relative">
           
-          {/* Logo Container */}
-          <div className="flex-shrink-0 z-50">
+          {/* Logo Container - Visible only when scrolled to avoid duplication with Hero Logo */}
+          <div className={`flex-shrink-0 z-50 transition-all duration-500 ${
+              isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}>
              <a href="#" className="flex items-center gap-3 group">
                 <img 
                   src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
                   alt="AGS Stones and Pavers" 
-                  className={`h-10 w-auto md:h-14 object-contain transition-all duration-500 transform
-                    ${isScrolled ? 'brightness-0' : 'brightness-0 invert'}
-                    ${showMobileLogo ? 'opacity-100 scale-100' : 'opacity-0 scale-90 md:opacity-100 md:scale-100'}
-                  `}
+                  className={`h-10 w-auto md:h-12 object-contain ${
+                    isScrolled ? 'brightness-0' : 'brightness-0 invert'
+                  }`}
                 />
              </a>
           </div>
@@ -91,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
            <a
               href="tel:+16784287630"
               className={`md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ${
-                 isScrolled ? 'bg-brand-gold text-white shadow-md opacity-100 translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'
+                 isScrolled ? 'bg-brand-gold text-white shadow-md' : 'bg-white/10 backdrop-blur-md text-white'
               }`}
               aria-label="Call Now"
             >

@@ -25,7 +25,7 @@ export const ZParallaxShowcase: React.FC = () => {
   }, []);
 
   return (
-    // Increased height to 250vh to allow for slower, smoother animation pacing
+    // Height set to 250vh to control the speed of the scroll effect
     <section ref={containerRef} className="relative h-[250vh] bg-[#0f1115]">
       
       <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" 
@@ -38,9 +38,10 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
            className="absolute inset-0 w-full h-full"
            style={{
-             // More gradual fade in (factor reduced from 4 to 2.5)
-             opacity: Math.min(1, scrollProgress * 2.5), 
-             transform: `scale(${1.2 - (scrollProgress * 0.2)}) translate3d(0,0,0)`,
+             // Tuned physics: Slower fade in (multiplier 2) for smoother reveal
+             opacity: Math.min(1, scrollProgress * 2), 
+             // Subtle scale down effect
+             transform: `scale(${1.2 - (scrollProgress * 0.15)}) translate3d(0,0,0)`,
              zIndex: 10
            }}
         >
@@ -63,14 +64,15 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{
-             // Slower opening pace (scale factor reduced from 80 to 50)
-             transform: `scale(${1 + scrollProgress * 50}) translate3d(0,0,0)`, 
+             // Tuned physics: Slower opening (multiplier reduced to 35) for ethereal feel
+             // This keeps the black mask visible longer
+             transform: `scale(${1 + scrollProgress * 35}) translate3d(0,0,0)`, 
              opacity: 1, 
              zIndex: 20
           }}
         >
            <div className="w-[100vw] h-[100vh] flex items-center justify-center">
-              {/* The "Hole" */}
+              {/* The "Hole" - Transparent center with huge black shadow */}
               <div className="w-[85vw] h-[50vh] md:w-[40vw] md:h-[40vh] rounded-[40%] md:rounded-[30%] shadow-[0_0_0_150vmax_#0f1115] bg-transparent"></div>
            </div>
         </div>
@@ -79,10 +81,10 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
           style={{
-             // Text stays visible slightly longer (factor reduced from 4 to 3)
-             opacity: Math.max(0, 1 - scrollProgress * 3), 
-             // Smoother scale up effect, reduced vertical movement for stability
-             transform: `scale(${1 + scrollProgress * 2}) translateY(${scrollProgress * -50}px) translate3d(0,0,0)`
+             // Text fades out a bit slower, staying visible as the hole opens
+             opacity: Math.max(0, 1 - scrollProgress * 2.5), 
+             // Smoother scale up, barely moves vertically to keep focus
+             transform: `scale(${1 + scrollProgress * 1.5}) translateY(${scrollProgress * -30}px) translate3d(0,0,0)`
           }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block drop-shadow-lg">

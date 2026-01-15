@@ -166,7 +166,7 @@ export const Testimonials: React.FC = () => {
                <div className="text-center md:text-left flex-1">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest mb-4">
                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                     Accepting New Projects for {new Date().toLocaleString('default', { month: 'long' })}
+                     Limited Availability: Booking Now
                   </div>
                   <h3 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">
                      Ready to Start <br className="hidden md:block" />
