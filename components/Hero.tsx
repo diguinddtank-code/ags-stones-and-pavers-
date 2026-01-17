@@ -69,9 +69,10 @@ export const Hero: React.FC = () => {
     <section 
       ref={sectionRef} 
       id="home" 
-      // Adjusted height strategy: min-h-[100svh] ensures it grows if content is tall (small laptops), 
-      // preventing cutoff. Centered vertically with flex.
-      className="relative min-h-[100svh] flex items-center overflow-hidden bg-brand-dark pt-28 pb-16 lg:pt-32 lg:pb-24 xl:py-0"
+      // Optimized height strategy for responsiveness
+      // min-h-[100svh] ensures full screen on mobile/desktop but allows growth
+      // py-20 ensures padding on top/bottom so content isn't cut off on short screens
+      className="relative min-h-[100svh] flex items-center bg-brand-dark pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-x-hidden"
     > 
       
       {/* Background Video Container */}
@@ -104,78 +105,78 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Main Content Grid */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center h-full">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         
         {/* LEFT COLUMN: Value Props & Copy */}
-        <div className="text-center md:text-left animate-[fade-up_0.8s_ease-out] flex flex-col justify-center h-full">
+        <div className="text-center md:text-left animate-[fade-up_0.8s_ease-out] flex flex-col justify-center">
           
           {/* MAIN LOGO - VISIBLE ONLY ON MOBILE */}
-          {/* Desktop relies on Header logo */}
-          <div className="flex justify-center md:justify-start lg:hidden mb-6">
+          <div className="flex justify-center md:justify-start lg:hidden mb-4">
             <img 
                src="https://i.imgur.com/DkMxLum.png" 
                alt="AGS Stones" 
-               className="w-32 sm:w-48 h-auto brightness-0 invert drop-shadow-xl opacity-100"
+               className="w-32 sm:w-40 h-auto brightness-0 invert drop-shadow-xl opacity-100"
             />
           </div>
 
           {/* Top Badge */}
-          <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 border border-brand-gold/50 rounded-full bg-brand-dark/80 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.3)] mx-auto md:mx-0 w-fit max-w-full hover:bg-brand-gold/10 transition-colors cursor-default">
+          <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 border border-brand-gold/50 rounded-full bg-brand-dark/80 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.3)] mx-auto md:mx-0 w-fit max-w-full hover:bg-brand-gold/10 transition-colors cursor-default">
              <Star className="w-3 h-3 md:w-3.5 md:h-3.5 text-brand-gold fill-brand-gold flex-shrink-0 animate-[spin_3s_linear_infinite]" />
              <span className="text-brand-gold text-[10px] md:text-xs font-bold tracking-widest uppercase truncate">#1 Factory Direct Fabricator</span>
           </div>
           
           {/* Headline - Scaled for better fit on Laptop (lg) vs Desktop (xl) */}
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-xl">
+          {/* Reduced text size on LG to 5xl to prevent vertical overflow on small laptops */}
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-5xl xl:text-7xl font-bold text-white leading-[1.1] mb-4 drop-shadow-xl">
             Atlanta's Premier <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-brand-gold italic">
               Hardscape & Stone
             </span>
           </h1>
           
-          <p className="text-sm md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl mx-auto md:mx-0 font-light leading-relaxed px-2 md:px-0 drop-shadow-md">
+          <p className="text-sm md:text-lg text-gray-200 mb-6 max-w-xl mx-auto md:mx-0 font-light leading-relaxed px-2 md:px-0 drop-shadow-md">
             Buy direct from the factory and save up to 30%. Expert installation of <strong>Pavers, Retaining Walls, and Outdoor Living</strong> in Duluth & Metro Atlanta.
           </p>
           
           {/* MOBILE CALL TO ACTION (Above Features) */}
-          <div className="lg:hidden w-full mb-8 animate-[fade-up_0.8s_ease-out_0.2s_both]">
+          <div className="lg:hidden w-full mb-6 animate-[fade-up_0.8s_ease-out_0.2s_both]">
              <a 
                 href="#contact" 
-                className="group w-full py-3.5 bg-brand-gold text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm relative overflow-hidden"
+                className="group w-full py-4 bg-brand-gold text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm relative overflow-hidden"
              >
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
                 <span className="relative z-10 flex items-center gap-2">
                    Get Free Estimate <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
              </a>
-             <div className="mt-3 flex justify-center gap-4 text-[10px] text-gray-400 font-medium">
+             <div className="mt-2 flex justify-center gap-4 text-[10px] text-gray-400 font-medium">
                 <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 text-brand-gold" /> Licensed & Insured</span>
                 <span className="flex items-center gap-1"><Star className="w-3 h-3 text-brand-gold" /> 5-Star Rated</span>
              </div>
           </div>
 
-          {/* Value Badges - Vertical Stack Full Width on Mobile */}
-          <div className="flex flex-col space-y-3 mb-8 md:mb-10 w-full md:w-auto">
+          {/* Value Badges - Vertical Stack Full Width on Mobile (Requested: "cada 1 em 1 linha") */}
+          <div className="flex flex-col gap-3 mb-8 w-full sm:w-auto sm:flex-row sm:flex-wrap">
             
-            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
-               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:rotate-12 transition-all duration-300" />
+            <div className="flex items-center gap-3 bg-white/5 md:bg-transparent rounded-lg p-3 md:p-0 border border-white/10 md:border-none w-full sm:w-auto backdrop-blur-sm md:backdrop-blur-none">
+               <div className="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
+                  <CheckCircle2 className="w-4 h-4 text-brand-gold" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Factory Direct Pricing (No Middlemen)</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide whitespace-nowrap">Factory Direct Pricing</span>
             </div>
 
-            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
-               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                  <Trophy className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:-rotate-12 transition-all duration-300" />
+            <div className="flex items-center gap-3 bg-white/5 md:bg-transparent rounded-lg p-3 md:p-0 border border-white/10 md:border-none w-full sm:w-auto backdrop-blur-sm md:backdrop-blur-none">
+               <div className="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
+                  <Trophy className="w-4 h-4 text-brand-gold" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Largest Indoor Slab Yard in Duluth</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide whitespace-nowrap">Largest Indoor Slab Yard</span>
             </div>
 
-            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
-               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                  <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:spin-slow transition-all duration-300" />
+            <div className="flex items-center gap-3 bg-white/5 md:bg-transparent rounded-lg p-3 md:p-0 border border-white/10 md:border-none w-full sm:w-auto backdrop-blur-sm md:backdrop-blur-none">
+               <div className="w-8 h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
+                  <Clock className="w-4 h-4 text-brand-gold" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">5-Day Turnaround Guarantee</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide whitespace-nowrap">5-Day Turnaround</span>
             </div>
 
           </div>
