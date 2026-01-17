@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
           }`}>
              <a href="#" className="flex items-center gap-3 group">
                 <img 
-                  src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
+                  src="https://i.imgur.com/DkMxLum.png" 
                   alt="AGS Stones and Pavers" 
                   className={`h-10 w-auto md:h-12 object-contain ${
                     isScrolled ? 'brightness-0' : 'brightness-0 invert'

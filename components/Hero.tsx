@@ -81,7 +81,8 @@ export const Hero: React.FC = () => {
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
-          className="w-full h-full object-cover object-center opacity-50 transition-transform duration-100 ease-linear"
+          // Increased opacity from 50 to 70 for better visibility
+          className="w-full h-full object-cover object-center opacity-70 transition-transform duration-100 ease-linear"
           style={{ 
              transform: isMobile ? 'none' : `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`,
              willChange: 'transform' 
@@ -94,8 +95,9 @@ export const Hero: React.FC = () => {
              className="w-full h-full object-cover"
           />
         </video>
-        {/* Dark Overlay gradient for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-black/40" />
+        
+        {/* Lighter Gradient Overlay: Dark behind text, transparent elsewhere */}
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/60 to-transparent" />
         
         {/* SEAMLESS TRANSITION GRADIENT (Bottom Fade) */}
         <div className="absolute bottom-0 left-0 w-full h-24 md:h-32 bg-gradient-to-t from-[#0f1115] to-transparent z-10 pointer-events-none"></div>
@@ -107,19 +109,19 @@ export const Hero: React.FC = () => {
         {/* LEFT COLUMN: Value Props & Copy */}
         <div className="text-center md:text-left animate-[fade-up_0.8s_ease-out] flex flex-col justify-center h-full">
           
-          {/* MAIN LOGO - Centered in Hero */}
-          <div className="flex justify-center md:justify-start mb-6 md:mb-8">
+          {/* MAIN LOGO - Position Optimized */}
+          <div className="flex justify-center md:justify-start mb-6 md:mb-6">
             <img 
-               src="https://agsstonesandpavers.com/wp-content/uploads/2023/05/Design-sem-nome-18.png" 
+               src="https://i.imgur.com/DkMxLum.png" 
                alt="AGS Stones" 
-               // Adjusted size: smaller on mobile to prevent overlap
-               className="w-36 sm:w-48 md:w-72 h-auto brightness-0 invert drop-shadow-xl opacity-95"
+               // Adjusted size: w-64 on desktop is cleaner than w-72
+               className="w-36 sm:w-48 md:w-64 h-auto brightness-0 invert drop-shadow-xl opacity-100"
             />
           </div>
 
           {/* Top Badge */}
-          <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 border border-brand-gold/50 rounded-full bg-brand-dark/80 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.3)] mx-auto md:mx-0 w-fit max-w-full">
-             <Star className="w-3 h-3 md:w-3.5 md:h-3.5 text-brand-gold fill-brand-gold flex-shrink-0" />
+          <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-3 py-1.5 border border-brand-gold/50 rounded-full bg-brand-dark/80 backdrop-blur-md shadow-[0_0_15px_rgba(212,175,55,0.3)] mx-auto md:mx-0 w-fit max-w-full hover:bg-brand-gold/10 transition-colors cursor-default">
+             <Star className="w-3 h-3 md:w-3.5 md:h-3.5 text-brand-gold fill-brand-gold flex-shrink-0 animate-[spin_3s_linear_infinite]" />
              <span className="text-brand-gold text-[10px] md:text-xs font-bold tracking-widest uppercase truncate">#1 Factory Direct Fabricator</span>
           </div>
           
@@ -130,30 +132,34 @@ export const Hero: React.FC = () => {
             </span>
           </h1>
           
-          <p className="text-sm md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl mx-auto md:mx-0 font-light leading-relaxed px-2 md:px-0">
+          <p className="text-sm md:text-lg text-gray-200 mb-6 md:mb-8 max-w-xl mx-auto md:mx-0 font-light leading-relaxed px-2 md:px-0 drop-shadow-md">
             Buy direct from the factory and save up to 30%. Expert installation of <strong>Pavers, Retaining Walls, and Outdoor Living</strong> in Duluth & Metro Atlanta.
           </p>
           
-          {/* Value Badges / Bullets - Compact on mobile */}
-          <div className="space-y-3 mb-8 md:mb-10 flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-3">
-               <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
-                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-brand-gold" />
+          {/* Value Badges / Bullets - With Animations */}
+          <div className="space-y-4 mb-8 md:mb-10 flex flex-col items-center md:items-start">
+            
+            <div className="group flex items-center gap-3 cursor-default">
+               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+                  <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:rotate-12 transition-all duration-300" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide">Factory Direct Pricing (No Middlemen)</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Factory Direct Pricing (No Middlemen)</span>
             </div>
-            <div className="flex items-center gap-3">
-               <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
-                  <Trophy className="w-4 h-4 md:w-5 md:h-5 text-brand-gold" />
+
+            <div className="group flex items-center gap-3 cursor-default">
+               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+                  <Trophy className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:-rotate-12 transition-all duration-300" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide">Largest Indoor Slab Yard in Duluth</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Largest Indoor Slab Yard in Duluth</span>
             </div>
-            <div className="flex items-center gap-3">
-               <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0">
-                  <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold" />
+
+            <div className="group flex items-center gap-3 cursor-default">
+               <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+                  <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:spin-slow transition-all duration-300" />
                </div>
-               <span className="text-white font-bold text-xs md:text-sm tracking-wide">5-Day Turnaround Guarantee</span>
+               <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">5-Day Turnaround Guarantee</span>
             </div>
+
           </div>
 
           {/* Social Proof Widget - Enhanced Google Badge */}
