@@ -61,43 +61,51 @@ export const FAQ: React.FC = () => {
         </div>
 
         <div className="space-y-4 fade-in-section">
-          {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className={`border rounded-2xl transition-all duration-300 overflow-hidden ${
-                openIndex === index ? 'border-brand-gold bg-brand-gold/5 shadow-md' : 'border-gray-200 bg-white hover:border-brand-gold/30'
-              }`}
-            >
-              <button 
-                onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-inset rounded-2xl"
-                aria-expanded={openIndex === index}
-                aria-controls={`faq-answer-${index}`}
-              >
-                <span className={`font-serif text-lg font-bold ${openIndex === index ? 'text-brand-dark' : 'text-gray-700'}`}>
-                  {faq.question}
-                </span>
-                <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-colors ${
-                   openIndex === index ? 'bg-brand-gold text-white border-brand-gold' : 'border-gray-300 text-gray-400'
-                }`}>
-                   {openIndex === index ? <Minus size={16} /> : <Plus size={16} />}
-                </span>
-              </button>
-              
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
               <div 
-                id={`faq-answer-${index}`}
-                role="region"
-                aria-labelledby={`faq-question-${index}`}
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                key={index} 
+                className={`border rounded-2xl transition-all duration-300 ${
+                  isOpen ? 'border-brand-gold bg-brand-gold/5 shadow-md' : 'border-gray-200 bg-white hover:border-brand-gold/30'
                 }`}
               >
-                <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-brand-gold/10 mt-2">
-                  {faq.answer}
+                <h3>
+                  <button 
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-inset rounded-2xl cursor-pointer select-none"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
+                    id={`faq-question-${index}`}
+                  >
+                    <span className={`font-serif text-lg font-bold ${isOpen ? 'text-brand-dark' : 'text-gray-700'}`}>
+                      {faq.question}
+                    </span>
+                    <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-colors ${
+                       isOpen ? 'bg-brand-gold text-white border-brand-gold' : 'border-gray-300 text-gray-400'
+                    }`}>
+                       {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    </span>
+                  </button>
+                </h3>
+                
+                <div 
+                  id={`faq-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                  className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                    isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-brand-gold/10 mt-2">
+                      {faq.answer}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
