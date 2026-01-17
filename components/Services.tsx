@@ -337,7 +337,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               <div className="hidden md:block relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
                 
                 {/* VALUE BADGE - DESKTOP */}
-                <div className="absolute top-6 left-6 z-30 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 delay-100">
+                {/* Fixed: Use opacity and small translate slide to avoid overflow clipping artifacts from -translate-x-full */}
+                <div className="absolute top-6 left-6 z-30 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
                     <ShieldCheck size={12} className="text-brand-gold" /> Warranty Protected
                 </div>
 
@@ -371,7 +372,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
                    {/* Text Block */}
                    <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
-                      <h3 className="text-3xl font-serif text-white font-medium mb-3 leading-tight group-hover:text-brand-gold transition-colors">
+                      {/* Fixed: Adjusted font size for better responsiveness on MD screens (text-2xl vs 3xl) */}
+                      <h3 className="text-2xl lg:text-3xl font-serif text-white font-medium mb-3 leading-tight group-hover:text-brand-gold transition-colors">
                         {service.title}
                       </h3>
                       

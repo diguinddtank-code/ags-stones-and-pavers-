@@ -118,7 +118,7 @@ export const Testimonials: React.FC = () => {
            {marqueeReviews.map((review, index) => (
              <article 
                 key={`${review.id}-${index}`} 
-                className="w-[300px] md:w-[400px] mx-4 bg-white p-8 rounded-2xl shadow-[0_5px_30px_-5px_rgba(0,0,0,0.05)] border border-gray-100 flex-shrink-0 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.1)] hover:border-brand-gold/30 cursor-default"
+                className="w-[300px] md:w-[400px] mx-4 bg-white p-8 rounded-2xl shadow-[0_5px_30px_-5px_rgba(0,0,0,0.05)] border border-gray-100 flex-shrink-0 transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_50px_-12px_rgba(212,175,55,0.25)] hover:border-brand-gold/40 cursor-default"
              >
                 <div className="flex justify-between items-start mb-6">
                    <div className="flex items-center gap-3">

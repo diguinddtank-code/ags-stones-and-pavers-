@@ -32,16 +32,19 @@ export const ZParallaxShowcase: React.FC = () => {
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/black-scales.png")` }}>
       </div>
 
+      {/* FLUID CONNECTOR: Top gradient to catch the fade from Hero if user scrolls fast */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0f1115] to-transparent z-40 pointer-events-none"></div>
+
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-[100px]">
         
         {/* Layer 3: The Destination (Background Image) */}
         <div 
            className="absolute inset-0 w-full h-full"
            style={{
-             // Tuned physics: Slower fade in (multiplier 2) for smoother reveal
-             opacity: Math.min(1, scrollProgress * 2), 
-             // Subtle scale down effect
-             transform: `scale(${1.2 - (scrollProgress * 0.15)}) translate3d(0,0,0)`,
+             // Tuned physics: Slower fade in for smoother reveal
+             opacity: Math.min(1, scrollProgress * 1.5), 
+             // Subtle scale down effect, smoother transition
+             transform: `scale(${1.15 - (scrollProgress * 0.1)}) translate3d(0,0,0)`,
              zIndex: 10
            }}
         >
@@ -64,9 +67,8 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{
-             // Tuned physics: Slower opening (multiplier reduced to 35) for ethereal feel
-             // This keeps the black mask visible longer
-             transform: `scale(${1 + scrollProgress * 35}) translate3d(0,0,0)`, 
+             // Tuned physics: Exponential growth for "ethereal" feel - starts slow, accelerates
+             transform: `scale(${1 + Math.pow(scrollProgress, 1.8) * 60}) translate3d(0,0,0)`, 
              opacity: 1, 
              zIndex: 20
           }}
@@ -81,10 +83,10 @@ export const ZParallaxShowcase: React.FC = () => {
         <div 
           className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
           style={{
-             // Text fades out a bit slower, staying visible as the hole opens
-             opacity: Math.max(0, 1 - scrollProgress * 2.5), 
-             // Smoother scale up, barely moves vertically to keep focus
-             transform: `scale(${1 + scrollProgress * 1.5}) translateY(${scrollProgress * -30}px) translate3d(0,0,0)`
+             // Text fades out slower to stay legible longer
+             opacity: Math.max(0, 1 - scrollProgress * 1.8), 
+             // Gentler scale up to avoid "jumping" at the user
+             transform: `scale(${1 + scrollProgress * 0.5}) translateY(${scrollProgress * -40}px) translate3d(0,0,0)`
           }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block drop-shadow-lg">
