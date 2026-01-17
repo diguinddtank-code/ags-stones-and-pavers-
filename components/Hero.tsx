@@ -69,8 +69,9 @@ export const Hero: React.FC = () => {
     <section 
       ref={sectionRef} 
       id="home" 
-      // Changed height to 100svh (Small Viewport Height) for perfect mobile fit
-      className="relative min-h-[100svh] md:h-screen flex items-center overflow-hidden bg-brand-dark pt-24 pb-16 md:pt-0 md:pb-0"
+      // Adjusted height strategy: min-h-[100svh] ensures it grows if content is tall (small laptops), 
+      // preventing cutoff. Centered vertically with flex.
+      className="relative min-h-[100svh] flex items-center overflow-hidden bg-brand-dark pt-28 pb-16 lg:pt-32 lg:pb-24 xl:py-0"
     > 
       
       {/* Background Video Container */}
@@ -81,7 +82,6 @@ export const Hero: React.FC = () => {
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop"
-          // Increased opacity from 50 to 70 for better visibility
           className="w-full h-full object-cover object-center opacity-70 transition-transform duration-100 ease-linear"
           style={{ 
              transform: isMobile ? 'none' : `translateY(${offset * 0.4}px) scale(${1 + offset * 0.0005})`,
@@ -96,26 +96,26 @@ export const Hero: React.FC = () => {
           />
         </video>
         
-        {/* Lighter Gradient Overlay: Dark behind text, transparent elsewhere */}
+        {/* Lighter Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/60 to-transparent" />
         
-        {/* SEAMLESS TRANSITION GRADIENT (Bottom Fade) */}
+        {/* SEAMLESS TRANSITION GRADIENT */}
         <div className="absolute bottom-0 left-0 w-full h-24 md:h-32 bg-gradient-to-t from-[#0f1115] to-transparent z-10 pointer-events-none"></div>
       </div>
 
       {/* Main Content Grid */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 md:gap-12 items-center h-full">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center h-full">
         
         {/* LEFT COLUMN: Value Props & Copy */}
         <div className="text-center md:text-left animate-[fade-up_0.8s_ease-out] flex flex-col justify-center h-full">
           
-          {/* MAIN LOGO - Position Optimized */}
-          <div className="flex justify-center md:justify-start mb-6 md:mb-6">
+          {/* MAIN LOGO - VISIBLE ONLY ON MOBILE */}
+          {/* Desktop relies on Header logo */}
+          <div className="flex justify-center md:justify-start lg:hidden mb-6">
             <img 
                src="https://i.imgur.com/DkMxLum.png" 
                alt="AGS Stones" 
-               // Adjusted size: w-64 on desktop is cleaner than w-72
-               className="w-36 sm:w-48 md:w-64 h-auto brightness-0 invert drop-shadow-xl opacity-100"
+               className="w-32 sm:w-48 h-auto brightness-0 invert drop-shadow-xl opacity-100"
             />
           </div>
 
@@ -125,7 +125,8 @@ export const Hero: React.FC = () => {
              <span className="text-brand-gold text-[10px] md:text-xs font-bold tracking-widest uppercase truncate">#1 Factory Direct Fabricator</span>
           </div>
           
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-xl">
+          {/* Headline - Scaled for better fit on Laptop (lg) vs Desktop (xl) */}
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-xl">
             Atlanta's Premier <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-brand-gold italic">
               Hardscape & Stone
@@ -136,24 +137,41 @@ export const Hero: React.FC = () => {
             Buy direct from the factory and save up to 30%. Expert installation of <strong>Pavers, Retaining Walls, and Outdoor Living</strong> in Duluth & Metro Atlanta.
           </p>
           
-          {/* Value Badges / Bullets - With Animations */}
-          <div className="space-y-4 mb-8 md:mb-10 flex flex-col items-center md:items-start">
+          {/* MOBILE CALL TO ACTION (Above Features) */}
+          <div className="lg:hidden w-full mb-8 animate-[fade-up_0.8s_ease-out_0.2s_both]">
+             <a 
+                href="#contact" 
+                className="group w-full py-3.5 bg-brand-gold text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm relative overflow-hidden"
+             >
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                <span className="relative z-10 flex items-center gap-2">
+                   Get Free Estimate <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+             </a>
+             <div className="mt-3 flex justify-center gap-4 text-[10px] text-gray-400 font-medium">
+                <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 text-brand-gold" /> Licensed & Insured</span>
+                <span className="flex items-center gap-1"><Star className="w-3 h-3 text-brand-gold" /> 5-Star Rated</span>
+             </div>
+          </div>
+
+          {/* Value Badges - Vertical Stack Full Width on Mobile */}
+          <div className="flex flex-col space-y-3 mb-8 md:mb-10 w-full md:w-auto">
             
-            <div className="group flex items-center gap-3 cursor-default">
+            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
                   <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:rotate-12 transition-all duration-300" />
                </div>
                <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Factory Direct Pricing (No Middlemen)</span>
             </div>
 
-            <div className="group flex items-center gap-3 cursor-default">
+            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
                   <Trophy className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:-rotate-12 transition-all duration-300" />
                </div>
                <span className="text-white font-bold text-xs md:text-sm tracking-wide group-hover:text-brand-gold transition-colors">Largest Indoor Slab Yard in Duluth</span>
             </div>
 
-            <div className="group flex items-center gap-3 cursor-default">
+            <div className="group flex items-center gap-3 cursor-default bg-white/5 md:bg-transparent p-3 md:p-0 rounded-lg md:rounded-none w-full md:w-auto">
                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-brand-gold/20 flex items-center justify-center border border-brand-gold/50 flex-shrink-0 group-hover:bg-brand-gold group-hover:scale-110 transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
                   <Clock className="w-4 h-4 md:w-5 md:h-5 text-brand-gold group-hover:text-white group-hover:spin-slow transition-all duration-300" />
                </div>
@@ -162,10 +180,8 @@ export const Hero: React.FC = () => {
 
           </div>
 
-          {/* Social Proof Widget - Enhanced Google Badge */}
+          {/* Social Proof Widget */}
           <div className="group flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/10 pl-2 pr-5 py-2 rounded-full w-fit mx-auto md:mx-0 hover:bg-white/15 transition-all duration-300 shadow-lg cursor-default scale-95 md:scale-100 origin-center md:origin-left">
-             
-             {/* Google Logo Circle */}
              <div className="bg-white rounded-full p-2 w-10 h-10 flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 transition-transform">
                  <img 
                     src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
@@ -173,47 +189,36 @@ export const Hero: React.FC = () => {
                     className="w-full h-full" 
                  />
              </div>
-
-             {/* Content Column */}
              <div className="flex flex-col items-start">
-                {/* Stars Row */}
                 <div className="flex items-center gap-1.5">
                    <span className="text-white font-bold text-sm leading-none">5.0</span>
                    <div className="flex gap-0.5">
                       {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 text-[#F4B400] fill-[#F4B400]" />)}
                    </div>
                 </div>
-                
-                {/* Reviews Text & Avatars */}
                 <div className="flex items-center gap-2 mt-0.5">
                    <span className="text-[10px] text-gray-300 font-medium tracking-wide">120+ Reviews</span>
-                   {/* Tiny Avatar Stack for Social Proof */}
-                   <div className="flex -space-x-1.5 pl-1">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=32&h=32" alt="" className="w-4 h-4 rounded-full border border-gray-600 object-cover" />
-                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=32&h=32" alt="" className="w-4 h-4 rounded-full border border-gray-600 object-cover" />
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=32&h=32" alt="" className="w-4 h-4 rounded-full border border-gray-600 object-cover" />
-                   </div>
                 </div>
              </div>
           </div>
         </div>
 
         {/* RIGHT COLUMN: High Conversion Form */}
-        <div className="relative animate-[fade-up_0.8s_ease-out_0.2s_both] hidden md:block">
+        <div className="relative animate-[fade-up_0.8s_ease-out_0.2s_both] hidden lg:block">
            
            {/* Floating Badge on Form */}
-           <div className="absolute -top-6 -right-6 bg-white text-brand-dark px-4 py-3 rounded-xl shadow-xl z-30 flex items-center gap-3 border-2 border-brand-gold animate-[bounce_3s_infinite]">
-              <ShieldCheck className="w-8 h-8 text-brand-gold" />
+           <div className="absolute -top-5 -right-5 bg-white text-brand-dark px-4 py-2 rounded-xl shadow-xl z-30 flex items-center gap-2 border-2 border-brand-gold animate-[bounce_3s_infinite]">
+              <ShieldCheck className="w-6 h-6 text-brand-gold" />
               <div className="flex flex-col">
-                 <span className="text-[10px] font-bold uppercase text-gray-400 leading-none">Guaranteed</span>
-                 <span className="text-sm font-black uppercase tracking-wide">Best Price in GA</span>
+                 <span className="text-[9px] font-bold uppercase text-gray-400 leading-none">Guaranteed</span>
+                 <span className="text-xs font-black uppercase tracking-wide">Best Price in GA</span>
               </div>
            </div>
 
-           <div className="bg-white rounded-3xl p-8 shadow-2xl relative overflow-hidden border border-white/20">
+           <div className="bg-white rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-hidden border border-white/20">
               <div className="relative z-10">
-                 <h3 className="font-serif text-3xl font-bold text-brand-dark mb-2">Get Your Free Estimate</h3>
-                 <p className="text-gray-500 text-sm mb-6">Lock in this month's special pricing. No obligation.</p>
+                 <h3 className="font-serif text-2xl lg:text-3xl font-bold text-brand-dark mb-2">Get Your Free Estimate</h3>
+                 <p className="text-gray-500 text-sm mb-5">Lock in this month's special pricing. No obligation.</p>
 
                  {formStatus === 'SUCCESS' ? (
                     <div className="bg-green-50 p-6 rounded-xl text-center border border-green-100">
@@ -223,14 +228,14 @@ export const Hero: React.FC = () => {
                        <button onClick={() => setFormStatus('IDLE')} className="mt-4 text-xs font-bold uppercase text-brand-dark underline">Send New Request</button>
                     </div>
                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                       <div className="grid grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="space-y-3 lg:space-y-4">
+                       <div className="grid grid-cols-2 gap-3 lg:gap-4">
                           <input 
                             type="text" 
                             name="name"
                             required
                             placeholder="First Name" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 lg:px-4 lg:py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
                             value={formData.name}
                             onChange={handleInputChange}
                           />
@@ -239,7 +244,7 @@ export const Hero: React.FC = () => {
                             name="phone"
                             required
                             placeholder="Phone Number" 
-                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
+                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 lg:px-4 lg:py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
                             value={formData.phone}
                             onChange={handleInputChange}
                           />
@@ -249,14 +254,14 @@ export const Hero: React.FC = () => {
                           name="email"
                           required
                           placeholder="Email Address" 
-                          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
+                          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 lg:px-4 lg:py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all"
                           value={formData.email}
                           onChange={handleInputChange}
                        />
                        <div className="relative">
                           <select 
                              name="service"
-                             className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all appearance-none text-gray-600"
+                             className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 lg:px-4 lg:py-3 text-sm focus:border-brand-gold focus:bg-white outline-none transition-all appearance-none text-gray-600"
                              value={formData.service}
                              onChange={handleInputChange}
                              required
@@ -269,14 +274,14 @@ export const Hero: React.FC = () => {
                              <option value="Other">Other</option>
                           </select>
                           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                             <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                             <ArrowRight className="w-3 h-3 text-gray-400 rotate-90" />
                           </div>
                        </div>
 
                        <button 
                           type="submit" 
                           disabled={formStatus === 'LOADING'}
-                          className="w-full bg-brand-gold hover:bg-brand-goldHover text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest text-sm flex items-center justify-center gap-2"
+                          className="w-full bg-brand-gold hover:bg-brand-goldHover text-white font-bold py-3.5 lg:py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest text-sm flex items-center justify-center gap-2"
                        >
                           {formStatus === 'LOADING' ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Get My Free Quote <ArrowRight className="w-5 h-5" /></>}
                        </button>
@@ -287,20 +292,6 @@ export const Hero: React.FC = () => {
                     </form>
                  )}
               </div>
-           </div>
-        </div>
-
-        {/* Mobile Call To Action (Optimized Spacing) */}
-        <div className="md:hidden w-full animate-[fade-up_0.8s_ease-out_0.4s_both] mt-auto">
-           <a 
-              href="#contact" 
-              className="group w-full py-4 bg-brand-gold text-white font-bold rounded-lg shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
-           >
-              Get Free Estimate <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-           </a>
-           <div className="mt-3 flex justify-center gap-4 text-[10px] text-gray-400 font-medium">
-              <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 text-brand-gold" /> Licensed & Insured</span>
-              <span className="flex items-center gap-1"><Star className="w-3 h-3 text-brand-gold" /> 5-Star Rated</span>
            </div>
         </div>
 
