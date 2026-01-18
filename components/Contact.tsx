@@ -86,8 +86,12 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-brand-light relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 pointer-events-none"></div>
+    <section id="contact" className="py-24 relative overflow-hidden">
+      {/* Background Texture */}
+      <div className="absolute inset-0 bg-[#f8f9fa]">
+         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
+         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 pointer-events-none"></div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -98,12 +102,12 @@ export const Contact: React.FC = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           
-          {/* Enhanced Form */}
+          {/* Enhanced Glass Form */}
           <div className="fade-in-section">
-            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-gray-100 relative overflow-hidden">
+            <div className="bg-white/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-white/60 relative overflow-hidden">
                 
                 {status === 'SUCCESS' ? (
-                  <div className="absolute inset-0 bg-white z-20 flex flex-col items-center justify-center text-center p-8 animate-[fadeIn_0.5s_ease-out]">
+                  <div className="absolute inset-0 bg-white/80 backdrop-blur-xl z-20 flex flex-col items-center justify-center text-center p-8 animate-[fadeIn_0.5s_ease-out]">
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                       <CheckCircle2 className="w-8 h-8 text-green-600" />
                     </div>
@@ -132,7 +136,7 @@ export const Contact: React.FC = () => {
                               required
                               value={formData.firstName}
                               onChange={handleChange}
-                              className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400" 
+                              className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
                               placeholder="John" 
                             />
                           </div>
@@ -145,7 +149,7 @@ export const Contact: React.FC = () => {
                               required
                               value={formData.lastName}
                               onChange={handleChange}
-                              className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400" 
+                              className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
                               placeholder="Doe" 
                             />
                           </div>
@@ -160,7 +164,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400" 
+                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
                             placeholder="john@example.com" 
                           />
                       </div>
@@ -174,7 +178,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400" 
+                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
                             placeholder="(555) 000-0000" 
                           />
                       </div>
@@ -188,7 +192,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.details}
                             onChange={handleChange}
-                            className="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 resize-none" 
+                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 resize-none backdrop-blur-sm" 
                             placeholder="I'm interested in a paver patio with a fire pit..."
                           ></textarea>
                       </div>
@@ -227,7 +231,7 @@ export const Contact: React.FC = () => {
           <div className="fade-in-section delay-200 flex flex-col gap-6">
              
              {/* Map Container - Full Width in this column */}
-             <div ref={mapContainerRef} className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 group bg-gray-100">
+             <div ref={mapContainerRef} className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/50 group bg-gray-100">
                 {loadMap ? (
                   <iframe 
                     title="Map of AGS Stones Location in Duluth, GA"
@@ -250,8 +254,8 @@ export const Contact: React.FC = () => {
                 )}
              </div>
 
-             {/* SEO Location List - Visual Layout matches request */}
-             <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
+             {/* SEO Location List - Glass */}
+             <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-sm">
                  <h4 className="font-serif font-bold text-xl text-brand-dark mb-4 flex items-center gap-2">
                     <MapPin className="text-brand-gold" size={24} /> Service Areas
                  </h4>
@@ -265,7 +269,7 @@ export const Contact: React.FC = () => {
                        </div>
                     ))}
                  </div>
-                 <p className="mt-6 text-xs text-gray-400 border-t border-gray-100 pt-3">
+                 <p className="mt-6 text-xs text-gray-400 border-t border-gray-200/50 pt-3">
                     Proudly serving Metro Atlanta and surrounding communities.
                  </p>
              </div>

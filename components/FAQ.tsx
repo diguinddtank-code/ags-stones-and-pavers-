@@ -46,14 +46,20 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 bg-white">
+    <section id="faq" className="py-24 relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>
+      
+      {/* BACKGROUND TEXTURE */}
+      <div className="absolute inset-0 bg-[#f8f9fa]">
+         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+      </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 fade-in-section">
-           <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-gold/10 rounded-full mb-4 text-brand-gold">
+           <div className="inline-flex items-center justify-center w-12 h-12 bg-white/60 backdrop-blur-md border border-white/50 rounded-full mb-4 text-brand-gold shadow-sm">
               <HelpCircle size={24} />
            </div>
            <h2 className="font-serif text-4xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
@@ -66,8 +72,8 @@ export const FAQ: React.FC = () => {
             return (
               <div 
                 key={index} 
-                className={`border rounded-2xl transition-all duration-300 ${
-                  isOpen ? 'border-brand-gold bg-brand-gold/5 shadow-md' : 'border-gray-200 bg-white hover:border-brand-gold/30'
+                className={`border rounded-2xl transition-all duration-300 backdrop-blur-md ${
+                  isOpen ? 'border-brand-gold bg-white/70 shadow-lg' : 'border-white/50 bg-white/40 hover:border-brand-gold/30 hover:bg-white/60'
                 }`}
               >
                 <h3>
@@ -82,7 +88,7 @@ export const FAQ: React.FC = () => {
                       {faq.question}
                     </span>
                     <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-colors ${
-                       isOpen ? 'bg-brand-gold text-white border-brand-gold' : 'border-gray-300 text-gray-400'
+                       isOpen ? 'bg-brand-gold text-white border-brand-gold' : 'border-gray-400 text-gray-400'
                     }`}>
                        {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                     </span>

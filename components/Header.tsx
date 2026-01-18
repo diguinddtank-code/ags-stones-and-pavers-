@@ -38,15 +38,13 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center relative">
           
-          {/* Logo Container - Visible only when scrolled to avoid duplication with Hero Logo */}
-          <div className={`flex-shrink-0 z-50 transition-all duration-500 ${
-              isScrolled ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
-          }`}>
+          {/* Logo Container - Always Visible now that Hero logo is gone */}
+          <div className="flex-shrink-0 z-50 transition-all duration-500 opacity-100 translate-y-0">
              <a href="#" className="flex items-center gap-3 group">
                 <img 
                   src="https://i.imgur.com/DkMxLum.png" 
                   alt="AGS Stones and Pavers" 
-                  className={`h-10 w-auto md:h-12 object-contain ${
+                  className={`h-10 w-auto md:h-12 object-contain transition-all duration-300 ${
                     isScrolled ? 'brightness-0' : 'brightness-0 invert'
                   }`}
                 />

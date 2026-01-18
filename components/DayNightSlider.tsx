@@ -5,7 +5,6 @@ export const DayNightSlider: React.FC = () => {
   const [isNight, setIsNight] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Observer local para ativar animações (fade-in) já que o componente é Lazy Loaded
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -24,93 +23,108 @@ export const DayNightSlider: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-32 pb-48 bg-brand-dark relative overflow-hidden">
-      {/* Background Ambience */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}>
-         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-900/20 rounded-full blur-[150px]"></div>
+    <section 
+        ref={sectionRef} 
+        className={`py-20 md:py-32 relative overflow-hidden transition-colors duration-1000 ease-in-out ${isNight ? 'bg-[#0b0c10] text-white' : 'bg-gray-50 text-brand-dark'}`}
+    >
+      
+      {/* Dynamic Background Gradients */}
+      <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${isNight ? 'opacity-100' : 'opacity-0'}`}>
+         <div className="absolute top-1/2 left-0 w-full h-full bg-gradient-to-t from-blue-900/10 to-transparent"></div>
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px]"></div>
       </div>
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${!isNight ? 'opacity-100' : 'opacity-0'}`}>
-         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[150px]"></div>
+      <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${!isNight ? 'opacity-100' : 'opacity-0'}`}>
+         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[150px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col gap-8 md:gap-12">
            
-           <div className="fade-in-section">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-bold uppercase tracking-widest mb-6">
-                 <Lightbulb size={14} /> Day to Night Transformation
+           {/* Header Content */}
+           <div className="text-center max-w-3xl mx-auto fade-in-section">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                 <Lightbulb size={14} /> 24/7 Curb Appeal
               </div>
               
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold mb-6 transition-colors duration-700 leading-tight">
                 Your Oasis Doesn't Sleep <br/>
-                <span className="text-brand-gold">When The Sun Sets.</span>
+                <span className={`transition-colors duration-700 ${isNight ? 'text-blue-200' : 'text-brand-gold'}`}>
+                   When The Sun Sets.
+                </span>
               </h2>
               
-              <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                 We design outdoor living spaces that are just as magical at night. From integrated LED step lights to moonlighting in trees and under-cap hardscape lighting, we extend your enjoyment long into the evening.
+              <p className={`text-sm md:text-lg transition-colors duration-700 mx-auto ${isNight ? 'text-gray-400' : 'text-gray-600'}`}>
+                 Integrated landscape lighting transforms your hardscape into an evening sanctuary. 
+                 Use the switch below to experience the ambiance.
               </p>
-
-              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm">
-                 <h4 className="font-bold text-white mb-4">Lighting Services Include:</h4>
-                 <ul className="grid grid-cols-2 gap-4">
-                    {['Pathway Lighting', 'Up-lighting Trees', 'Retaining Wall Lights', 'Pool Deck Ambience'].map((item, i) => (
-                       <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
-                          <div className={`w-2 h-2 rounded-full ${isNight ? 'bg-brand-gold shadow-[0_0_8px_rgba(212,175,55,0.8)]' : 'bg-gray-500'}`}></div>
-                          {item}
-                       </li>
-                    ))}
-                 </ul>
-              </div>
            </div>
 
-           {/* Interactive Display */}
-           <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 group fade-in-section delay-200">
+           {/* Interactive Container */}
+           <div className="relative w-full max-w-5xl mx-auto fade-in-section">
               
-              {/* Day Image - OPTIMIZED: Imgur 'h' + .webp */}
-              <img 
-                src="https://i.imgur.com/lCsQQavh.webp" 
-                alt="Patio Day" 
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${isNight ? 'opacity-0' : 'opacity-100'}`}
-                loading="lazy"
-              />
-              
-              {/* Night Image - Replaced broken link with stable Unsplash image */}
-              <div className={`absolute inset-0 bg-brand-dark/40 mix-blend-multiply transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}></div>
-              <img 
-                 src="https://i.imgur.com/skbC8RZ.png"
-                 alt="Patio Night"
-                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${isNight ? 'opacity-100 grayscale-[20%] brightness-75 contrast-125' : 'opacity-0'}`}
-                 loading="lazy"
-              />
-              
-              {/* Fake Lighting Effects overlay when night */}
-              <div className={`absolute inset-0 transition-opacity duration-1000 ${isNight ? 'opacity-100' : 'opacity-0'}`}>
-                 {/* Warm glow spots simulating lights */}
-                 <div className="absolute bottom-1/4 left-1/4 w-32 h-32 bg-orange-400/30 blur-[40px] rounded-full mix-blend-screen animate-pulse"></div>
-                 <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-orange-400/20 blur-[50px] rounded-full mix-blend-screen"></div>
-                 <div className="absolute bottom-10 right-10 w-24 h-24 bg-brand-gold/40 blur-[30px] rounded-full mix-blend-screen"></div>
-              </div>
+              {/* Image Container */}
+              <div className="relative aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-[4px] md:border-[6px] border-white/10 group select-none transition-all duration-500">
+                  
+                  {/* NIGHT IMAGE (Base Layer) */}
+                  <div className="absolute inset-0 bg-[#050505]">
+                      <img 
+                         src="https://i.imgur.com/skbC8RZ.png"
+                         alt="Patio Night"
+                         className="w-full h-full object-cover grayscale-[10%] brightness-110 contrast-125 transition-transform duration-[2000ms] ease-out"
+                         style={{ transform: isNight ? 'scale(1.05)' : 'scale(1)' }}
+                      />
+                  </div>
 
-              {/* Toggle Switch */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center bg-black/50 backdrop-blur-md p-1 rounded-full border border-white/20 z-20">
-                 <button 
-                   onClick={() => setIsNight(false)}
-                   className={`flex items-center gap-2 px-6 py-2 rounded-full font-bold text-xs uppercase transition-all ${
-                      !isNight ? 'bg-white text-brand-dark shadow-lg' : 'text-gray-400 hover:text-white'
-                   }`}
-                 >
-                    <Sun size={14} /> Day
-                 </button>
-                 <button 
-                   onClick={() => setIsNight(true)}
-                   className={`flex items-center gap-2 px-6 py-2 rounded-full font-bold text-xs uppercase transition-all ${
-                      isNight ? 'bg-brand-dark text-brand-gold shadow-lg border border-brand-gold/30' : 'text-gray-400 hover:text-white'
-                   }`}
-                 >
-                    <Moon size={14} /> Night
-                 </button>
-              </div>
+                  {/* DAY IMAGE (Top Layer - Fades Out) */}
+                  <div 
+                     className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isNight ? 'opacity-0' : 'opacity-100'}`}
+                  >
+                      <img 
+                        src="https://i.imgur.com/lCsQQavh.webp" 
+                        alt="Patio Day" 
+                        className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out"
+                        style={{ transform: !isNight ? 'scale(1.05)' : 'scale(1)' }}
+                      />
+                  </div>
 
+                  {/* Switch Control - Centered & Premium */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30">
+                     <button
+                        onClick={() => setIsNight(!isNight)}
+                        className="relative flex items-center bg-black/40 backdrop-blur-xl border border-white/20 rounded-full p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all hover:scale-105 group active:scale-95"
+                     >
+                        {/* Toggle Background Pill */}
+                        <div className="w-32 h-10 md:w-40 md:h-12 bg-black/50 rounded-full relative overflow-hidden">
+                           <div className={`absolute top-0 bottom-0 w-1/2 bg-gradient-to-br from-brand-gold to-yellow-600 rounded-full transition-all duration-500 shadow-lg ${isNight ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}></div>
+                           <div className={`absolute top-0 bottom-0 w-1/2 bg-gradient-to-br from-blue-600 to-indigo-900 rounded-full transition-all duration-500 shadow-lg ${isNight ? 'translate-x-full opacity-100' : 'translate-x-0 opacity-0'}`}></div>
+                        </div>
+
+                        {/* Labels & Icons overlay */}
+                        <div className="absolute inset-0 flex justify-between items-center px-1 text-[10px] md:text-xs font-bold uppercase tracking-widest pointer-events-none">
+                           <div className={`w-1/2 flex items-center justify-center gap-2 transition-colors duration-300 ${!isNight ? 'text-white' : 'text-gray-400'}`}>
+                              <Sun size={16} className={!isNight ? 'animate-spin-slow' : ''} /> <span className="hidden md:inline">Day</span>
+                           </div>
+                           <div className={`w-1/2 flex items-center justify-center gap-2 transition-colors duration-300 ${isNight ? 'text-white' : 'text-gray-400'}`}>
+                              <Moon size={16} className={isNight ? 'animate-pulse' : ''} /> <span className="hidden md:inline">Night</span>
+                           </div>
+                        </div>
+                     </button>
+                  </div>
+
+                  {/* Corner Labels (Decorative) */}
+                  <div className={`absolute top-4 left-4 md:top-6 md:left-6 transition-opacity duration-500 ${isNight ? 'opacity-0' : 'opacity-100'}`}>
+                     <div className="bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
+                        <Sun size={12} className="text-brand-gold" fill="currentColor" /> Day View
+                     </div>
+                  </div>
+                  
+                  <div className={`absolute top-4 right-4 md:top-6 md:right-6 transition-opacity duration-500 ${!isNight ? 'opacity-0' : 'opacity-100'}`}>
+                     <div className="bg-black/60 backdrop-blur-md text-blue-100 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-2 border border-white/10">
+                        <Moon size={12} className="text-blue-300" fill="currentColor" /> Night View
+                     </div>
+                  </div>
+
+              </div>
            </div>
 
         </div>

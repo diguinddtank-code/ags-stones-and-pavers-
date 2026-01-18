@@ -85,12 +85,17 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="pt-24 pb-12 bg-brand-light relative overflow-hidden">
+    <section id="testimonials" className="pt-24 pb-12 relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      {/* BACKGROUND TEXTURE */}
+      <div className="absolute inset-0 bg-[#f8f9fa]">
+         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10">
         <div className="text-center fade-in-section">
            <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm">Client Stories</span>
            <h2 className="mt-2 font-serif text-4xl md:text-5xl font-bold text-brand-dark">Loved by Locals</h2>
@@ -105,20 +110,20 @@ export const Testimonials: React.FC = () => {
 
       {/* Marquee Container */}
       <div 
-        className="relative w-full overflow-hidden mb-16" 
+        className="relative w-full overflow-hidden mb-16 z-10" 
         aria-label="Scrolling list of client reviews"
         role="region"
       >
-        {/* Gradients to fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-brand-light to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-brand-light to-transparent z-10"></div>
+        {/* Gradients to fade edges - Adjusted for new bg */}
+        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-[#f8f9fa] to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-[#f8f9fa] to-transparent z-10"></div>
 
         {/* Moving Track */}
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] py-4">
            {marqueeReviews.map((review, index) => (
              <article 
                 key={`${review.id}-${index}`} 
-                className="w-[300px] md:w-[400px] mx-4 bg-white p-8 rounded-2xl shadow-[0_5px_30px_-5px_rgba(0,0,0,0.05)] border border-gray-100 flex-shrink-0 transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_50px_-12px_rgba(212,175,55,0.25)] hover:border-brand-gold/40 cursor-default"
+                className="w-[300px] md:w-[400px] mx-4 bg-white/60 backdrop-blur-xl p-8 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] border border-white/50 flex-shrink-0 transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_50px_-12px_rgba(212,175,55,0.25)] hover:border-brand-gold/40 cursor-default"
              >
                 <div className="flex justify-between items-start mb-6">
                    <div className="flex items-center gap-3">
@@ -143,7 +148,7 @@ export const Testimonials: React.FC = () => {
 
                 <p className="text-gray-600 text-sm leading-relaxed italic mb-4 line-clamp-3">"{review.text}"</p>
                 
-                <div className="pt-3 border-t border-gray-50 flex items-center gap-1.5 text-[10px] font-bold text-green-700 uppercase tracking-wider">
+                <div className="pt-3 border-t border-brand-gold/10 flex items-center gap-1.5 text-[10px] font-bold text-green-700 uppercase tracking-wider">
                    <CheckCircle size={12} aria-hidden="true" /> Verified Project
                 </div>
              </article>
@@ -152,7 +157,7 @@ export const Testimonials: React.FC = () => {
       </div>
 
       {/* STRATEGIC CONVERSION BLOCK - HIGH VISIBILITY CTA */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-section relative z-10">
          <div className="relative rounded-3xl overflow-hidden bg-brand-dark shadow-2xl border border-white/10 group">
             {/* Background Effects */}
             <div className="absolute inset-0">

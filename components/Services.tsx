@@ -256,15 +256,21 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   };
 
   return (
-    <section id="services" className="pt-24 pb-32 bg-slate-50 relative z-20">
+    <section id="services" className="pt-24 pb-32 relative z-20 overflow-hidden">
       
-      {/* Decorative center line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent via-brand-gold/50 to-transparent"></div>
+      {/* GLASSMORPHISM BACKGROUND TEXTURE */}
+      <div className="absolute inset-0 bg-[#f8f9fa]">
+         {/* Subtle Concrete Texture */}
+         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
+         {/* Soft Gradient Orbs */}
+         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none"></div>
+         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
+      </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="text-center mb-16 fade-in-section">
-            <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-4 py-1.5 rounded-full bg-white mb-6">
+            <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md mb-6 shadow-sm">
                <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
                <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">Metro Atlanta Hardscapes</span>
             </div>
@@ -293,8 +299,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               role="listitem"
             >
               
-              {/* MOBILE LAYOUT: "Premium Ticket" Style with Slide-In Animation */}
-              <div className="md:hidden flex h-36 bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-gray-100 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg relative">
+              {/* MOBILE LAYOUT: Glass Ticket */}
+              <div className="md:hidden flex h-36 bg-white/70 backdrop-blur-lg rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-white/50 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg relative">
                  {/* VALUE BADGE - MOBILE */}
                  <div className="absolute top-0 left-0 bg-brand-gold text-white text-[9px] font-bold px-2 py-0.5 z-20 rounded-br-lg uppercase tracking-wider flex items-center gap-1">
                     <ShieldCheck size={10} /> 5-Yr Warranty
@@ -333,12 +339,11 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               </div>
 
 
-              {/* DESKTOP LAYOUT: "Immersive Vertical" (Full Image, Overlay, Hover Effects) */}
+              {/* DESKTOP LAYOUT: "Immersive Vertical Glass" */}
               <div className="hidden md:block relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
                 
                 {/* VALUE BADGE - DESKTOP */}
-                {/* Fixed: Use opacity and small translate slide to avoid overflow clipping artifacts from -translate-x-full */}
-                <div className="absolute top-6 left-6 z-30 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
+                <div className="absolute top-6 left-6 z-30 bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 border border-white/50">
                     <ShieldCheck size={12} className="text-brand-gold" /> Warranty Protected
                 </div>
 
@@ -350,7 +355,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                     className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
                     loading="lazy"
                   />
-                  {/* Base Gradient - Always Visible for readability */}
+                  {/* Base Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90"></div>
                   
                   {/* Gold Sheen on Hover */}
@@ -365,14 +370,13 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       0{index + 1}
                    </div>
 
-                   {/* Icon */}
-                   <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white mb-6 group-hover:bg-brand-gold group-hover:border-brand-gold group-hover:scale-110 transition-all duration-500 shadow-lg origin-bottom-left">
+                   {/* Icon - Glass Effect */}
+                   <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 flex items-center justify-center text-white mb-6 group-hover:bg-brand-gold group-hover:border-brand-gold group-hover:scale-110 transition-all duration-500 shadow-lg origin-bottom-left">
                       {React.cloneElement(service.icon as React.ReactElement<any>, { size: 24 })}
                    </div>
 
                    {/* Text Block */}
                    <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
-                      {/* Fixed: Adjusted font size for better responsiveness on MD screens (text-2xl vs 3xl) */}
                       <h3 className="text-2xl lg:text-3xl font-serif text-white font-medium mb-3 leading-tight group-hover:text-brand-gold transition-colors">
                         {service.title}
                       </h3>
@@ -408,12 +412,12 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
           aria-labelledby="modal-title"
         >
           <div 
-            className="absolute inset-0 bg-brand-dark/95 backdrop-blur-md animate-[fadeIn_0.3s_ease-out]" 
+            className="absolute inset-0 bg-black/60 backdrop-blur-lg animate-[fadeIn_0.3s_ease-out]" 
             onClick={closeModal}
             aria-hidden="true"
           ></div>
           
-          <div className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)]">
+          <div className="relative w-full max-w-6xl bg-white/90 backdrop-blur-2xl rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)] border border-white/50">
              <button 
                 onClick={closeModal} 
                 className="absolute top-4 right-4 z-50 p-2 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-brand-gold transition-all"
@@ -434,7 +438,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                         />
                         <div className="absolute inset-0 bg-black/20"></div>
                         <div className="absolute bottom-8 left-8 text-white">
-                           <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex">
+                           <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex border border-white/10">
                               {selectedService.icon} Premium Service
                            </div>
                            <h2 id="modal-title" className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
@@ -456,7 +460,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 )}
              </div>
 
-             <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto bg-white flex flex-col">
+             <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto flex flex-col">
                 <p className="text-xl text-brand-dark font-serif italic mb-6">
                   "{selectedService.description}"
                 </p>
@@ -466,7 +470,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                      Whether you are looking for "driveway pavers near me" or complex "retaining wall installation", our team provides warranty-backed craftsmanship.
                    </p>
                    <div>
-                      <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-100 pb-2">What's Included</h4>
+                      <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-200 pb-2">What's Included</h4>
                       <ul className="space-y-3">
                         {selectedService.benefits.map((benefit, i) => (
                           <li key={i} className="flex items-start gap-3 text-gray-700">
@@ -479,7 +483,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       </ul>
                    </div>
                 </div>
-                <div className="mt-auto pt-6 border-t border-gray-100">
+                <div className="mt-auto pt-6 border-t border-gray-200">
                    <a href="tel:6784287630" className="block w-full text-center bg-brand-dark text-white py-4 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-brand-gold transition-colors shadow-lg">
                      Get Free Quote
                    </a>
