@@ -85,7 +85,7 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="pt-24 pb-12 relative overflow-hidden">
+    <section id="testimonials" className="pt-10 pb-12 relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>

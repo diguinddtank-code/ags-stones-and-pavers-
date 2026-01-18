@@ -112,15 +112,33 @@ export const Hero: React.FC = () => {
             {/* LEFT COLUMN: TEXT CONTENT */}
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
               
-              {/* TRUST PILL */}
-              <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-1.5 border border-white/20 rounded-full bg-white/10 backdrop-blur-md animate-[fade-up_0.8s_ease-out_0.1s_both] shadow-lg">
+              {/* TRUST PILL - INTEGRATED SUBTLE AVAILABILITY */}
+              <div className="inline-flex items-center gap-3 mb-4 md:mb-6 px-4 py-2 border border-white/20 rounded-full bg-white/10 backdrop-blur-md animate-[fade-up_0.8s_ease-out_0.1s_both] shadow-lg">
                 <div className="flex gap-0.5">
                     {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 text-[#F4B400] fill-[#F4B400]" />)}
                 </div>
-                <span className="text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase border-l border-white/20 pl-2 ml-1 drop-shadow-md">
-                  <span className="sm:hidden">#1 Rated Hardscapes</span>
-                  <span className="hidden sm:inline">#1 Atlanta Hardscape & Paver Pros</span>
+                
+                {/* Vertical Divider */}
+                <div className="w-px h-3 bg-white/30"></div>
+                
+                <span className="text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase drop-shadow-md">
+                  #1 Atlanta Hardscapes
                 </span>
+
+                {/* Vertical Divider */}
+                <div className="w-px h-3 bg-white/30 block"></div>
+
+                {/* Subtle Availability Dot */}
+                <div className="flex items-center gap-1.5">
+                   <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                   </span>
+                   <span className="text-green-50 text-[9px] font-bold uppercase tracking-wider opacity-80">
+                      <span className="sm:hidden">Open</span>
+                      <span className="hidden sm:inline">Projects Open</span>
+                   </span>
+                </div>
               </div>
               
               {/* H1 HEADLINE */}
@@ -157,12 +175,12 @@ export const Hero: React.FC = () => {
               <div className="mt-8 md:mt-10 animate-[fade-up_1s_ease-out_0.6s_both] flex justify-center lg:justify-start w-full">
                 {/* Mobile */}
                 <div className="flex md:hidden items-center gap-3 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-full border border-brand-gold/30 shadow-2xl justify-center">
-                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-brand-dark">
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-brand-dark flex-shrink-0">
                         <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="#EA4335" d="M12 4.9c1.77 0 3.36.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.61l4 3.1C6.22 6.86 8.87 4.9 12 4.9z"/><path fill="#FBBC05" d="M5.28 9.71c-.24.7-.38 1.45-.38 2.29s.14 1.59.38 2.29l-4 3.1C.46 15.54 0 13.82 0 12c0-1.82.46-3.54 1.28-5.39l4 3.1z"/><path fill="#34A853" d="M12 19.1c-3.13 0-5.78-1.96-6.72-4.81l-4 3.1c1.98 3.92 6.03 6.61 10.72 6.61 3.24 0 5.95-1.07 7.96-2.91l-3.87-3c-1.09.73-2.46 1.01-4.09 1.01z"/><path fill="#4285F4" d="M23.5 12.23c0-.79-.07-1.55-.19-2.23H12v4.45h6.47c-.29 1.48-1.13 2.73-2.4 3.58l3.87 3c2.25-2.09 3.56-5.17 3.56-8.8z"/></svg>
                     </div>
                     <div className="flex flex-col text-left">
                         <div className="flex text-[#F4B400] gap-0.5"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
-                        <span className="text-[10px] text-gray-200 font-medium">Top Rated in Atlanta</span>
+                        <span className="text-[10px] text-gray-200 font-bold whitespace-nowrap">128+ 5-Star Reviews</span>
                     </div>
                 </div>
 
@@ -190,8 +208,8 @@ export const Hero: React.FC = () => {
             <div className="hidden lg:block lg:col-span-5 animate-[fade-up_0.8s_ease-out_0.5s_both]">
                <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] border border-white/20">
                   
-                  {/* FLOATING BADGE (Top Right) */}
-                  <div className="absolute -top-5 -right-5 z-20 animate-[bounce_3s_infinite]">
+                  {/* FLOATING BADGE (Safe Position inside) */}
+                  <div className="absolute -top-6 right-4 z-20 animate-[bounce_3s_infinite]">
                       <div className="bg-white rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.2)] p-2 pr-3 flex items-center gap-2 border border-gray-100">
                           <ShieldCheck className="text-brand-gold w-6 h-6 fill-brand-gold/10" />
                           <div className="flex flex-col leading-none">

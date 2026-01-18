@@ -146,7 +146,7 @@ export const LocalProjects: React.FC = () => {
           {filteredProjects.map((project) => (
             <div 
               key={project.id} 
-              className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 fade-in-section"
+              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 fade-in-section"
             >
               <div className="relative h-64 overflow-hidden bg-gray-100">
                 <img 

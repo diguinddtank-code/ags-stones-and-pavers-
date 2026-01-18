@@ -7,6 +7,7 @@ const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcas
 
 // Block 1: Core Value Proposition
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
+const Testimonials = React.lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
 const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
 
 // Block 2: Visual Proof
@@ -15,7 +16,6 @@ const LocalProjects = React.lazy(() => import('./components/LocalProjects').then
 const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
 
 // Block 3: Trust & Conversion
-const Testimonials = React.lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
@@ -145,7 +145,6 @@ const App: React.FC = () => {
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-slate-50 animate-pulse" />}>
                  <Services onModalChange={setIsServiceModalOpen} />
-                 {/* MOVED TESTIMONIALS HERE FOR DYNAMIC FLOW */}
                  <Testimonials />
                  <WhyChooseUs />
               </Suspense>

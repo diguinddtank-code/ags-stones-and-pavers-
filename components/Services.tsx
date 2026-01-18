@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, Box, Move3d, MousePointer2, ZoomIn, ChevronRight, ShieldCheck } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, MousePointer2, ZoomIn, ChevronRight, ShieldCheck, Plus } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
@@ -13,7 +13,8 @@ const services: ServiceItem[] = [
     benefits: [
       'Best Driveway Contractors Near Me',
       'High-Load Bearing Installation',
-      'Permeable & Standard Paver Options'
+      'Permeable & Standard Paver Options',
+      'Wide Range of Premium Stone Options'
     ]
   },
   {
@@ -102,119 +103,12 @@ const services: ServiceItem[] = [
   }
 ];
 
-// --- 3D ENGINE COMPONENT ---
-const Paver3DViewer = () => {
-  const [rotation, setRotation] = useState({ x: 60, z: 45 });
-  const [zoom, setZoom] = useState(1);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const lastMouse = useRef({ x: 0, y: 0 });
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    lastMouse.current = { x: e.clientX, y: e.clientY };
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    const deltaX = e.clientX - lastMouse.current.x;
-    const deltaY = e.clientY - lastMouse.current.y;
-    
-    setRotation(prev => ({
-      x: Math.max(0, Math.min(90, prev.x - deltaY * 0.5)), 
-      z: prev.z + deltaX * 0.5
-    }));
-    
-    lastMouse.current = { x: e.clientX, y: e.clientY };
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    e.stopPropagation(); // Prevent page scroll
-    setZoom(prev => Math.max(0.5, Math.min(2, prev - e.deltaY * 0.001)));
-  };
-
-  const pavers = [];
-  const rows = 6;
-  const cols = 6;
-  
-  for (let i = -rows/2; i < rows/2; i++) {
-    for (let j = -cols/2; j < cols/2; j++) {
-       pavers.push({ x: i * 60, y: j * 35 + (i % 2 ? 17.5 : 0), color: '#e2e8f0' });
-    }
-  }
-
-  return (
-    <div 
-      ref={containerRef}
-      className="w-full h-full bg-[#1a1a1a] relative overflow-hidden cursor-move flex items-center justify-center rounded-l-2xl md:rounded-l-none select-none"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onWheel={handleWheel}
-      role="img"
-      aria-label="Interactive 3D Paver Model Viewer"
-    >
-       <div 
-         className="relative w-0 h-0"
-         style={{
-            transformStyle: 'preserve-3d',
-            transform: `perspective(1000px) rotateX(${rotation.x}deg) rotateZ(${rotation.z}deg) scale(${zoom})`
-         }}
-       >
-          <div 
-             className="absolute bg-[#2a2a2a] border-4 border-brand-gold/30 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
-             style={{
-                width: '400px',
-                height: '400px',
-                transform: 'translate(-50%, -50%) translateZ(-10px)',
-             }}
-          />
-          {pavers.map((p, idx) => (
-             <div
-               key={idx}
-               className="absolute"
-               style={{
-                  width: '56px',
-                  height: '30px',
-                  transform: `translate3d(${p.x}px, ${p.y}px, 0)`,
-                  transformStyle: 'preserve-3d'
-               }}
-             >
-                <div className="absolute inset-0 bg-gray-300 border border-white/20" style={{ transform: 'translateZ(8px)' }}>
-                   <div className="w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/concrete-seamless.png')]"></div>
-                </div>
-                <div className="absolute bottom-0 left-0 w-full h-[8px] bg-gray-500 origin-bottom" style={{ transform: 'rotateX(-90deg)' }}></div>
-                <div className="absolute right-0 top-0 h-full w-[8px] bg-gray-400 origin-right" style={{ transform: 'rotateY(90deg)' }}></div>
-                <div className="absolute left-0 top-0 h-full w-[8px] bg-gray-400 origin-left" style={{ transform: 'rotateY(-90deg)' }}></div>
-             </div>
-          ))}
-          <div 
-            className="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-brand-gold/20 rounded-full opacity-30 pointer-events-none"
-            style={{ transform: 'translate(-50%, -50%)' }}
-          ></div>
-       </div>
-
-       <div className="absolute bottom-6 right-6 flex flex-col gap-2 pointer-events-none">
-          <div className="bg-black/60 backdrop-blur-md p-3 rounded-lg text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-white/10">
-             <Move3d size={14} className="text-brand-gold" /> Drag to Rotate
-          </div>
-       </div>
-    </div>
-  );
-};
-
 interface ServicesProps {
   onModalChange?: (isOpen: boolean) => void;
 }
 
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const [show3DModel, setShow3DModel] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
 
   // Dedicated Observer for Fluid Card Animation
@@ -243,20 +137,18 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
   const openModal = (service: ServiceItem) => {
     setSelectedService(service);
-    setShow3DModel(false);
     document.body.style.overflow = 'hidden';
     if (onModalChange) onModalChange(true);
   };
 
   const closeModal = () => {
     setSelectedService(null);
-    setShow3DModel(false);
     document.body.style.overflow = 'unset';
     if (onModalChange) onModalChange(false);
   };
 
   return (
-    <section id="services" className="pt-24 pb-32 relative z-20 overflow-hidden">
+    <section id="services" className="pt-24 pb-10 relative z-20 overflow-hidden">
       
       {/* GLASSMORPHISM BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
@@ -282,7 +174,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </p>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8" role="list">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" role="list">
           {services.map((service, index) => (
             <article 
               key={service.id}
@@ -299,48 +191,56 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               role="listitem"
             >
               
-              {/* MOBILE LAYOUT: Glass Ticket */}
-              <div className="md:hidden flex h-36 bg-white/70 backdrop-blur-lg rounded-xl overflow-hidden shadow-[0_4px_20px_-5px_rgba(0,0,0,0.1)] border border-white/50 active:scale-[0.98] transition-transform duration-500 hover:shadow-lg relative">
-                 {/* VALUE BADGE - MOBILE */}
-                 <div className="absolute top-0 left-0 bg-brand-gold text-white text-[9px] font-bold px-2 py-0.5 z-20 rounded-br-lg uppercase tracking-wider flex items-center gap-1">
-                    <ShieldCheck size={10} /> 5-Yr Warranty
-                 </div>
+              {/* MOBILE LAYOUT: Vertical Immersive Card with Extra Rounding */}
+              <div className="md:hidden relative h-[380px] rounded-3xl overflow-hidden shadow-lg border border-white/40 active:scale-[0.98] transition-transform duration-300">
+                  {/* Image Background */}
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  
+                  {/* Top Gradient for Badge readability */}
+                  <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/60 to-transparent"></div>
+                  
+                  {/* Bottom Gradient for Text */}
+                  <div className="absolute bottom-0 left-0 w-full h-3/4 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
 
-                 {/* Left: Image (35% width) */}
-                 <div className="w-[35%] relative overflow-hidden">
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-brand-dark/10"></div>
-                 </div>
+                  {/* Top Right Icon */}
+                  <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2.5 rounded-full border border-white/20 text-white shadow-lg">
+                    {React.cloneElement(service.icon as React.ReactElement<any>, { size: 18 })}
+                  </div>
 
-                 {/* Right: Content */}
-                 <div className="w-[65%] p-4 flex flex-col justify-center relative">
-                    <div className="absolute top-3 right-3 text-gray-300">
-                       <span className="text-[10px] font-bold">0{index + 1}</span>
-                    </div>
-                    
-                    <div className="flex items-center gap-2 text-brand-gold mb-1.5 mt-2">
-                       {React.cloneElement(service.icon as React.ReactElement<any>, { size: 14 })}
-                       <span className="text-[9px] font-bold uppercase tracking-widest">Premium Service</span>
-                    </div>
-                    
-                    <h3 className="font-serif text-lg font-bold text-brand-dark leading-tight mb-2 line-clamp-2">
-                      {service.title}
-                    </h3>
-                    
-                    <div className="flex items-center gap-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide group-active:text-brand-gold transition-colors">
-                       View Details <ChevronRight size={12} className="group-active:translate-x-1 transition-transform" />
-                    </div>
-                 </div>
+                  {/* Badge */}
+                  <div className="absolute top-4 left-4">
+                     <span className="bg-brand-gold text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                        <ShieldCheck size={12} /> 5-Yr Warranty
+                     </span>
+                  </div>
+
+                  {/* Bottom Content */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 text-white">
+                      <div className="flex items-center gap-2 mb-2 opacity-80">
+                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] border-l-2 border-brand-gold pl-2">Premium Series</span>
+                      </div>
+                      
+                      <h3 className="font-serif text-3xl font-bold leading-none mb-3 drop-shadow-md">
+                        {service.title}
+                      </h3>
+                      
+                      <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/20">
+                         <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">Tap to View</span>
+                         <div className="bg-white/20 p-1.5 rounded-full">
+                            <Plus size={16} />
+                         </div>
+                      </div>
+                  </div>
               </div>
 
 
-              {/* DESKTOP LAYOUT: "Immersive Vertical Glass" */}
-              <div className="hidden md:block relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
+              {/* DESKTOP LAYOUT: "Immersive Vertical Glass" with Extra Rounding */}
+              <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
                 
                 {/* VALUE BADGE - DESKTOP */}
                 <div className="absolute top-6 left-6 z-30 bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 border border-white/50">
@@ -395,7 +295,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 </div>
 
                 {/* Border Hover Effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-gold/30 rounded-2xl transition-colors duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-gold/30 rounded-3xl transition-colors duration-500 pointer-events-none"></div>
               </div>
 
             </article>
@@ -417,7 +317,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             aria-hidden="true"
           ></div>
           
-          <div className="relative w-full max-w-6xl bg-white/90 backdrop-blur-2xl rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)] border border-white/50">
+          <div className="relative w-full max-w-6xl bg-white/90 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)] border border-white/50">
              <button 
                 onClick={closeModal} 
                 className="absolute top-4 right-4 z-50 p-2 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-brand-gold transition-all"
@@ -427,37 +327,18 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
              </button>
 
              <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
-                {selectedService.id === '1' && show3DModel ? (
-                    <Paver3DViewer />
-                ) : (
-                    <>
-                        <img 
-                          src={selectedService.image.includes('imgur') ? selectedService.image.replace('l.webp', 'h.webp') : selectedService.image} 
-                          alt={`Detail view of ${selectedService.title}`} 
-                          className="w-full h-full object-cover" 
-                        />
-                        <div className="absolute inset-0 bg-black/20"></div>
-                        <div className="absolute bottom-8 left-8 text-white">
-                           <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex border border-white/10">
-                              {selectedService.icon} Premium Service
-                           </div>
-                           <h2 id="modal-title" className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
-                        </div>
-                    </>
-                )}
-
-                {selectedService.id === '1' && (
-                    <button
-                        onClick={() => setShow3DModel(!show3DModel)}
-                        className="absolute bottom-6 right-6 z-20 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-brand-gold hover:border-brand-gold transition-all flex items-center gap-2"
-                    >
-                        {show3DModel ? (
-                            <> <LayoutGrid size={14} /> View Photo </>
-                        ) : (
-                            <> <Box size={14} /> View 3D Model </>
-                        )}
-                    </button>
-                )}
+                <img 
+                  src={selectedService.image.includes('imgur') ? selectedService.image.replace('l.webp', 'h.webp') : selectedService.image} 
+                  alt={`Detail view of ${selectedService.title}`} 
+                  className="w-full h-full object-cover" 
+                />
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="absolute bottom-8 left-8 text-white">
+                   <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex border border-white/10">
+                      {selectedService.icon} Premium Service
+                   </div>
+                   <h2 id="modal-title" className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
+                </div>
              </div>
 
              <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto flex flex-col">
