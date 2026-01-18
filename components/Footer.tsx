@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
             <address className="not-italic text-gray-400 text-sm space-y-4">
               <p className="flex items-start gap-3">
                  <MapPin size={16} className="text-brand-gold mt-1 flex-shrink-0" />
-                 <span>4579 Abbotts Bridge Rd Suite -10<br/>Duluth, GA 30097</span>
+                 <span>4579 Abbotts Bridge Rd Suite 10<br/>Duluth, GA 30097</span>
               </p>
               <p>
                  <a href="tel:6784287630" className="hover:text-white block font-medium text-base text-gray-300">(678) 428-7630</a>

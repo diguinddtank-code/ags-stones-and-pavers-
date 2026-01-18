@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, MousePointer2, ZoomIn, ChevronRight, ShieldCheck, Plus } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, MousePointer2, ZoomIn, ChevronRight, ShieldCheck, Plus, Star } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
@@ -240,7 +240,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
 
               {/* DESKTOP LAYOUT: "Immersive Vertical Glass" with Extra Rounding */}
-              <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2">
+              <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2 border border-white/5">
                 
                 {/* VALUE BADGE - DESKTOP */}
                 <div className="absolute top-6 left-6 z-30 bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 border border-white/50">

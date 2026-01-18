@@ -46,7 +46,7 @@ export const BeforeAfter: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="portfolio" className="pt-32 pb-48 bg-white relative">
+    <section ref={sectionRef} id="portfolio" className="pt-32 pb-20 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-12 items-center">
           

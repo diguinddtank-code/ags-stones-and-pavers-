@@ -234,8 +234,8 @@ export const Contact: React.FC = () => {
              <div ref={mapContainerRef} className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/50 group bg-gray-100">
                 {loadMap ? (
                   <iframe 
-                    title="Map of AGS Stones Location in Duluth, GA"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.857642594639!2d-84.1802526848419!3d34.04753698060684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2zMzTCsDAyJzUxLjEiTiA4NMKwMTAnNDEuMCJX!5e0!3m2!1sen!2sus!4v1689000000000!5m2!1sen!2sus" 
+                    title="AGS Stones - Driveway Pavers & Retaining Wall Contractor in Duluth, GA"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.146522047879!2d-84.18241432367554!3d34.01594951609104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2s4579%20Abbotts%20Bridge%20Rd%20Ste%2010%2C%20Duluth%2C%20GA%2030097!5e0!3m2!1sen!2sus!4v1709220000000!5m2!1sen!2sus" 
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
