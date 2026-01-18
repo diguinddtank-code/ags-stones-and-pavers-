@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Star, ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, DollarSign, Check, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  const [offset, setOffset] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
+  // Removed state-based scroll offset to prevent re-renders on every frame
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   
   // Form State
   const [formStatus, setFormStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
@@ -16,11 +17,21 @@ export const Hero: React.FC = () => {
   });
 
   useEffect(() => {
+    // Direct DOM manipulation for performance (avoids React Reconciliation)
     const handleScroll = () => {
-      if (sectionRef.current && window.innerWidth > 768) {
-        requestAnimationFrame(() => setOffset(window.scrollY));
+      if (window.innerWidth > 768) {
+        const scrollY = window.scrollY;
+        
+        if (videoRef.current) {
+          videoRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
+        }
+        
+        if (contentRef.current) {
+           contentRef.current.style.transform = `translateY(${scrollY * 0.1}px)`;
+        }
       }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -74,7 +85,6 @@ export const Hero: React.FC = () => {
 
   return (
     <section 
-      ref={sectionRef} 
       id="home" 
       className="relative min-h-[100svh] w-full flex flex-col justify-center bg-brand-dark overflow-hidden"
     > 
@@ -82,16 +92,13 @@ export const Hero: React.FC = () => {
       {/* BACKGROUND VIDEO LAYER */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
-          className="w-full h-full object-cover object-center scale-105"
-          style={{ 
-             transform: `translateY(${offset * 0.4}px)`,
-             willChange: 'transform' 
-          }}
+          className="w-full h-full object-cover object-center scale-105 will-change-transform"
         >
           <source src="https://storage.googleapis.com/msgsndr/yRboz8P4zFeLUF6bAk8i/media/680a5a6f1eba4b32d1925215.mp4" type="video/mp4" />
         </video>
@@ -103,8 +110,8 @@ export const Hero: React.FC = () => {
 
       {/* CONTENT LAYER */}
       <div 
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex items-center pt-24 pb-20 lg:pt-0 lg:pb-0"
-        style={{ transform: `translateY(${offset * 0.1}px)` }}
+        ref={contentRef}
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex items-center pt-24 pb-20 lg:pt-0 lg:pb-0 will-change-transform"
       >
           {/* COMPACT GAP */}
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">

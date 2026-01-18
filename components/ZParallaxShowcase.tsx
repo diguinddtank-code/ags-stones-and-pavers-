@@ -1,21 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
 
 export const ZParallaxShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Refs for Direct DOM Manipulation
+  const layer3Ref = useRef<HTMLDivElement>(null); // Bg
+  const layer2Ref = useRef<HTMLDivElement>(null); // Mask
+  const layer1Ref = useRef<HTMLDivElement>(null); // Text
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Enabled for all devices
       if (!containerRef.current) return;
       
       const rect = containerRef.current.getBoundingClientRect();
       const height = rect.height - window.innerHeight;
       const top = -rect.top;
       
+      // Calculate progress between 0 and 1
       const progress = Math.max(0, Math.min(1, top / height));
-      requestAnimationFrame(() => setScrollProgress(progress));
+      
+      requestAnimationFrame(() => {
+          // Layer 3: Destination (Scale & Translate)
+          if (layer3Ref.current) {
+             layer3Ref.current.style.opacity = Math.min(1, progress * 1.5).toString();
+             layer3Ref.current.style.transform = `scale(${1.15 - (progress * 0.1)}) translate3d(0,0,0)`;
+          }
+
+          // Layer 2: Mask (Scale heavily)
+          if (layer2Ref.current) {
+             layer2Ref.current.style.transform = `scale(${1 + Math.pow(progress, 1.8) * 60}) translate3d(0,0,0)`;
+          }
+
+          // Layer 1: Text (Fade out & Slide up)
+          if (layer1Ref.current) {
+             layer1Ref.current.style.opacity = Math.max(0, 1 - progress * 1.8).toString();
+             layer1Ref.current.style.transform = `scale(${1 + progress * 0.5}) translateY(${progress * -40}px) translate3d(0,0,0)`;
+          }
+
+          // Scroll Indicator (Hide immediately)
+          if (scrollIndicatorRef.current) {
+             scrollIndicatorRef.current.style.opacity = progress > 0.05 ? '0' : '1';
+          }
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -38,10 +66,11 @@ export const ZParallaxShowcase: React.FC = () => {
         
         {/* Layer 3: The Destination (Background Image) */}
         <div 
-           className="absolute inset-0 w-full h-full"
+           ref={layer3Ref}
+           className="absolute inset-0 w-full h-full will-change-transform"
            style={{
-             opacity: Math.min(1, scrollProgress * 1.5), 
-             transform: `scale(${1.15 - (scrollProgress * 0.1)}) translate3d(0,0,0)`,
+             opacity: 0, 
+             transform: `scale(1.15) translate3d(0,0,0)`,
              zIndex: 10
            }}
         >
@@ -58,9 +87,10 @@ export const ZParallaxShowcase: React.FC = () => {
 
         {/* Layer 2: The Portal (DARK Mask with Hole) */}
         <div 
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          ref={layer2Ref}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
           style={{
-             transform: `scale(${1 + Math.pow(scrollProgress, 1.8) * 60}) translate3d(0,0,0)`, 
+             transform: `scale(1) translate3d(0,0,0)`, 
              opacity: 1, 
              zIndex: 20
           }}
@@ -73,10 +103,11 @@ export const ZParallaxShowcase: React.FC = () => {
 
         {/* Layer 1: The Text (Welcome Message) */}
         <div 
-          className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
+          ref={layer1Ref}
+          className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none will-change-transform"
           style={{
-             opacity: Math.max(0, 1 - scrollProgress * 1.8), 
-             transform: `scale(${1 + scrollProgress * 0.5}) translateY(${scrollProgress * -40}px) translate3d(0,0,0)`
+             opacity: 1, 
+             transform: `scale(1) translateY(0) translate3d(0,0,0)`
           }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block">
@@ -92,8 +123,8 @@ export const ZParallaxShowcase: React.FC = () => {
 
         {/* Scroll Indicator */}
         <div 
+           ref={scrollIndicatorRef}
            className="absolute bottom-10 z-50 text-white flex flex-col items-center gap-2 transition-opacity duration-300"
-           style={{ opacity: scrollProgress > 0.05 ? 0 : 1 }}
         >
            <span className="text-[10px] uppercase tracking-widest font-bold">Scroll to Enter</span>
            <ArrowDown className="w-5 h-5 animate-bounce text-brand-gold" />
