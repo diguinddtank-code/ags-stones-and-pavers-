@@ -5,22 +5,18 @@ import { Hero } from './components/Hero';
 // --- COMPONENT CHUNKS ---
 const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
 
-// Block 1: Core Value Proposition
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
 const Testimonials = React.lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
 const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
 
-// Block 2: Visual Proof
 const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
 const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
 const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
 
-// Block 3: Trust & Conversion
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
 
-// Aux
 const MobileNav = React.lazy(() => import('./components/MobileNav').then(module => ({ default: module.MobileNav })));
 const FloatingWidget = React.lazy(() => import('./components/FloatingWidget').then(module => ({ default: module.FloatingWidget })));
 const ExitIntentPopup = React.lazy(() => import('./components/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
@@ -34,7 +30,6 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-// Prevents the entire site from crashing if one lazy chunk fails to load
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
@@ -63,9 +58,8 @@ const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = (
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 1. Immediate mobile check to avoid waiting
-    if (typeof window !== 'undefined' && window.scrollY > 200) {
-       // If user already scrolled down on reload, show immediately
+    // 1. Immediate mobile check
+    if (typeof window !== 'undefined' && window.scrollY > 100) {
        setIsVisible(true);
        return;
     }
@@ -75,7 +69,7 @@ const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = (
         setIsVisible(true);
         observer.disconnect();
       }
-    }, { rootMargin: "600px" }); // Huge margin to load well before user arrives
+    }, { rootMargin: "400px" });
 
     if (ref.current) observer.observe(ref.current);
     
@@ -98,33 +92,6 @@ const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = (
 const App: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
 
-  // Global Animation Observer (Optimized: Single Instance)
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          entry.target.classList.remove('fade-in-section'); // Cleanup class
-        }
-      });
-    }, { threshold: 0.1 });
-
-    // Attach to body to catch new elements as they hydrate
-    const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-          if (node instanceof HTMLElement) {
-             if (node.classList.contains('fade-in-section')) observer.observe(node);
-             node.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-          }
-        });
-      });
-    });
-
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-    return () => { observer.disconnect(); mutationObserver.disconnect(); }
-  }, []);
-
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
       <Header isHidden={isServiceModalOpen} />
@@ -133,17 +100,17 @@ const App: React.FC = () => {
         {/* CRITICAL: Hero Loads Instantly */}
         <Hero />
         
-        {/* PRIORITY 1: Immediate Below Fold (No LazyBlock wrapper to prevent gaps) */}
+        {/* PRIORITY 1: Immediate Below Fold */}
         <ErrorBoundary>
-          <Suspense fallback={<div className="h-[85vh] bg-[#0f1115] w-full" />}>
+          <Suspense fallback={<div className="h-[100vh] bg-[#0f1115] w-full" />}>
              <ZParallaxShowcase />
           </Suspense>
         </ErrorBoundary>
 
-        {/* PRIORITY 2: Core Services & Social Proof (Batched) */}
+        {/* PRIORITY 2: Core Services */}
         <LazyBlock minHeight="1000px">
            <ErrorBoundary>
-              <Suspense fallback={<div className="h-96 w-full bg-slate-50 animate-pulse" />}>
+              <Suspense fallback={<div className="h-96 w-full bg-slate-50" />}>
                  <Services onModalChange={setIsServiceModalOpen} />
                  <Testimonials />
                  <WhyChooseUs />
@@ -151,7 +118,7 @@ const App: React.FC = () => {
            </ErrorBoundary>
         </LazyBlock>
         
-        {/* PRIORITY 3: Visual Proof (Batched) */}
+        {/* PRIORITY 3: Visual Proof */}
         <LazyBlock minHeight="1200px">
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-white" />}>
@@ -162,7 +129,7 @@ const App: React.FC = () => {
            </ErrorBoundary>
         </LazyBlock>
 
-        {/* PRIORITY 4: Trust & Contact (Batched) */}
+        {/* PRIORITY 4: Trust & Contact */}
         <LazyBlock minHeight="1000px">
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-brand-light" />}>
@@ -181,7 +148,6 @@ const App: React.FC = () => {
          </ErrorBoundary>
       </LazyBlock>
 
-      {/* AUXILIARY: Load last, completely separate */}
       <Suspense fallback={null}>
          <FloatingWidget />
          <MobileNav />

@@ -30,18 +30,32 @@ export const Contact: React.FC = () => {
   const [status, setStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
   const [loadMap, setLoadMap] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Performance: Lazy load map only when in view
+  // Performance: Lazy load map only when in view + Fade In Animation
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setLoadMap(true);
-        observer.disconnect();
-      }
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Trigger Fade In
+          if (entry.target.classList.contains('fade-in-section')) {
+             entry.target.classList.add('is-visible');
+          }
+          // Load Map if it's the map container
+          if (entry.target === mapContainerRef.current) {
+             setLoadMap(true);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
     }, { rootMargin: "200px" });
 
-    if (mapContainerRef.current) {
-      observer.observe(mapContainerRef.current);
+    if (mapContainerRef.current) observer.observe(mapContainerRef.current);
+    
+    // Observe all fade-in sections within this component
+    if (sectionRef.current) {
+        const fadeEls = sectionRef.current.querySelectorAll('.fade-in-section');
+        fadeEls.forEach(el => observer.observe(el));
     }
 
     return () => observer.disconnect();
@@ -86,7 +100,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="py-24 relative overflow-hidden">
       {/* Background Texture */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
          <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>

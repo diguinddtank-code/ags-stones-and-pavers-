@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
 
 const faqs = [
@@ -26,6 +26,25 @@ const faqs = [
 
 export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionRef.current) {
+        const fadeEls = sectionRef.current.querySelectorAll('.fade-in-section');
+        fadeEls.forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -46,7 +65,7 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} id="faq" className="py-24 relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>

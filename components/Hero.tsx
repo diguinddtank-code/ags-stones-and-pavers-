@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Star, ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, DollarSign, Check, ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, Tag, Check, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
-  // Removed state-based scroll offset to prevent re-renders on every frame
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  // Removed refs and scroll listeners to free up the main thread
   
   // Form State
   const [formStatus, setFormStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
@@ -13,28 +11,8 @@ export const Hero: React.FC = () => {
     lastName: '',
     phone: '',
     email: '',
-    service: 'Driveway Pavers' // Default high-value service
+    service: 'Driveway Pavers' 
   });
-
-  useEffect(() => {
-    // Direct DOM manipulation for performance (avoids React Reconciliation)
-    const handleScroll = () => {
-      if (window.innerWidth > 768) {
-        const scrollY = window.scrollY;
-        
-        if (videoRef.current) {
-          videoRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
-        }
-        
-        if (contentRef.current) {
-           contentRef.current.style.transform = `translateY(${scrollY * 0.1}px)`;
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -89,29 +67,26 @@ export const Hero: React.FC = () => {
       className="relative min-h-[100svh] w-full flex flex-col justify-center bg-brand-dark overflow-hidden"
     > 
       
-      {/* BACKGROUND VIDEO LAYER */}
+      {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
-          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
-          className="w-full h-full object-cover object-center scale-105 will-change-transform"
+          className="w-full h-full object-cover object-center scale-105"
         >
           <source src="https://storage.googleapis.com/msgsndr/yRboz8P4zFeLUF6bAk8i/media/680a5a6f1eba4b32d1925215.mp4" type="video/mp4" />
         </video>
         
-        {/* LIGHTER AESTHETIC: Reduced opacity for brighter feel */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-r from-black/60 to-transparent pointer-events-none md:w-2/3" />
       </div>
 
       {/* CONTENT LAYER */}
       <div 
-        ref={contentRef}
-        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex items-center pt-24 pb-20 lg:pt-0 lg:pb-0 will-change-transform"
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow flex items-center pt-24 pb-20 lg:pt-0 lg:pb-0"
       >
           {/* COMPACT GAP */}
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center w-full">
@@ -119,23 +94,20 @@ export const Hero: React.FC = () => {
             {/* LEFT COLUMN: TEXT CONTENT */}
             <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
               
-              {/* TRUST PILL - INTEGRATED SUBTLE AVAILABILITY */}
+              {/* TRUST PILL */}
               <div className="inline-flex items-center gap-3 mb-4 md:mb-6 px-4 py-2 border border-white/20 rounded-full bg-white/10 backdrop-blur-md animate-[fade-up_0.8s_ease-out_0.1s_both] shadow-lg">
                 <div className="flex gap-0.5">
                     {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 text-[#F4B400] fill-[#F4B400]" />)}
                 </div>
                 
-                {/* Vertical Divider */}
                 <div className="w-px h-3 bg-white/30"></div>
                 
                 <span className="text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase drop-shadow-md">
                   #1 Atlanta Hardscapes
                 </span>
 
-                {/* Vertical Divider */}
                 <div className="w-px h-3 bg-white/30 block"></div>
 
-                {/* Subtle Availability Dot */}
                 <div className="flex items-center gap-1.5">
                    <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -155,6 +127,16 @@ export const Hero: React.FC = () => {
                   Outdoor Living
                 </span>
               </h1>
+
+              {/* FACTORY DIRECT PROMO BADGE */}
+              <div className="flex justify-center lg:justify-start w-full animate-[fade-up_0.8s_ease-out_0.3s_both] mb-6">
+                <div className="group inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all cursor-default">
+                     <Tag className="w-3.5 h-3.5 text-brand-gold/80 group-hover:text-brand-gold transition-colors" />
+                     <span className="text-xs text-gray-300 font-medium tracking-wide">Factory Direct Pricing</span>
+                     <span className="w-px h-3 bg-white/20"></span>
+                     <span className="text-xs text-white font-bold tracking-wide">Save 30%</span>
+                </div>
+              </div>
               
               {/* SUBTEXT */}
               <p className="text-sm sm:text-lg lg:text-xl text-white mb-8 max-w-[95%] md:max-w-xl font-light leading-relaxed drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] animate-[fade-up_0.8s_ease-out_0.3s_both] border-t lg:border-t-0 lg:border-l border-white/20 pt-4 lg:pt-0 lg:pl-6">
@@ -180,14 +162,18 @@ export const Hero: React.FC = () => {
 
               {/* SOCIAL PROOF */}
               <div className="mt-8 md:mt-10 animate-[fade-up_1s_ease-out_0.6s_both] flex justify-center lg:justify-start w-full">
+                
                 {/* Mobile */}
-                <div className="flex md:hidden items-center gap-3 bg-black/40 backdrop-blur-xl px-4 py-2 rounded-full border border-brand-gold/30 shadow-2xl justify-center">
-                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-brand-dark flex-shrink-0">
+                <div className="flex md:hidden items-center gap-3 bg-white/10 backdrop-blur-xl px-5 py-3 rounded-full border border-white/20 shadow-2xl justify-center mx-auto max-w-sm cursor-pointer hover:bg-black/40 transition-colors">
+                    <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-white/50 shadow-inner flex-shrink-0">
                         <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="#EA4335" d="M12 4.9c1.77 0 3.36.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.61l4 3.1C6.22 6.86 8.87 4.9 12 4.9z"/><path fill="#FBBC05" d="M5.28 9.71c-.24.7-.38 1.45-.38 2.29s.14 1.59.38 2.29l-4 3.1C.46 15.54 0 13.82 0 12c0-1.82.46-3.54 1.28-5.39l4 3.1z"/><path fill="#34A853" d="M12 19.1c-3.13 0-5.78-1.96-6.72-4.81l-4 3.1c1.98 3.92 6.03 6.61 10.72 6.61 3.24 0 5.95-1.07 7.96-2.91l-3.87-3c-1.09.73-2.46 1.01-4.09 1.01z"/><path fill="#4285F4" d="M23.5 12.23c0-.79-.07-1.55-.19-2.23H12v4.45h6.47c-.29 1.48-1.13 2.73-2.4 3.58l3.87 3c2.25-2.09 3.56-5.17 3.56-8.8z"/></svg>
                     </div>
                     <div className="flex flex-col text-left">
-                        <div className="flex text-[#F4B400] gap-0.5"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
-                        <span className="text-[10px] text-gray-200 font-bold whitespace-nowrap">128+ 5-Star Reviews</span>
+                        <div className="flex items-center gap-2">
+                             <span className="text-white font-bold text-sm leading-none drop-shadow-sm">Google Rating</span>
+                             <div className="flex text-[#F4B400] gap-0.5"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
+                        </div>
+                        <span className="text-[11px] text-gray-200 font-medium leading-tight mt-0.5 drop-shadow-md">Trusted by homeowners in Atlanta</span>
                     </div>
                 </div>
 
@@ -205,7 +191,7 @@ export const Hero: React.FC = () => {
                             <span className="text-white font-bold text-sm drop-shadow-md">Google Reviews</span>
                             <div className="flex text-[#F4B400] drop-shadow-sm"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
                         </div>
-                        <span className="text-[10px] text-gray-200 drop-shadow-md">Trusted by homeowners in Duluth & Roswell</span>
+                        <span className="text-[10px] text-gray-200 drop-shadow-md">Trusted by homeowners in Atlanta</span>
                     </div>
                 </div>
               </div>
@@ -215,7 +201,7 @@ export const Hero: React.FC = () => {
             <div className="hidden lg:block lg:col-span-5 animate-[fade-up_0.8s_ease-out_0.5s_both]">
                <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] border border-white/20">
                   
-                  {/* FLOATING BADGE (Safe Position inside) */}
+                  {/* FLOATING BADGE */}
                   <div className="absolute -top-6 right-4 z-20 animate-[bounce_3s_infinite]">
                       <div className="bg-white rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.2)] p-2 pr-3 flex items-center gap-2 border border-gray-100">
                           <ShieldCheck className="text-brand-gold w-6 h-6 fill-brand-gold/10" />

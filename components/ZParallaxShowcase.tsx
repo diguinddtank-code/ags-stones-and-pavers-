@@ -5,110 +5,109 @@ export const ZParallaxShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Refs for Direct DOM Manipulation
-  const layer3Ref = useRef<HTMLDivElement>(null); // Bg
-  const layer2Ref = useRef<HTMLDivElement>(null); // Mask
-  const layer1Ref = useRef<HTMLDivElement>(null); // Text
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const height = rect.height - window.innerHeight;
-      const top = -rect.top;
-      
-      // Calculate progress between 0 and 1
-      const progress = Math.max(0, Math.min(1, top / height));
-      
-      requestAnimationFrame(() => {
-          // Layer 3: Destination (Scale & Translate)
-          if (layer3Ref.current) {
-             layer3Ref.current.style.opacity = Math.min(1, progress * 1.5).toString();
-             layer3Ref.current.style.transform = `scale(${1.15 - (progress * 0.1)}) translate3d(0,0,0)`;
-          }
+    let animationFrameId: number;
+    
+    const updateParallax = () => {
+       if (!containerRef.current) return;
 
-          // Layer 2: Mask (Scale heavily)
-          if (layer2Ref.current) {
-             layer2Ref.current.style.transform = `scale(${1 + Math.pow(progress, 1.8) * 60}) translate3d(0,0,0)`;
-          }
+       const rect = containerRef.current.getBoundingClientRect();
+       const windowHeight = window.innerHeight;
+       
+       // Optimization: Stop loop if completely out of view
+       if (rect.bottom < 0 || rect.top > windowHeight) return;
 
-          // Layer 1: Text (Fade out & Slide up)
-          if (layer1Ref.current) {
-             layer1Ref.current.style.opacity = Math.max(0, 1 - progress * 1.8).toString();
-             layer1Ref.current.style.transform = `scale(${1 + progress * 0.5}) translateY(${progress * -40}px) translate3d(0,0,0)`;
-          }
+       const height = rect.height - windowHeight;
+       const top = -rect.top;
+       
+       // Calculate progress (0 to 1)
+       // We clamp strictly to avoid weird overshoot values
+       const progress = Math.max(0, Math.min(1, top / height));
+       
+       // 1. Image Scaling (Subtle zoom out effect)
+       if (imageContainerRef.current) {
+          // Hardware accelerated transform only
+          imageContainerRef.current.style.transform = `scale(${1.2 - (progress * 0.2)}) translate3d(0,0,0)`;
+       }
 
-          // Scroll Indicator (Hide immediately)
-          if (scrollIndicatorRef.current) {
-             scrollIndicatorRef.current.style.opacity = progress > 0.05 ? '0' : '1';
-          }
-      });
+       // 2. The Reveal (Instead of massive shadow, we just fade out the black overlay)
+       // This is 100x more performant than box-shadow calculation
+       if (overlayRef.current) {
+          // Power curve delays the reveal slightly for drama
+          const opacity = Math.max(0, 1 - Math.pow(progress, 1.5) * 1.5);
+          overlayRef.current.style.opacity = opacity.toString();
+       }
+
+       // 3. Text Handling (Fade out and move up)
+       if (textRef.current) {
+          textRef.current.style.opacity = Math.max(0, 1 - progress * 3).toString();
+          textRef.current.style.transform = `translateY(${progress * -50}px) translate3d(0,0,0)`;
+          // Hide completely when scrolled past to prevent pointer events
+          textRef.current.style.visibility = progress > 0.5 ? 'hidden' : 'visible';
+       }
+
+       // 4. Indicator
+       if (scrollIndicatorRef.current) {
+          scrollIndicatorRef.current.style.opacity = progress > 0.05 ? '0' : '1';
+       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    const loop = () => {
+      updateParallax();
+      animationFrameId = requestAnimationFrame(loop);
+    };
+
+    // Start loop
+    loop();
+
     return () => {
-        window.removeEventListener('scroll', handleScroll);
+        cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
-    // Height set to 250vh to control the speed of the scroll effect
-    // DARK THEME: Changed from bg-white to bg-brand-dark (#0f1115)
-    <section ref={containerRef} className="relative h-[250vh] bg-[#0f1115]">
+    // Height reduced slightly to 200vh for a tighter feel
+    <section ref={containerRef} className="relative h-[200vh] bg-[#0f1115]">
       
-      {/* Dark Texture - Adjusted opacity and blend mode for dark background */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay" 
-           style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}>
-      </div>
-
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-[100px]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         
-        {/* Layer 3: The Destination (Background Image) */}
+        {/* Layer 1: The Image (Scales Down) */}
         <div 
-           ref={layer3Ref}
+           ref={imageContainerRef}
            className="absolute inset-0 w-full h-full will-change-transform"
-           style={{
-             opacity: 0, 
-             transform: `scale(1.15) translate3d(0,0,0)`,
-             zIndex: 10
-           }}
+           style={{ transform: `scale(1.2) translate3d(0,0,0)` }}
         >
-           <picture className="w-full h-full">
-              <source media="(max-width: 768px)" srcSet="https://i.imgur.com/TVqAe9D.jpeg" />
-              <img 
-                src="https://i.imgur.com/6rQRJxs.jpeg" 
-                alt="Magnificent Outdoor Living and Pool Deck" 
-                className="w-full h-full object-cover"
-              />
-           </picture>
-           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
-        </div>
-
-        {/* Layer 2: The Portal (DARK Mask with Hole) */}
-        <div 
-          ref={layer2Ref}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-transform"
-          style={{
-             transform: `scale(1) translate3d(0,0,0)`, 
-             opacity: 1, 
-             zIndex: 20
-          }}
-        >
-           <div className="w-[100vw] h-[100vh] flex items-center justify-center">
-              {/* The "Hole" - Transparent center with huge BLACK shadow (#0f1115) to match background */}
-              <div className="w-[85vw] h-[50vh] md:w-[40vw] md:h-[40vh] rounded-[40%] md:rounded-[30%] shadow-[0_0_0_150vmax_#0f1115] bg-transparent"></div>
+           <div className="relative w-full h-full">
+              <picture>
+                  <source media="(max-width: 768px)" srcSet="https://i.imgur.com/TVqAe9D.jpeg" />
+                  <img 
+                    src="https://i.imgur.com/6rQRJxs.jpeg" 
+                    alt="Magnificent Outdoor Living and Pool Deck" 
+                    className="w-full h-full object-cover"
+                    loading="eager" 
+                  />
+              </picture>
+              <div className="absolute inset-0 bg-black/10"></div>
            </div>
         </div>
 
-        {/* Layer 1: The Text (Welcome Message) */}
+        {/* Layer 2: The "Mask" (Simple Black Overlay that fades out) */}
         <div 
-          ref={layer1Ref}
-          className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none will-change-transform"
-          style={{
-             opacity: 1, 
-             transform: `scale(1) translateY(0) translate3d(0,0,0)`
-          }}
+          ref={overlayRef}
+          className="absolute inset-0 bg-[#0f1115] z-20 pointer-events-none will-change-opacity"
+          style={{ opacity: 1 }}
+        ></div>
+
+        {/* Layer 3: The Text (Welcome Message) */}
+        <div 
+          ref={textRef}
+          className="absolute z-30 text-center px-4 w-full flex flex-col items-center justify-center h-full pointer-events-none"
+          style={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
         >
            <span className="text-brand-gold font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-4 block">
              Welcome to

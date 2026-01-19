@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Star, Quote, MapPin, CheckCircle, ArrowRight, Phone } from 'lucide-react';
 import { Testimonial } from '../types';
 
@@ -56,6 +56,25 @@ const reviews: Testimonial[] = [
 export const Testimonials: React.FC = () => {
   // Duplicate reviews to create seamless loop
   const marqueeReviews = [...reviews, ...reviews];
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    if (sectionRef.current) {
+        const fadeEls = sectionRef.current.querySelectorAll('.fade-in-section');
+        fadeEls.forEach(el => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Schema for aggregate rating
   const schemaData = {
@@ -85,7 +104,7 @@ export const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="pt-10 pb-12 relative overflow-hidden">
+    <section ref={sectionRef} id="testimonials" className="pt-10 pb-12 relative overflow-hidden">
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
       </script>

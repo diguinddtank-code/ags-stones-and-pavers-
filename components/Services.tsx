@@ -110,15 +110,19 @@ interface ServicesProps {
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Dedicated Observer for Fluid Card Animation
+  // Dedicated Observer for Fluid Card Animation AND Section Header
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add 'show' class to trigger CSS transition
-          entry.target.classList.remove('opacity-0', 'translate-y-12', 'scale-95');
-          entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+          if (entry.target.classList.contains('service-card-anim')) {
+             entry.target.classList.remove('opacity-0', 'translate-y-12', 'scale-95');
+             entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+          } else if (entry.target.classList.contains('fade-in-section')) {
+             entry.target.classList.add('is-visible');
+          }
           observer.unobserve(entry.target);
         }
       });
@@ -127,6 +131,13 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       rootMargin: '50px' // Start slightly before
     });
 
+    // Observe Header
+    if (sectionRef.current) {
+        const fadeEls = sectionRef.current.querySelectorAll('.fade-in-section');
+        fadeEls.forEach(el => observer.observe(el));
+    }
+
+    // Observe Cards
     if (gridRef.current) {
       const cards = gridRef.current.querySelectorAll('.service-card-anim');
       cards.forEach(card => observer.observe(card));
@@ -148,7 +159,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   };
 
   return (
-    <section id="services" className="pt-24 pb-10 relative z-20 overflow-hidden">
+    <section ref={sectionRef} id="services" className="pt-24 pb-10 relative z-20 overflow-hidden">
       
       {/* GLASSMORPHISM BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
@@ -301,6 +312,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </article>
           ))}
         </div>
+
       </div>
 
       {/* MODAL */}
