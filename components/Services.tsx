@@ -226,7 +226,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                   {/* Badge */}
                   <div className="absolute top-4 left-4">
                      <span className="bg-brand-gold text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md">
-                        <ShieldCheck size={12} /> 5-Yr Warranty
+                        <ShieldCheck size={12} /> 1-Yr Warranty
                      </span>
                   </div>
 
@@ -312,8 +312,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </article>
           ))}
         </div>
-
-      </div>
 
       {/* MODAL */}
       {selectedService && (

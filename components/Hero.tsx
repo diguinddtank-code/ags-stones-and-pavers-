@@ -55,7 +55,7 @@ export const Hero: React.FC = () => {
 
   // Badge data for mapping
   const badges = [
-    { icon: <ShieldCheck className="w-5 h-5 md:w-6 lg:w-7 md:h-6 lg:h-7" />, title: "5-Year Warranty", sub: "On All Installations" },
+    { icon: <ShieldCheck className="w-5 h-5 md:w-6 lg:w-7 md:h-6 lg:h-7" />, title: "1-Year Warranty", sub: "On All Installations" },
     { icon: <Award className="w-5 h-5 md:w-6 lg:w-7 md:h-6 lg:h-7" />, title: "Licensed & Insured", sub: "Georgia State Certified" },
     { icon: <CheckCircle2 className="w-5 h-5 md:w-6 lg:w-7 md:h-6 lg:h-7" />, title: "ICPI Certified", sub: "Industry Standards" },
     { icon: <ThumbsUp className="w-5 h-5 md:w-6 lg:w-7 md:h-6 lg:h-7" />, title: "Owner Operated", sub: "Direct Oversight" }

@@ -137,7 +137,7 @@ export const WhyChooseUs: React.FC = () => {
   
   const benefits = [
     { 
-      title: '5-Year Warranty', 
+      title: '1-Year Warranty', 
       description: 'Comprehensive installation warranty on all hardscapes.',
       icon: <IconShield /> 
     },

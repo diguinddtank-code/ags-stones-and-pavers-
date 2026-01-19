@@ -4,7 +4,7 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 const faqs = [
   {
     question: "Do you offer warranties on your installation?",
-    answer: "Yes, we stand firmly behind our work. AGS Stones provides a 5-Year Craftsmanship Warranty on all hardscape installations. This covers any issues related to settlement or workmanship. Material warranties vary by manufacturer (e.g., Belgard, Techo-Bloc) and often carry lifetime guarantees."
+    answer: "Yes, we stand firmly behind our work. AGS Stones provides a 1-Year Craftsmanship Warranty on all hardscape installations. This covers any issues related to settlement or workmanship. Material warranties vary by manufacturer (e.g., Belgard, Techo-Bloc) and often carry lifetime guarantees."
   },
   {
     question: "Do I need a permit for my patio or retaining wall?",
