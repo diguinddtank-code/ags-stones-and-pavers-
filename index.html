@@ -52,15 +52,18 @@
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=1200&auto=format&fit=crop&fm=webp" media="(max-width: 768px)">
     <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=2000&auto=format&fit=crop&fm=webp" media="(min-width: 769px)">
 
-    <!-- Google Ads Tag & Conversion Tracking -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16885125181"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'AW-16885125181');
 
-      // Conversion Report Function
+      gtag('config', 'AW-16885125181');
+    </script>
+
+    <!-- Event snippet for Clique Botao Ligar Site conversion page -->
+    <script>
       function gtag_report_conversion(url) {
         var callback = function () {
           if (typeof(url) != 'undefined') {
