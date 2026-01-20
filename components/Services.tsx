@@ -385,4 +385,4 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       )}
     </section>
   );
-};
+}
