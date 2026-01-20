@@ -383,3 +383,10 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
           </div>
         </div>
       )}
+      
+      {/* CLOSED THE MISSING CONTAINER DIV HERE */}
+      </div> 
+
+    </section>
+  );
+};
