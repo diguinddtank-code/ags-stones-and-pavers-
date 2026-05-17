@@ -70,19 +70,19 @@ export const Contact: React.FC = () => {
     setStatus('LOADING');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `New Lead: ${formData.firstName} ${formData.lastName}`,
+            access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
+            subject: `New Lead: ${formData.firstName} ${formData.lastName}`,
             name: `${formData.firstName} ${formData.lastName}`,
             email: formData.email,
             phone: formData.phone,
-            message: formData.details,
-            _template: "table"
+            message: formData.details
         })
       });
 
