@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Phone, CheckCircle2, Shield, Star, Clock, ArrowRight } from 'lucide-react';
 
@@ -105,9 +106,9 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
              {data.name}
           </motion.h1>
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-             <a href="#contact" className="w-full sm:w-auto px-8 py-4 bg-brand-gold text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-dark transition-colors duration-300 outline-none flex items-center justify-center gap-2 group">
+             <Link to="/quote" className="w-full sm:w-auto px-8 py-4 bg-brand-gold text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-dark transition-colors duration-300 outline-none flex items-center justify-center gap-2 group">
                Get Your Free Estimate <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-             </a>
+             </Link>
              <a href="#process" className="w-full sm:w-auto px-8 py-4 border border-white/30 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-colors duration-300 outline-none">
                See Our Process
              </a>
@@ -142,9 +143,9 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
                  <p key={idx}>{p}</p>
                ))}
                <div className="pt-6">
-                 <a href="#contact" className="inline-flex items-center gap-2 font-bold text-brand-dark uppercase tracking-widest text-sm hover:text-brand-gold transition-colors group">
+                 <Link to="/quote" className="inline-flex items-center gap-2 font-bold text-brand-dark uppercase tracking-widest text-sm hover:text-brand-gold transition-colors group">
                     Schedule a Consultation <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                 </a>
+                 </Link>
                </div>
             </div>
          </motion.div>
@@ -260,9 +261,9 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
            </p>
 
            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-             <a href="#contact" className="w-full sm:w-auto px-10 py-5 bg-brand-gold text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-dark transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+             <Link to="/quote" className="w-full sm:w-auto px-10 py-5 bg-brand-gold text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-dark transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
                Request Free Quote
-             </a>
+             </Link>
              <a href="tel:6784287630" onClick={trackCallClick} className="w-full sm:w-auto px-10 py-5 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-colors duration-300 flex items-center justify-center gap-2">
                <Phone size={18} /> Call Us Direct
              </a>

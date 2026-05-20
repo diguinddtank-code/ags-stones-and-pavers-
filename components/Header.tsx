@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   isHidden?: boolean;
@@ -22,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Reviews', href: '#testimonials' },
     { name: 'FAQ', href: '#faq' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', href: '/quote', isRoute: true },
   ];
 
   return (
@@ -54,16 +55,29 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false }) => {
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`font-medium text-xs uppercase tracking-widest transition-all hover:-translate-y-0.5 relative group ${
-                  isScrolled ? 'text-brand-dark' : 'text-white'
-                }`}
-              >
-                {link.name}
-                <span className={`absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full`}></span>
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`font-medium text-xs uppercase tracking-widest transition-all hover:-translate-y-0.5 relative group ${
+                    isScrolled ? 'text-brand-dark' : 'text-white'
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full`}></span>
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`font-medium text-xs uppercase tracking-widest transition-all hover:-translate-y-0.5 relative group ${
+                    isScrolled ? 'text-brand-dark' : 'text-white'
+                  }`}
+                >
+                  {link.name}
+                  <span className={`absolute -bottom-2 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full`}></span>
+                </a>
+              )
             ))}
             <a
               href="tel:+16784287630"

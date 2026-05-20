@@ -175,6 +175,7 @@ const Home: React.FC = () => {
   );
 };
 
+const QuotePage = React.lazy(() => import('./pages/QuotePage').then(module => ({ default: module.QuotePage })));
 const ServicePage = React.lazy(() => import('./pages/ServicePage').then(module => ({ default: module.ServicePage })));
 
 const App: React.FC = () => {
@@ -183,6 +184,7 @@ const App: React.FC = () => {
       <Suspense fallback={<div className="h-screen w-full bg-slate-50 flex items-center justify-center">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/quote" element={<QuotePage />} />
           <Route path="/service/:id" element={<ServicePage />} />
         </Routes>
       </Suspense>

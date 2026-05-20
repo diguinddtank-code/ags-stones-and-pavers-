@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Star, Quote, MapPin, CheckCircle, ArrowRight, Phone } from 'lucide-react';
 import { Testimonial } from '../types';
 
@@ -203,12 +204,12 @@ export const Testimonials: React.FC = () => {
 
                {/* Right: Action Buttons */}
                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                  <a 
-                    href="#contact" 
+                  <Link 
+                    to="/quote" 
                     className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-gold text-white font-bold rounded-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:bg-white hover:text-brand-dark hover:scale-105 transition-all duration-300 uppercase tracking-wide text-xs md:text-sm group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)]"
                   >
                      Get Free Estimate <ArrowRight size={16} />
-                  </a>
+                  </Link>
                   <a 
                     href="tel:6784287630" 
                     className="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-xl hover:bg-white/10 hover:border-white/30 transition-all duration-300 uppercase tracking-wide text-xs md:text-sm"

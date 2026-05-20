@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Star, ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, Tag, Check, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -146,12 +147,12 @@ export const Hero: React.FC = () => {
               
               {/* MOBILE ONLY BUTTONS */}
               <div className="lg:hidden flex flex-col sm:flex-row gap-3 w-full sm:w-auto px-4 sm:px-0 animate-[fade-up_0.8s_ease-out_0.4s_both]">
-                <a 
-                    href="#contact" 
+                <Link 
+                    to="/quote" 
                     className="w-full sm:w-auto px-8 py-4 bg-brand-gold hover:bg-white text-white hover:text-brand-dark font-bold rounded-xl shadow-[0_0_30px_rgba(212,175,55,0.3)] flex items-center justify-center gap-3 uppercase tracking-widest text-xs transition-all duration-300 transform hover:-translate-y-1 active:scale-95 group border border-brand-gold"
                 >
                     Get Free Estimate <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
                 <a 
                     href="tel:6784287630" 
                     className="w-full sm:w-auto px-8 py-4 bg-black/40 border border-white/30 hover:bg-white/20 text-white font-bold rounded-xl flex items-center justify-center gap-3 uppercase tracking-widest text-xs backdrop-blur-md transition-all active:scale-95 shadow-lg"
