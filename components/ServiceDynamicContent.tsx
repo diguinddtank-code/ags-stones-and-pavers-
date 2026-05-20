@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Phone, CheckCircle2, Shield, Star, Clock, ArrowRight } from 'lucide-react';
+import { Phone, CheckCircle2, Shield, Star, Clock, ArrowRight, MapPin, Award } from 'lucide-react';
 
 // Analytics tracking helpers
 const trackCallClick = () => {
@@ -79,7 +79,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
   return (
     <div className="bg-white overflow-hidden selection:bg-brand-gold selection:text-white">
       {/* HERO SECTION */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden">
         <motion.div 
           style={{ y: yHero }}
           className="absolute inset-0 z-0 origin-top"
@@ -91,13 +91,42 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
            />
         </motion.div>
         
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-brand-dark/20 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40 z-0"></div>
+
+        {/* Floating Badges */}
+        <motion.div 
+           animate={{ y: [0, -15, 0] }} 
+           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+           className="absolute top-32 md:top-1/4 left-4 lg:left-20 z-20 flex items-center gap-3 bg-black/40 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/10 text-white shadow-2xl"
+        >
+          <div className="w-10 h-10 bg-brand-gold rounded-full flex items-center justify-center">
+            <MapPin className="text-white" size={20} />
+          </div>
+          <div className="text-left hidden sm:block">
+             <p className="text-[10px] uppercase tracking-widest text-white/70 font-bold">Serving Region</p>
+             <p className="text-sm font-bold">Metro Atlanta</p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+           animate={{ y: [0, 15, 0] }} 
+           transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+           className="absolute bottom-32 md:bottom-1/4 right-4 lg:right-20 z-20 flex items-center gap-3 bg-black/40 backdrop-blur-md px-5 py-4 rounded-2xl border border-white/10 text-white shadow-2xl"
+        >
+           <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-dark">
+              <Award size={20} />
+           </div>
+           <div className="text-left hidden sm:block">
+              <p className="text-[10px] uppercase tracking-widest text-white/70 font-bold">#1 Rated</p>
+              <p className="text-sm font-bold">Local Experts</p>
+           </div>
+        </motion.div>
 
         <motion.div 
           variants={staggerContainer}
           initial="hidden"
           animate="show"
-          className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-20"
+          className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10 md:mt-20"
         >
           <motion.h2 variants={fadeUp} className="text-brand-gold uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4">
              {data.heroSubtitle}
@@ -122,38 +151,70 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
       </section>
 
       {/* OVERVIEW SECTION (Negative Space & Typography) */}
-      <section className="py-24 md:py-40 px-6 max-w-5xl mx-auto border-b border-gray-100">
+      <section className="py-24 md:py-40 px-6 max-w-7xl mx-auto border-b border-gray-100 relative overflow-hidden">
+         {/* Decorative background element */}
+         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none"></div>
+
          <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col md:flex-row gap-12 md:gap-24"
+            className="flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10"
          >
-            <div className="md:w-1/2 space-y-6">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 border border-gray-200 rounded-full text-xs font-bold uppercase tracking-widest text-brand-dark">
-                  <Star className="w-3 h-3 text-brand-gold fill-brand-gold" /> Premium Service
-               </div>
-               <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl text-brand-dark font-medium leading-[1.1] tracking-tight">
+            <div className="md:w-5/12 space-y-6">
+               <motion.div 
+                 initial={{ opacity: 0, x: -20 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 transition={{ delay: 0.2 }}
+                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold uppercase tracking-widest text-brand-dark"
+               >
+                  <Star className="w-4 h-4 text-brand-gold fill-brand-gold" /> Premium Service
+               </motion.div>
+               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-dark font-medium leading-[1.1] tracking-tight">
                   {data.overviewHeading}
                </h2>
-            </div>
-            <div className="md:w-1/2 space-y-6 text-lg md:text-xl text-gray-600 font-sans leading-relaxed pt-2 md:pt-12">
-               {data.overviewParagraphs.map((p, idx) => (
-                 <p key={idx}>{p}</p>
-               ))}
-               <div className="pt-6">
-                 <Link to="/quote" className="inline-flex items-center gap-2 font-bold text-brand-dark uppercase tracking-widest text-sm hover:text-brand-gold transition-colors group">
-                    Schedule a Consultation <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                 </Link>
+               
+               <div className="hidden md:block pt-8">
+                  <div className="flex items-center gap-4">
+                     <div className="w-16 h-[1px] bg-brand-gold"></div>
+                     <span className="text-sm font-bold uppercase tracking-widest text-[#8c98a4]">Atlanta's Choice</span>
+                  </div>
                </div>
+            </div>
+            
+            <div className="md:w-7/12 space-y-6 text-lg md:text-xl text-[#4a5568] font-sans leading-relaxed md:pt-14 relative">
+               {/* Vertical decorative line */}
+               <div className="hidden md:block absolute left-[-3rem] top-14 bottom-0 w-[1px] bg-gradient-to-b from-brand-gold/50 to-transparent"></div>
+               
+               {data.overviewParagraphs.map((p, idx) => (
+                 <motion.p 
+                   key={idx}
+                   initial={{ opacity: 0, y: 20 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ delay: 0.3 + (idx * 0.1) }}
+                 >
+                   {p}
+                 </motion.p>
+               ))}
+               <motion.div 
+                 initial={{ opacity: 0, y: 20 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ delay: 0.6 }}
+                 className="pt-8"
+               >
+                 <Link to="/quote" className="inline-flex items-center gap-3 font-bold text-brand-dark uppercase tracking-widest text-sm hover:text-brand-gold transition-colors group">
+                    <span className="border-b border-brand-dark group-hover:border-brand-gold pb-1 transition-colors">Schedule a Consultation</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-brand-gold" />
+                 </Link>
+               </motion.div>
             </div>
          </motion.div>
       </section>
 
       {/* WHY CHOOSE US / TRUST SECTION */}
-      <section className="py-24 px-6 md:px-12 bg-gray-50 border-b border-gray-100">
-         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+      <section className="py-24 px-6 md:px-12 bg-white relative overflow-hidden">
+         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 md:gap-16">
             {[
               { icon: Shield, title: "No Subcontractors", desc: "We use our own in-house crews. This guarantees quality control and keeps your project strictly on schedule." },
               { icon: Star, title: "Premium Materials", desc: "We source only the highest-grade stone, pavers, and base materials, ensuring your outdoor space withstands the elements and regular use." },
@@ -164,14 +225,14 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
                  initial={{ opacity: 0, y: 30 }}
                  whileInView={{ opacity: 1, y: 0 }}
                  viewport={{ once: true }}
-                 transition={{ duration: 0.6, delay: 0.1 * idx }}
-                 className="flex flex-col items-start space-y-4"
+                 transition={{ duration: 0.8, delay: 0.15 * idx }}
+                 className="flex flex-col items-start space-y-5 relative group"
                >
-                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center text-brand-gold mb-2">
-                     <trust.icon size={24} />
+                  <div className="w-16 h-16 bg-[#f8f9fa] rounded-2xl flex items-center justify-center text-brand-gold mb-2 group-hover:bg-brand-gold group-hover:text-white transition-colors duration-500">
+                     <trust.icon size={28} />
                   </div>
-                  <h4 className="font-bold text-brand-dark text-xl">{trust.title}</h4>
-                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                  <h4 className="font-bold text-brand-dark text-2xl group-hover:text-brand-gold transition-colors duration-300">{trust.title}</h4>
+                  <p className="text-[#4a5568] leading-relaxed text-base md:text-lg">
                      {trust.desc}
                   </p>
                </motion.div>
@@ -207,36 +268,45 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
       </section>
 
       {/* TIMELINE / PROCESS */}
-      <section id="process" className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
-         <div className="text-center mb-16 md:mb-24">
-            <h2 className="font-serif text-3xl md:text-5xl text-brand-dark font-bold mb-4">Our Process</h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-               No guesswork. Just a proven process that delivers your dream outdoor space on time and done right the first time.
-            </p>
-         </div>
+      <section id="process" className="py-24 md:py-40 px-6 bg-gray-50 overflow-hidden relative">
+         <div className="max-w-7xl mx-auto relative z-10">
+            <motion.div 
+               initial={{ opacity: 0, y: 30 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               className="text-center mb-16 md:mb-28"
+            >
+               <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Proven Methodology</span>
+               <h2 className="font-serif text-4xl md:text-6xl text-brand-dark font-medium mb-6">Our Process</h2>
+               <p className="text-[#8c98a4] max-w-2xl mx-auto text-lg md:text-xl">
+                  No guesswork. Just a proven process that delivers your dream outdoor space on time and done right the first time.
+               </p>
+            </motion.div>
 
-         <div className="grid md:grid-cols-4 gap-12 relative">
-            {/* Connecting Line */}
-            <div className="hidden md:block absolute top-[28px] left-[10%] right-[10%] h-[1px] bg-gray-200 z-0"></div>
+            <div className="grid md:grid-cols-4 gap-8 md:gap-12 relative">
+               {/* Connecting Line */}
+               <div className="hidden md:block absolute top-[45px] left-[12%] right-[12%] h-[2px] bg-brand-gold/20 z-0"></div>
 
-            {data.process.map((step, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="relative z-10 flex flex-col items-center text-center group"
-              >
-                 <div className="w-14 h-14 bg-white border border-gray-100 shadow-xl rounded-full flex items-center justify-center text-brand-gold font-bold font-serif text-xl mb-6 relative transition-transform duration-500 group-hover:scale-110">
-                    <span className="relative z-10">{idx + 1}</span>
-                    {/* Hover ripple */}
-                    <div className="absolute inset-0 rounded-full border border-brand-gold/30 scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                 </div>
-                 <h4 className="font-bold text-brand-dark text-xl mb-3">{step.title}</h4>
-                 <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-[250px]">{step.description}</p>
-              </motion.div>
-            ))}
+               {data.process.map((step, idx) => (
+                 <motion.div 
+                   key={idx}
+                   initial={{ opacity: 0, y: 40 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true, margin: "-100px" }}
+                   transition={{ duration: 0.8, delay: idx * 0.2 }}
+                   className="relative z-10 flex flex-col items-center text-center group"
+                 >
+                    <div className="w-24 h-24 bg-white shadow-xl rounded-full flex flex-col items-center justify-center text-brand-gold font-bold font-serif text-3xl mb-8 relative transition-transform duration-500 group-hover:-translate-y-2 border border-[#eef0f2]">
+                       <span className="relative z-10">{idx + 1}</span>
+                       <span className="text-[10px] uppercase font-sans tracking-widest text-[#8c98a4] absolute bottom-4">Step</span>
+                       {/* Hover ripple */}
+                       <div className="absolute inset-0 rounded-full border-2 border-brand-gold/40 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700"></div>
+                    </div>
+                    <h4 className="font-bold text-brand-dark text-xl md:text-2xl mb-4 group-hover:text-brand-gold transition-colors">{step.title}</h4>
+                    <p className="text-[#4a5568] text-base leading-relaxed max-w-[280px]">{step.description}</p>
+                 </motion.div>
+               ))}
+            </div>
          </div>
       </section>
 
