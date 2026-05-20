@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Layers, Flame, Utensils, LayoutGrid, ArrowUpRight, X, CheckCircle2, Hammer, Waves, Mountain, Ruler, ArrowRight, MousePointer2, ZoomIn, ChevronRight, ShieldCheck, Plus, Star } from 'lucide-react';
+import { Layers, Flame, Utensils, LayoutGrid, ShieldCheck, Plus, Hammer, Waves, Mountain, Ruler } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
 const services: ServiceItem[] = [
   {
-    id: '1',
+    id: 'driveway-pavers',
     title: 'Driveway Pavers',
     description: 'Expert driveway installation contractors near you. We replace concrete with premium interlocking pavers.',
     icon: <LayoutGrid className="w-5 h-5" />,
@@ -18,7 +19,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '2',
+    id: 'outdoor-patio-builders',
     title: 'Outdoor Patio Builders',
     description: 'Leading patio contractors in your area. We design and build custom stone patios for luxury outdoor living.',
     icon: <Utensils className="w-5 h-5" />,
@@ -30,7 +31,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '3',
+    id: 'retaining-wall-installation',
     title: 'Retaining Wall Installation',
     description: 'Certified retaining wall contractors near you. We fix erosion and level yards with engineered stone walls.',
     icon: <Layers className="w-5 h-5" />,
@@ -42,7 +43,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '4',
+    id: 'masonry-fireplaces',
     title: 'Masonry & Fireplaces',
     description: 'Skilled stone work contractors near you. Custom stone masonry for fire pits, columns, and veneers.',
     icon: <Flame className="w-5 h-5" />,
@@ -54,7 +55,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '5',
+    id: 'deck-builders',
     title: 'Deck Builders',
     description: 'Professional deck builders near me. Composite and wood decking integrated with stone hardscapes.',
     icon: <Hammer className="w-5 h-5" />,
@@ -66,7 +67,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '6',
+    id: 'pool-deck-pavers',
     title: 'Pool Deck Pavers',
     description: 'Specialized pavers for pool decks. Slip-resistant coping and resort-style hardscapes.',
     icon: <Waves className="w-5 h-5" />,
@@ -78,7 +79,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '7',
+    id: 'stone-veneer',
     title: 'Stone Veneer',
     description: 'Enhance your home with stone veneer. The best local masonry companies for architectural facing.',
     icon: <Mountain className="w-5 h-5" />,
@@ -90,7 +91,7 @@ const services: ServiceItem[] = [
     ]
   },
   {
-    id: '8',
+    id: 'landscape-design',
     title: 'Landscape Design',
     description: 'Advanced landscape services and 3D design. We visualize your hardscape before we build.',
     icon: <Ruler className="w-5 h-5" />,
@@ -108,7 +109,7 @@ interface ServicesProps {
 }
 
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const navigate = useNavigate();
   const gridRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -146,16 +147,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
     return () => observer.disconnect();
   }, []);
 
-  const openModal = (service: ServiceItem) => {
-    setSelectedService(service);
-    document.body.style.overflow = 'hidden';
-    if (onModalChange) onModalChange(true);
-  };
-
-  const closeModal = () => {
-    setSelectedService(null);
-    document.body.style.overflow = 'unset';
-    if (onModalChange) onModalChange(false);
+  const openService = (service: ServiceItem) => {
+    navigate(`/service/${service.id}`);
   };
 
   return (
@@ -189,7 +182,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
           {services.map((service, index) => (
             <article 
               key={service.id}
-              onClick={() => openModal(service)}
+              onClick={() => openService(service)}
               // Initial state: Invisible, shifted down, slightly scaled down
               className="service-card-anim group cursor-pointer opacity-0 translate-y-12 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.2,1,0.3,1)]"
               // Staggered Delay for fluid wave effect
@@ -312,78 +305,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
             </article>
           ))}
         </div>
-
-      {/* MODAL */}
-      {selectedService && (
-        <div 
-          className="fixed inset-0 z-[110] flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-        >
-          <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-lg animate-[fadeIn_0.3s_ease-out]" 
-            onClick={closeModal}
-            aria-hidden="true"
-          ></div>
-          
-          <div className="relative w-full max-w-6xl bg-white/90 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-[scaleIn_0.4s_cubic-bezier(0.16,1,0.3,1)] border border-white/50">
-             <button 
-                onClick={closeModal} 
-                className="absolute top-4 right-4 z-50 p-2 bg-black/20 backdrop-blur-md rounded-full text-white hover:bg-brand-gold transition-all"
-                aria-label="Close Modal"
-             >
-                <X size={24} />
-             </button>
-
-             <div className="w-full md:w-1/2 h-64 md:h-auto relative bg-black">
-                <img 
-                  src={selectedService.image.includes('imgur') ? selectedService.image.replace('l.webp', 'h.webp') : selectedService.image} 
-                  alt={`Detail view of ${selectedService.title}`} 
-                  className="w-full h-full object-cover" 
-                />
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute bottom-8 left-8 text-white">
-                   <div className="flex items-center gap-2 mb-2 text-brand-gold font-bold uppercase tracking-widest text-xs px-3 py-1 bg-black/40 backdrop-blur-md rounded-full inline-flex border border-white/10">
-                      {selectedService.icon} Premium Service
-                   </div>
-                   <h2 id="modal-title" className="text-4xl md:text-5xl font-serif font-bold leading-none">{selectedService.title}</h2>
-                </div>
-             </div>
-
-             <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto flex flex-col">
-                <p className="text-xl text-brand-dark font-serif italic mb-6">
-                  "{selectedService.description}"
-                </p>
-                <div className="space-y-6 mb-10">
-                   <p className="text-gray-600 leading-relaxed">
-                     At AGS Stones, our {selectedService.title.toLowerCase()} process is designed to meet the highest standards. 
-                     Whether you are looking for "driveway pavers near me" or complex "retaining wall installation", our team provides warranty-backed craftsmanship.
-                   </p>
-                   <div>
-                      <h4 className="font-bold text-xs uppercase tracking-widest text-brand-dark mb-4 border-b border-gray-200 pb-2">What's Included</h4>
-                      <ul className="space-y-3">
-                        {selectedService.benefits.map((benefit, i) => (
-                          <li key={i} className="flex items-start gap-3 text-gray-700">
-                             <div className="mt-1 w-5 h-5 rounded-full bg-brand-gold/10 flex items-center justify-center flex-shrink-0">
-                                <CheckCircle2 className="w-3 h-3 text-brand-gold" />
-                             </div>
-                             <span className="text-sm font-medium">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                   </div>
-                </div>
-                <div className="mt-auto pt-6 border-t border-gray-200">
-                   <a href="tel:6784287630" className="block w-full text-center bg-brand-dark text-white py-4 rounded-lg font-bold uppercase tracking-widest text-sm hover:bg-brand-gold transition-colors shadow-lg">
-                     Get Free Quote
-                   </a>
-                </div>
-             </div>
-          </div>
-        </div>
-      )}
-      
+        
       {/* CLOSED THE MISSING CONTAINER DIV HERE */}
       </div> 
 

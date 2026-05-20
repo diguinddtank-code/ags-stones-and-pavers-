@@ -1,6 +1,8 @@
 import React, { Component, useEffect, useState, useRef, Suspense, ReactNode, ErrorInfo } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { SEO } from './components/SEO';
 
 // --- COMPONENT CHUNKS ---
 const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
@@ -86,7 +88,7 @@ const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = (
   );
 };
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
 
   // GLOBAL CONVERSION TRACKING LISTENER
@@ -98,7 +100,7 @@ const App: React.FC = () => {
       if (target && target.href.startsWith('tel:')) {
         const gtagReport = (window as any).gtag_report_conversion;
         if (typeof gtagReport === 'function') {
-          e.preventDefault();
+          // Default browser behavior for tel: is fine, just report
           gtagReport(target.href);
         }
       }
@@ -110,6 +112,7 @@ const App: React.FC = () => {
 
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
+      <SEO />
       <Header isHidden={isServiceModalOpen} />
       
       <main>
@@ -166,10 +169,24 @@ const App: React.FC = () => {
 
       <Suspense fallback={null}>
          <FloatingWidget />
-         <MobileNav />
          <ExitIntentPopup />
       </Suspense>
     </div>
+  );
+};
+
+const ServicePage = React.lazy(() => import('./pages/ServicePage').then(module => ({ default: module.ServicePage })));
+
+const App: React.FC = () => {
+  return (
+    <ErrorBoundary>
+      <Suspense fallback={<div className="h-screen w-full bg-slate-50 flex items-center justify-center">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/service/:id" element={<ServicePage />} />
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
