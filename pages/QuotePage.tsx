@@ -38,13 +38,20 @@ export const QuotePage: React.FC = () => {
         description="Request a free, factory-direct estimate for your hardscaping project. Driveways, patios, retaining walls, and custom stone work in your area."
       />
 
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1584622119106-95fe3db3ff37?q=80&w=2000&auto=format&fit=crop" 
-          alt="Premium Hardscaping" 
-          className="w-full h-full object-cover brightness-[0.25]"
-        />
+      {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
+          className="w-full h-full object-cover object-center scale-105"
+        >
+          <source src="https://storage.googleapis.com/msgsndr/yRboz8P4zFeLUF6bAk8i/media/680a5a6f1eba4b32d1925215.mp4" type="video/mp4" />
+        </video>
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-8">
