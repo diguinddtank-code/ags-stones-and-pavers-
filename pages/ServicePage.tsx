@@ -24,6 +24,120 @@ const serviceDataDb: Record<string, ServiceData> = {
       { title: 'Polymeric Sealing', description: 'Joints are locked in with advanced polymeric sand to prevent weeds.' }
     ]
   },
+  'driveways-pavers-alpharetta-ga': {
+    id: 'driveways-pavers-alpharetta-ga',
+    name: 'Driveway Pavers Alpharetta GA',
+    heroImage: 'https://i.imgur.com/by6FzIkl.webp',
+    heroSubtitle: 'ALPHARETTA\'S ULTRA-PREMIUM PAVER INSTALLERS',
+    overviewHeading: 'Architectural Driveway Paver Installations in Alpharetta, GA — Built for Lifelong Structural Strength',
+    overviewParagraphs: [
+      "Alpharetta is renowned for its breathtaking estates, rich neighborhood standards, and demanding luxury home profiles. Standard poured concrete simply doesn't cut it—it cracks, stains, sinks, and compromises your home's luxury curb appeal. At AGS Stones, we design and install high-end interlocking paver driveways that elevate the elegance of Alpharetta's finest residences while delivering lifelong durability.",
+      "Our industry-leading driveway installations are engineered with deep-compacted stone bases, stable commercial-grade geotextile underlayment, and premium joint stabilization. We manage the entire lifecycle—from securing neighborhood HOA approvals to integrating flawless, water-repelling transition grading. Every custom paving project is backed by our signature 5-year structural warranty."
+    ],
+    parallaxImage: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp',
+    parallaxQuote: "Perfect precision engineering designed to match Alpharetta's highest architectural standards.",
+    process: [
+      { title: 'HOA & Structural Survey', description: 'Reviewing property lines, elevation limits, drainage paths, and specific subdivision standards.' },
+      { title: 'Subgrade Clay Excavation', description: 'Removing heavy Georgia clay and establishing a thick base with dual-vibrated washed aggregate.' },
+      { title: 'Artisanal Hand-Setting', description: 'Our in-house master masons hand-set premium stones in gorgeous custom alignments with exact tight gaps.' },
+      { title: 'Joint Solidification & Seal', description: 'Applying next-gen polymeric security sand and premium hydrophobic sealants for long-term lock.' }
+    ]
+  },
+  'outdoor-kitchen-johns-creek-ga': {
+    id: 'outdoor-kitchen-johns-creek-ga',
+    name: 'Outdoor Kitchens Johns Creek GA',
+    heroImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    heroSubtitle: 'JOHNS CREEK\'S EXPERT RESORT BUILDERS',
+    overviewHeading: 'Bespoke Outdoor Kitchens & Custom Patio Builders in Johns Creek, GA — Elevating Backyard Entertainment',
+    overviewParagraphs: [
+      "Transform your backyard into a luxury private resort. Premier homes in Johns Creek demand culinary-grade performance, high-performance outdoor kitchens, and gorgeous, master-crafted stonework. At AGS Stones, we design and build bespoke outdoor kitchens, custom bar counters, premium gas grills, fire features, and custom stone patios that act as flawless extensions of your living room.",
+      "Our master hardscape designers utilize state-of-the-art 3D landscape modeling to render your setup in exact layout, proportions, and elevations before we ever break ground. Sourcing the finest Turkish Travertine, Brazilian Granite, and premium masonry blocks, we create resort-like entertainment centers that stand up to Georgia's seasonal shifts and remain pristine for decades."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "An exquisite outdoor sanctuary built for exquisite culinary moments.",
+    process: [
+      { title: '3D Resort Modeling', description: 'Simulating your precise backyard topography, seating arrangements, utilities, and line of sight.' },
+      { title: 'Load-Bearing Concrete Footings', description: 'Digging deep and pouring steel-reinforced structural concrete pads to prevent any future settling or shifting.' },
+      { title: 'Custom Stone & Countertop Framing', description: 'Building custom masonry counters clad in masterfully chiseled stone veneer, topped with premium quartzite or granite.' },
+      { title: 'Utility Connection & Calibration', description: 'Surgical installation of lines, ventilation, ice makers, drawers, and professional-grade cooking appliances.' }
+    ]
+  },
+  'driveway-pavers-atlanta': {
+    id: 'driveway-pavers-atlanta',
+    name: 'Driveway Pavers Atlanta',
+    heroImage: 'https://i.imgur.com/by6FzIkl.webp',
+    heroSubtitle: 'ATLANTA\'S PREMIER HARDSCAPE CONTRACTOR',
+    overviewHeading: 'Atlanta\'s #1 Driveway Paver Installer — Zero Cracking, Engineered Base, 5-Year Lifetime Warranty',
+    overviewParagraphs: [
+      "Tired of dealing with ugly, sinking concrete that cracks under the scorching Georgia summer? In Atlanta's high-clay soils, standard poured concrete driveways are guaranteed to crack. Our interlocking driveway pavers are engineered to distribute heavy loads and flex with underground soil shifts, remaining flawless for decades.",
+      "At AGS Stones, we follow a rigorous multi-step excavation process. We excavate down to pristine subgrade, compact a thick base of premium aggregate, lay down durable professional-grade geotextiles, and use advanced polymeric locking sand. The result is a stunning, durable driveway that instantly boosts your property value and supports everything from daily vehicles to heavy RVs with ease."
+    ],
+    parallaxImage: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp',
+    parallaxQuote: "We build the most durable pavements in Georgia. Done once, done right, backed by a 5-year structural warranty.",
+    process: [
+      { title: 'Atlanta Soil Analysis', description: 'We evaluate your driveway\'s unique runoff, clay density, and slope.' },
+      { title: 'Deep Road-Base Prep', description: 'We compact premium gravel base with commercial-grade vibratory plates.' },
+      { title: 'Precision Paver Setting', description: 'Our veteran in-house masons hand-set every single stone with absolute tight margins.' },
+      { title: 'Polymeric Lock & Cure', description: 'Joints are locked with premium sand that solidifies into a barrier against weed and ants.' }
+    ]
+  },
+  'retaining-walls-atlanta': {
+    id: 'retaining-walls-atlanta',
+    name: 'Retaining Walls Atlanta',
+    heroImage: 'https://i.imgur.com/dZstK86l.webp',
+    heroSubtitle: 'STRUCTURAL ENGINEERING & EROSION CONTROL',
+    overviewHeading: 'Engineered Retaining Walls Built to Reclaim Hillside Yards & Prevent Land Loss in Atlanta',
+    overviewParagraphs: [
+      "Atlanta's hilly terrain combined with heavy seasonal rains can turn gorgeous yards into erosion disasters. We build commercial-grade, engineered retaining walls that hold back thousands of pounds of pressure, leveling your property to create stunning, usable flat tiers of green lawn.",
+      "A collapsed retaining wall can cost tens of thousands in property damage. That's why we build walls that go beyond local code. Every single wall features professional hydrostatic pressure relief drainage, dual-compacted backfill, and structural geogrid ties. We have zero failures on record."
+    ],
+    parallaxImage: 'https://i.imgur.com/uDiqFSl.jpeg',
+    parallaxQuote: "Taming Georgia slopes with structural mastery and pristine stone craftsmanship.",
+    process: [
+      { title: 'Slope & Weight Evaluation', description: 'Analyzing the height, lateral load, and water flow patterns of your slope.' },
+      { title: 'Drainage Infrastructure', description: 'Installing commercial perforated pipes, geotextile wrap, and clean gravel beds.' },
+      { title: 'Reinforced Block Laying', description: 'Using premium Allan Blocks or Segmental Masonry anchored with high-tensile geogrid.' },
+      { title: 'Compacted Backfill', description: 'Backfilling with premium materials in 6-inch increments for permanent static load-bearing.' }
+    ]
+  },
+  'outdoor-patios-atlanta': {
+    id: 'outdoor-patios-atlanta',
+    name: 'Outdoor Patios Atlanta',
+    heroImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    heroSubtitle: 'RESORT-STYLE BACKYARD TRANSFORMATION',
+    overviewHeading: 'Custom Patio Designers & Builders Transforming Backyard Living Across Metro Atlanta',
+    overviewParagraphs: [
+      "Don't settle for a basic, uninspired patio deck. Your backyard should be a private resort. We craft breathtaking, custom outdoor living spaces featuring premium flagstones, travertine, and architectural modular pavers.",
+      "Each layout is custom-designed using advanced 3D visualizers, showing you exactly how your outdoor kitchen, fire feature, and dining areas flow together before we ever break ground. It is the perfect blend of high-end design and flawless durability."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "Step out of your back door into an elegant, high-end paradise.",
+    process: [
+      { title: 'Resort-Style 3D Design', description: 'We render your entire property in 3D to visualize the optimal spatial layout.' },
+      { title: 'Perfect Elevation Grading', description: 'Ensuring zero-pooling water slopes that guide rain away from your home\'s foundation.' },
+      { title: 'Stone/Paver Crafting', description: 'Our master stone-setters organize a gorgeous mosaic layout with tight joints.' },
+      { title: 'Sealing & Detail Handover', description: 'Applying top-tier sealers to protect against Georgia clays, fading, and spills.' }
+    ]
+  },
+  'pool-deck-pavers-atlanta': {
+    id: 'pool-deck-pavers-atlanta',
+    name: 'Pool Deck Pavers Atlanta',
+    heroImage: 'https://i.imgur.com/vEHS8LGl.webp',
+    heroSubtitle: 'SLIP-RESISTANT COOL-TOUCH POOL DECKS',
+    overviewHeading: 'Atlanta\'s Premier Cool-Touch Travertine & Paver Pool Deck Remodeling Experts',
+    overviewParagraphs: [
+      "Are you tired of scorching your feet on hot concrete or dealing with unsightly cracks around your pool? AGS Stones transforms outdated pool landscapes with gorgeous Turkish Travertine and luxury pavers that stay cool under the blistering Atlanta sun.",
+      "Our specialized pool deck installation avoids cracking and shifting. By laying a permeable, self-draining bedding foundation, we manage splashed pool water perfectly, providing a slip-resistant, beautiful surface representing the absolute pinnacle of luxury hardscaping."
+    ],
+    parallaxImage: 'https://i.imgur.com/uDiqFSl.jpeg',
+    parallaxQuote: "Cool to the touch, beautiful to look at, and safe for your entire family.",
+    process: [
+      { title: 'Drainage & Coping Review', description: 'Inspecting pool water levels, skimmers, and structural deck requirements.' },
+      { title: 'Bullnose Coping Setting', description: 'Anchoring thick travertine bullnose edging securely around your pool\'s concrete shell.' },
+      { title: 'Modular Bedding Prep', description: 'Applying high-quality screenings and aggregate to allow natural, fast water drainage.' },
+      { title: 'Perfect Leveling', description: 'Laying cool-touch travertine with microscopic leveling tolerance for a barefoot-safe surface.' }
+    ]
+  },
   'outdoor-patio-builders': {
     id: 'outdoor-patio-builders',
     name: 'Outdoor Patio Builders',
@@ -179,19 +293,25 @@ const fallbackData: ServiceData = {
   ]
 };
 
-export const ServicePage: React.FC = () => {
+interface ServicePageProps {
+  idOverride?: string;
+}
+
+export const ServicePage: React.FC<ServicePageProps> = ({ idOverride }) => {
   const { id } = useParams<{ id: string }>();
+  const activeId = idOverride || id;
   
   useEffect(() => {
     // Scroll to top on mount
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [activeId]);
 
-  const data = (id && serviceDataDb[id]) ? serviceDataDb[id] : fallbackData;
+  const data = (activeId && serviceDataDb[activeId]) ? serviceDataDb[activeId] : fallbackData;
 
   const title = `${data.name} Contractors | Premium Hardscaping | AGS Stones`;
   const description = data.overviewParagraphs[0];
   const seoKeywords = [data.name.toLowerCase(), 'hardscaping contractors', 'outdoor living', 'AGS stones'];
+  const canonicalPath = idOverride ? `/${idOverride}` : `/service/${id}`;
 
   return (
     <div className="bg-white min-h-screen relative">
@@ -199,7 +319,7 @@ export const ServicePage: React.FC = () => {
         title={title}
         description={description}
         image={data.heroImage}
-        canonicalPath={`/service/${id}`}
+        canonicalPath={canonicalPath}
         keywords={seoKeywords}
       />
       <div className="absolute top-4 left-6 z-50">

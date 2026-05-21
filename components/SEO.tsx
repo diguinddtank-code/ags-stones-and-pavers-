@@ -18,7 +18,7 @@ export const SEO: React.FC<SEOProps> = ({
   image = 'https://i.imgur.com/G2N5Chsl.webp',
   type = 'website'
 }) => {
-  const siteUrl = 'https://agsstones.com'; // Replace with actual domain when known
+  const siteUrl = 'https://agsstonesandpavers.com'; // Replace with actual domain when known
   const currentUrl = `${siteUrl}${canonicalPath}`;
 
   // Structured Data (JSON-LD) for LocalBusiness to boost Local SEO

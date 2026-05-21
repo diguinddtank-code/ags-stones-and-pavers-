@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Instagram, Facebook, MapPin } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -43,25 +44,25 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-lg mb-6 text-brand-gold">Popular Services</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
-              <li><a href="#services" className="hover:text-white transition-colors">Paver Driveway Installation</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Retaining Wall Contractors</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Patio Builders Near Me</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Pool Deck Pavers</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Stone Fireplace Builders</a></li>
-              <li><a href="#services" className="hover:text-white transition-colors">Landscape Design</a></li>
+              <li><Link to="/service/driveway-pavers" className="hover:text-white transition-colors">Paver Driveway Installation</Link></li>
+              <li><Link to="/service/retaining-wall-installation" className="hover:text-white transition-colors">Retaining Wall Contractors</Link></li>
+              <li><Link to="/service/outdoor-patio-builders" className="hover:text-white transition-colors">Patio Builders Near Me</Link></li>
+              <li><Link to="/service/pool-deck-pavers" className="hover:text-white transition-colors">Pool Deck Pavers</Link></li>
+              <li><Link to="/service/masonry-fireplaces" className="hover:text-white transition-colors">Stone Fireplace Builders</Link></li>
+              <li><Link to="/service/landscape-design" className="hover:text-white transition-colors">Landscape Design</Link></li>
             </ul>
           </div>
 
           {/* Keyword Cloud (Strategic Long Tail Capture) */}
           <div>
              <h4 className="font-bold text-lg mb-6 text-brand-gold">Specialized Searches</h4>
-             <ul className="space-y-2 text-gray-500 text-xs">
-                <li><a href="#services" className="hover:text-white transition-colors">Stone work contractors near me</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Concrete driveway companies</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Masonry services near me</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Blacktop paving alternatives</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Landscapers around me</a></li>
-                <li><a href="#services" className="hover:text-white transition-colors">Brick paver installers</a></li>
+             <ul className="space-y-2 text-gray-400 text-sm">
+                <li><Link to="/driveway-pavers-atlanta" className="hover:text-brand-gold transition-colors block">Driveway Pavers Atlanta</Link></li>
+                <li><Link to="/driveways-pavers-alpharetta-ga" className="hover:text-brand-gold transition-colors block">Driveway Pavers Alpharetta, GA</Link></li>
+                <li><Link to="/outdoor-kitchen-johns-creek-ga" className="hover:text-brand-gold transition-colors block">Outdoor Kitchens Johns Creek, GA</Link></li>
+                <li><Link to="/retaining-walls-atlanta" className="hover:text-brand-gold transition-colors block">Retaining Walls Atlanta</Link></li>
+                <li><Link to="/outdoor-patios-atlanta" className="hover:text-brand-gold transition-colors block">Outdoor Patios Atlanta</Link></li>
+                <li><Link to="/pool-deck-pavers-atlanta" className="hover:text-brand-gold transition-colors block">Pool Deck Pavers Atlanta</Link></li>
              </ul>
              <div className="mt-6">
                 <h5 className="font-bold text-sm text-brand-gold mb-2">Service Areas</h5>
