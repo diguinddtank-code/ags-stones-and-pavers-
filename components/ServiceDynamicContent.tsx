@@ -40,6 +40,56 @@ interface Props {
   data: ServiceData;
 }
 
+const renderParagraphWithLinks = (text: string) => {
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+    
+    const anchorText = match[1];
+    const url = match[2];
+
+    const isExternal = url.startsWith('http') || url.startsWith('tel:') || url.startsWith('mailto:');
+    if (isExternal) {
+      parts.push(
+        <a 
+          key={matchIndex} 
+          href={url} 
+          target={url.startsWith('tel:') ? undefined : "_blank"}
+          rel={url.startsWith('tel:') ? undefined : "noopener noreferrer"}
+          className="text-brand-gold hover:underline font-semibold"
+        >
+          {anchorText}
+        </a>
+      );
+    } else {
+      parts.push(
+        <Link 
+          key={matchIndex} 
+          to={url} 
+          className="text-brand-gold hover:underline font-semibold"
+        >
+          {anchorText}
+        </Link>
+      );
+    }
+    
+    lastIndex = regex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+};
+
 export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
   const { scrollY } = useScroll();
   const [showStickyFooter, setShowStickyFooter] = useState(false);
@@ -194,7 +244,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
                    whileInView={{ opacity: 1, y: 0 }}
                    transition={{ delay: 0.3 + (idx * 0.1) }}
                  >
-                   {p}
+                   {renderParagraphWithLinks(p)}
                  </motion.p>
                ))}
                <motion.div 

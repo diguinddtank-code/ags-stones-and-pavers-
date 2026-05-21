@@ -12,8 +12,8 @@ const serviceDataDb: Record<string, ServiceData> = {
     heroSubtitle: 'Luxury Hardscaping',
     overviewHeading: 'Elevate your home\'s curb appeal with a driveway built to outlast concrete.',
     overviewParagraphs: [
-      "Your driveway is the first impression of your home. We replace cracked, shifting concrete with premium interlocking pavers that flex with the earth and stand the test of time.",
-      "Most contractors cut corners on the base preparation, which is why their driveways sink and settle within a few years. At AGS Stones, we excavate deep, build a proper foundational base, and use high-density polymeric sand to ensure a structural finish that holds the weight of your vehicles effortlessly."
+      "Your driveway is the first impression of your home. We replace cracked, shifting concrete with premium interlocking pavers that flex with the earth and stand the test of time. Whether you need a prestigious estate entry or a robust suburban parkway, we serve the entire region with bespoke materials.",
+      "Most contractors cut corners on base preparation, which is why their driveways sink. At AGS Stones, we excavate deep, build a proper aggregate base, and use high-density polymeric sand. If you are located in the north metro suburbs, explore our specialized [Driveway Pavers Alpharetta, GA](/driveways-pavers-alpharetta-ga) or our core municipal [Driveway Pavers Atlanta](/driveway-pavers-atlanta) services for regional engineering specifications."
     ],
     parallaxImage: 'https://i.imgur.com/by6FzIkl.webp',
     parallaxQuote: "Quality craftsmanship that transforms your outdoor space.",
@@ -32,7 +32,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Architectural Driveway Paver Installations in Alpharetta, GA — Built for Lifelong Structural Strength',
     overviewParagraphs: [
       "Alpharetta is renowned for its breathtaking estates, rich neighborhood standards, and demanding luxury home profiles. Standard poured concrete simply doesn't cut it—it cracks, stains, sinks, and compromises your home's luxury curb appeal. At AGS Stones, we design and install high-end interlocking paver driveways that elevate the elegance of Alpharetta's finest residences while delivering lifelong durability.",
-      "Our industry-leading driveway installations are engineered with deep-compacted stone bases, stable commercial-grade geotextile underlayment, and premium joint stabilization. We manage the entire lifecycle—from securing neighborhood HOA approvals to integrating flawless, water-repelling transition grading. Every custom paving project is backed by our signature 5-year structural warranty."
+      "Our industry-leading driveway installations are engineered with deep-compacted stone bases, stable commercial-grade geotextile underlayment, and premium joint stabilization. We manage the entire lifecycle—from securing neighborhood HOA approvals to integrating flawless, water-repelling transition grading. Looking for breathtaking backyard entertaining ideas? We also construct premium resort-grade [Outdoor Kitchens in Johns Creek, GA](/outdoor-kitchen-johns-creek-ga), and design sloped [Retaining Walls Atlanta](/retaining-walls-atlanta) systems for severe suburban terrains."
     ],
     parallaxImage: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp',
     parallaxQuote: "Perfect precision engineering designed to match Alpharetta's highest architectural standards.",
@@ -51,7 +51,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Bespoke Outdoor Kitchens & Custom Patio Builders in Johns Creek, GA — Elevating Backyard Entertainment',
     overviewParagraphs: [
       "Transform your backyard into a luxury private resort. Premier homes in Johns Creek demand culinary-grade performance, high-performance outdoor kitchens, and gorgeous, master-crafted stonework. At AGS Stones, we design and build bespoke outdoor kitchens, custom bar counters, premium gas grills, fire features, and custom stone patios that act as flawless extensions of your living room.",
-      "Our master hardscape designers utilize state-of-the-art 3D landscape modeling to render your setup in exact layout, proportions, and elevations before we ever break ground. Sourcing the finest Turkish Travertine, Brazilian Granite, and premium masonry blocks, we create resort-like entertainment centers that stand up to Georgia's seasonal shifts and remain pristine for decades."
+      "Our master hardscape designers utilize state-of-the-art 3D landscape modeling to render your setup in exact layout, proportions, and elevations before we ever break ground. Sourcing the finest Turkish Travertine, Brazilian Granite, and premium masonry blocks, we create resort-like entertainment centers that stand up to Georgia's seasonal shifts and remain pristine for decades. To complement your cooking zone, coordinate your home entrance with our high-end [Driveway Pavers Alpharetta, GA](/driveways-pavers-alpharetta-ga) or discover stunning slate tiles in our comprehensive [Outdoor Patios Atlanta](/outdoor-patios-atlanta) catalog."
     ],
     parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
     parallaxQuote: "An exquisite outdoor sanctuary built for exquisite culinary moments.",
@@ -70,7 +70,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Atlanta\'s #1 Driveway Paver Installer — Zero Cracking, Engineered Base, 5-Year Lifetime Warranty',
     overviewParagraphs: [
       "Tired of dealing with ugly, sinking concrete that cracks under the scorching Georgia summer? In Atlanta's high-clay soils, standard poured concrete driveways are guaranteed to crack. Our interlocking driveway pavers are engineered to distribute heavy loads and flex with underground soil shifts, remaining flawless for decades.",
-      "At AGS Stones, we follow a rigorous multi-step excavation process. We excavate down to pristine subgrade, compact a thick base of premium aggregate, lay down durable professional-grade geotextiles, and use advanced polymeric locking sand. The result is a stunning, durable driveway that instantly boosts your property value and supports everything from daily vehicles to heavy RVs with ease."
+      "At AGS Stones, we follow a rigorous multi-step excavation process. We excavate down to pristine subgrade, compact a thick base of premium aggregate, lay down durable professional-grade geotextiles, and use advanced polymeric locking sand. Keep in mind that we also serve surrounding areas with premium services: check out our luxury [Driveway Pavers Alpharetta, GA](/driveways-pavers-alpharetta-ga) and secure your yard's steep sections with our dedicated [Retaining Walls Atlanta](/retaining-walls-atlanta) installations."
     ],
     parallaxImage: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp',
     parallaxQuote: "We build the most durable pavements in Georgia. Done once, done right, backed by a 5-year structural warranty.",
@@ -89,7 +89,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Engineered Retaining Walls Built to Reclaim Hillside Yards & Prevent Land Loss in Atlanta',
     overviewParagraphs: [
       "Atlanta's hilly terrain combined with heavy seasonal rains can turn gorgeous yards into erosion disasters. We build commercial-grade, engineered retaining walls that hold back thousands of pounds of pressure, leveling your property to create stunning, usable flat tiers of green lawn.",
-      "A collapsed retaining wall can cost tens of thousands in property damage. That's why we build walls that go beyond local code. Every single wall features professional hydrostatic pressure relief drainage, dual-compacted backfill, and structural geogrid ties. We have zero failures on record."
+      "A collapsed retaining wall can cost tens of thousands in property damage. That's why we build walls that go beyond local code. Every wall features professional hydrostatic pressure relief drainage, dual-compacted backfill, and structural geogrid ties. Once your yard is leveled, it becomes the perfect site for our [Outdoor Patios Atlanta](/outdoor-patios-atlanta) designs or a robust interlocking setup constructed by our [Driveway Pavers Atlanta](/driveway-pavers-atlanta) specialists."
     ],
     parallaxImage: 'https://i.imgur.com/uDiqFSl.jpeg',
     parallaxQuote: "Taming Georgia slopes with structural mastery and pristine stone craftsmanship.",
@@ -108,7 +108,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Custom Patio Designers & Builders Transforming Backyard Living Across Metro Atlanta',
     overviewParagraphs: [
       "Don't settle for a basic, uninspired patio deck. Your backyard should be a private resort. We craft breathtaking, custom outdoor living spaces featuring premium flagstones, travertine, and architectural modular pavers.",
-      "Each layout is custom-designed using advanced 3D visualizers, showing you exactly how your outdoor kitchen, fire feature, and dining areas flow together before we ever break ground. It is the perfect blend of high-end design and flawless durability."
+      "Each layout is custom-designed using advanced 3D visualizers, showing you exactly how your outdoor kitchen, fire feature, and dining areas flow together before we ever break ground. It is the perfect blend of high-end design and flawless durability. Build poolside beauty with our [Pool Deck Pavers Atlanta](/pool-deck-pavers-atlanta) team, or extend your culinary zone with our custom [Outdoor Kitchens in Johns Creek, GA](/outdoor-kitchen-johns-creek-ga) setups."
     ],
     parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
     parallaxQuote: "Step out of your back door into an elegant, high-end paradise.",
@@ -127,7 +127,7 @@ const serviceDataDb: Record<string, ServiceData> = {
     overviewHeading: 'Atlanta\'s Premier Cool-Touch Travertine & Paver Pool Deck Remodeling Experts',
     overviewParagraphs: [
       "Are you tired of scorching your feet on hot concrete or dealing with unsightly cracks around your pool? AGS Stones transforms outdated pool landscapes with gorgeous Turkish Travertine and luxury pavers that stay cool under the blistering Atlanta sun.",
-      "Our specialized pool deck installation avoids cracking and shifting. By laying a permeable, self-draining bedding foundation, we manage splashed pool water perfectly, providing a slip-resistant, beautiful surface representing the absolute pinnacle of luxury hardscaping."
+      "Our specialized pool deck installation avoids cracking and shifting. By laying a permeable, self-draining bedding foundation, we manage splashed pool water perfectly, providing a slip-resistant, beautiful surface representing the absolute pinnacle of luxury hardscaping. For an integrated resort-feel, pair your new pool layout with luxury [Outdoor Kitchens in Johns Creek, GA](/outdoor-kitchen-johns-creek-ga) or transition smoothly into the yard with customized [Outdoor Patios Atlanta](/outdoor-patios-atlanta) flagstones."
     ],
     parallaxImage: 'https://i.imgur.com/uDiqFSl.jpeg',
     parallaxQuote: "Cool to the touch, beautiful to look at, and safe for your entire family.",

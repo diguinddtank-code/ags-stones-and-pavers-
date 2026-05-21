@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Tag, ArrowRight, Calendar, Ruler, Box } from 'lucide-react';
 
 const projects = [
@@ -77,6 +78,15 @@ const projects = [
 ];
 
 const filters = ['All', 'Alpharetta', 'Duluth', 'Roswell', 'Marietta', 'Johns Creek', 'Suwanee'];
+
+const urlMap: Record<number, string> = {
+  1: '/pool-deck-pavers-atlanta',
+  2: '/retaining-walls-atlanta',
+  3: '/service/driveway-pavers',
+  4: '/outdoor-kitchen-johns-creek-ga',
+  5: '/service/outdoor-patio-builders',
+  6: '/retaining-walls-atlanta'
+};
 
 export const LocalProjects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -224,7 +234,7 @@ export const LocalProjects: React.FC = () => {
                 </p>
                 
                 {/* Keyword Tags */}
-                <div className="flex flex-wrap gap-2 mb-6 mt-auto" aria-label="Project Tags">
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto" aria-label="Project Tags">
                   {project.tags.map((tag, i) => (
                     <span key={i} className="text-[10px] font-medium text-gray-400 bg-white px-2 py-1 rounded-md border border-gray-200">
                       {tag}
@@ -232,7 +242,19 @@ export const LocalProjects: React.FC = () => {
                   ))}
                 </div>
 
-                <a href="tel:6784287630" className="w-full mt-auto flex items-center justify-between text-xs font-bold uppercase tracking-widest text-white bg-brand-dark py-3 px-4 rounded-lg group-hover:bg-brand-gold transition-all" aria-label={`Get quote for ${project.title}`}>
+                {/* Local SEO Contextual Handshake Link */}
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-100">
+                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-sans">Local Area Case:</span>
+                  <Link 
+                    to={urlMap[project.id] || '/'} 
+                    className="text-xs font-bold text-brand-gold hover:underline flex items-center gap-1 group/link animate-pulse duration-1000"
+                  >
+                    View Local Service Guide
+                    <ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                <a href="tel:6784287630" className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-widest text-white bg-brand-dark py-3 px-4 rounded-lg group-hover:bg-brand-gold transition-all" aria-label={`Get quote for ${project.title}`}>
                   <span>Replicate this Project</span> 
                   <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </a>
