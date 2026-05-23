@@ -7,6 +7,7 @@ export interface ServiceItem {
   icon: React.ReactNode;
   image: string;
   benefits: string[];
+  localLinks?: { name: string; url: string }[];
 }
 
 export interface Testimonial {

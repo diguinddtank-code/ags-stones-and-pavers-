@@ -16,6 +16,10 @@ const services: ServiceItem[] = [
       'High-Load Bearing Installation',
       'Permeable & Standard Paver Options',
       'Wide Range of Premium Stone Options'
+    ],
+    localLinks: [
+      { name: 'Alpharetta', url: '/pavers-alpharetta-ga' },
+      { name: 'Atlanta', url: '/driveway-pavers-atlanta' }
     ]
   },
   {
@@ -28,6 +32,10 @@ const services: ServiceItem[] = [
       'Custom Outdoor Kitchen Builders',
       'Patio Paver Companies Near Me',
       'Granite & Stone Fabrication'
+    ],
+    localLinks: [
+      { name: 'Johns Creek', url: '/patio-installation-johns-creek' },
+      { name: 'Duluth', url: '/paver-patio-duluth-ga' }
     ]
   },
   {
@@ -40,6 +48,10 @@ const services: ServiceItem[] = [
       'Structural Masonry Contractors',
       'Landscape Wall Installation',
       'Drainage & Erosion Solutions'
+    ],
+    localLinks: [
+      { name: 'Atlanta', url: '/retaining-walls-atlanta' },
+      { name: 'Roswell', url: '/hardscape-roswell-ga' }
     ]
   },
   {
@@ -52,6 +64,10 @@ const services: ServiceItem[] = [
       'Outdoor Fireplace Builders',
       'Stone Masonry Company',
       'Veneer & Natural Stone'
+    ],
+    localLinks: [
+      { name: 'Alpharetta', url: '/stone-patio-contractors-alpharetta-ga' },
+      { name: 'Smyrna', url: '/hardscaping-smyrna' }
     ]
   },
   {
@@ -64,6 +80,10 @@ const services: ServiceItem[] = [
       'Composite & Wood Decking',
       'Structural Framing',
       'Under-Deck Drainage Systems'
+    ],
+    localLinks: [
+      { name: 'Duluth', url: '/paver-patio-duluth-ga' },
+      { name: 'Johns Creek', url: '/outdoor-kitchen-johns-creek-ga' }
     ]
   },
   {
@@ -76,6 +96,10 @@ const services: ServiceItem[] = [
       'Slip-Resistant Travertine',
       'Pool Coping Installation',
       'Cool-Touch Technology'
+    ],
+    localLinks: [
+      { name: 'Atlanta', url: '/pool-deck-pavers-atlanta' },
+      { name: 'Roswell', url: '/paving-stone-contractor-roswell' }
     ]
   },
   {
@@ -88,6 +112,10 @@ const services: ServiceItem[] = [
       'House Facing & Columns',
       'Stone Work Contractors',
       'Polymer Modified Mortar'
+    ],
+    localLinks: [
+      { name: 'Alpharetta', url: '/pavers-alpharetta-ga' },
+      { name: 'Johns Creek', url: '/paver-patio-johns-creek-ga' }
     ]
   },
   {
@@ -100,6 +128,10 @@ const services: ServiceItem[] = [
       '3D Hardscape Design',
       'Landscapers Near Me',
       'Full Project Planning'
+    ],
+    localLinks: [
+      { name: 'Atlanta', url: '/hardscape-installation-atlanta' },
+      { name: 'Roswell', url: '/hardscape-roswell-ga' }
     ]
   }
 ];
@@ -232,6 +264,16 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       <h3 className="font-serif text-3xl font-bold leading-none mb-3 drop-shadow-md">
                         {service.title}
                       </h3>
+
+                      {service.localLinks && (
+                        <div className="flex gap-2 flex-wrap mb-3" onClick={(e) => e.stopPropagation()}>
+                          {service.localLinks.map((link) => (
+                            <a onClick={(e) => { e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-gold bg-black/40 px-2 py-1 rounded-md border border-white/10 hover:bg-brand-gold hover:text-white transition-colors cursor-pointer">
+                              {link.name}
+                            </a>
+                          ))}
+                        </div>
+                      )}
                       
                       <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/20">
                          <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">Tap to View</span>
@@ -286,9 +328,18 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       </h3>
                       
                       <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
-                        <p className="text-gray-300 text-sm leading-relaxed mb-6 line-clamp-3">
+                        <p className="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
                           {service.description}
                         </p>
+                        {service.localLinks && (
+                          <div className="flex gap-2 flex-wrap mb-6" onClick={(e) => e.stopPropagation()}>
+                            {service.localLinks.map((link) => (
+                              <a onClick={(e) => { e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-dark bg-brand-gold px-2 py-1 rounded-[4px] hover:bg-white transition-colors cursor-pointer">
+                                {link.name}
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       <div className="flex items-center gap-3 pt-4 border-t border-white/10 group-hover:border-brand-gold/50 transition-colors">

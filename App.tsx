@@ -19,7 +19,6 @@ const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ defaul
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
 
-const MobileNav = React.lazy(() => import('./components/MobileNav').then(module => ({ default: module.MobileNav })));
 const FloatingWidget = React.lazy(() => import('./components/FloatingWidget').then(module => ({ default: module.FloatingWidget })));
 const ExitIntentPopup = React.lazy(() => import('./components/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
@@ -177,6 +176,9 @@ const Home: React.FC = () => {
 
 const QuotePage = React.lazy(() => import('./pages/QuotePage').then(module => ({ default: module.QuotePage })));
 const ServicePage = React.lazy(() => import('./pages/ServicePage').then(module => ({ default: module.ServicePage })));
+const ServicesIndexPage = React.lazy(() => import('./pages/ServicesIndexPage').then(module => ({ default: module.ServicesIndexPage })));
+const AboutUsPage = React.lazy(() => import('./pages/AboutUsPage').then(module => ({ default: module.AboutUsPage })));
+const LocationsPage = React.lazy(() => import('./pages/LocationsPage').then(module => ({ default: module.LocationsPage })));
 
 const App: React.FC = () => {
   return (
@@ -185,6 +187,10 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quote" element={<QuotePage />} />
+          <Route path="/services" element={<ServicesIndexPage />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/service-areas" element={<LocationsPage />} />
+          
           <Route path="/service/:id" element={<ServicePage />} />
           <Route path="/driveway-pavers-atlanta" element={<ServicePage idOverride="driveway-pavers-atlanta" />} />
           <Route path="/driveways-pavers-alpharetta-ga" element={<ServicePage idOverride="driveways-pavers-alpharetta-ga" />} />
@@ -200,6 +206,14 @@ const App: React.FC = () => {
           <Route path="/hardscape-installation-atlanta" element={<ServicePage idOverride="hardscape-installation-atlanta" />} />
           <Route path="/hardscaping-smyrna" element={<ServicePage idOverride="hardscaping-smyrna" />} />
           <Route path="/paver-patio-johns-creek-ga" element={<ServicePage idOverride="paver-patio-johns-creek-ga" />} />
+          
+          {/* Most Recent Service/Location Routes */}
+          <Route path="/pavers-alpharetta-ga" element={<ServicePage idOverride="pavers-alpharetta-ga" />} />
+          <Route path="/hardscape-roswell-ga" element={<ServicePage idOverride="hardscape-roswell-ga" />} />
+          <Route path="/patio-installation-johns-creek" element={<ServicePage idOverride="patio-installation-johns-creek" />} />
+
+          {/* Catch-all for dynamically created neighborhood slugs */}
+          <Route path="/:id" element={<ServicePage />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import { ServiceDynamicContent, ServiceData } from '../components/ServiceDynamicContent';
 import { SEO } from '../components/SEO';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
 const serviceDataDb: Record<string, ServiceData> = {
+// ... data
+
   'driveway-pavers': {
     id: 'driveway-pavers',
     name: 'Driveway Pavers',
@@ -385,6 +388,63 @@ const serviceDataDb: Record<string, ServiceData> = {
       { title: 'Polymeric Sanding', description: 'Filling the joints with activated polymer sand to repel insects and water.' }
     ]
   },
+  'pavers-alpharetta-ga': {
+    id: 'pavers-alpharetta-ga',
+    name: 'Pavers Alpharetta GA',
+    heroImage: 'https://i.imgur.com/vEHS8LGl.webp',
+    heroSubtitle: 'ALPHARETTA PAVER EXPERTS',
+    overviewHeading: 'Premium Paver Installations in Alpharetta — Built for Elegance and Endurance',
+    overviewParagraphs: [
+      "When evaluating pavers in Alpharetta, GA, settling for basic concrete means constant maintenance. We specialize in high-load bearing, premium interlocking modular pavers that elevate property value and provide incredible curb appeal. From cobblestone entrances to sprawling resort style walkways, our stones stay locked.",
+      "The secret is our deep excavation process, ensuring that the heavy Alpharetta clay doesn't shift your investment over time. Match your new driveway surfaces with our [Stone Patios Alpharetta](/stone-patio-contractors-alpharetta-ga) division or complete the landscape with a stunning [Hardscape Installation Atlanta](/hardscape-installation-atlanta)."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "The hallmark of Alpharetta's finest luxury estates.",
+    process: [
+      { title: 'Estate Code Planning', description: 'Navigating Alpharetta HOA requirements and property boundary codes.' },
+      { title: 'Deep Base Compaction', description: 'Digging out soft Georgia clay to create a rigid, rock-solid sub-base.' },
+      { title: 'Precision Layouts', description: 'Installing the pavers with laser-levels and heavy duty edge restraints.' },
+      { title: 'Final Polymeric Seal', description: 'Sanding and vibrating the pavers to lock them permanently.' }
+    ]
+  },
+  'hardscape-roswell-ga': {
+    id: 'hardscape-roswell-ga',
+    name: 'Hardscape Roswell GA',
+    heroImage: 'https://i.imgur.com/G2N5Chsl.webp',
+    heroSubtitle: 'ROSWELL LANDSCAPE & MASONRY',
+    overviewHeading: 'Expert Hardscape in Roswell, GA — Stop Erosion and Build Beautifully',
+    overviewParagraphs: [
+      "Roswell's beautiful hilly terrain can be a nightmare for drainage and usable yard space. As Roswell's premier hardscaping contractor, we build structural retaining walls, elegant stone steps, and leveled tiered patios that redefine how you use your property. We don't just decorate the land; we engineer it.",
+      "Whether you need slope protection or a luxury outdoor hub, our certified teams handle it seamlessly. Try integrating our block structures with [Paving Stone Contractor Roswell](/paving-stone-contractor-roswell) paths or look into our high-end [Pool Deck Pavers Atlanta](/pool-deck-pavers-atlanta)."
+    ],
+    parallaxImage: 'https://i.imgur.com/dZstK86l.webp',
+    parallaxQuote: "Engineered to conquer slopes. Designed to conquer hearts.",
+    process: [
+      { title: 'Erosion Analysis', description: 'Identifying water flow and hydrostatic pressure points on your Roswell property.' },
+      { title: 'Heavy Fleet Excavation', description: 'Removing massive amounts of dirt to create level, functional terraces.' },
+      { title: 'Structural Stone Construction', description: 'Laying beautiful retaining facing blocks packed with deep drainage gravel.' },
+      { title: 'Clean Transitioning', description: 'Integrating softscapes, sod, and natural stone walkways into the new design.' }
+    ]
+  },
+  'patio-installation-johns-creek': {
+    id: 'patio-installation-johns-creek',
+    name: 'Patio Installation Johns Creek',
+    heroImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    heroSubtitle: 'JOHNS CREEK PATIO BUILDERS',
+    overviewHeading: 'Flawless Patio Installation in Johns Creek — Creating Backyard Sanctuaries',
+    overviewParagraphs: [
+      "In Johns Creek, outdoor living means luxury. Our patio installation process utilizes the market's highest quality materials—thick interlocking concrete blocks, Turkish travertine, and natural flagstone—to replace degrading wooden decks and cracked concrete slabs. We build open-air living rooms designed to handle anything.",
+      "Consider your patio the anchor for greater things: expand it with our [Outdoor Kitchens in Johns Creek](/outdoor-kitchen-johns-creek-ga), or coordinate property accents with sweeping [Driveways & Pavers Alpharetta](/driveways-pavers-alpharetta-ga) pathways leading to the front."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "Your private retreat, built on an uncompromising foundation.",
+    process: [
+      { title: 'Backyard 3D Modeling', description: 'Drafting your Johns Creek patio precisely to see spatial flow.' },
+      { title: 'Gravel & Sand Matting', description: 'Installing a multi-inch aggregate bed for perfect leveling and zero water pooling.' },
+      { title: 'Custom Stone Cutting', description: 'Diamond-blading paver borders for flawless, tight architectural curves.' },
+      { title: 'Resort Level Finish', description: 'Cleaning, sealing, and a final walkthrough for 100% satisfaction guarantee.' }
+    ]
+  }
 };
 
 const fallbackData: ServiceData = {
@@ -428,7 +488,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride }) => {
   const canonicalPath = idOverride ? `/${idOverride}` : `/service/${id}`;
 
   return (
-    <div className="bg-white min-h-screen relative">
+    <div className="bg-white min-h-screen relative flex flex-col">
       <SEO 
         title={title}
         description={description}
@@ -436,12 +496,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride }) => {
         canonicalPath={canonicalPath}
         keywords={seoKeywords}
       />
-      <div className="absolute top-4 left-6 z-50">
-         <Link to="/" className="inline-flex items-center gap-2 bg-black/30 backdrop-blur-md text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-black/50 transition-colors">
-            <ArrowLeft size={16} /> Back
-         </Link>
-      </div>
-      <ServiceDynamicContent data={data} />
+      <Header />
+      <main className="flex-grow">
+        <ServiceDynamicContent data={data} />
+      </main>
+      <Footer />
     </div>
   );
 };

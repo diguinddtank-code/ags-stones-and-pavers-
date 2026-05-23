@@ -42,14 +42,14 @@ export const Footer: React.FC = () => {
 
           {/* Services Links (SEO Silo) */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-brand-gold">Popular Services</h4>
+            <h4 className="font-bold text-lg mb-6 text-brand-gold">Company & Services</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
+              <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
+              <li><Link to="/about-us" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/service-areas" className="hover:text-white transition-colors">Service Areas</Link></li>
               <li><Link to="/service/driveway-pavers" className="hover:text-white transition-colors">Paver Driveway Installation</Link></li>
               <li><Link to="/service/retaining-wall-installation" className="hover:text-white transition-colors">Retaining Wall Contractors</Link></li>
               <li><Link to="/service/outdoor-patio-builders" className="hover:text-white transition-colors">Patio Builders Near Me</Link></li>
-              <li><Link to="/service/pool-deck-pavers" className="hover:text-white transition-colors">Pool Deck Pavers</Link></li>
-              <li><Link to="/service/masonry-fireplaces" className="hover:text-white transition-colors">Stone Fireplace Builders</Link></li>
-              <li><Link to="/service/landscape-design" className="hover:text-white transition-colors">Landscape Design</Link></li>
             </ul>
           </div>
 
@@ -68,6 +68,9 @@ export const Footer: React.FC = () => {
                 <li><Link to="/hardscape-installation-atlanta" className="hover:text-brand-gold transition-colors block">Hardscape Installation Atlanta</Link></li>
                 <li><Link to="/hardscaping-smyrna" className="hover:text-brand-gold transition-colors block">Hardscaping Smyrna</Link></li>
                 <li><Link to="/paver-patio-johns-creek-ga" className="hover:text-brand-gold transition-colors block">Paver Patio Johns Creek GA</Link></li>
+                <li><Link to="/pavers-alpharetta-ga" className="hover:text-brand-gold transition-colors block">Pavers Alpharetta GA</Link></li>
+                <li><Link to="/hardscape-roswell-ga" className="hover:text-brand-gold transition-colors block">Hardscape Roswell GA</Link></li>
+                <li><Link to="/patio-installation-johns-creek" className="hover:text-brand-gold transition-colors block">Patio Installation Johns Creek</Link></li>
              </ul>
              <div className="mt-6">
                 <h5 className="font-bold text-sm text-brand-gold mb-2">Service Areas</h5>
