@@ -270,7 +270,121 @@ const serviceDataDb: Record<string, ServiceData> = {
       { title: 'Rendering', description: 'Building the photorealistic 3D model and fly-throughs.' },
       { title: 'Approval', description: 'Finalizing the design before construction begins.' }
     ]
-  }
+  },
+  'paver-patio-duluth-ga': {
+    id: 'paver-patio-duluth-ga',
+    name: 'Paver Patio Duluth GA',
+    heroImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    heroSubtitle: 'DULUTH\'S PREMIER OUTDOOR LIVING BUILDERS',
+    overviewHeading: 'Custom Paver Patios in Duluth, GA — Built for Year-Round Entertaining',
+    overviewParagraphs: [
+      "Duluth's vibrant outdoor lifestyle deserves a backyard built to match. A standard wood deck or basic concrete slab can't capture the luxury of a true hardscape. We design and install custom paver patios in Duluth, featuring slip-resistant modular stones, premium Turkish travertine, and elegant flagstone that transform empty grass into high-end entertainment hubs.",
+      "Beyond aesthetics, Duluth yards often face drainage challenges. Our engineered patio bases include deep gravel compaction and advanced water runoff grading to ensure your new outdoor living space remains dry, level, and structurally sound for decades. Pair your new patio with a stunning [Retaining Wall in Atlanta](/retaining-walls-atlanta) for multi-level backyards or upgrade your entrance with our [Alpharetta Driveway Pavers](/driveways-pavers-alpharetta-ga) services."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "The centerpiece of your family's best memories.",
+    process: [
+      { title: 'Subsoil Grading Check', description: 'Assessing Duluth\'s specific soil composition for proper footing.' },
+      { title: 'Structural Aggregates', description: 'Installing a heavy-duty gravel base to prevent future paver settling.' },
+      { title: 'Patio Paving & Designing', description: 'Laying your chosen stone in breathtaking patterns with precise laser-leveling.' },
+      { title: 'Weatherproof Jointing', description: 'Locking the gaps with high-grade, weed-blocking polymeric sand.' }
+    ]
+  },
+  'paving-stone-contractor-roswell': {
+    id: 'paving-stone-contractor-roswell',
+    name: 'Paving Stone Contractor Roswell',
+    heroImage: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp',
+    heroSubtitle: 'ROSWELL\'S TRUSTED MASTER MASONS',
+    overviewHeading: 'Expert Paving Stone Contractors in Roswell — Elevate Your Curb Appeal & Backyard',
+    overviewParagraphs: [
+      "Roswell's historic elegance and modern luxury homes demand the very best in architectural hardscaping. As the premier paving stone contractor in Roswell, AGS Stones specializes in replacing failing concrete with elite interlocking pavers that flex, breathe, and endure without cracking under Georgia's intense weather cycles.",
+      "From high-load driveway pavements to majestic backyard walking paths, our structural engineers ensure zero compromise. Our 5-year structural warranty backs every stone we set. Explore our [Atlanta Driveway Pavers](/driveway-pavers-atlanta) for more on our heavy-duty vehicle support, or see how we craft resort-style spaces via [Outdoor Kitchens Johns Creek](/outdoor-kitchen-johns-creek-ga)."
+    ],
+    parallaxImage: 'https://i.imgur.com/by6FzIkl.webp',
+    parallaxQuote: "Heritage craftsmanship built to last in Roswell.",
+    process: [
+      { title: 'Roswell Permitting & HOA', description: 'Navigating local Roswell regulations and strict neighborhood aesthetic covenants.' },
+      { title: 'Base Excavation', description: 'Complete removal of cracked concrete and organic topsoil layers.' },
+      { title: 'Artisanal Paving', description: 'Setting paving stones utilizing tight-gap precision for maximum interlock.' },
+      { title: 'Polishing & Sealing', description: 'Applying deep-penetrating sealants to enhance color and block oil stains.' }
+    ]
+  },
+  'stone-patio-contractors-alpharetta-ga': {
+    id: 'stone-patio-contractors-alpharetta-ga',
+    name: 'Stone Patio Contractors Alpharetta GA',
+    heroImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    heroSubtitle: 'ALPHARETTA\'S LUXURY PATIO ARCHITECTS',
+    overviewHeading: 'Bespoke Stone Patios in Alpharetta, GA — Where Luxury Meets Outdoor Living',
+    overviewParagraphs: [
+      "When you live in Alpharetta, your backyard is a canvas for luxury. We are specialized stone patio contractors providing high-end property owners with exquisite Travertine, architectural Slate, and premium modular block patios. Forget the mundane; we build outdoor living rooms that command attention and provide ultimate comfort.",
+      "Our Alpharetta patio projects are renowned for their flawless flat grading, invisible drainage networks, and jaw-dropping masonry finishes. We seamlessly tie our patios into [Alpharetta Driveway Pavers](/driveways-pavers-alpharetta-ga) for uniform property aesthetics, and we can elevate the space further with custom [Johns Creek Outdoor Kitchens](/outdoor-kitchen-johns-creek-ga)."
+    ],
+    parallaxImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    parallaxQuote: "Step outside into pure, uncompromised elegance.",
+    process: [
+      { title: '3D Backyard Rendering', description: 'Drafting your new Alpharetta stone patio in full 3D to visualize the masterpiece.' },
+      { title: 'Hydrostatic Planning', description: 'Mapping out invisible water runoff vectors to keep your patio bone dry.' },
+      { title: 'Premium Stone Cutting', description: 'Precision diamond-cutting natural stone to fit the custom contours of your yard.' },
+      { title: 'Resort Verification', description: 'Final sweeping, sealing, and a walk-through to ensure absolute perfection.' }
+    ]
+  },
+  'hardscape-installation-atlanta': {
+    id: 'hardscape-installation-atlanta',
+    name: 'Hardscape Installation Atlanta',
+    heroImage: 'https://i.imgur.com/G2N5Chsl.webp',
+    heroSubtitle: 'ATLANTA HARDSCAPE MASTERY',
+    overviewHeading: 'Full-Scope Hardscape Installation in Atlanta — Retaining Walls, Patios, and Driveways',
+    overviewParagraphs: [
+      "Hardscaping is the backbone of any spectacular landscape. AGS Stones provides comprehensive hardscape installation in Atlanta, tackling everything from severe slope leveling and structural boulder walls to massive residential paver driveway overhauls. We specialize in the difficult projects that other contractors walk away from.",
+      "Our structural approach means we focus heavily on what lies beneath the stone: geo-grids, deep trench footings, and perforated drainage pipelines. Whether you need heavy-duty [Atlanta Retaining Walls](/retaining-walls-atlanta) to stop a mudslide, or our signature [Atlanta Driveway Pavers](/driveway-pavers-atlanta) to boost curb appeal, we engineer it to last a lifetime."
+    ],
+    parallaxImage: 'https://i.imgur.com/vEHS8LGl.webp',
+    parallaxQuote: "We bring structural engineering aesthetics to Metro Atlanta.",
+    process: [
+      { title: 'Site Engineering', description: 'Complete elevation topography and load-bearing soil tests.' },
+      { title: 'Deep Structural Trenching', description: 'Digging below the frost line to pour heavy-duty concrete and gravel footings.' },
+      { title: 'Hardscape Construction', description: 'Building the core masonry, whether it’s retaining blocks, fire pits, or paver fields.' },
+      { title: 'Landscape Integration', description: 'Adding topsoil backfill, smoothing grades, and handing over a clean, finished site.' }
+    ]
+  },
+  'hardscaping-smyrna': {
+    id: 'hardscaping-smyrna',
+    name: 'Hardscaping Smyrna',
+    heroImage: 'https://i.imgur.com/dZstK86l.webp',
+    heroSubtitle: 'SMYRNA\'S STRUCTURAL LANDSCAPE PROS',
+    overviewHeading: 'Professional Hardscaping in Smyrna — Patios, Walkways, and Landscape Masonry',
+    overviewParagraphs: [
+      "Smyrna homeowners value beautiful, functional outdoor spaces. Our professional hardscaping services in Smyrna solve fundamental yard issues—like poor drainage, unusable sloped lawns, and cracking concrete—by installing gorgeous, permanent stone and paver structures.",
+      "From terraced planter walls to smooth, barefoot-friendly poolside travertine, our hardscape designs redefine how you use your property. Combine our hardscaping expertise with our dedicated [Atlanta Pool Deck Pavers](/pool-deck-pavers-atlanta) or secure a brand new entrance via our [Roswell Paving Stone](/paving-stone-contractor-roswell) teams."
+    ],
+    parallaxImage: 'https://i.imgur.com/uDiqFSl.jpeg',
+    parallaxQuote: "Bringing form, function, and forever-quality to Smyrna.",
+    process: [
+      { title: 'Smyrna Yard Diagnostics', description: 'Identifying erosion zones, dead turf spots, and spatial flow restrictions.' },
+      { title: 'Earth Moving', description: 'Reshaping the yard\'s layout safely using compact machinery and expert operators.' },
+      { title: 'Stone & Block Installation', description: 'Erecting the hardscape features with premium modular or natural blocks.' },
+      { title: 'Detail Finishing', description: 'Applying edge restraints, capping walls, and pressure washing the new installation.' }
+    ]
+  },
+  'paver-patio-johns-creek-ga': {
+    id: 'paver-patio-johns-creek-ga',
+    name: 'Paver Patio Johns Creek GA',
+    heroImage: 'https://i.imgur.com/h3NCvta.jpeg',
+    heroSubtitle: 'JOHNS CREEK LUXURY LIVING',
+    overviewHeading: 'Exquisite Paver Patios in Johns Creek, GA — The Ultimate Backyard Upgrade',
+    overviewParagraphs: [
+      "In Johns Creek, your backyard is your private oasis. We design and install high-end paver patios that serve as the foundation for the ultimate outdoor lifestyle. By replacing standard decks with robust, beautifully patterned interlocking pavers, we create sweeping entertainment spaces that require zero maintenance.",
+      "Our paver patios perfectly complement our top-tier [Johns Creek Outdoor Kitchens](/outdoor-kitchen-johns-creek-ga), providing a unified, resort-level experience. We engineer every patio with heavy-load aggregate bases to ensure absolute flatness. Consider pairing your new patio with elite [Alpharetta Stone Patios](/stone-patio-contractors-alpharetta-ga) design concepts for a sprawling, multi-zoned outdoor compound."
+    ],
+    parallaxImage: 'https://i.imgur.com/SIBIdiFl.webp',
+    parallaxQuote: "The foundation of your private Johns Creek resort.",
+    process: [
+      { title: 'Architectural Zoning', description: 'Separating the patio into dining, lounging, and cooking zones.' },
+      { title: 'Base Optimization', description: 'Compacting layers of crush-and-run gravel to prevent dipping and settling.' },
+      { title: 'Seamless Paving', description: 'Installing thick, luxury pavers designed to withstand massive weights without cracking.' },
+      { title: 'Polymeric Sanding', description: 'Filling the joints with activated polymer sand to repel insects and water.' }
+    ]
+  },
 };
 
 const fallbackData: ServiceData = {

@@ -192,6 +192,14 @@ const App: React.FC = () => {
           <Route path="/retaining-walls-atlanta" element={<ServicePage idOverride="retaining-walls-atlanta" />} />
           <Route path="/outdoor-patios-atlanta" element={<ServicePage idOverride="outdoor-patios-atlanta" />} />
           <Route path="/pool-deck-pavers-atlanta" element={<ServicePage idOverride="pool-deck-pavers-atlanta" />} />
+          
+          {/* New Location SEO Pages */}
+          <Route path="/paver-patio-duluth-ga" element={<ServicePage idOverride="paver-patio-duluth-ga" />} />
+          <Route path="/paving-stone-contractor-roswell" element={<ServicePage idOverride="paving-stone-contractor-roswell" />} />
+          <Route path="/stone-patio-contractors-alpharetta-ga" element={<ServicePage idOverride="stone-patio-contractors-alpharetta-ga" />} />
+          <Route path="/hardscape-installation-atlanta" element={<ServicePage idOverride="hardscape-installation-atlanta" />} />
+          <Route path="/hardscaping-smyrna" element={<ServicePage idOverride="hardscaping-smyrna" />} />
+          <Route path="/paver-patio-johns-creek-ga" element={<ServicePage idOverride="paver-patio-johns-creek-ga" />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

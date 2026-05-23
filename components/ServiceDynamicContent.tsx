@@ -400,116 +400,116 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
                            description: 'Explore high-end interlocking stone designs built to satisfy Alpharetta\'s premium neighborhood covenants and heavy Georgia clays.'
                         },
                         {
-                           title: 'Atlanta Driveway Paver Installation',
-                           url: '/driveway-pavers-atlanta',
-                           badge: 'METRO GRADE EXCELLENCE',
-                           description: 'Zero cracks. Engineered base. Settle-free paver solutions replacing failing, cracked poured concrete driveways across Atlanta.'
+                           title: 'Paving Stone Contractor Roswell',
+                           url: '/paving-stone-contractor-roswell',
+                           badge: 'ROSWELL MASONS',
+                           description: 'Heritage craftsmanship tailored to Roswell’s historic luxury utilizing robust subgrade excavation.'
                         },
                         {
                            title: 'Atlanta Regional Retaining Walls',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'SLOPE SECURITY',
-                           description: 'Incorporate certified structural block walls with proper hydraulic relief behind heavy sloped parking or entry sections.'
+                           url: '/hardscape-installation-atlanta',
+                           badge: 'ATLANTA HARDSCAPE',
+                           description: 'Comprehensive hardscaping designed for Atlanta’s toughest slopes, managing complete terrain overhauls.'
                         }
                      ],
                      'driveways-pavers-alpharetta-ga': [
                         {
-                           title: 'Johns Creek Outdoor Kitchens',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'RESORT COOKING STATIONS',
-                           description: 'Complete high-performance backyard entertainment hubs built with hand-set stone veneer and customized granite layouts in Johns Creek.'
+                           title: 'Stone Patios Alpharetta',
+                           url: '/stone-patio-contractors-alpharetta-ga',
+                           badge: 'ALPHARETTA LUXURY',
+                           description: 'Coordinate your premium entryway pavements directly with an exquisite backyard stone patio built for entertaining.'
                         },
                         {
-                           title: 'Atlanta Retaining Wall Stabilization',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'STRUCTURAL EROSION CONTROL',
-                           description: 'Prevent local land loss. Engineered retaining walls utilizing robust drainage gravel to hold back shifting silt slopes.'
+                           title: 'Atlanta Hardscape Installations',
+                           url: '/hardscape-installation-atlanta',
+                           badge: 'STRUCTURAL HARDSCAPE',
+                           description: 'See how we approach heavy terrain remodeling alongside our driveway installations.'
                         },
                         {
-                           title: 'Core Driveway Pavers Design Guide',
-                           url: '/service/driveway-pavers',
-                           badge: 'TECHNICAL CODE & BLUEPRINT',
-                           description: 'Study our core driveway installation methodology, concrete sand preparation sheets, and premium polymeric joint sealing specs.'
+                           title: 'Driveway Pavers Atlanta',
+                           url: '/driveway-pavers-atlanta',
+                           badge: 'TECHNICAL BLUEPRINT',
+                           description: 'Review our metro-wide specifications for managing clay shifting and zero-tolerance load-bearing concrete grids.'
                         }
                      ],
                      'outdoor-kitchen-johns-creek-ga': [
                         {
-                           title: 'Alpharetta Estate Driveway Pavers',
-                           url: '/driveways-pavers-alpharetta-ga',
-                           badge: 'ALPHARETTA HARDSCAPES',
-                           description: 'Tour top-tier cobblestone and modular tile driveways designed to optimize estate curb appeal in premium golf courses.'
+                           title: 'Paver Patio Johns Creek',
+                           url: '/paver-patio-johns-creek-ga',
+                           badge: 'JOHNS CREEK PATIOS',
+                           description: 'The definitive foundation for your outdoor kitchen. Custom modular paver patios built to support intense weights.'
                         },
                         {
-                           title: 'Cool-Touch Pool Decks Atlanta',
-                           url: '/pool-deck-pavers-atlanta',
-                           badge: 'BAREFOOT COMFORT',
-                           description: 'Surround your pool with natural Turkish Travertine tiles engineered to repel heat and protect family feet from blisters.'
+                           title: 'Duluth Paver Patios',
+                           url: '/paver-patio-duluth-ga',
+                           badge: 'DULUTH OUTDOOR LIVING',
+                           description: 'Tour structural paver layouts in neighboring Duluth designed specifically for year-round family entertainment.'
                         },
                         {
                            title: 'Core Outdoor Patio Builders',
                            url: '/service/outdoor-patio-builders',
-                           badge: 'DESIGN & STONE DATABASE',
+                           badge: 'DESIGN DATABASE',
                            description: 'Browse the catalog of premium modular stone formats, flagstones, structural slope grading maps, and water runoff blueprints.'
                         }
                      ],
                      'driveway-pavers-atlanta': [
                         {
-                           title: 'Atlanta Pool Deck Travertine Decking',
-                           url: '/pool-deck-pavers-atlanta',
-                           badge: 'TRAVERTINE OASIS',
-                           description: 'Transform regular concrete pool borders into breathtaking resort escapes with high-grip sand seal Turkish Travertine pavers.'
+                           title: 'Roswell Paving Stones',
+                           url: '/paving-stone-contractor-roswell',
+                           badge: 'ROSWELL PRECISION',
+                           description: 'Check out premium interlocking driveways meticulously lined with Belgian cobbles matching historic Roswell properties.'
                         },
                         {
-                           title: 'Structural Retaining Walls Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'SLOPE CONTAINMENT',
-                           description: 'Avoid mudslides and terrain drop-offs on steep metropolitan yards using certified, drainage-backed Allan Block layers.'
+                           title: 'Smyrna Hardscaping Pros',
+                           url: '/hardscaping-smyrna',
+                           badge: 'SMYRNA MASONRY',
+                           description: 'See our adjacent property remodeling efforts, covering full yard hardscapes in Smyrna.'
                         },
                         {
                            title: 'Alpharetta Architectural Pavers',
                            url: '/driveways-pavers-alpharetta-ga',
                            badge: 'ALPHARETTA HIGH-END',
-                           description: 'Check out premium interlocking driveways meticulously lined with Belgian cobbles matching high-class country club properties.'
+                           description: 'Review our top-tier driveway executions managing aggressive HOA specifications and premium estate profiles.'
                         }
                      ],
                      'retaining-walls-atlanta': [
                         {
+                           title: 'Atlanta Hardscape Mastery',
+                           url: '/hardscape-installation-atlanta',
+                           badge: 'FULL SCOPE LANDSCAPING',
+                           description: 'Learn how retaining walls play a critical component in our end-to-end Hardscape Installation process across Atlanta.'
+                        },
+                        {
+                           title: 'Hardscaping Smyrna',
+                           url: '/hardscaping-smyrna',
+                           badge: 'SMYRNA YARD LEVELING',
+                           description: 'See how we stabilize Smyrna properties through expert grading, earth moving, and structural stone construction.'
+                        },
+                        {
                            title: 'Atlanta Advanced Driveway Pavers',
                            url: '/driveway-pavers-atlanta',
                            badge: 'STABILIZED DRIVES',
-                           description: 'Anchor sloping parking spaces with interlocking concrete pavers engineered to absorb vehicle shear load without shifting.'
-                        },
-                        {
-                           title: 'Outdoor Luxury Patios Atlanta',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'RESORT PATIOS',
-                           description: 'Turn newly structured, leveled terraced gardens into gorgeous travertine conversation spaces and outdoor dining zones.'
-                        },
-                        {
-                           title: 'Core Retaining Wall Installation Guide',
-                           url: '/service/retaining-wall-installation',
-                           badge: 'ENGINEERING SPECIFICATIONS',
-                           description: 'Study our internal standards for base gravel depth, geogrid sheets placement, subsoil compaction ratios, and drainage pipe lines.'
+                           description: 'Anchor sloping parking spaces with interlocking concrete pavers engineered to absorb vehicle shear load safely.'
                         }
                      ],
                      'outdoor-patios-atlanta': [
                         {
-                           title: 'Barefoot Travertine Pool Decks Atlanta',
-                           url: '/pool-deck-pavers-atlanta',
-                           badge: 'POOL OASIS',
-                           description: 'Synchronize your patio stone layout with slip-resistant, cool-shriveled Travertine pool deck surrounds for clean fluidity.'
+                           title: 'Stone Patio Contractors Alpharetta',
+                           url: '/stone-patio-contractors-alpharetta-ga',
+                           badge: 'ALPHARETTA PATIOS',
+                           description: 'Elevated stone patio engineering using architectural slate and zero-pooling grading matrices.'
                         },
                         {
-                           title: 'Johns Creek Outdoor Resort Kitchens',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'CULINARY SANCTUARIES',
-                           description: 'Incorporate commercial built-in grills, stone bars, dual sinks, and under-counter refrigerators on your backyard stone patio.'
+                           title: 'Paver Patio Duluth GA',
+                           url: '/paver-patio-duluth-ga',
+                           badge: 'DULUTH ENTERTAINMENT',
+                           description: 'Customized modular stone patios built in Duluth specifically for dynamic Georgia weather cycles.'
                         },
                         {
-                           title: 'Core Outdoor Patio Builders Manual',
-                           url: '/service/outdoor-patio-builders',
-                           badge: 'BLUEPRINTS & SPEC SHEETS',
-                           description: 'Gain full insight on our standard base excavation depths, sand screen alignment tolerances, and structural joint locking.'
+                           title: 'Paver Patio Johns Creek',
+                           url: '/paver-patio-johns-creek-ga',
+                           badge: 'JOHNS CREEK OASIS',
+                           description: 'Luxury paver foundations that seamlessly integrate with high-end outdoor kitchens and backyard resort zones.'
                         }
                      ],
                      'pool-deck-pavers-atlanta': [
@@ -517,181 +517,42 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
                            title: 'Johns Creek Pro Outdoor Kitchens',
                            url: '/outdoor-kitchen-johns-creek-ga',
                            badge: 'CULINARY RESORTS',
-                           description: 'Host poolside dinner parties with stainless steel grill engines, stone-faced cocktail counters, and built-in masonry draft drafts.'
+                           description: 'Host poolside dinner parties with stainless steel grill engines, stone-faced cocktail counters, and built-in masonry drafts.'
                         },
                         {
-                           title: 'Custom Outdoor Patios Atlanta',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'TRANSITIONAL HARDSCAPING',
-                           description: 'Architect beautiful transitions with seamless flagstone steps wrapping from structural patio door thresholds down to pool waters.'
+                           title: 'Alpharetta Stone Patios',
+                           url: '/stone-patio-contractors-alpharetta-ga',
+                           badge: 'ALPHARETTA HARDSCAPING',
+                           description: 'Expand your pool deck visually into sweeping, grand stone patios designed for luxury Alpharetta yards.'
                         },
                         {
-                           title: 'Core Pool Deck Pavers Design Page',
-                           url: '/service/pool-deck-pavers',
-                           badge: 'SWIMMING DECK SYSTEMS',
-                           description: 'Read about our bullnose limestone coping anchors, anti-slip sand aggregates, and polymeric weed prevention.'
+                           title: 'Hardscape Installation Atlanta',
+                           url: '/hardscape-installation-atlanta',
+                           badge: 'COMPLETE OVERHAUL',
+                           description: 'Integrate your brand new pool deck into a comprehensive Atlanta hardscape redesign including walls and pathways.'
                         }
                      ],
-                     'retaining-wall-installation': [
-                        {
-                           title: 'Engineered Retaining Walls Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'EROSION MASTERCLASS',
-                           description: 'Expert, drainage-packed block work structured to reclaim steep residential yards and redirect heavy rain runoff safely.'
-                        },
-                        {
-                           title: 'Atlanta Luxury Patios Design',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'TRAVERTINE PATIOS',
-                           description: 'Pave newly created, stable flat levels using top-quality modular concrete blocks or beautiful natural slate flagstone.'
-                        },
-                        {
-                           title: 'Atlanta Heavy Driveway Reconstruction',
-                           url: '/driveway-pavers-atlanta',
-                           badge: 'DRIVEWAY STABILIZATION',
-                           description: 'Learn how we construct vertical security columns to retain driveway edges along severe hillside property lines.'
-                        }
-                     ],
-                     'outdoor-patio-builders': [
-                        {
-                           title: 'Atlanta Premium Custom Patios',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'FLAGSTONE & SLATE TOUR',
-                           description: 'Stunning travertine, flagstone, and modern paver patios displaying customized Metro Atlanta layouts and fire features.'
-                        },
-                        {
-                           title: 'Johns Creek Backyard Outdoor Kitchens',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'BESPOKE COOKING BARS',
-                           description: 'Build robust grill countertops faced with beautiful stack-stone veneers and luxury weather-durable quartzite tops.'
-                        },
-                        {
-                           title: 'Retaining Wall Stabilization Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'YARD LEVELING MATRICES',
-                           description: 'Safely flatten rolling slopes to prepare a secure structural foundation for premium outdoor patio construction.'
-                        }
-                     ],
-                     'pool-deck-pavers': [
-                        {
-                           title: 'Atlanta Cool Travertine Pool Surrounds',
-                           url: '/pool-deck-pavers-atlanta',
-                           badge: 'TRAVERTINE SPECIALISTS',
-                           description: 'Flawless Turkish travertine overlays around existing concrete swimming pools in Georgia\'s high-end neighborhoods.'
-                        },
-                        {
-                           title: 'Johns Creek Luxury Outdoor Entertaining',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'POOL RESORT KITCHENS',
-                           description: 'Combine cool-touch poolside pathways with custom outdoor bars, sinks, and gas wood fireplaces.'
-                        },
-                        {
-                           title: 'Atlanta Outdoor Resilient Patios',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'TRANSITIONAL WALKWAYS',
-                           description: 'Build a harmonious transition with synchronized stone designs linking your back door directly to pool steps.'
-                        }
-                     ],
-                     'masonry-fireplaces': [
-                        {
-                           title: 'Johns Creek Cooking & Grill Resorts',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'JOHNS CREEK BESPOKE',
-                           description: 'Anchor your stone fireplace with customized gas grills, brick pizza ovens, refrigeration compartments, and natural granite counters.'
-                        },
-                        {
-                           title: 'Atlanta Custom Patios Showcase',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'TRAVERTINE COLD-FIREPLACES',
-                           description: 'Wrap your luxury patio in absolute comfort with deep fire pit seating configurations styled with natural flagstone veneer.'
-                        },
-                        {
-                           title: 'Atlanta Retaining Wall Geogrid Stabilization',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'HEAVY FOOTINGS CODES',
-                           description: 'Understand how our structural engineers pour heavy reinforced concrete base pads to safely host high-tonnage chimney builds.'
-                        }
-                     ],
-                     'deck-builders': [
-                        {
-                           title: 'Atlanta Outlawed Deck Patios',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'MULTI-LEVEL TRANSITIONS',
-                           description: 'Exquisite transitions between high-level synthetic composite decks and ground-level flagstone conversation zones.'
-                        },
-                        {
-                           title: 'Retaining Wall Terraces Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'LAND SLOPE RETENTION',
-                           description: 'Support high-elevation deck footings and secure steep soil slopes with premium structural boulder and block walls.'
-                        },
-                        {
-                           title: 'Johns Creek Outdoor Culinary Cookers',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'DECK FOOD SANCTUARIES',
-                           description: 'Safely integrate state-of-the-art gas grills and stone kitchen wraps under custom pergola decks in Johns Creek.'
-                        }
-                     ],
-                     'stone-veneer': [
-                        {
-                           title: 'Johns Creek Stack-Stone Kitchens',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: 'OUTDOOR CHISELED COUNTERS',
-                           description: 'Clad premium built-in bars and draft taps in authentic, tightly stacked outdoor masonry veneer.'
-                        },
-                        {
-                           title: 'Retaining Walls Stone Facing Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'PRESTIGE NATURAL FACADES',
-                           description: 'Elevate heavy-duty structural concrete retaining walls with majestic natural flagstone or dry-stack granite stone veneer.'
-                        },
-                        {
-                           title: 'Alpharetta Estate Paving & Columns',
-                           url: '/driveways-pavers-alpharetta-ga',
-                           badge: 'ALPHARETTA ESTATE PORTICO',
-                           description: 'Coordinate complete stone veneer entryway columns with luxury modular driveways for unparalleled estate presence.'
-                        }
-                     ],
-                     'landscape-design': [
-                        {
-                           title: 'Atlanta Natural Travertine Patios',
-                           url: '/outdoor-patios-atlanta',
-                           badge: 'RESORT COMFORT DECOR',
-                           description: 'Pristine flagstone walk paths, slate conversations hubs, and softscape alignments custom contoured to Georgia forests.'
-                        },
-                        {
-                           title: 'Retaining Wall Terraced Scapes Atlanta',
-                           url: '/retaining-walls-atlanta',
-                           badge: 'TIERED SOIL MODULATIONS',
-                           description: 'Structural leveling systems with built-in planter steps, premium turf, and natural drainage vectors.'
-                        },
-                        {
-                           title: 'Johns Creek 3D Outdoor Kitchen Resorts',
-                           url: '/outdoor-kitchen-johns-creek-ga',
-                           badge: '3D RESORT BLUEPRINTING',
-                           description: 'Simulate precise property orientations, wind lines, sunset profiles, and seating flows with architectural 3D modeling.'
-                        }
-                     ]
+                     // For all other dynamically generated or generic pages we'll provide default ones below.
                   };
 
                   const links = showcasesDb[data.id] || [
                      {
-                        title: 'Alpharetta Estate Driveway Pavers',
-                        url: '/driveways-pavers-alpharetta-ga',
-                        badge: 'REGIONAL CORE INDEX',
-                        description: 'View premium interlocking block installations structured for clay ground stability and exceptional estate aesthetics.'
+                        title: 'Stone Patios Alpharetta',
+                        url: '/stone-patio-contractors-alpharetta-ga',
+                        badge: 'ALPHARETTA LUXURY SECRETS',
+                        description: 'View breathtaking residential stone patios engineered with structural integrity to match Alpharetta’s premium aesthetics.'
                      },
                      {
-                        title: 'Johns Creek Resort Outdoor Kitchens',
-                        url: '/outdoor-kitchen-johns-creek-ga',
-                        badge: 'BACKYARD LIVING INDEX',
-                        description: 'State-of-the-art culinary stations lined with Turkish travertine, customized quartzite counters, and hand-layered brick elements.'
+                        title: 'Paver Patio Johns Creek',
+                        url: '/paver-patio-johns-creek-ga',
+                        badge: 'JOHNS CREEK RESORT PADS',
+                        description: 'The foundation of the perfect outdoor kitchen. Discover load-bearing, zero-shift paver patios throughout Johns Creek.'
                      },
                      {
-                        title: 'Erosion Retaining Walls Atlanta',
-                        url: '/retaining-walls-atlanta',
-                        badge: 'EROSION MATRIX',
-                        description: 'Over-engineered soil retention platforms with deep hydrostatic drainage channels built specifically for North Georgia slopes.'
+                        title: 'Hardscaping Smyrna & Atlanta',
+                        url: '/hardscaping-smyrna',
+                        badge: 'STRUCTURAL LANDSCAPING',
+                        description: 'Witness comprehensive yard transformations—from unmanageable slopes to gorgeous, level masonry entertaining hubs.'
                      }
                   ];
 
