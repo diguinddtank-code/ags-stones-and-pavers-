@@ -16,6 +16,7 @@ export const QuotePage: React.FC = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -24,6 +25,7 @@ export const QuotePage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
     
     // Extract form data
     const formData = new FormData(e.currentTarget);
@@ -48,13 +50,21 @@ export const QuotePage: React.FC = () => {
         body: JSON.stringify(data)
       });
 
-      if (response.ok) {
+      const resData = await response.json().catch(() => ({}));
+
+      if (response.ok && (resData.success === "true" || resData.success === true || resData.success === undefined)) {
         setIsSuccess(true);
       } else {
-        console.error("Form delivery failed.");
+        console.error("Form delivery issue:", resData);
+        if (resData.message && (resData.message.toLowerCase().includes("activation") || resData.message.toLowerCase().includes("activate") || resData.message.toLowerCase().includes("confirm"))) {
+          setErrorMessage("Ativação pendente! Por favor, acesse o e-mail agstones.pavers@gmail.com e clique em 'Activate/Confirm' no link de ativação enviado pelo FormSubmit para começar a receber formulários.");
+        } else {
+          setErrorMessage(resData.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
+        }
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("Erro de rede. Verifique sua conexão ou tente novamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -205,6 +215,13 @@ export const QuotePage: React.FC = () => {
                    className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors resize-none text-[15px]"
                  ></textarea>
               </div>
+
+              {errorMessage && (
+                <div className="mb-6 p-5 bg-red-50 border border-red-200 text-red-800 rounded-2xl flex flex-col gap-1.5 shadow-sm text-[14px]">
+                  <span className="font-bold text-red-900 block">❌ Envio Falhou / Ativação Requerida</span>
+                  <p className="leading-relaxed opacity-95">{errorMessage}</p>
+                </div>
+              )}
 
               <button 
                 type="submit" 

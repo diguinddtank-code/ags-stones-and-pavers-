@@ -28,6 +28,7 @@ export const Contact: React.FC = () => {
   });
   
   const [status, setStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
+  const [formErrorMsg, setFormErrorMsg] = useState<string>('');
   const [loadMap, setLoadMap] = useState(false);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,6 +69,7 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('LOADING');
+    setFormErrorMsg('');
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
@@ -86,16 +88,24 @@ export const Contact: React.FC = () => {
         })
       });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && (data.success === "true" || data.success === true || data.success === undefined)) {
         setStatus('SUCCESS');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', details: '' });
         setTimeout(() => setStatus('IDLE'), 5000);
       } else {
         setStatus('ERROR');
+        if (data.message && (data.message.toLowerCase().includes("activation") || data.message.toLowerCase().includes("activate") || data.message.toLowerCase().includes("confirm"))) {
+          setFormErrorMsg("Ativação pendente! Por favor, acesse a caixa de entrada do e-mail agstones.pavers@gmail.com e clique em 'Activate/Confirm' no e-mail recebido do FormSubmit.co para receber as mensagens.");
+        } else {
+          setFormErrorMsg(data.message || "Houve um problema de envio. Verifique se o e-mail agstones.pavers@gmail.com já ativou o serviço ou tente novamente.");
+        }
       }
     } catch (error) {
       console.error("Form Error:", error);
       setStatus('ERROR');
+      setFormErrorMsg("Erro de rede. Por favor, verifique sua conexão ou tente novamente.");
     }
   };
 
@@ -212,9 +222,14 @@ export const Contact: React.FC = () => {
                       </div>
 
                       {status === 'ERROR' && (
-                        <div className="flex items-center gap-2 text-red-500 text-sm bg-red-50 p-3 rounded-lg border border-red-100">
-                          <AlertCircle size={16} />
-                          <span>Something went wrong. Please call us directly at (678) 428-7630.</span>
+                        <div className="flex flex-col gap-2 p-4 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200">
+                          <div className="flex items-center gap-2 font-bold select-none text-red-800">
+                            <AlertCircle size={16} />
+                            <span>Erro no Envio / Link de Ativação Pendente</span>
+                          </div>
+                          <p className="leading-relaxed">
+                            {formErrorMsg || "Something went wrong. Please check if the form is activated or call us directly at (678) 428-7630."}
+                          </p>
                         </div>
                       )}
 

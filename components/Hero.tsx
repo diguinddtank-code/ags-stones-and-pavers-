@@ -7,6 +7,7 @@ export const Hero: React.FC = () => {
   
   // Form State
   const [formStatus, setFormStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
+  const [heroErrorMsg, setHeroErrorMsg] = useState<string>('');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,6 +23,7 @@ export const Hero: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('LOADING');
+    setHeroErrorMsg('');
 
     try {
       const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
@@ -41,16 +43,24 @@ export const Hero: React.FC = () => {
         })
       });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && (data.success === "true" || data.success === true || data.success === undefined)) {
         setFormStatus('SUCCESS');
         setFormData({ firstName: '', lastName: '', phone: '', email: '', service: 'Driveway Pavers' });
         setTimeout(() => setFormStatus('IDLE'), 5000);
       } else {
         setFormStatus('ERROR');
+        if (data.message && (data.message.toLowerCase().includes("activation") || data.message.toLowerCase().includes("activate") || data.message.toLowerCase().includes("confirm"))) {
+          setHeroErrorMsg("Ativação pendente! Por favor, acesse o e-mail agstones.pavers@gmail.com e ative o FormSubmit para começar a receber formulários.");
+        } else {
+          setHeroErrorMsg(data.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
+        }
       }
     } catch (error) {
       console.error("Form Error:", error);
       setFormStatus('ERROR');
+      setHeroErrorMsg("Erro de conexão. Verifique sua rede ou tente novamente.");
     }
   };
 
@@ -299,7 +309,13 @@ export const Hero: React.FC = () => {
                            
                            <p className="text-[10px] text-center text-gray-300 mt-2 flex items-center justify-center gap-1">
                               <ShieldCheck size={12} /> No obligation. Privacy protected.
-                           </p>
+                            </p>
+                            {formStatus === 'ERROR' && (
+                              <div className="p-3 bg-red-950/85 border border-red-800 text-red-200 text-xs rounded-lg flex flex-col gap-1 backdrop-blur-md text-left mt-2 shadow-xl">
+                                <span className="font-bold">❌ Envio Falhou / Ativação Requerida</span>
+                                <p className="leading-relaxed opacity-95">{heroErrorMsg || "Something went wrong. Please check activation."}</p>
+                              </div>
+                            )}
                         </form>
                      </>
                   )}
