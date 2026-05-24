@@ -72,35 +72,31 @@ export const Contact: React.FC = () => {
     setFormErrorMsg('');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `New Lead: ${formData.firstName} ${formData.lastName}`,
+            access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
+            subject: `New Lead: ${formData.firstName} ${formData.lastName}`,
             name: `${formData.firstName} ${formData.lastName}`,
             email: formData.email,
             phone: formData.phone,
-            message: formData.details,
-            _captcha: "false"
+            message: formData.details
         })
       });
 
       const data = await response.json().catch(() => ({}));
 
-      if (response.ok && (data.success === "true" || data.success === true || data.success === undefined)) {
+      if (response.ok && (data.success === "true" || data.success === true)) {
         setStatus('SUCCESS');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', details: '' });
         setTimeout(() => setStatus('IDLE'), 5000);
       } else {
         setStatus('ERROR');
-        if (data.message && (data.message.toLowerCase().includes("activation") || data.message.toLowerCase().includes("activate") || data.message.toLowerCase().includes("confirm"))) {
-          setFormErrorMsg("Ativação pendente! Por favor, acesse a caixa de entrada do e-mail agstones.pavers@gmail.com e clique em 'Activate/Confirm' no e-mail recebido do FormSubmit.co para receber as mensagens.");
-        } else {
-          setFormErrorMsg(data.message || "Houve um problema de envio. Verifique se o e-mail agstones.pavers@gmail.com já ativou o serviço ou tente novamente.");
-        }
+        setFormErrorMsg(data.message || "Houve um problema de envio com o Web3Forms. Por favor, tente novamente ou entre em contato diretamente pelo telefone (678) 428-7630.");
       }
     } catch (error) {
       console.error("Form Error:", error);
@@ -225,10 +221,10 @@ export const Contact: React.FC = () => {
                         <div className="flex flex-col gap-2 p-4 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200">
                           <div className="flex items-center gap-2 font-bold select-none text-red-800">
                             <AlertCircle size={16} />
-                            <span>Erro no Envio / Link de Ativação Pendente</span>
+                            <span>Falha ao Enviar Mensagem</span>
                           </div>
                           <p className="leading-relaxed">
-                            {formErrorMsg || "Something went wrong. Please check if the form is activated or call us directly at (678) 428-7630."}
+                            {formErrorMsg || "Something went wrong. Please try again or call us directly at (678) 428-7630."}
                           </p>
                         </div>
                       )}

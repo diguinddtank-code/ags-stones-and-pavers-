@@ -26,36 +26,31 @@ export const Hero: React.FC = () => {
     setHeroErrorMsg('');
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `New HERO Lead: ${formData.firstName} ${formData.lastName}`,
+            access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
+            subject: `New HERO Lead: ${formData.firstName} ${formData.lastName}`,
             name: `${formData.firstName} ${formData.lastName}`,
             phone: formData.phone,
             email: formData.email,
-            service_interest: formData.service,
-            source: "Desktop Hero Glass Form",
-            _captcha: "false"
+            message: `Service Interest: ${formData.service}\nSource: Desktop Hero Glass Form`
         })
       });
 
       const data = await response.json().catch(() => ({}));
 
-      if (response.ok && (data.success === "true" || data.success === true || data.success === undefined)) {
+      if (response.ok && (data.success === "true" || data.success === true)) {
         setFormStatus('SUCCESS');
         setFormData({ firstName: '', lastName: '', phone: '', email: '', service: 'Driveway Pavers' });
         setTimeout(() => setFormStatus('IDLE'), 5000);
       } else {
         setFormStatus('ERROR');
-        if (data.message && (data.message.toLowerCase().includes("activation") || data.message.toLowerCase().includes("activate") || data.message.toLowerCase().includes("confirm"))) {
-          setHeroErrorMsg("Ativação pendente! Por favor, acesse o e-mail agstones.pavers@gmail.com e ative o FormSubmit para começar a receber formulários.");
-        } else {
-          setHeroErrorMsg(data.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
-        }
+        setHeroErrorMsg(data.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
       }
     } catch (error) {
       console.error("Form Error:", error);
@@ -312,8 +307,8 @@ export const Hero: React.FC = () => {
                             </p>
                             {formStatus === 'ERROR' && (
                               <div className="p-3 bg-red-950/85 border border-red-800 text-red-200 text-xs rounded-lg flex flex-col gap-1 backdrop-blur-md text-left mt-2 shadow-xl">
-                                <span className="font-bold">❌ Envio Falhou / Ativação Requerida</span>
-                                <p className="leading-relaxed opacity-95">{heroErrorMsg || "Something went wrong. Please check activation."}</p>
+                                <span className="font-bold">❌ Envio Falhou</span>
+                                <p className="leading-relaxed opacity-95">{heroErrorMsg || "Something went wrong. Please check details and try again."}</p>
                               </div>
                             )}
                         </form>

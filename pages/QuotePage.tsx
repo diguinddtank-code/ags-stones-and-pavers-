@@ -30,18 +30,16 @@ export const QuotePage: React.FC = () => {
     // Extract form data
     const formData = new FormData(e.currentTarget);
     const data = {
+        access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
         name: formData.get('fullName'),
         phone: formData.get('phone'),
         email: formData.get('email'),
-        zip: formData.get('zip'),
-        details: formData.get('details'),
-        service: selectedService || 'Unspecified',
-        _subject: `New Quote Request: ${formData.get('fullName')}`,
-        _captcha: "false"
+        subject: `New Quote Request: ${formData.get('fullName')}`,
+        message: `Zip Code: ${formData.get('zip')}\nSelected Service: ${selectedService || 'Unspecified'}\n\nProject Details:\n${formData.get('details')}`
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
@@ -52,15 +50,11 @@ export const QuotePage: React.FC = () => {
 
       const resData = await response.json().catch(() => ({}));
 
-      if (response.ok && (resData.success === "true" || resData.success === true || resData.success === undefined)) {
+      if (response.ok && (resData.success === "true" || resData.success === true)) {
         setIsSuccess(true);
       } else {
         console.error("Form delivery issue:", resData);
-        if (resData.message && (resData.message.toLowerCase().includes("activation") || resData.message.toLowerCase().includes("activate") || resData.message.toLowerCase().includes("confirm"))) {
-          setErrorMessage("Ativação pendente! Por favor, acesse o e-mail agstones.pavers@gmail.com e clique em 'Activate/Confirm' no link de ativação enviado pelo FormSubmit para começar a receber formulários.");
-        } else {
-          setErrorMessage(resData.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
-        }
+        setErrorMessage(resData.message || "Erro de envio com o Web3Forms. Por favor, tente novamente ou ligue para (678) 428-7630.");
       }
     } catch (err) {
       console.error(err);
@@ -218,7 +212,7 @@ export const QuotePage: React.FC = () => {
 
               {errorMessage && (
                 <div className="mb-6 p-5 bg-red-50 border border-red-200 text-red-800 rounded-2xl flex flex-col gap-1.5 shadow-sm text-[14px]">
-                  <span className="font-bold text-red-900 block">❌ Envio Falhou / Ativação Requerida</span>
+                  <span className="font-bold text-red-900 block">❌ Envio Falhou</span>
                   <p className="leading-relaxed opacity-95">{errorMessage}</p>
                 </div>
               )}
