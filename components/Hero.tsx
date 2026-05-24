@@ -24,20 +24,20 @@ export const Hero: React.FC = () => {
     setFormStatus('LOADING');
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
-            subject: `New HERO Lead: ${formData.firstName} ${formData.lastName}`,
+            _subject: `New HERO Lead: ${formData.firstName} ${formData.lastName}`,
             name: `${formData.firstName} ${formData.lastName}`,
             phone: formData.phone,
             email: formData.email,
             service_interest: formData.service,
-            source: "Desktop Hero Glass Form"
+            source: "Desktop Hero Glass Form",
+            _captcha: "false"
         })
       });
 

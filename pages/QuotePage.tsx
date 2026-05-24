@@ -21,14 +21,43 @@ export const QuotePage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    // Extract form data
+    const formData = new FormData(e.currentTarget);
+    const data = {
+        name: formData.get('fullName'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        zip: formData.get('zip'),
+        details: formData.get('details'),
+        service: selectedService || 'Unspecified',
+        _subject: `New Quote Request: ${formData.get('fullName')}`,
+        _captcha: "false"
+    };
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/agstones.pavers@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        console.error("Form delivery failed.");
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1500);
+    }
   };
 
   return (
@@ -132,6 +161,7 @@ export const QuotePage: React.FC = () => {
                  <div>
                     <input 
                       type="text" 
+                      name="fullName"
                       required
                       placeholder="Full Name" 
                       className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-[15px]"
@@ -140,6 +170,7 @@ export const QuotePage: React.FC = () => {
                  <div>
                     <input 
                       type="tel" 
+                      name="phone"
                       required
                       placeholder="Phone Number" 
                       className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-[15px]"
@@ -148,6 +179,7 @@ export const QuotePage: React.FC = () => {
                  <div>
                     <input 
                       type="email" 
+                      name="email"
                       required
                       placeholder="Email Address" 
                       className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-[15px]"
@@ -156,6 +188,7 @@ export const QuotePage: React.FC = () => {
                  <div>
                     <input 
                       type="text" 
+                      name="zip"
                       required
                       placeholder="Zip Code" 
                       className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-[15px]"
@@ -166,6 +199,7 @@ export const QuotePage: React.FC = () => {
               <div className="mb-8">
                  <textarea 
                    rows={4}
+                   name="details"
                    required
                    placeholder="Tell us about your project (dimensions, stone preference, etc...)" 
                    className="w-full bg-white border border-[#eef0f2] rounded-2xl px-6 py-5 text-[#4a5568] placeholder-[#a0aec0] focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors resize-none text-[15px]"
