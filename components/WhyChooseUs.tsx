@@ -189,7 +189,7 @@ export const WhyChooseUs: React.FC = () => {
                  
                  <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 md:mb-8 text-white">
                    Not Just Contractors. <br/>
-                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-200 to-brand-gold">
+                   <span className="text-brand-gold">
                      Hardscape Artisans.
                    </span>
                  </h2>

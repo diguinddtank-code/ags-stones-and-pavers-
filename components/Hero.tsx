@@ -50,12 +50,12 @@ export const Hero: React.FC = () => {
         setTimeout(() => setFormStatus('IDLE'), 5000);
       } else {
         setFormStatus('ERROR');
-        setHeroErrorMsg(data.message || "Erro de envio. Por favor, tente novamente ou ligue para (678) 428-7630.");
+        setHeroErrorMsg(data.message || "There was a problem submitting the form. Please try again or call us at (678) 428-7630.");
       }
     } catch (error) {
       console.error("Form Error:", error);
       setFormStatus('ERROR');
-      setHeroErrorMsg("Erro de conexão. Verifique sua rede ou tente novamente.");
+      setHeroErrorMsg("Network error. Please check your connection and try again.");
     }
   };
 
@@ -128,9 +128,9 @@ export const Hero: React.FC = () => {
               
               {/* H1 HEADLINE */}
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] mb-4 md:mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] animate-[fade-up_0.8s_ease-out_0.2s_both]">
-                Transform Your <br className="hidden md:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-yellow-100 to-brand-gold italic pr-2 drop-shadow-md">
-                  Outdoor Living
+                Expert Paver Installation & <br className="hidden md:block" />
+                <span className="text-brand-gold italic pr-2 drop-shadow-md">
+                  Custom Hardscapes
                 </span>
               </h1>
 
@@ -307,7 +307,7 @@ export const Hero: React.FC = () => {
                             </p>
                             {formStatus === 'ERROR' && (
                               <div className="p-3 bg-red-950/85 border border-red-800 text-red-200 text-xs rounded-lg flex flex-col gap-1 backdrop-blur-md text-left mt-2 shadow-xl">
-                                <span className="font-bold">❌ Envio Falhou</span>
+                                <span className="font-bold">Error Submitting</span>
                                 <p className="leading-relaxed opacity-95">{heroErrorMsg || "Something went wrong. Please check details and try again."}</p>
                               </div>
                             )}

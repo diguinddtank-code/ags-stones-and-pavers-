@@ -54,11 +54,11 @@ export const QuotePage: React.FC = () => {
         setIsSuccess(true);
       } else {
         console.error("Form delivery issue:", resData);
-        setErrorMessage(resData.message || "Erro de envio com o Web3Forms. Por favor, tente novamente ou ligue para (678) 428-7630.");
+        setErrorMessage(resData.message || "There was a problem submitting the form. Please try again or call us at (678) 428-7630.");
       }
     } catch (err) {
       console.error(err);
-      setErrorMessage("Erro de rede. Verifique sua conexão ou tente novamente.");
+      setErrorMessage("Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -212,7 +212,7 @@ export const QuotePage: React.FC = () => {
 
               {errorMessage && (
                 <div className="mb-6 p-5 bg-red-50 border border-red-200 text-red-800 rounded-2xl flex flex-col gap-1.5 shadow-sm text-[14px]">
-                  <span className="font-bold text-red-900 block">❌ Envio Falhou</span>
+                  <span className="font-bold text-red-900 block">Error Submitting</span>
                   <p className="leading-relaxed opacity-95">{errorMessage}</p>
                 </div>
               )}

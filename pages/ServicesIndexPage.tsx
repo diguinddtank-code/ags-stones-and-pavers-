@@ -58,7 +58,7 @@ export const ServicesIndexPage: React.FC = () => {
                 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-8 tracking-tighter leading-[1.1] drop-shadow-2xl">
                   Luxury Outdoor <br className="hidden md:block" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500">Living Spaces.</span>
+                  <span className="text-gray-300">Living Spaces.</span>
                 </h1>
                 
                 <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto font-light mb-12 leading-relaxed shadow-sm">

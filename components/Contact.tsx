@@ -96,12 +96,12 @@ export const Contact: React.FC = () => {
         setTimeout(() => setStatus('IDLE'), 5000);
       } else {
         setStatus('ERROR');
-        setFormErrorMsg(data.message || "Houve um problema de envio com o Web3Forms. Por favor, tente novamente ou entre em contato diretamente pelo telefone (678) 428-7630.");
+        setFormErrorMsg(data.message || "There was a problem submitting the form. Please try again or call us at (678) 428-7630.");
       }
     } catch (error) {
       console.error("Form Error:", error);
       setStatus('ERROR');
-      setFormErrorMsg("Erro de rede. Por favor, verifique sua conexão ou tente novamente.");
+      setFormErrorMsg("Network error. Please check your connection and try again.");
     }
   };
 
@@ -221,7 +221,7 @@ export const Contact: React.FC = () => {
                         <div className="flex flex-col gap-2 p-4 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200">
                           <div className="flex items-center gap-2 font-bold select-none text-red-800">
                             <AlertCircle size={16} />
-                            <span>Falha ao Enviar Mensagem</span>
+                            <span>Error Submitting</span>
                           </div>
                           <p className="leading-relaxed">
                             {formErrorMsg || "Something went wrong. Please try again or call us directly at (678) 428-7630."}

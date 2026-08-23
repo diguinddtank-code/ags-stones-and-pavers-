@@ -169,6 +169,7 @@ const Home: React.FC = () => {
       <Suspense fallback={null}>
          <FloatingWidget />
          <ExitIntentPopup />
+         <CookieBanner />
       </Suspense>
     </div>
   );
@@ -179,6 +180,9 @@ const ServicePage = React.lazy(() => import('./pages/ServicePage').then(module =
 const ServicesIndexPage = React.lazy(() => import('./pages/ServicesIndexPage').then(module => ({ default: module.ServicesIndexPage })));
 const AboutUsPage = React.lazy(() => import('./pages/AboutUsPage').then(module => ({ default: module.AboutUsPage })));
 const LocationsPage = React.lazy(() => import('./pages/LocationsPage').then(module => ({ default: module.LocationsPage })));
+const LegalPage = React.lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
+const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
+const CookieBanner = React.lazy(() => import('./components/CookieBanner').then(module => ({ default: module.CookieBanner })));
 
 const App: React.FC = () => {
   return (
@@ -189,6 +193,8 @@ const App: React.FC = () => {
           <Route path="/quote" element={<QuotePage />} />
           <Route path="/services" element={<ServicesIndexPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/privacy-policy" element={<LegalPage type="privacy" />} />
+          <Route path="/terms-of-service" element={<LegalPage type="terms" />} />
           <Route path="/service-areas" element={<LocationsPage />} />
           
           <Route path="/service/:id" element={<ServicePage />} />
@@ -214,6 +220,8 @@ const App: React.FC = () => {
 
           {/* Catch-all for dynamically created neighborhood slugs */}
           <Route path="/:id" element={<ServicePage />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>

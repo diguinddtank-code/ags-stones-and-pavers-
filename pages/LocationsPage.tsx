@@ -79,7 +79,7 @@ export const LocationsPage: React.FC = () => {
                 
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tighter leading-[1.1] drop-shadow-xl">
                   Our Service <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-250 to-gray-400">Areas.</span>
+                  <span className="text-gray-300">Areas.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed shadow-sm">
                   Commanding the northern Metro Atlanta suburbs with premium hardscapes. Select your region below to see specialized local services.

@@ -70,7 +70,7 @@ export const AboutUsPage: React.FC = () => {
                 </span>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tighter leading-[1.1] drop-shadow-xl">
                   Built on <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-600">Integrity.</span>
+                  <span className="text-brand-gold">Integrity.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light mb-10 leading-relaxed shadow-sm">
                   We engineer premium outdoor spaces across Metro Atlanta. Extreme structural integrity meets breathtaking architectural masonry.
