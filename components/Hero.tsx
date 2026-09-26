@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, Tag, Check, ChevronDown } from 'lucide-react';
+import { ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, Tag, Check, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   // Removed refs and scroll listeners to free up the main thread
@@ -63,6 +63,12 @@ export const Hero: React.FC = () => {
     }
   };
 
+  const heroBadges = [
+    { icon: <ShieldCheck />, label: "Licensed & Insured", sub: "Fully covered in Georgia" },
+    { icon: <Award />, label: "In-House Crews", sub: "No subcontractors" },
+    { icon: <CheckCircle2 />, label: "Free Estimates", sub: "On-site, no obligation" },
+  ];
+
   const badges = [
     { icon: <Award />, title: "20+ Years", sub: "Master Experience" },
     { icon: <CheckCircle2 />, title: "ICPI Certified", sub: "Expert Installers" },
@@ -72,7 +78,7 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full h-[100svh] min-h-[650px] flex items-center pt-24 md:pt-32 pb-24 md:pb-32 overflow-hidden bg-brand-dark">
+    <section className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-28 md:pt-32 pb-28 md:pb-32 overflow-hidden bg-brand-dark">
       {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
@@ -101,47 +107,30 @@ export const Hero: React.FC = () => {
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white leading-[1.1] mb-6 drop-shadow-lg tracking-tight">
-                    Transform Your Home's <br className="hidden md:block"/>
-                    <span className="text-brand-gold italic pr-2">Curb Appeal</span> Today.
+                    Transform Your <span className="text-brand-gold italic pr-2">Outdoor Space</span> with Expert Hardscaping.
                 </h1>
                 
                 <p className="text-base md:text-xl text-gray-100 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-md">
                     Premium driveway pavers, luxury patios, and expert hardscaping crafted by local master masons.
                 </p>
 
-                {/* TRUST BADGES - Mobile (Centered) */}
-                <div className="md:hidden flex items-center justify-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 p-2 pr-4 rounded-full shadow-2xl mx-auto max-w-[280px] mb-8">
-                    <div className="flex -space-x-2">
-                      <div className="w-8 h-8 rounded-full border border-white/50 bg-white flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="w-5 h-5"><path fill="#EA4335" d="M12 4.9c1.77 0 3.36.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.61l4 3.1C6.22 6.86 8.87 4.9 12 4.9z"/><path fill="#FBBC05" d="M5.28 9.71c-.24.7-.38 1.45-.38 2.29s.14 1.59.38 2.29l-4 3.1C.46 15.54 0 13.82 0 12c0-1.82.46-3.54 1.28-5.39l4 3.1z"/><path fill="#34A853" d="M12 19.1c-3.13 0-5.78-1.96-6.72-4.81l-4 3.1c1.98 3.92 6.03 6.61 10.72 6.61 3.24 0 5.95-1.07 7.96-2.91l-3.87-3c-1.09.73-2.46 1.01-4.09 1.01z"/><path fill="#4285F4" d="M23.5 12.23c0-.79-.07-1.55-.19-2.23H12v4.45h6.47c-.29 1.48-1.13 2.73-2.4 3.58l3.87 3c2.25-2.09 3.56-5.17 3.56-8.8z"/></svg>                      </div>
-                      <div className="w-8 h-8 rounded-full border border-white/50 bg-brand-gold flex items-center justify-center text-brand-dark font-bold text-[10px]">98+</div>
-                    </div>
-                    <div className="text-left flex flex-col justify-center">
-                        <div className="flex items-center gap-1">
-                            <span className="text-white font-bold text-xs drop-shadow-md leading-none">5.0</span>
-                             <div className="flex text-[#F4B400] gap-0.5"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
-                        </div>
-                        <span className="text-[11px] text-gray-200 font-medium leading-tight mt-0.5 drop-shadow-md">Trusted by homeowners in Atlanta</span>
-                    </div>
-                </div>
-
-                {/* Desktop */}
-                <div className="hidden md:flex items-center gap-4 bg-white/10 backdrop-blur-xl border border-white/20 p-3 pr-6 rounded-full hover:bg-black/50 transition-colors cursor-pointer shadow-2xl">
-                    <div className="flex -space-x-3">
-                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=64&h=64" alt="Reviewer" className="w-10 h-10 rounded-full border-2 border-white/50" loading="lazy" decoding="async" />
-                      <div className="w-10 h-10 rounded-full border-2 border-white/50 bg-white flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="#EA4335" d="M12 4.9c1.77 0 3.36.61 4.6 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.61l4 3.1C6.22 6.86 8.87 4.9 12 4.9z"/><path fill="#FBBC05" d="M5.28 9.71c-.24.7-.38 1.45-.38 2.29s.14 1.59.38 2.29l-4 3.1C.46 15.54 0 13.82 0 12c0-1.82.46-3.54 1.28-5.39l4 3.1z"/><path fill="#34A853" d="M12 19.1c-3.13 0-5.78-1.96-6.72-4.81l-4 3.1c1.98 3.92 6.03 6.61 10.72 6.61 3.24 0 5.95-1.07 7.96-2.91l-3.87-3c-1.09.73-2.46 1.01-4.09 1.01z"/><path fill="#4285F4" d="M23.5 12.23c0-.79-.07-1.55-.19-2.23H12v4.45h6.47c-.29 1.48-1.13 2.73-2.4 3.58l3.87 3c2.25-2.09 3.56-5.17 3.56-8.8z"/></svg>
-                      </div>
-                      <div className="w-10 h-10 rounded-full border-2 border-white/50 bg-brand-gold flex items-center justify-center text-brand-dark font-bold text-xs">98+</div>
-                    </div>
-                    <div className="text-left">
-                        <div className="flex items-center gap-1">
-                            <span className="text-white font-bold text-sm drop-shadow-md">Google Reviews</span>
-                            <div className="flex text-[#F4B400] drop-shadow-sm"><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /><Star size={10} fill="currentColor" /></div>
-                        </div>
-                        <span className="text-[10px] text-gray-200 drop-shadow-md">Trusted by homeowners in Atlanta</span>
-                    </div>
-                </div>
+                {/* TRUST BADGES - glass pills, wrap on small screens */}
+                <ul className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-8 lg:mb-0 max-w-md sm:max-w-none mx-auto lg:mx-0">
+                    {heroBadges.map((b) => (
+                      <li
+                        key={b.label}
+                        className="flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 pl-1.5 pr-3 sm:pr-4 py-1.5 rounded-full shadow-2xl"
+                      >
+                        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold/90 text-brand-dark flex items-center justify-center shrink-0">
+                          {React.cloneElement(b.icon as React.ReactElement<any>, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4" })}
+                        </span>
+                        <span className="text-left leading-tight">
+                          <span className="block text-white font-bold text-[11px] sm:text-xs uppercase tracking-wider drop-shadow-md">{b.label}</span>
+                          <span className="hidden sm:block text-[10px] text-gray-200 drop-shadow-md">{b.sub}</span>
+                        </span>
+                      </li>
+                    ))}
+                </ul>
             </div>
 
             {/* Right Form Column */}
