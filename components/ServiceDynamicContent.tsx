@@ -197,7 +197,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-6 text-white/80 text-sm font-medium">
              <span className="flex items-center gap-2"><Shield size={16} className="text-brand-gold" /> Fully Licensed & Insured</span>
              <span className="flex items-center gap-2"><Star size={16} className="text-brand-gold" /> 5-Star Rated Craftsmen</span>
-             <span className="flex items-center gap-2"><Clock size={16} className="text-brand-gold" /> Free 3D Design Consult</span>
+             <span className="flex items-center gap-2"><Clock size={16} className="text-brand-gold" /> Free On-Site Estimates</span>
           </motion.div>
         </motion.div>
       </section>
