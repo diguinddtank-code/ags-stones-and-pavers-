@@ -139,9 +139,7 @@ export const LocalProjects: React.FC = () => {
 
   return (
     <section ref={sectionRef} id="local-projects" className="pt-10 pb-24 bg-white relative">
-      <script type="application/ld+json">
-        {JSON.stringify(schemaData)}
-      </script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

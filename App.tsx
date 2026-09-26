@@ -19,7 +19,6 @@ const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ defaul
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
 
-const FloatingWidget = React.lazy(() => import('./components/FloatingWidget').then(module => ({ default: module.FloatingWidget })));
 const ExitIntentPopup = React.lazy(() => import('./components/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
 // --- ERROR BOUNDARY ---
@@ -52,10 +51,16 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
 // --- LIGHTWEIGHT LAZY WRAPPER ---
 const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = ({ children, minHeight = "500px" }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  // Prerendered pages ship the full content in the HTML (crawlers see every
+  // section) and hydrate it as-is; only a plain client render stays lazy.
+  const [isVisible, setIsVisible] = useState(
+    () => typeof window === "undefined" || (window as any).__PRERENDERED__ === true
+  );
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isVisible) return;
+
     // 1. Immediate mobile check
     if (typeof window !== 'undefined' && window.scrollY > 100) {
        setIsVisible(true);
@@ -111,7 +116,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
-      <SEO />
+      <SEO
+        title="Paver Installation, Retaining Walls & Patio Contractors in Atlanta | AGS Stones"
+        description="Duluth-based hardscape contractor for driveway pavers, paver patios, retaining walls, pool decks and outdoor kitchens across Atlanta, Alpharetta, Johns Creek and Roswell. Free estimates."
+        canonicalPath="/"
+      />
       <Header isHidden={isServiceModalOpen} />
       
       <main>
@@ -167,7 +176,6 @@ const Home: React.FC = () => {
       </LazyBlock>
 
       <Suspense fallback={null}>
-         <FloatingWidget />
          <ExitIntentPopup />
          <CookieBanner />
       </Suspense>
@@ -180,6 +188,8 @@ const ServicePage = React.lazy(() => import('./pages/ServicePage').then(module =
 const ServicesIndexPage = React.lazy(() => import('./pages/ServicesIndexPage').then(module => ({ default: module.ServicesIndexPage })));
 const AboutUsPage = React.lazy(() => import('./pages/AboutUsPage').then(module => ({ default: module.AboutUsPage })));
 const LocationsPage = React.lazy(() => import('./pages/LocationsPage').then(module => ({ default: module.LocationsPage })));
+const BlogIndexPage = React.lazy(() => import('./pages/BlogIndexPage').then(module => ({ default: module.BlogIndexPage })));
+const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage').then(module => ({ default: module.BlogPostPage })));
 const LegalPage = React.lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 const CookieBanner = React.lazy(() => import('./components/CookieBanner').then(module => ({ default: module.CookieBanner })));
@@ -197,29 +207,14 @@ const App: React.FC = () => {
           <Route path="/terms-of-service" element={<LegalPage type="terms" />} />
           <Route path="/service-areas" element={<LocationsPage />} />
           
-          <Route path="/service/:id" element={<ServicePage />} />
-          <Route path="/driveway-pavers-atlanta" element={<ServicePage idOverride="driveway-pavers-atlanta" />} />
-          <Route path="/driveways-pavers-alpharetta-ga" element={<ServicePage idOverride="driveways-pavers-alpharetta-ga" />} />
-          <Route path="/outdoor-kitchen-johns-creek-ga" element={<ServicePage idOverride="outdoor-kitchen-johns-creek-ga" />} />
-          <Route path="/retaining-walls-atlanta" element={<ServicePage idOverride="retaining-walls-atlanta" />} />
-          <Route path="/outdoor-patios-atlanta" element={<ServicePage idOverride="outdoor-patios-atlanta" />} />
-          <Route path="/pool-deck-pavers-atlanta" element={<ServicePage idOverride="pool-deck-pavers-atlanta" />} />
-          
-          {/* New Location SEO Pages */}
-          <Route path="/paver-patio-duluth-ga" element={<ServicePage idOverride="paver-patio-duluth-ga" />} />
-          <Route path="/paving-stone-contractor-roswell" element={<ServicePage idOverride="paving-stone-contractor-roswell" />} />
-          <Route path="/stone-patio-contractors-alpharetta-ga" element={<ServicePage idOverride="stone-patio-contractors-alpharetta-ga" />} />
-          <Route path="/hardscape-installation-atlanta" element={<ServicePage idOverride="hardscape-installation-atlanta" />} />
-          <Route path="/hardscaping-smyrna" element={<ServicePage idOverride="hardscaping-smyrna" />} />
-          <Route path="/paver-patio-johns-creek-ga" element={<ServicePage idOverride="paver-patio-johns-creek-ga" />} />
-          
-          {/* Most Recent Service/Location Routes */}
-          <Route path="/pavers-alpharetta-ga" element={<ServicePage idOverride="pavers-alpharetta-ga" />} />
-          <Route path="/hardscape-roswell-ga" element={<ServicePage idOverride="hardscape-roswell-ga" />} />
-          <Route path="/patio-installation-johns-creek" element={<ServicePage idOverride="patio-installation-johns-creek" />} />
+          <Route path="/blog" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
 
-          {/* Catch-all for dynamically created neighborhood slugs */}
-          <Route path="/:id" element={<ServicePage />} />
+          {/* Core service hubs */}
+          <Route path="/service/:id" element={<ServicePage scope="service" />} />
+
+          {/* Hand-written local pages and generated service + city pages; unknown slugs render a real 404 */}
+          <Route path="/:id" element={<ServicePage scope="root" />} />
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

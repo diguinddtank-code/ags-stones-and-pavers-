@@ -1,89 +1,110 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
+import {
+  BUSINESS,
+  BUSINESS_ID,
+  WEBSITE_ID,
+  Crumb,
+  absoluteUrl,
+  breadcrumbSchema,
+  businessSchema,
+  websiteSchema,
+} from '../lib/business';
 
 interface SEOProps {
   title?: string;
   description?: string;
   keywords?: string[];
+  /** Path used for the canonical URL. Defaults to the current route. */
   canonicalPath?: string;
   image?: string;
-  type?: 'website' | 'article' | 'local.business';
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  /** Breadcrumb trail (Home is added automatically). */
+  breadcrumbs?: Crumb[];
+  /** Extra schema.org nodes merged into the page @graph. */
+  schema?: Record<string, unknown>[];
+  /** Extra article meta for blog posts. */
+  article?: { publishedTime: string; modifiedTime: string; section?: string };
 }
 
-export const SEO: React.FC<SEOProps> = ({
-  title = 'AGS Stones and Pavers | Premium Hardscaping serving Your City',
-  description = 'Transform your outdoor living space with AGS Stones. We specialize in driveway pavers, luxury patios, retaining walls, and custom masonry. Expert local craftsmen.',
-  keywords = ['driveway pavers', 'outdoor patio builders', 'retaining wall installation', 'hardscaping', 'masonry fireplaces'],
-  canonicalPath = '',
-  image = 'https://i.imgur.com/G2N5Chsl.webp',
-  type = 'website'
-}) => {
-  const siteUrl = 'https://agsstonesandpavers.com'; // Replace with actual domain when known
-  const currentUrl = `${siteUrl}${canonicalPath}`;
+const DEFAULT_TITLE = 'Paver Installation, Retaining Walls & Patio Contractors | AGS Stones and Pavers';
+const DEFAULT_DESCRIPTION =
+  'Duluth-based hardscape contractor for driveway pavers, paver patios, retaining walls, pool decks and outdoor kitchens across Atlanta, Alpharetta, Johns Creek and Roswell. Free estimates.';
 
-  // Structured Data (JSON-LD) for LocalBusiness to boost Local SEO
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "AGS Stones and Pavers",
-    "image": image,
-    "description": description,
-    "url": siteUrl,
-    "telephone": "+16784287630",
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Your City",
-      "addressRegion": "Your State",
-      "addressCountry": "US"
-    },
-    // Optional opening hours
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "opens": "08:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      // Links to social profiles go here
-    ]
+export const SEO: React.FC<SEOProps> = ({
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  keywords,
+  canonicalPath,
+  image = BUSINESS.defaultImage,
+  type = 'website',
+  noindex = false,
+  breadcrumbs,
+  schema = [],
+  article,
+}) => {
+  const location = useLocation();
+  const url = absoluteUrl(canonicalPath ?? location.pathname);
+  const imageUrl = absoluteUrl(image);
+
+  const crumbs: Crumb[] | null = breadcrumbs ? [{ name: 'Home', path: '/' }, ...breadcrumbs] : null;
+
+  const webPage: Record<string, unknown> = {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: title,
+    description,
+    inLanguage: 'en-US',
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': BUSINESS_ID },
+    primaryImageOfPage: { '@type': 'ImageObject', url: imageUrl },
+    ...(crumbs ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
+  };
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      websiteSchema(),
+      businessSchema(),
+      webPage,
+      ...(crumbs ? [breadcrumbSchema(crumbs, url)] : []),
+      ...schema,
+    ],
   };
 
   return (
-    <Helmet>
-      {/* Basic Title & Meta */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={currentUrl} />
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+        <meta
+          name="robots"
+          content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+        />
+        {!noindex && <link rel="canonical" href={url} />}
 
-      {/* Open Graph (Facebook/LinkedIn) */}
-      <meta property="og:site_name" content="AGS Stones and Pavers" />
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={currentUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content={BUSINESS.name} />
+        <meta property="og:type" content={type} />
+        <meta property="og:url" content={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={imageUrl} />
+        {article && <meta property="article:published_time" content={article.publishedTime} />}
+        {article && <meta property="article:modified_time" content={article.modifiedTime} />}
+        {article?.section && <meta property="article:section" content={article.section} />}
 
-      {/* Twitter Cards */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-
-      {/* Structured Data (JSON-LD) */}
-      <script type="application/ld+json">
-        {JSON.stringify(localBusinessSchema)}
-      </script>
-    </Helmet>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl} />
+      </Helmet>
+      {/* JSON-LD stays in the body: it is rendered identically on server and client. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
+    </>
   );
 };

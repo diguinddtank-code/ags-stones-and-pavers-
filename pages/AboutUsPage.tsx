@@ -38,7 +38,8 @@ export const AboutUsPage: React.FC = () => {
       <SEO 
         title="About AGS Stones | Atlanta's Premier Hardscaping Company" 
         description="Learn about AGS Stones, the leading hardscaping and paver installation experts in Atlanta. Family-owned, structurally focused, and built to outlast."
-        url="https://agsstonesandpavers.com/about-us"
+        breadcrumbs={[{ name: "About Us", path: "/about-us" }]}
+        schema={[{ "@type": "AboutPage", "@id": "https://www.agsstonesandpavers.com/about-us#about", url: "https://www.agsstonesandpavers.com/about-us", name: "About AGS Stones and Pavers", about: { "@id": "https://www.agsstonesandpavers.com/#business" } }]}
       />
       
       <Header />

@@ -66,9 +66,7 @@ export const FAQ: React.FC = () => {
 
   return (
     <section ref={sectionRef} id="faq" className="py-24 relative overflow-hidden">
-      <script type="application/ld+json">
-        {JSON.stringify(schemaData)}
-      </script>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       
       {/* BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">

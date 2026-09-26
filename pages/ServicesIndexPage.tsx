@@ -6,6 +6,24 @@ import { Services } from '../components/Services';
 import { Contact } from '../components/Contact';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Layers, HardHat, Compass } from 'lucide-react';
+import { serviceDataDb, CORE_SERVICE_IDS } from '../lib/serviceData';
+import { absoluteUrl, BUSINESS_ID } from '../lib/business';
+
+const servicesItemList = {
+  '@type': 'ItemList',
+  '@id': absoluteUrl('/services') + '#services',
+  name: 'Hardscape Services',
+  itemListElement: CORE_SERVICE_IDS.map((id, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: serviceDataDb[id].name,
+      url: absoluteUrl(`/service/${id}`),
+      provider: { '@id': BUSINESS_ID },
+    },
+  })),
+};
 
 export const ServicesIndexPage: React.FC = () => {
   useEffect(() => {
@@ -21,7 +39,8 @@ export const ServicesIndexPage: React.FC = () => {
       <SEO 
         title="Our Hardscaping & Paver Services | AGS Stones" 
         description="Comprehensive luxury hardscaping services in Metro Atlanta. Patios, driveways, retaining walls, and outdoor kitchens built to last."
-        url="https://agsstonesandpavers.com/services"
+        breadcrumbs={[{ name: "Services", path: "/services" }]}
+        schema={[servicesItemList]}
       />
       
       <Header />

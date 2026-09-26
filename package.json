@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
-    "start": "node dist/server.cjs"
+    "build": "vite build && vite build --ssr entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "preview": "npm run build && npm start"
   },
   "dependencies": {
     "@google/genai": "^1.37.0",
+    "compression": "^1.8.1",
     "express": "^5.2.1",
     "framer-motion": "^12.39.0",
     "lucide-react": "^0.562.0",
@@ -19,12 +21,16 @@
     "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.6",
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
+    "autoprefixer": "^10.5.4",
     "esbuild": "^0.28.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^3.4.19",
     "tsx": "^4.22.3",
     "typescript": "~5.8.2",
     "vite": "^6.4.2"

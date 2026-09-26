@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Layers, Flame, Utensils, LayoutGrid, ShieldCheck, Plus, Hammer, Waves, Mountain, Ruler } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ServiceItem } from '../types';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
@@ -262,13 +262,13 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                       </div>
                       
                       <h3 className="font-serif text-3xl font-bold leading-none mb-3 drop-shadow-md">
-                        {service.title}
+                        <Link to={`/service/${service.id}`} onClick={(e) => e.stopPropagation()}>{service.title}</Link>
                       </h3>
 
                       {service.localLinks && (
                         <div className="flex gap-2 flex-wrap mb-3" onClick={(e) => e.stopPropagation()}>
                           {service.localLinks.map((link) => (
-                            <a onClick={(e) => { e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-gold bg-black/40 px-2 py-1 rounded-md border border-white/10 hover:bg-brand-gold hover:text-white transition-colors cursor-pointer">
+                            <a href={link.url} onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-gold bg-black/40 px-2 py-1 rounded-md border border-white/10 hover:bg-brand-gold hover:text-white transition-colors cursor-pointer">
                               {link.name}
                             </a>
                           ))}
@@ -324,7 +324,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                    {/* Text Block */}
                    <div className="transform transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
                       <h3 className="text-2xl lg:text-3xl font-serif text-white font-medium mb-3 leading-tight group-hover:text-brand-gold transition-colors">
-                        {service.title}
+                        <Link to={`/service/${service.id}`} onClick={(e) => e.stopPropagation()}>{service.title}</Link>
                       </h3>
                       
                       <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
@@ -334,7 +334,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                         {service.localLinks && (
                           <div className="flex gap-2 flex-wrap mb-6" onClick={(e) => e.stopPropagation()}>
                             {service.localLinks.map((link) => (
-                              <a onClick={(e) => { e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-dark bg-brand-gold px-2 py-1 rounded-[4px] hover:bg-white transition-colors cursor-pointer">
+                              <a href={link.url} onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(link.url); }} key={link.url} className="text-[10px] uppercase font-bold text-brand-dark bg-brand-gold px-2 py-1 rounded-[4px] hover:bg-white transition-colors cursor-pointer">
                                 {link.name}
                               </a>
                             ))}

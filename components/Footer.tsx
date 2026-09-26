@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
                 <span className="group-hover:text-white">Instagram</span>
               </a>
                <a 
-                href="https://www.facebook.com/agsstonesandpavers" 
+                href="https://www.facebook.com/profile.php?id=61594750743609" 
                 target="_blank" 
                 rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-brand-gold transition-colors text-sm font-bold tracking-wide group"
@@ -47,6 +47,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
               <li><Link to="/about-us" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/service-areas" className="hover:text-white transition-colors">Service Areas</Link></li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Blog & Guides</Link></li>
               <li><Link to="/service/driveway-pavers" className="hover:text-white transition-colors">Paver Driveway Installation</Link></li>
               <li><Link to="/service/retaining-wall-installation" className="hover:text-white transition-colors">Retaining Wall Contractors</Link></li>
               <li><Link to="/service/outdoor-patio-builders" className="hover:text-white transition-colors">Patio Builders Near Me</Link></li>
@@ -90,7 +91,7 @@ export const Footer: React.FC = () => {
               </p>
               <p>
                  <a href="tel:6784287630" className="hover:text-white block font-medium text-base text-gray-300">(678) 428-7630</a>
-                 <span className="text-xs text-green-500 block mt-1">● Available Mon-Sat</span>
+                 <span className="text-xs text-green-500 block mt-1">● Available Mon-Fri</span>
               </p>
               <p><a href="mailto:agstones.pavers@gmail.com" className="hover:text-white underline decoration-gray-600 underline-offset-4">agstones.pavers@gmail.com</a></p>
             </address>
@@ -103,7 +104,7 @@ export const Footer: React.FC = () => {
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link to="/services" className="hover:text-white transition-colors">Sitemap</Link>
+            <a href="/sitemap.xml" className="hover:text-white transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

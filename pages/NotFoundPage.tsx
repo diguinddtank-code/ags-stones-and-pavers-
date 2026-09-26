@@ -12,7 +12,7 @@ export const NotFoundPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
-      <SEO title="Page Not Found | AGS Stones" description="The page you are looking for does not exist." />
+      <SEO title="Page Not Found | AGS Stones and Pavers" description="The page you are looking for does not exist." noindex />
       <Header forceSolid={true} />
       <main className="flex-grow flex items-center justify-center pt-32 pb-20 px-4">
         <div className="max-w-xl mx-auto text-center">

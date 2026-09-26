@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://agsstonesandpavers.com/sitemap.xml
+Sitemap: https://www.agsstonesandpavers.com/sitemap.xml

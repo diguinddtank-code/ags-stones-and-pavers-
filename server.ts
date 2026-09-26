@@ -1,14 +1,19 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
+import compression from "compression";
+import fs from "fs";
+
 import { createServer as createViteServer } from "vite";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // Compress all HTTP responses (gzip/brotli)
+  app.use(compression());
 
   // JSON request body parser
   app.use(express.json());
@@ -44,12 +49,39 @@ async function startServer() {
     console.log("Starting server in PRODUCTION mode...");
     const distPath = path.join(process.cwd(), "dist");
     
-    // Serve static files inside dist/ directory
-    app.use(express.static(distPath));
+    // Every page is prerendered to dist/<route>.html. Drop trailing slashes so
+    // each page has exactly one URL, then serve "/about-us" from about-us.html.
+    app.use((req, res, next) => {
+      if (req.path.length > 1 && req.path.endsWith("/")) {
+        const query = req.url.slice(req.path.length);
+        return res.redirect(301, req.path.replace(/\/+$/, "") + query);
+      }
+      const page = req.path === "/" ? "index.html" : `${req.path.slice(1)}.html`;
+      const file = path.join(distPath, page);
+      if (file.startsWith(distPath) && fs.existsSync(file)) {
+        res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+        return res.sendFile(file);
+      }
+      next();
+    });
+
+    // Serve static files inside dist/ directory with aggressive caching for assets
+    app.use(express.static(distPath, {
+      redirect: false,
+      setHeaders: (res, path) => {
+        if (path.includes('/assets/')) {
+          // Cache immutable assets (hashed) for 1 year
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        } else {
+          // Cache other static files (like favicon) for 1 day
+          res.setHeader('Cache-Control', 'public, max-age=86400');
+        }
+      }
+    }));
     
-    // Fallback all client routes to single-page App index.html (solves 404 on refresh)
+    // Unknown URLs get a real 404 status (no soft-404s for Google)
     app.get("*all", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.status(404).sendFile(path.join(distPath, "404.html"));
     });
   }
 

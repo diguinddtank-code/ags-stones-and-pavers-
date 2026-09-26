@@ -34,6 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
     { name: 'About', href: '/about-us', isRoute: true },
     { name: 'Locations', href: '/service-areas', isRoute: true },
     { name: 'Portfolio', href: '/#portfolio', isRoute: false },
+    { name: 'Blog', href: '/blog', isRoute: true },
     { name: 'Contact', href: '/quote', isRoute: true },
   ];
 
@@ -138,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
         {/* Mobile Nav Dropdown */}
         <div 
           className={`md:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 transition-all duration-300 origin-top overflow-hidden ${
-            isMobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+            isMobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
           }`}
         >
           <div className="flex flex-col px-6 py-8 space-y-4">

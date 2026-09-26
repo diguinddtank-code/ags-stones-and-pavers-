@@ -68,7 +68,9 @@ export const QuotePage: React.FC = () => {
     <div className="min-h-screen bg-brand-dark flex flex-col relative overflow-hidden font-sans">
       <SEO 
         title="Get a Free Estimate | AGS Stones and Pavers"
-        description="Request a free, factory-direct estimate for your hardscaping project. Driveways, patios, retaining walls, and custom stone work in your area."
+        description="Request a free on-site estimate for your hardscaping project in Metro Atlanta: driveway pavers, patios, retaining walls, pool decks and outdoor kitchens."
+        breadcrumbs={[{ name: "Free Estimate", path: "/quote" }]}
+        schema={[{ "@type": "ContactPage", "@id": "https://www.agsstonesandpavers.com/quote#contact", url: "https://www.agsstonesandpavers.com/quote", name: "Request a Free Estimate", about: { "@id": "https://www.agsstonesandpavers.com/#business" } }]}
       />
 
       {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}

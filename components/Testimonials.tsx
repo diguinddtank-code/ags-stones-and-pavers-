@@ -77,38 +77,8 @@ export const Testimonials: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Schema for aggregate rating
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "AGS Stones and Pavers",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": reviews.length,
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": reviews.map(r => ({
-      "@type": "Review",
-      "author": {
-         "@type": "Person",
-         "name": r.name
-      },
-      "reviewRating": {
-         "@type": "Rating",
-         "ratingValue": r.rating,
-         "bestRating": "5"
-      },
-      "reviewBody": r.text
-    }))
-  };
-
   return (
     <section ref={sectionRef} id="testimonials" className="pt-10 pb-12 relative overflow-hidden">
-      <script type="application/ld+json">
-        {JSON.stringify(schemaData)}
-      </script>
 
       {/* BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
@@ -148,7 +118,7 @@ export const Testimonials: React.FC = () => {
                 <div className="flex justify-between items-start mb-6">
                    <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden border border-brand-gold/20">
-                         <img src={review.image} alt={`${review.name} from ${review.location}`} className="w-full h-full object-cover" loading="lazy" />
+                         <img src={review.image} alt={`${review.name} from ${review.location}`} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                       </div>
                       <div>
                          <h3 className="font-bold text-brand-dark leading-tight text-sm">{review.name}</h3>

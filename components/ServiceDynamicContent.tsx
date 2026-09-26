@@ -38,6 +38,8 @@ export interface ServiceData {
 
 interface Props {
   data: ServiceData;
+  /** Rendered before the final CTA (FAQ, local links, guides). */
+  extraSections?: React.ReactNode;
 }
 
 const renderParagraphWithLinks = (text: string) => {
@@ -90,7 +92,7 @@ const renderParagraphWithLinks = (text: string) => {
   return parts.length > 0 ? parts : text;
 };
 
-export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
+export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) => {
   const { scrollY } = useScroll();
   const [showStickyFooter, setShowStickyFooter] = useState(false);
 
@@ -596,6 +598,8 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data }) => {
             </div>
          </div>
       </section>
+
+      {extraSections}
 
       {/* FINAL SCARCITY CTA */}
       <section className="bg-brand-dark py-24 md:py-32 px-6 relative overflow-hidden">

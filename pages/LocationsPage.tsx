@@ -6,6 +6,7 @@ import { Contact } from '../components/Contact';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { MapPin, ArrowRight, ShieldCheck, HardHat, Compass, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { localPageUrl } from '../lib/localPages';
 
 const locations = [
   { id: 'alpharetta', name: 'Alpharetta, GA', lat: '34.0754', lng: '-84.2941', desc: 'Custom golf club estates & high-end interlocking modular driveways.' },
@@ -43,7 +44,7 @@ export const LocationsPage: React.FC = () => {
       <SEO 
         title="Service Areas | AGS Stones Hardscaping Across Metro Atlanta" 
         description="Find our elite hardscaping, paving, and outdoor kitchen services across Alpharetta, Johns Creek, Atlanta, Roswell, Duluth, and Smyrna."
-        url="https://agsstonesandpavers.com/service-areas"
+        breadcrumbs={[{ name: "Service Areas", path: "/service-areas" }]}
       />
       
       <Header />
@@ -159,7 +160,7 @@ export const LocationsPage: React.FC = () => {
                             <span className="text-[9px] font-bold uppercase tracking-widest text-brand-gold block mb-2">Direct Local Portals:</span>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {servicePrefixes.map(({ prefix, label, icon }) => {
-                                const hrefLink = `/${prefix}-${loc.id}-ga`;
+                                const hrefLink = localPageUrl(prefix, loc.id);
                                 return (
                                   <Link
                                     key={prefix}
@@ -251,7 +252,7 @@ export const LocationsPage: React.FC = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
                       {servicePrefixes.map(({ prefix, label, icon }) => {
-                        const hrefLink = `/${prefix}-${selectedLocation.id}-ga`;
+                        const hrefLink = localPageUrl(prefix, selectedLocation.id);
                         return (
                           <Link
                             key={prefix}
@@ -295,7 +296,7 @@ export const LocationsPage: React.FC = () => {
                         return (
                           <li key={prefix}>
                             <Link 
-                              to={`/${prefix}-${loc.id}-ga`}
+                              to={localPageUrl(prefix, loc.id)}
                               className="text-gray-400 hover:text-brand-gold transition-colors block truncate hover:underline"
                               title={`${label} in ${loc.name}`}
                             >

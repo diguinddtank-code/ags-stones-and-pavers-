@@ -1,5 +1,125 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/driveway-pavers-alpharetta-ga",
+      "destination": "/driveways-pavers-alpharetta-ga",
+      "permanent": true
+    },
+    {
+      "source": "/driveway-pavers-atlanta-ga",
+      "destination": "/driveway-pavers-atlanta",
+      "permanent": true
+    },
+    {
+      "source": "/driveway-pavers-roswell-ga",
+      "destination": "/paving-stone-contractor-roswell",
+      "permanent": true
+    },
+    {
+      "source": "/stone-patios-alpharetta-ga",
+      "destination": "/stone-patio-contractors-alpharetta-ga",
+      "permanent": true
+    },
+    {
+      "source": "/stone-patios-atlanta-ga",
+      "destination": "/outdoor-patios-atlanta",
+      "permanent": true
+    },
+    {
+      "source": "/stone-patios-duluth-ga",
+      "destination": "/paver-patio-duluth-ga",
+      "permanent": true
+    },
+    {
+      "source": "/stone-patios-johns-creek-ga",
+      "destination": "/paver-patio-johns-creek-ga",
+      "permanent": true
+    },
+    {
+      "source": "/retaining-walls-atlanta-ga",
+      "destination": "/retaining-walls-atlanta",
+      "permanent": true
+    },
+    {
+      "source": "/outdoor-kitchens-johns-creek-ga",
+      "destination": "/outdoor-kitchen-johns-creek-ga",
+      "permanent": true
+    },
+    {
+      "source": "/service/:id(driveway-pavers-atlanta|retaining-walls-atlanta|outdoor-patios-atlanta|pool-deck-pavers-atlanta|driveways-pavers-alpharetta-ga|outdoor-kitchen-johns-creek-ga)",
+      "destination": "/:id",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/quote",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/about-us",
+      "permanent": true
+    },
+    {
+      "source": "/locations",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/about-ags-stones-and-pavers-atlanta",
+      "destination": "/about-us",
+      "permanent": true
+    },
+    {
+      "source": "/about-ags-stones-and-pavers-atlanta/",
+      "destination": "/about-us",
+      "permanent": true
+    },
+    {
+      "source": "/category/paving-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/category/paving-services/",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/category/:slug*",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/feed/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
@@ -21,8 +141,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
