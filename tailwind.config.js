@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1920px',
+      },
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],

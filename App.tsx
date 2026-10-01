@@ -195,6 +195,33 @@ const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module
 const CookieBanner = React.lazy(() => import('./components/CookieBanner').then(module => ({ default: module.CookieBanner })));
 
 const App: React.FC = () => {
+  // GLOBAL CONVERSION TRACKING LISTENER
+  // Intercepts any click on a "tel:" link across the entire app
+  // and fires the Google Ads + Meta Pixel conversion events.
+  useEffect(() => {
+    const handleTelClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a');
+      if (target && target.href.startsWith('tel:')) {
+        const gtagReport = (window as any).gtag_report_conversion;
+        if (typeof gtagReport === 'function') {
+          gtagReport(target.href);
+        } else if ((window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+            send_to: 'AW-16885125181/Au3NCM3fmugbEL2guvM-',
+            event_category: 'Contact',
+            event_label: 'Call Click',
+          });
+        }
+        if ((window as any).fbq) {
+          (window as any).fbq('track', 'Contact');
+        }
+      }
+    };
+
+    document.addEventListener('click', handleTelClick);
+    return () => document.removeEventListener('click', handleTelClick);
+  }, []);
+
   return (
     <ErrorBoundary>
       <Suspense fallback={<div className="h-screen w-full bg-slate-50 flex items-center justify-center">Loading...</div>}>

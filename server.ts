@@ -23,6 +23,39 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
+  // API lead capture route
+  app.post("/api/lead", async (req, res) => {
+    try {
+      const { fullName, phone, zipOrCity, serviceOrMaterial, notes, pageUrl } = req.body || {};
+      console.log("[New Lead Received]:", { fullName, phone, zipOrCity, serviceOrMaterial, notes, pageUrl });
+
+      // Forward to Web3Forms for email delivery
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            access_key: "faed6a10-57e8-4faa-b1ec-74c37345ea30",
+            subject: `New Quote Request: ${fullName || "Lead"} - ${serviceOrMaterial || "Hardscaping"}`,
+            name: fullName,
+            phone: phone,
+            message: `Service/Material: ${serviceOrMaterial}\nZIP/City: ${zipOrCity}\nProject Notes: ${notes || "None"}\nPage URL: ${pageUrl || ""}`
+          })
+        });
+      } catch (err) {
+        console.error("Web3Forms forward error (non-fatal):", err);
+      }
+
+      res.status(200).json({ success: true, message: "Lead received successfully" });
+    } catch (error) {
+      console.error("Error processing lead:", error);
+      res.status(500).json({ success: false, error: "Failed to process lead" });
+    }
+  });
+
   // Vite middleware for development or fallback static folder in production
   if (process.env.NODE_ENV !== "production") {
     console.log("Starting server in DEVELOPMENT mode with Vite Middleware...");
