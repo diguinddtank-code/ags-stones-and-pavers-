@@ -1,0 +1,13 @@
+/* TEAM */
+  Business: AGS Stones and Pavers LLC
+  Location: Duluth, Georgia, USA
+  Founders: Local Master Masons & Hardscape Specialists
+  Contact: agstones.pavers@gmail.com
+  Phone: (678) 428-7630
+  Website: https://www.agsstonesandpavers.com
+
+/* SITE */
+  Last update: 2026-10-24
+  Standards: HTML5, CSS3, GeoJSON, Schema.org JSON-LD
+  Components: React, Vite, Tailwind CSS, Lucide Icons
+  Software: Custom Node.js Static Prerender & Express SSR Proxy

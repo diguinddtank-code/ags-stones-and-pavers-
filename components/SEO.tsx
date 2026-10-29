@@ -87,6 +87,12 @@ export const SEO: React.FC<SEOProps> = ({
         />
         {!noindex && <link rel="canonical" href={url} />}
 
+        <meta name="geo.region" content="US-GA" />
+        <meta name="geo.placename" content="Duluth, Georgia" />
+        <meta name="geo.position" content="34.032232;-84.179575" />
+        <meta name="ICBM" content="34.032232, -84.179575" />
+        <meta name="author" content={BUSINESS.legalName} />
+
         <meta property="og:locale" content="en_US" />
         <meta property="og:site_name" content={BUSINESS.name} />
         <meta property="og:type" content={type} />

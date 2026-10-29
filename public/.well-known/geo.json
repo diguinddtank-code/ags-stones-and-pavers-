@@ -1,0 +1,91 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "name": "AGS Stones and Pavers Geographic Coverage",
+    "description": "Headquarters and primary service territory for AGS Stones and Pavers LLC in North Metro Atlanta, Georgia.",
+    "website": "https://www.agsstonesandpavers.com",
+    "phone": "+1-678-428-7630",
+    "email": "agstones.pavers@gmail.com",
+    "lastUpdated": "2026-10-24"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ags-stones-headquarters",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-84.1795749, 34.0322319]
+      },
+      "properties": {
+        "name": "AGS Stones and Pavers LLC",
+        "category": "Hardscape Contractor",
+        "streetAddress": "4579 Abbotts Bridge Rd Suite 10",
+        "addressLocality": "Duluth",
+        "addressRegion": "GA",
+        "postalCode": "30097",
+        "addressCountry": "US",
+        "phone": "(678) 428-7630",
+        "email": "agstones.pavers@gmail.com",
+        "url": "https://www.agsstonesandpavers.com",
+        "openingHours": "Mo-Fr 08:00-18:00",
+        "googleRating": 5.0,
+        "services": [
+          "Driveway Paver Installation",
+          "Outdoor Patio Builders",
+          "Retaining Wall Installation",
+          "Pool Deck Pavers",
+          "Outdoor Kitchens and Fireplaces",
+          "Stone Masonry and Veneer",
+          "3D Hardscape Design"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "service-area-north-metro-atlanta",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-84.4500, 34.2500],
+            [-84.0500, 34.2500],
+            [-83.9500, 34.0500],
+            [-84.0000, 33.8500],
+            [-84.3500, 33.7500],
+            [-84.5500, 33.8500],
+            [-84.6000, 34.0500],
+            [-84.4500, 34.2500]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "North Metro Atlanta Service Territory",
+        "coverageRadiusMiles": 35,
+        "counties": [
+          "Gwinnett County",
+          "Fulton County",
+          "Cobb County",
+          "Forsyth County",
+          "DeKalb County"
+        ],
+        "municipalities": [
+          "Duluth",
+          "Alpharetta",
+          "Johns Creek",
+          "Roswell",
+          "Suwanee",
+          "Sandy Springs",
+          "Milton",
+          "Marietta",
+          "Cumming",
+          "Smyrna",
+          "Buckhead",
+          "Peachtree Corners",
+          "Norcross",
+          "Dunwoody",
+          "Buford"
+        ]
+      }
+    }
+  ]
+}

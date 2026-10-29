@@ -1,5 +1,77 @@
+# Robots.txt for AGS Stones and Pavers
+# Official Website: https://www.agsstonesandpavers.com
+# Headquarters: 4579 Abbotts Bridge Rd Suite 10, Duluth, GA 30097
+# Phone: (678) 428-7630
+
 User-agent: *
 Allow: /
 Disallow: /api/
 
+# Major Search Engine Crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+User-agent: YandexBot
+Allow: /
+Disallow: /api/
+
+# AI Search Engines & LLM Ingestion Crawlers
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+# Host and Sitemap
+Host: https://www.agsstonesandpavers.com
 Sitemap: https://www.agsstonesandpavers.com/sitemap.xml

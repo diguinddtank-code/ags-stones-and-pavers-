@@ -96,6 +96,226 @@ const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'fix-backyard-drainage-georgia-red-clay',
+    title: 'How to Fix Backyard Drainage, Standing Water & Mud on Georgia Red Clay: French Drains, Swales & Hardscape Guide',
+    badge: 'Drainage & Solutions Guide',
+    category: 'Planning',
+    datePublished: '2026-10-29',
+    dateModified: '2026-10-29',
+    readTime: '9 min read',
+    image: '/images/backyard-drainage-georgia-red-clay.jpg',
+    alt: 'Instructional architectural diagram showing French drain cross-section, retaining wall weep holes, and paver patio slope fixing backyard drainage on Georgia red clay',
+    excerpt:
+      'Standing water, soggy lawn, or muddy runoff pooling against your home foundation? Learn why Georgia red clay traps rainwater and how French drains, buried downspouts, retaining walls, and permeable pavers permanently solve drainage issues across Metro Atlanta.',
+    keyTakeaways: [
+      'Georgia red clay has microscopic pore structure and near-zero percolation rates, turning normal rainfall into standing pools and slippery red mud.',
+      'Burying roof downspouts into solid PVC pipes is the single most impactful fix, moving thousands of gallons away from home foundations.',
+      'French drains intercept underground water seepage before it saturates your yard, while catch basins handle fast-moving surface water.',
+      'Retaining walls with clean gravel backfill and perforated weeping pipes stop hillside erosion and turn unusable slopes into flat living space.',
+      'Permeable interlocking concrete pavers (PICP) eliminate surface puddling by letting rainwater filter through crushed stone joints into an underground reservoir.',
+    ],
+    faqs: [
+      {
+        q: 'Why does water stand in my Metro Atlanta yard for days after rain?',
+        a: 'The culprit is Georgia Piedmont red clay soil. Clay soil particles are microscopic, flat, and densely packed together. Unlike sandy loam that absorbs water rapidly, Georgia clay has a percolation rate as slow as 0.05 inches per hour. Once the top quarter-inch is saturated, all additional rainfall sits on top of the lawn as standing pools or sheets across your yard, creating stagnant mud and breeding mosquitoes.',
+      },
+      {
+        q: 'What is better for Georgia red clay: a French drain or a catch basin?',
+        a: 'They solve different problems, and the best systems often combine both. Catch basins with surface grates are designed for fast-moving surface water that collects in specific low spots or at the base of slopes. French drains use a perforated pipe inside a geotextile-wrapped gravel trench to capture subsurface water that is slowly seeping through saturated clay beneath the turf.',
+      },
+      {
+        q: 'Can a paver patio help with my backyard water drainage?',
+        a: 'Yes, when installed with proper engineering. A standard paver patio is pitched at a minimum 2% grade (a quarter-inch per foot) to direct surface water safely away from the house into collection swales. Alternatively, permeable interlocking pavers (PICP) allow water to drain straight through aggregate joints into an underground crushed stone reservoir, absorbing runoff without any surface puddling.',
+      },
+      {
+        q: 'How far should gutter downspouts drain away from a home foundation?',
+        a: 'Downspouts should discharge water at least 10 feet away from your home foundation, and ideally 15 to 20 feet if your yard slopes back toward the house. Dumping roof water right next to the foundation causes hydrostatic pressure that cracks basement walls, erodes crawlspace soil, and triggers interior mold.',
+      },
+      {
+        q: 'How much does professional yard drainage installation cost in Metro Atlanta?',
+        a: 'Yard drainage costs vary based on trench length, digging conditions in heavy clay, tree root obstacles, and pipe choice. Simple downspout burial typically runs $1,200 to $2,800, while comprehensive French drain networks and retaining wall drainage systems range from $3,500 to $12,000+. Combining drainage with a new paver patio or retaining wall project saves significant labor and equipment costs.',
+      },
+    ],
+    relatedServices: [
+      { name: 'Retaining Wall Installation', path: '/service/retaining-wall-installation' },
+      { name: 'Outdoor Patio Builders', path: '/service/outdoor-patio-builders' },
+      { name: 'Driveway Paver Installation', path: '/service/driveway-pavers' },
+      { name: '3D Landscape & Hardscape Design', path: '/service/landscape-design' },
+      { name: 'Pool Deck Pavers', path: '/service/pool-deck-pavers' },
+    ],
+    content: (
+      <>
+        <P>
+          If you own a home in Metro Atlanta, you have probably experienced the Georgia red clay nightmare:
+          a heavy thunderstorm hits on Tuesday afternoon, and by Thursday your backyard is still an unnavigable,
+          soggy red sponge. Your dogs track wet clay through the house, the grass is drowning, and standing water is
+          creeping uncomfortably close to your basement foundation or air conditioning condenser pad.
+        </P>
+        <P>
+          In hilly communities across <L to="/pavers-alpharetta-ga">Alpharetta</L>, <L to="/paver-patio-johns-creek-ga">Johns Creek</L>,{' '}
+          <L to="/hardscape-roswell-ga">Roswell</L>, <L to="/retaining-walls-sandy-springs-ga">Sandy Springs</L>, and{' '}
+          <L to="/driveway-pavers-duluth-ga">Duluth</L>, poor drainage is more than an eyesore. Left unaddressed, trapped water
+          exerts massive hydrostatic pressure against foundation walls, washes out timber retaining walls, and erodes thousands
+          of dollars in landscaping.
+        </P>
+        <P>
+          The good news is that yard drainage is a solved engineering challenge. Here is how modern hardscaping, French drains,
+          grading, and permeable pavers solve standing water on Georgia red clay once and for all.
+        </P>
+
+        <H2>1. Why Georgia Red Clay Traps Water (The Science of Piedmont Soil)</H2>
+        <P>
+          To fix the problem, you have to understand what you are digging into. The soil across North Georgia consists of
+          Cecil soil series, commonly known as Piedmont red clay. Unlike sandy soils that allow water to filter downward
+          like a coffee filter, Georgia clay particles are microscopic, flat, and tightly bonded by iron oxide.
+        </P>
+        <UL
+          items={[
+            <><strong>Near-Zero Percolation:</strong> Standard topsoil absorbs water quickly. Saturated Georgia red clay has a percolation rate as low as 0.05 inches per hour. A typical 2-inch Atlanta summer downpour simply cannot soak into the ground.</>,
+            <><strong>Compaction from Builders:</strong> During subdivision construction, heavy bulldozers compact the subgrade into a virtual ceramic bowl before rolling out a thin layer of sod. The water has nowhere to go but sideways or to sit on top.</>,
+            <><strong>The Sponge Effect:</strong> Clay expands as it absorbs moisture and contracts into rock-hard fissures when it dries, causing uneven soil shifting beneath concrete walkways and driveways.</>,
+          ]}
+        />
+        <Callout title="Contractor Truth">
+          Throwing bags of topsoil or planting extra grass seeds will never fix a clay drainage problem. You cannot absorb
+          water out of a clay swamp; you must physically capture it and pipe it downhill to a safe discharge point.
+        </Callout>
+
+        <H2>2. Step One: Burying Roof Gutter Downspouts into Solid PVC</H2>
+        <P>
+          Most homeowners are shocked to learn how much water their own roof dumps into their yard. A standard 2,500-square-foot
+          roof sheds roughly <strong>1,500 gallons of water</strong> during a single 1-inch thunderstorm.
+        </P>
+        <P>
+          When that water dumps through standard 3-foot splash blocks right next to your foundation, it saturates the clay
+          immediately around your footings, leading to basement seepage, cracked sheetrock, and crawlspace moisture problems.
+        </P>
+        <Steps
+          items={[
+            {
+              title: 'Disconnect splash blocks',
+              text: 'Remove the cheap plastic or concrete splash trays that dump water against your foundation.',
+            },
+            {
+              title: 'Connect to solid PVC pipe',
+              text: 'Always use rigid Schedule 40 or heavy-duty smooth-wall PVC pipe. Avoid flimsy black corrugated pipe, which crushes easily under foot traffic and clogs with pine needles.',
+            },
+            {
+              title: 'Install debris cleanout filters',
+              text: 'Add accessible cleanout caps or inline leaf filters at ground level to catch debris before it enters the underground run.',
+            },
+            {
+              title: 'Discharge to daylight downhill',
+              text: 'Route the solid pipe at least 15 to 25 feet away from the home foundation, terminating in a pop-up emitter or decorative dry riverbed that drains safely into natural grade.',
+            },
+          ]}
+        />
+
+        <H2>3. French Drains vs. Catch Basins: Which One Does Your Yard Need?</H2>
+        <P>
+          Homeowners frequently ask us during <L to="/quote">free on-site estimates</L> whether they need a French drain
+          or a catch basin. The answer depends on whether your water problem is on top of the grass or underneath it.
+        </P>
+        <Table
+          head={['Feature', 'Catch Basin System', 'True French Drain Trench']}
+          rows={[
+            ['Primary Job', 'Captures fast surface runoff', 'Intercepts subsurface water saturation'],
+            ['How Water Enters', 'Through an open top metal/plastic grate', 'Percolates through gravel into pipe holes'],
+            ['Pipe Type', 'Solid PVC pipe (no holes)', 'Perforated PVC pipe (holes facing down)'],
+            ['Trench Fill', 'Backfilled with standard soil/sod', 'Washed #57 granite gravel wrapped in filter fabric'],
+            ['Best For', 'Low spots, patio corners, driveway aprons', 'Soggy yards, base of hills, weeping retaining walls'],
+            ['Maintenance', 'Empty the basin leaf basket seasonally', 'Virtually zero maintenance with geotextile wrap'],
+          ]}
+        />
+        <P>
+          In most comprehensive North Atlanta yard makeovers, we install a hybrid system: surface catch basins placed at
+          the lowest grade points to handle flash downpours, tied into a subsurface French drain that keeps the surrounding
+          clay from staying spongy for days.
+        </P>
+
+        <H2>4. Sloped Yards & Retaining Walls: Reclaiming Hillside Mud</H2>
+        <P>
+          If your property slopes down toward your back door, rainwater will constantly push red clay mud against your house.
+          The permanent engineering solution is an engineered retaining wall system paired with integrated terracing.
+        </P>
+        <P>
+          As detailed in our guide on <L to="/blog/why-retaining-walls-fail-georgia">why retaining walls fail in Georgia</L>,
+          water pressure (hydrostatic force) is what destroys walls. When we install a structural wall in communities like{' '}
+          <L to="/hardscape-roswell-ga">Roswell</L> or <L to="/retaining-walls-atlanta">Atlanta</L>, the magic happens underground:
+        </P>
+        <UL
+          items={[
+            <><strong>Washed #57 Stone Drainage Column:</strong> A minimum 12-inch column of clean crushed stone directly behind the modular blocks allows water to fall straight down instead of pressing against the wall face.</>,
+            <><strong>Perforated Collector Pipe:</strong> A 4-inch perforated PVC pipe rests at the footing level, collecting the water and venting it out through weep holes or side pipes downhill.</>,
+            <><strong>Non-Woven Geotextile Fabric:</strong> Separates native clay from the clean stone, preventing clay silt from clogging the drainage gravel over time.</>,
+            <><strong>Level Entertaining Terrace:</strong> Carving out the slope behind the wall creates flat, dry usable land for an <L to="/service/outdoor-patio-builders">outdoor patio</L> or lawn.</>,
+          ]}
+        />
+
+        <H2>5. Permeable Pavers: The Zero-Puddle Patio Solution</H2>
+        <P>
+          One of the biggest concerns with building a large patio is adding more hard, impermeable surface that makes runoff
+          worse. In cities like <L to="/retaining-walls-sandy-springs-ga">Sandy Springs</L> and{' '}
+          <L to="/pavers-alpharetta-ga">Alpharetta</L>, strict municipal impervious lot coverage limits (often 30% to 40%)
+          make standard concrete slabs illegal without costly variances.
+        </P>
+        <P>
+          <strong>Permeable Interlocking Concrete Pavers (PICP)</strong> completely change the game. Instead of sealing joints
+          with sand, permeable pavers have engineered gap spacers filled with small crushed granite chips (#8 stone).
+        </P>
+        <Steps
+          items={[
+            {
+              title: 'Instant surface infiltration',
+              text: 'Rainwater falls on the patio and passes instantly between the pavers at rates exceeding 100 inches per hour — zero puddling, zero standing water, zero slippery algae.',
+            },
+            {
+              title: 'Sub-base storage reservoir',
+              text: 'Beneath the pavers lies an open-graded crushed stone base (#57 and #4 stone) that holds thousands of gallons of water like an underground detention vault.',
+            },
+            {
+              title: 'Controlled ground recharge',
+              text: 'The water slowly infiltrates into the deeper subgrade or exits through an integrated perforated underdrain into natural drainage zones.',
+            },
+          ]}
+        />
+        <P>
+          Learn more about local city codes in our{' '}
+          <L to="/blog/permits-hoa-rules-hardscaping-atlanta">Metro Atlanta hardscape permit and HOA guide</L>.
+        </P>
+
+        <H2>6. Protect Your Neighbors & Respect Georgia Drainage Laws</H2>
+        <P>
+          Under Georgia common law (the <em>Civil Law Rule of Surface Waters</em>), while you are allowed to protect your
+          home from water, you cannot artificially channel and discharge concentrated runoff onto a neighbor property in a
+          destructive manner.
+        </P>
+        <P>
+          Whenever AGS Stones engineers a drainage solution in neighborhoods like Windward in Alpharetta, St Ives in{' '}
+          <L to="/paver-patio-johns-creek-ga">Johns Creek</L>, or Sugarloaf in <L to="/driveway-pavers-duluth-ga">Duluth</L>,
+          we design the discharge point within your own property boundaries. We use pop-up dispersion emitters, rock bubble pots,
+          and dry creek beds buffered with river rock to slow water velocity down before it reaches property lines.
+        </P>
+
+        <H2>The Bottom Line: Turn Your Muddy Yard Into Living Space</H2>
+        <P>
+          You do not have to live with standing water, dead grass, and red mud every time it rains in Georgia.
+          By combining proper slope grading, buried downspouts, French drains, and engineered retaining walls, you protect
+          your home investment and create dry, functional outdoor living areas that look incredible year-round.
+        </P>
+        <P>
+          Whether you need a full backyard grading makeover, a <L to="/service/retaining-wall-installation">retaining wall</L>,
+          or an expanded <L to="/service/outdoor-patio-builders">paver patio</L>, our Duluth-based crews inspect every site
+          in person to design the right drainage plan for your elevation.
+        </P>
+        <P>
+          Ready to fix your yard drainage once and for all? <L to="/quote">Schedule your free on-site estimate today</L> or
+          call our hardscape team directly at <a href="tel:6784287630" className="text-brand-gold font-bold hover:underline">(678) 428-7630</a>.
+        </P>
+      </>
+    ),
+  },
+  {
     slug: 'permits-hoa-rules-hardscaping-atlanta',
     title: 'Do You Need a Permit for a Paver Patio, Retaining Wall or Driveway in Metro Atlanta? (City-by-City HOA & Code Guide)',
     badge: 'Permits & HOA Guide',
