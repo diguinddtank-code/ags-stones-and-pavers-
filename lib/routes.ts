@@ -12,7 +12,7 @@ export interface SiteRoute {
   lastmod?: string;
 }
 
-const LAST_UPDATED = '2026-10-29';
+const LAST_UPDATED = '2026-11-02';
 
 export const getSiteRoutes = (): SiteRoute[] => {
   const staticRoutes: SiteRoute[] = [
