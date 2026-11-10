@@ -8,7 +8,7 @@ const steps = [
     subtitle: 'The Vision',
     description: 'We meet at your property to assess the terrain, listen to your dreams, and establish a budget that works for you.',
     icon: <Search className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop'
+    image: '/images/service-hero-patio.webp'
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const steps = [
     subtitle: 'The Blueprint',
     description: 'See your future backyard before we dig. Our photorealistic 3D renderings ensure every curve meets your approval.',
     icon: <PenTool className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200&auto=format&fit=crop'
+    image: '/images/service-hero-outdoor-kitchen.webp'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const steps = [
     subtitle: 'The Craft',
     description: 'Master craftsmen execute the plan with ICPI standards. Precision grading, drainage, and stonework guaranteed to last.',
     icon: <Hammer className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=80&w=1200&auto=format&fit=crop'
+    image: '/images/service-hero-pool-deck.webp'
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ const steps = [
     subtitle: 'The Lifestyle',
     description: 'Final walkthrough, sealing, and cleanup. Your new outdoor sanctuary is ready for a lifetime of memories.',
     icon: <CheckCircle2 className="w-6 h-6" />,
-    image: 'https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=1200&auto=format&fit=crop'
+    image: '/images/service-hero-retaining-wall.webp'
   }
 ];
 

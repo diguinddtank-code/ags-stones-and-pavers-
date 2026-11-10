@@ -942,7 +942,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '8 min read',
-    image: 'https://i.imgur.com/SIBIdiFl.webp',
+    image: '/images/service-hero-patio.webp',
     alt: 'Finished backyard paver patio with outdoor seating in Metro Atlanta',
     excerpt:
       'What actually drives the price of a paver patio, driveway or retaining wall in Metro Atlanta — materials, base depth, demolition, access and drainage — and how to compare quotes the right way.',
@@ -1071,7 +1071,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '7 min read',
-    image: 'https://i.imgur.com/by6FzIkl.webp',
+    image: '/images/service-hero-driveway.webp',
     alt: 'Interlocking paver driveway leading to a two-car garage',
     excerpt:
       'Why poured concrete driveways crack in Georgia clay, how interlocking pavers handle soil movement, and a side-by-side comparison of cost, lifespan, repairs and curb appeal.',
@@ -1176,7 +1176,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '6 min read',
-    image: 'https://i.imgur.com/h3NCvta.jpeg',
+    image: '/images/service-hero-outdoor-kitchen.webp',
     alt: 'Clean, sealed paver patio with outdoor furniture',
     excerpt:
       'Keep your paver patio, driveway or pool deck looking new: routine cleaning, removing oil and rust stains, re-sanding joints with polymeric sand and when (and how) to seal.',
@@ -1281,7 +1281,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '7 min read',
-    image: 'https://i.imgur.com/dZstK86l.webp',
+    image: '/images/service-hero-retaining-wall.webp',
     alt: 'Segmental block retaining wall terracing a sloped backyard',
     excerpt:
       'Leaning, bulging or collapsing walls almost always come down to water. Learn the warning signs, what proper drainage and geogrid look like, and when a wall needs a permit or engineer.',
@@ -1380,7 +1380,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '6 min read',
-    image: 'https://i.imgur.com/vEHS8LGl.webp',
+    image: '/images/service-hero-pool-deck.webp',
     alt: 'Travertine pool deck with bullnose coping around a backyard pool',
     excerpt:
       'Choosing a pool deck surface for a Georgia summer? Compare travertine and concrete pavers on surface temperature, slip resistance, durability, maintenance and price.',
@@ -1478,7 +1478,7 @@ export const blogPosts: BlogPost[] = [
     datePublished: '2026-09-26',
     dateModified: '2026-09-26',
     readTime: '7 min read',
-    image: 'https://i.imgur.com/G2N5Chsl.webp',
+    image: '/images/service-hero-patio.webp',
     alt: 'Stone outdoor fireplace and seating area on a backyard patio',
     excerpt:
       'From choosing a layout and appliances to picking weather-proof countertops and planning gas, water and power — everything to decide before building an outdoor kitchen in Georgia.',

@@ -31,8 +31,7 @@ export const BUSINESS = {
     display: 'Mon–Fri: 8:00 AM – 6:00 PM',
   },
   logo: 'https://i.imgur.com/DkMxLum.png',
-  defaultImage: 'https://i.imgur.com/G2N5Chsl.webp',
-  priceRange: '$$',
+  defaultImage: `${SITE_URL}/images/service-hero-patio.webp`,
   sameAs: [
     'https://www.google.com/search?kgmid=/g/11yw0y2byp', // Google Business Profile
     'https://www.instagram.com/agsstonesandpavers',
@@ -77,9 +76,7 @@ export const businessSchema = () => ({
   image: BUSINESS.defaultImage,
   telephone: BUSINESS.phone,
   email: BUSINESS.email,
-  priceRange: BUSINESS.priceRange,
   currenciesAccepted: 'USD',
-  paymentAccepted: 'Cash, Credit Card, Check, Financing',
   hasMap: BUSINESS.mapUrl,
   address: {
     '@type': 'PostalAddress',
@@ -102,111 +99,42 @@ export const businessSchema = () => ({
       closes: BUSINESS.hours.closes,
     },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '128',
-    bestRating: '5',
-    worstRating: '1',
-  },
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: BUSINESS.phone,
-      contactType: 'customer service',
-      areaServed: 'US',
-      availableLanguage: ['en', 'es', 'pt'],
-    },
-  ],
   knowsAbout: [
-    'Driveway Paver Installation',
-    'Interlocking Concrete Pavers',
-    'Outdoor Patio Construction',
-    'Retaining Wall Installation',
-    'Engineered Segmental Retaining Walls',
-    'Pool Deck Pavers',
-    'Travertine Pool Decks',
-    'Outdoor Kitchens and Fireplaces',
-    'Stone Masonry and Stone Veneer',
-    'Permeable Pavers',
-    'Stormwater Drainage and French Drains',
-    '3D Landscape & Hardscape Design',
+    'Driveway pavers',
+    'Outdoor patio installation',
+    'Retaining wall installation',
+    'Pool deck pavers',
+    'Stone veneer and masonry',
+    'Decks and hardscape layout',
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Hardscaping & Stone Masonry Services',
     itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Driveway Paver Installation',
-          url: `${SITE_URL}/service/driveway-pavers`,
-          description: 'Custom interlocking paver driveways designed for vehicle loads and Georgia red clay soils.',
-        },
+      ['Driveway Pavers', 'driveway-pavers'],
+      ['Outdoor Patio Installation', 'outdoor-patio-builders'],
+      ['Retaining Wall Installation', 'retaining-wall-installation'],
+      ['Masonry and Fireplaces', 'masonry-fireplaces'],
+      ['Deck Builders', 'deck-builders'],
+      ['Pool Deck Pavers', 'pool-deck-pavers'],
+      ['Stone Veneer', 'stone-veneer'],
+      ['Landscape Design', 'landscape-design'],
+    ].map(([name, slug]) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name,
+        url: `${SITE_URL}/service/${slug}`,
+        provider: { '@id': BUSINESS_ID },
+        areaServed: BUSINESS.areaServed.map((city) => `${city.name}, GA`),
       },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Outdoor Patio Construction',
-          url: `${SITE_URL}/service/outdoor-patio-builders`,
-          description: 'Paver, flagstone, and travertine backyard patios with built-in seating and lighting.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Retaining Wall Installation',
-          url: `${SITE_URL}/service/retaining-wall-installation`,
-          description: 'Engineered structural retaining walls with perforated drainage pipes and geogrid reinforcement.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Pool Deck Pavers',
-          url: `${SITE_URL}/service/pool-deck-pavers`,
-          description: 'Slip-resistant, cool-underfoot travertine and concrete paver pool surrounds and coping.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Masonry & Outdoor Fireplaces',
-          url: `${SITE_URL}/service/masonry-fireplaces`,
-          description: 'Custom stone masonry, outdoor kitchens, fire pits, and stone veneer.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: '3D Landscape & Hardscape Design',
-          url: `${SITE_URL}/service/landscape-design`,
-          description: 'Photorealistic 3D architectural renderings and project layouts for HOA approval.',
-        },
-      },
-    ],
+    })),
   },
   areaServed: [
     ...BUSINESS.areaServed.map((c) => ({
       '@type': 'City',
       name: `${c.name}, GA`,
-      sameAs: c.wiki,
     })),
-    {
-      '@type': 'GeoCircle',
-      geoMidpoint: {
-        '@type': 'GeoCoordinates',
-        latitude: BUSINESS.geo.latitude,
-        longitude: BUSINESS.geo.longitude,
-      },
-      geoRadius: '50000', // 50 km (~31 miles radius covering all North Metro Atlanta)
-    },
   ],
   sameAs: BUSINESS.sameAs,
 });

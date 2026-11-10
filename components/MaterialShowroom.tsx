@@ -16,7 +16,7 @@ const materials: Material[] = [
     name: 'Premium Travertine',
     category: 'Natural Stone',
     description: 'A classic favorite for pool decks. Travertine remains cool to the touch even in Atlanta summers and offers a non-slip luxury texture.',
-    image: 'https://images.unsplash.com/photo-1621256133234-29e2f41d4517?q=80&w=1600&auto=format&fit=crop',
+    image: '/images/service-hero-pool-deck.webp',
     features: ['Heat Resistant', 'Non-Slip Surface', 'Timeless Aesthetic']
   },
   {
@@ -24,7 +24,7 @@ const materials: Material[] = [
     name: 'Interlocking Pavers',
     category: 'Engineered',
     description: 'Versatile and durable. Engineered pavers offer unlimited pattern possibilities and superior load-bearing strength for driveways.',
-    image: 'https://images.unsplash.com/photo-1596527914909-328670cb6658?q=80&w=1600&auto=format&fit=crop',
+    image: '/images/service-hero-landscape-design.webp',
     features: ['Crack Resistant', 'High Load Bearing', 'Modern Patterns']
   },
   {
@@ -32,7 +32,7 @@ const materials: Material[] = [
     name: 'Bluestone Slate',
     category: 'Natural Stone',
     description: 'Deep, rich tones that create a sophisticated contrast. Perfect for walkways and patios that require a natural, organic look.',
-    image: 'https://images.unsplash.com/photo-1518640027989-d1c5d80bd3ca?q=80&w=1600&auto=format&fit=crop',
+    image: '/images/service-hero-stone-veneer.webp',
     features: ['Natural Variation', 'Organic Look', 'Durable']
   },
   {
@@ -40,7 +40,7 @@ const materials: Material[] = [
     name: 'Outdoor Porcelain',
     category: 'Modern',
     description: 'The ultimate in modern low-maintenance living. Stain-resistant, fade-resistant, and ultra-sleek for contemporary homes.',
-    image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1600&auto=format&fit=crop',
+    image: '/images/service-hero-deck.webp',
     features: ['Stain Proof', 'Zero Maintenance', 'Ultra Modern']
   }
 ];

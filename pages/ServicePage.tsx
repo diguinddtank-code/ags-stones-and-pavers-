@@ -12,6 +12,9 @@ import { cities, cityById, City } from '../lib/cities';
 import { buildFaqs, kindHub, pageMeta, ServiceKind } from '../lib/serviceFaqs';
 import { blogPosts } from '../lib/blogData';
 import { BUSINESS_ID, Crumb, absoluteUrl, faqSchema, toMetaDescription } from '../lib/business';
+import { serviceHeroImages } from '../lib/serviceHeroImages';
+import { getServiceCopy } from '../lib/serviceCopy';
+import { ServicePlanningGuide } from '../components/ServicePlanningGuide';
 
 const coreTitles: Record<string, string> = {
   'driveway-pavers': 'Driveway Paver Installation in Atlanta, GA',
@@ -91,6 +94,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
   if (!page) return <NotFoundPage />;
 
   const { data, path, kind, city, isCore } = page;
+  const pageCopy = getServiceCopy(kind, city?.name, city?.county);
+  const heroImage = serviceHeroImages[kind];
   const displayName = data.name.replace(/\s+GA$/, '');
   const title = isCore
     ? `${coreTitles[data.id] ?? displayName} | AGS Stones`
@@ -112,7 +117,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
     serviceType: hub.name,
     description,
     url,
-    image: absoluteUrl(data.heroImage),
+    image: absoluteUrl(heroImage),
     provider: { '@id': BUSINESS_ID },
     areaServed: city
       ? { '@type': 'City', name: `${city.name}, GA`, containedInPlace: { '@type': 'State', name: 'Georgia' } }
@@ -149,7 +154,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
       <SEO
         title={title}
         description={description}
-        image={data.heroImage}
+        image={heroImage}
         canonicalPath={path}
         keywords={[displayName.toLowerCase(), `${hub.name.toLowerCase()} ${city ? city.name.toLowerCase() : 'atlanta'}`, 'hardscape contractor', 'AGS Stones']}
         breadcrumbs={breadcrumbs}
@@ -158,15 +163,18 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
       <Header />
       <main className="flex-grow">
         <ServiceDynamicContent
-          data={data}
+          data={{ ...data, ...pageCopy, heroImage }}
           extraSections={
-            <ServiceSeoExtras
-              faqs={faqs}
-              faqHeading={city ? `${hub.name} Questions in ${city.name}` : `${displayName} Questions`}
-              areaHeading={areaHeading}
-              areaLinks={areaLinks}
-              guides={guides}
-            />
+            <>
+              <ServicePlanningGuide kind={kind} serviceName={displayName} />
+              <ServiceSeoExtras
+                faqs={faqs}
+                faqHeading={city ? `${hub.name} Questions in ${city.name}` : `${displayName} Questions`}
+                areaHeading={areaHeading}
+                areaLinks={areaLinks}
+                guides={guides}
+              />
+            </>
           }
         />
       </main>

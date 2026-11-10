@@ -9,16 +9,18 @@ import { Link } from 'react-router-dom';
 import { localPageUrl } from '../lib/localPages';
 
 const locations = [
-  { id: 'alpharetta', name: 'Alpharetta, GA', lat: '34.0754', lng: '-84.2941', desc: 'Custom golf club estates & high-end interlocking modular driveways.' },
-  { id: 'johns-creek', name: 'Johns Creek, GA', lat: '34.0289', lng: '-84.1986', desc: 'Country club estate luxury, outdoor kitchens & massive structured patios.' },
-  { id: 'sandy-springs', name: 'Sandy Springs, GA', lat: '33.9304', lng: '-84.3733', desc: 'Wooded terraced yards, erosion control & structural retaining walls.' },
-  { id: 'buckhead', name: 'Buckhead, GA', lat: '33.8398', lng: '-84.3796', desc: 'Mansion hardscapes, level grading & sweeping driveway redesigns.' },
-  { id: 'roswell', name: 'Roswell, GA', lat: '34.0232', lng: '-84.3616', desc: 'Restored historic properties matching natural stone and cobblestone styles.' },
-  { id: 'atlanta', name: 'Atlanta, GA', lat: '33.7490', lng: '-84.3880', desc: 'Intown slope stabilization, retaining block columns & cool-touch pool decks.' },
-  { id: 'duluth', name: 'Duluth, GA', lat: '34.0029', lng: '-84.1446', desc: 'Our flagship service boundary. Year-round outdoor living & paver patios.' },
-  { id: 'suwanee', name: 'Suwanee, GA', lat: '34.0515', lng: '-84.0714', desc: 'Multi-generational fire pits, travertine and robust ground grading.' },
-  { id: 'marietta', name: 'Marietta, GA', lat: '33.9526', lng: '-84.5499', desc: 'Erosion containment & heavy-load retaining grids across large lots.' },
-  { id: 'smyrna', name: 'Smyrna, GA', lat: '33.8839', lng: '-84.5143', desc: 'Complete yard leveling, masonry steps, and flat backyard conversions.' }
+  { id: 'alpharetta', name: 'Alpharetta, GA', lat: '34.0754', lng: '-84.2941', desc: 'Driveway pavers, patios, retaining walls and outdoor kitchens.' },
+  { id: 'johns-creek', name: 'Johns Creek, GA', lat: '34.0289', lng: '-84.1986', desc: 'Patios, outdoor kitchens, pool decks and masonry.' },
+  { id: 'sandy-springs', name: 'Sandy Springs, GA', lat: '33.9304', lng: '-84.3733', desc: 'Hardscape projects shaped around the property and its grade.' },
+  { id: 'buckhead', name: 'Buckhead, GA', lat: '33.8398', lng: '-84.3796', desc: 'Paver driveways, patios and stone features.' },
+  { id: 'roswell', name: 'Roswell, GA', lat: '34.0232', lng: '-84.3616', desc: 'Driveways, patios, retaining walls and stonework.' },
+  { id: 'atlanta', name: 'Atlanta, GA', lat: '33.7490', lng: '-84.3880', desc: 'Paver and stone projects for homes across the Atlanta area.' },
+  { id: 'cumming', name: 'Cumming, GA', lat: '34.2073', lng: '-84.1402', desc: 'Paver driveways, patios, retaining walls and outdoor features.' },
+  { id: 'duluth', name: 'Duluth, GA', lat: '34.0029', lng: '-84.1446', desc: 'AGS Stones and Pavers is based in Duluth.' },
+  { id: 'milton', name: 'Milton, GA', lat: '34.1322', lng: '-84.3007', desc: 'Hardscape services for driveways, patios and outdoor spaces.' },
+  { id: 'suwanee', name: 'Suwanee, GA', lat: '34.0515', lng: '-84.0714', desc: 'Patios, driveways, walls and outdoor living features.' },
+  { id: 'marietta', name: 'Marietta, GA', lat: '33.9526', lng: '-84.5499', desc: 'Hardscape and stone projects planned around each property.' },
+  { id: 'smyrna', name: 'Smyrna, GA', lat: '33.8839', lng: '-84.5143', desc: 'Paver, masonry and retaining wall services.' }
 ];
 
 const servicePrefixes = [
@@ -43,7 +45,7 @@ export const LocationsPage: React.FC = () => {
     <div className="font-sans antialiased text-white bg-brand-dark min-h-screen flex flex-col">
       <SEO 
         title="Service Areas | AGS Stones Hardscaping Across Metro Atlanta" 
-        description="Find our elite hardscaping, paving, and outdoor kitchen services across Alpharetta, Johns Creek, Atlanta, Roswell, Duluth, and Smyrna."
+        description="See the Metro Atlanta cities served by AGS Stones and Pavers, a Duluth contractor for driveways, patios, retaining walls and outdoor kitchens."
         breadcrumbs={[{ name: "Service Areas", path: "/service-areas" }]}
       />
       
@@ -59,7 +61,7 @@ export const LocationsPage: React.FC = () => {
              <div className="absolute inset-0 bg-black/60 z-10" />
              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-100 z-10" />
              <img 
-               src="https://i.imgur.com/h3NCvta.jpeg" 
+               src="/images/service-hero-outdoor-kitchen.webp" 
                alt="AGS Stones Local Projects" 
                className="w-full h-full object-cover scale-105"
              />
@@ -83,7 +85,7 @@ export const LocationsPage: React.FC = () => {
                   <span className="text-gray-300">Areas.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed shadow-sm">
-                  Commanding the northern Metro Atlanta suburbs with premium hardscapes. Select your region below to see specialized local services.
+                  Based in Duluth, AGS Stones and Pavers serves homeowners across Metro Atlanta. Choose a city to explore services and discuss your project.
                 </p>
              </motion.div>
           </div>
@@ -99,15 +101,14 @@ export const LocationsPage: React.FC = () => {
             {/* Section Header */}
             <div className="max-w-3xl mb-16">
               <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-4 block flex items-center gap-2">
-                <span className="w-6 h-px bg-brand-gold"></span> 100% Local Precision Coverage
+                <span className="w-6 h-px bg-brand-gold"></span> Metro Atlanta Service Area
               </span>
               <h2 className="text-4xl md:text-6xl font-serif font-bold text-white tracking-tight mb-6 leading-tight">
                 Our Neighborhood <span className="italic font-normal text-brand-gold">Footprint</span>
               </h2>
               <p className="text-gray-350 text-lg font-light leading-relaxed">
-                We operate fully equipped hardscaping and masonry crews in each city below. 
-                By adhering strictly to high-compaction ground leveling and structural block engineering, 
-                we provide <strong className="text-white font-medium">elite outdoor living spaces</strong> guaranteed against shifting across North Metro Atlanta.
+                Based in Duluth, AGS Stones and Pavers works with homeowners across the Metro Atlanta area. 
+                Select a city to explore relevant service information, then contact us to discuss your address and project scope.
               </p>
             </div>
 
@@ -153,7 +154,7 @@ export const LocationsPage: React.FC = () => {
                       {isActive && (
                         <div className="px-5 pb-6 pt-1 border-t border-white/5 bg-black/20">
                           <p className="text-gray-300 text-sm font-light mb-6 leading-relaxed">
-                            {loc.desc} Our local crews evaluate soil composition, grade land perfectly for water runoff, and ensure a pristine interlocking surface that will not settle or crack under Georgia's heavy rains.
+                            {loc.desc} Availability and project requirements depend on the address and scope. Contact AGS to discuss the property and next steps.
                           </p>
                           
                           <div className="space-y-3">
@@ -241,7 +242,7 @@ export const LocationsPage: React.FC = () => {
                   </h3>
                   
                   <p className="text-gray-300 text-base font-light mb-10 leading-relaxed max-w-lg">
-                    {selectedLocation.desc} Our local crews evaluate soil composition, grade land perfectly for water runoff, and ensure a pristine interlocking surface that will not settle or crack under Georgia's heavy rains.
+                    {selectedLocation.desc} Availability and project requirements depend on the address and scope. Contact AGS to discuss the property and next steps.
                   </p>
 
                   {/* Link Permutations Matrix */}

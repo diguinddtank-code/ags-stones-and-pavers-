@@ -13,13 +13,11 @@ const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(mod
 
 const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
 const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
-const DayNightSlider = React.lazy(() => import('./components/DayNightSlider').then(module => ({ default: module.DayNightSlider })));
 
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
 const Footer = React.lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
 
-const ExitIntentPopup = React.lazy(() => import('./components/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
 // --- ERROR BOUNDARY ---
 interface ErrorBoundaryProps {
@@ -151,7 +149,6 @@ const Home: React.FC = () => {
               <Suspense fallback={<div className="h-96 w-full bg-white" />}>
                  <BeforeAfter />
                  <LocalProjects />
-                 <DayNightSlider />
               </Suspense>
            </ErrorBoundary>
         </LazyBlock>
@@ -175,10 +172,6 @@ const Home: React.FC = () => {
          </ErrorBoundary>
       </LazyBlock>
 
-      <Suspense fallback={null}>
-         <ExitIntentPopup />
-         <CookieBanner />
-      </Suspense>
     </div>
   );
 };
@@ -192,7 +185,6 @@ const BlogIndexPage = React.lazy(() => import('./pages/BlogIndexPage').then(modu
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage').then(module => ({ default: module.BlogPostPage })));
 const LegalPage = React.lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
-const CookieBanner = React.lazy(() => import('./components/CookieBanner').then(module => ({ default: module.CookieBanner })));
 
 const App: React.FC = () => {
   // GLOBAL CONVERSION TRACKING LISTENER

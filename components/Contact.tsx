@@ -1,22 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, ArrowRight, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
-
-const serviceAreas = [
-  "Atlanta, GA",
-  "Bill Arp, GA",
-  "Brookhaven, GA",
-  "College Park, GA",
-  "Douglasville, GA",
-  "Fairburn, GA",
-  "Hiram, GA",
-  "Mableton, GA",
-  "Marietta, GA",
-  "Powder Springs, GA",
-  "Sandy Springs, GA",
-  "South Fulton, GA",
-  "Villa Rica, GA",
-  "Vinings, GA"
-];
+import { BUSINESS } from '../lib/business';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -109,7 +93,6 @@ export const Contact: React.FC = () => {
     <section ref={sectionRef} id="contact" className="py-24 relative overflow-hidden">
       {/* Background Texture */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
-         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
          <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 pointer-events-none"></div>
       </div>
 
@@ -260,7 +243,7 @@ export const Contact: React.FC = () => {
                 {loadMap ? (
                   <iframe 
                     title="AGS Stones - Driveway Pavers & Retaining Wall Contractor in Duluth, GA"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.146522047879!2d-84.18241432367554!3d34.01594951609104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f59f0f9b0b0b0b%3A0x0!2s4579%20Abbotts%20Bridge%20Rd%20Ste%2010%2C%20Duluth%2C%20GA%2030097!5e0!3m2!1sen!2sus!4v1709220000000!5m2!1sen!2sus" 
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(`${BUSINESS.address.street}, ${BUSINESS.address.city}, ${BUSINESS.address.region} ${BUSINESS.address.postalCode}`)}&output=embed`}
                     width="100%" 
                     height="100%" 
                     style={{ border: 0 }} 
@@ -285,11 +268,11 @@ export const Contact: React.FC = () => {
                     <MapPin className="text-brand-gold" size={24} /> Service Areas
                  </h4>
                  <div className="grid grid-cols-2 md:grid-cols-2 gap-y-3 gap-x-4">
-                    {serviceAreas.map((area, index) => (
+                    {BUSINESS.areaServed.map(({ name: city }, index) => (
                        <div key={index} className="flex items-center gap-2 group cursor-default">
                           <MapPin size={14} className="text-red-600 flex-shrink-0 group-hover:scale-125 transition-transform" fill="currentColor" />
                           <span className="text-sm font-bold text-brand-dark underline decoration-gray-300 underline-offset-4 decoration-1 group-hover:decoration-brand-gold transition-all">
-                             {area}
+                             {city}, GA
                           </span>
                        </div>
                     ))}

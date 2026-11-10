@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, MapPin } from 'lucide-react';
+import { BUSINESS } from '../lib/business';
 
 export const Footer: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ export const Footer: React.FC = () => {
               <span className="text-brand-gold">AGS</span> STONES
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Atlanta's Premier Hardscape Contractor. Specialists in Pavers, Retaining Walls, and Masonry.
+              Hardscape and stone work from a Duluth contractor serving homeowners across Metro Atlanta.
             </p>
             <div className="flex gap-4">
               <a 
@@ -49,34 +50,26 @@ export const Footer: React.FC = () => {
               <li><Link to="/service-areas" className="hover:text-white transition-colors">Service Areas</Link></li>
               <li><Link to="/blog" className="hover:text-white transition-colors">Blog & Guides</Link></li>
               <li><Link to="/service/driveway-pavers" className="hover:text-white transition-colors">Paver Driveway Installation</Link></li>
-              <li><Link to="/service/retaining-wall-installation" className="hover:text-white transition-colors">Retaining Wall Contractors</Link></li>
-              <li><Link to="/service/outdoor-patio-builders" className="hover:text-white transition-colors">Patio Builders Near Me</Link></li>
+              <li><Link to="/service/retaining-wall-installation" className="hover:text-white transition-colors">Retaining Wall Installation</Link></li>
+              <li><Link to="/service/outdoor-patio-builders" className="hover:text-white transition-colors">Outdoor Patio Installation</Link></li>
             </ul>
           </div>
 
-          {/* Keyword Cloud (Strategic Long Tail Capture) */}
+          {/* Helpful service shortcuts */}
           <div>
-             <h4 className="font-bold text-lg mb-6 text-brand-gold">Specialized Searches</h4>
+             <h4 className="font-bold text-lg mb-6 text-brand-gold">Explore Services</h4>
              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><Link to="/driveway-pavers-atlanta" className="hover:text-brand-gold transition-colors block">Driveway Pavers Atlanta</Link></li>
-                <li><Link to="/driveways-pavers-alpharetta-ga" className="hover:text-brand-gold transition-colors block">Driveways & Pavers Alpharetta</Link></li>
-                <li><Link to="/outdoor-kitchen-johns-creek-ga" className="hover:text-brand-gold transition-colors block">Outdoor Kitchen Johns Creek</Link></li>
-                <li><Link to="/retaining-walls-atlanta" className="hover:text-brand-gold transition-colors block">Retaining Walls Atlanta</Link></li>
-                <li><Link to="/pool-deck-pavers-atlanta" className="hover:text-brand-gold transition-colors block">Pool Deck Pavers Atlanta</Link></li>
-                <li><Link to="/paver-patio-duluth-ga" className="hover:text-brand-gold transition-colors block">Paver Patio Duluth GA</Link></li>
-                <li><Link to="/paving-stone-contractor-roswell" className="hover:text-brand-gold transition-colors block">Paving Stone Contractor Roswell</Link></li>
-                <li><Link to="/stone-patio-contractors-alpharetta-ga" className="hover:text-brand-gold transition-colors block">Stone Patio Contractors Alpharetta</Link></li>
-                <li><Link to="/hardscape-installation-atlanta" className="hover:text-brand-gold transition-colors block">Hardscape Installation Atlanta</Link></li>
-                <li><Link to="/hardscaping-smyrna" className="hover:text-brand-gold transition-colors block">Hardscaping Smyrna</Link></li>
-                <li><Link to="/paver-patio-johns-creek-ga" className="hover:text-brand-gold transition-colors block">Paver Patio Johns Creek GA</Link></li>
-                <li><Link to="/pavers-alpharetta-ga" className="hover:text-brand-gold transition-colors block">Pavers Alpharetta GA</Link></li>
-                <li><Link to="/hardscape-roswell-ga" className="hover:text-brand-gold transition-colors block">Hardscape Roswell GA</Link></li>
-                <li><Link to="/patio-installation-johns-creek" className="hover:text-brand-gold transition-colors block">Patio Installation Johns Creek</Link></li>
+                <li><Link to="/service/driveway-pavers" className="hover:text-brand-gold transition-colors block">Driveways</Link></li>
+                <li><Link to="/service/outdoor-patio-builders" className="hover:text-brand-gold transition-colors block">Patios</Link></li>
+                <li><Link to="/service/retaining-wall-installation" className="hover:text-brand-gold transition-colors block">Retaining walls</Link></li>
+                <li><Link to="/service/pool-deck-pavers" className="hover:text-brand-gold transition-colors block">Pool decks</Link></li>
+                <li><Link to="/service/masonry-fireplaces" className="hover:text-brand-gold transition-colors block">Stonework & outdoor kitchens</Link></li>
+                <li><Link to="/service-areas" className="hover:text-brand-gold transition-colors block">All service areas</Link></li>
              </ul>
              <div className="mt-6">
                 <h5 className="font-bold text-sm text-brand-gold mb-2">Service Areas</h5>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                   Duluth • Alpharetta • Roswell • Johns Creek • Suwanee • Milton • Cumming • Sandy Springs • Marietta • Dunwoody • Norcross
+                   {BUSINESS.areaServed.map((area) => area.name).join(' · ')}
                 </p>
              </div>
           </div>
@@ -87,13 +80,13 @@ export const Footer: React.FC = () => {
             <address className="not-italic text-gray-400 text-sm space-y-4">
               <p className="flex items-start gap-3">
                  <MapPin size={16} className="text-brand-gold mt-1 flex-shrink-0" />
-                 <span>4579 Abbotts Bridge Rd Suite 10<br/>Duluth, GA 30097</span>
+                 <span>{BUSINESS.address.street}<br/>{BUSINESS.address.city}, {BUSINESS.address.region} {BUSINESS.address.postalCode}</span>
               </p>
               <p>
-                 <a href="tel:6784287630" className="hover:text-white block font-medium text-base text-gray-300">(678) 428-7630</a>
+                 <a href={BUSINESS.phoneHref} className="hover:text-white block font-medium text-base text-gray-300">{BUSINESS.phoneDisplay}</a>
                  <span className="text-xs text-green-500 block mt-1">● Available Mon-Fri</span>
               </p>
-              <p><a href="mailto:agstones.pavers@gmail.com" className="hover:text-white underline decoration-gray-600 underline-offset-4">agstones.pavers@gmail.com</a></p>
+              <p><a href={`mailto:${BUSINESS.email}`} className="hover:text-white underline decoration-gray-600 underline-offset-4">{BUSINESS.email}</a></p>
             </address>
           </div>
         </div>

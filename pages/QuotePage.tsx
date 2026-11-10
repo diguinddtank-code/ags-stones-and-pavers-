@@ -75,16 +75,7 @@ export const QuotePage: React.FC = () => {
 
       {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
-          className="w-full h-full object-cover object-center scale-105"
-        >
-          <source src="https://storage.googleapis.com/msgsndr/yRboz8P4zFeLUF6bAk8i/media/680a5a6f1eba4b32d1925215.mp4" type="video/mp4" />
-        </video>
+        <img src="/images/service-hero-patio.webp" alt="Paver patio project inspiration" className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high" />
         
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
       </div>
@@ -101,12 +92,11 @@ export const QuotePage: React.FC = () => {
         {/* Page Titles */}
         <div className="max-w-4xl mx-auto text-center mb-12 mt-4 md:mt-12">
            <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-brand-gold font-bold mb-4 drop-shadow-lg leading-tight">
-             Premium <span className="text-white">Hardscaping &</span>
-             <span className="text-white block mt-2">Masonry</span>
+             Tell us about <span className="text-white">your</span>
+             <span className="text-white block mt-2">project</span>
            </h1>
            <p className="text-gray-200 text-lg md:text-xl font-medium tracking-wide">
-             Lock in your exclusive factory-direct estimate. Experience luxury design
-             <br className="hidden md:block" /> without the retail markup.
+             Request a free estimate for pavers, patios, retaining walls, outdoor kitchens or stonework in Metro Atlanta.
            </p>
         </div>
 

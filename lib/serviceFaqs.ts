@@ -23,181 +23,181 @@ const builders: Record<ServiceKind, (city: string, county: string) => Faq[]> = {
   driveway: (city, county) => [
     {
       q: `How much does a paver driveway cost in ${city}?`,
-      a: `Price depends on square footage, the paver line you choose, how much old concrete or asphalt has to be removed, and how deep the base needs to be on your lot. We give every ${city} homeowner a free on-site estimate with a line-item quote, so you know exactly what you are paying for before any work starts.`,
+      a: `The estimate depends on driveway size, material and pattern, demolition, site access, grading and drainage needs. A site review is the best way to understand the scope for a ${city} property.`,
     },
     {
-      q: `Are pavers better than concrete for a driveway in ${county}?`,
-      a: `On Georgia clay, poured concrete tends to crack as the soil expands and contracts. Interlocking pavers sit on a compacted aggregate base and flex with the ground instead of cracking, and a single damaged paver can be lifted and replaced without patching the whole slab.`,
+      q: 'What should I compare when choosing driveway pavers?',
+      a: 'Consider the home’s style, vehicle loads, surface texture, color, pattern and maintenance. Ask how excavation, base preparation, edge restraint and drainage are included in the proposed scope.',
     },
     {
-      q: 'How long does a paver driveway installation take?',
-      a: 'Most residential driveways are completed in 3 to 5 working days: demolition and excavation, base compaction, paver laying, edge restraints and polymeric sand. Larger motor courts or projects with drainage work can take longer, and we give you a written timeline before we start.',
+      q: `How are paver driveways planned for ${county} soil and drainage?`,
+      a: 'The approach depends on the property. Grade, soil, water flow, existing paving and intended vehicle use should be reviewed before deciding on excavation depth, base materials and surface slope.',
     },
     {
-      q: `Do you handle HOA approval for driveways in ${city}?`,
-      a: `Yes. We prepare the layout drawings, material samples and color specs most ${city} HOAs ask for, and we can meet with your architectural review committee if needed.`,
+      q: 'Can existing concrete be replaced with pavers?',
+      a: 'Often, yes. The existing surface, access, subgrade and drainage affect the work required. Share photos and the property address when requesting an estimate so the next step can be discussed.',
     },
   ],
   patio: (city, county) => [
     {
       q: `How much does a paver patio cost in ${city}?`,
-      a: `The main cost drivers are size, material (concrete pavers, travertine or natural flagstone), site access and grading. Adding seat walls, steps or a fire feature changes the scope. We provide a free on-site design consultation and a detailed written quote for every ${city} project.`,
+      a: `Cost depends on patio size, material, access, grading and details such as steps, borders or seating walls. Discuss how you plan to use the space so the estimate reflects the right scope for your ${city} property.`,
     },
     {
-      q: 'How long does it take to build a patio?',
-      a: 'A standard backyard paver patio usually takes 2 to 5 working days. Patios that include retaining walls, outdoor kitchens or fire features typically take 1 to 3 weeks depending on scope.',
+      q: 'Which patio material should I choose?',
+      a: 'Concrete pavers and natural stone differ in color, texture, format, cost and maintenance. Compare samples in the context of your home and the amount of sun, shade and use the patio will receive.',
     },
     {
-      q: `Will my new patio hold up to rain and clay soil in ${county}?`,
-      a: `That is exactly what the base is for. We excavate below the topsoil, compact a graded aggregate base, and pitch the surface so water drains away from your home instead of pooling on the patio.`,
+      q: `How should a patio handle rain and grading in ${county}?`,
+      a: 'The design should account for the existing slope, roof runoff, nearby structures and where water can safely flow. Site conditions determine the base and surface grading needed.',
     },
     {
-      q: 'Can I see the design before construction starts?',
-      a: 'Yes. We offer 3D renderings so you can see the layout, stone colors and how the patio connects to your home before we break ground.',
+      q: `What information helps plan a patio in ${city}?`,
+      a: 'Share approximate dimensions, how you expect to use the area, preferred materials and any concerns about access, steps, slope or drainage. Photos can help start the conversation.',
     },
   ],
   wall: (city, county) => [
     {
       q: `Do I need a permit for a retaining wall in ${city}?`,
-      a: `Requirements vary by jurisdiction in ${county}, and taller walls or walls supporting a load (like a driveway or structure) usually need a permit and sometimes an engineered design. We check the local requirements for your address and handle the permit process for you.`,
+      a: `Requirements depend on the wall and the local jurisdiction in ${county}. Confirm current permit, engineering and property-line requirements with the relevant city or county before work begins.`,
     },
     {
-      q: 'Why do retaining walls fail?',
-      a: 'Almost always because of water. Without a gravel drainage zone, a perforated drain pipe and proper geogrid reinforcement, hydrostatic pressure builds behind the wall until it leans or collapses. Every wall we build includes drainage designed for Georgia rainfall.',
+      q: 'What should be considered when planning a retaining wall?',
+      a: 'Wall height and length, soil, slope, water, nearby structures, property lines and access all affect the design. Some projects also need engineering or permits; verify requirements for the specific site.',
     },
     {
       q: `How much does a retaining wall cost in ${city}?`,
-      a: 'Cost depends on wall height and length, block type, access for equipment, and how much excavation and drainage the slope needs. We measure the site and give you a written estimate at no cost.',
+      a: 'Cost depends on the wall dimensions, selected system, site access, excavation, drainage and any engineering or approvals required. An estimate starts with understanding the grade and property conditions.',
     },
     {
       q: 'Can a retaining wall give me a flat, usable backyard?',
-      a: 'Yes. Terracing a slope with one or more engineered walls is the most common way to create level lawn, patio or play space on a hillside lot.',
+      a: 'A retaining wall can be part of a plan to create usable space on a slope. Whether terracing is suitable depends on the property, water flow, wall design and local requirements.',
     },
   ],
   kitchen: (city) => [
     {
       q: `How much does an outdoor kitchen cost in ${city}?`,
-      a: 'It depends on the size of the island, the countertop material, the appliances (grill, side burners, refrigerator, pizza oven) and the utility runs for gas, water and electrical. We design the layout with you and give a detailed quote before any work begins.',
+      a: 'Cost depends on the layout, masonry, countertop and appliance choices, utility needs, patio work and site access. Define the features you want before comparing estimates.',
     },
     {
       q: 'What countertop works best for an outdoor kitchen in Georgia?',
-      a: 'Dense natural stone such as granite or quartzite handles UV, heat and freeze-thaw cycles well. Many indoor quartz products can discolor in direct sun, so we steer outdoor projects toward UV-stable materials.',
+      a: 'Outdoor countertops differ in appearance, heat and weather performance, care and price. Ask the supplier about the selected product’s suitability for exterior use and follow its care guidance.',
     },
     {
-      q: 'Do you build the patio and the outdoor kitchen together?',
-      a: 'Yes. We build the patio, the kitchen island, seat walls and fire features as one coordinated project, so the footings, drainage and utilities are planned together.',
+      q: 'Should the patio and outdoor kitchen be planned together?',
+      a: 'Planning them together helps coordinate dimensions, movement around the cooking area, utility routes, seating and drainage. The exact work included should be listed in the project scope.',
     },
     {
-      q: 'How long does an outdoor kitchen project take?',
-      a: 'Most outdoor kitchens take 1 to 3 weeks depending on the size of the island, utility work and whether a new patio is built at the same time.',
+      q: `Are permits or utility approvals needed for an outdoor kitchen in ${city}?`,
+      a: 'Requirements depend on the appliances, utility connections and local jurisdiction. Confirm applicable permits and inspections with the city or county and the relevant utility providers.',
     },
   ],
   pool: (city) => [
     {
       q: 'Are travertine pool decks hot to walk on?',
-      a: 'Travertine stays noticeably cooler than concrete in direct sun, which is why it is the most popular pool deck material in Metro Atlanta. Light-colored concrete pavers are another comfortable option.',
+      a: 'Surface temperature varies with color, finish, sun exposure and weather. Compare samples outdoors and consider texture, care and comfort alongside appearance.',
     },
     {
       q: `Can you replace a cracked concrete pool deck in ${city}?`,
-      a: 'Yes. We remove the old deck, re-grade for drainage, reset or replace the coping and install pavers or travertine on a properly compacted base.',
+      a: 'A replacement may be possible. The existing deck, pool edge, drainage, access and any movement around the pool need to be assessed before choosing a method and material.',
     },
     {
       q: 'Are paver pool decks slippery when wet?',
-      a: 'Tumbled travertine and textured concrete pavers are slip-resistant when wet. We help you choose a finish that is safe for kids and guests around the pool.',
+      a: 'Wet traction varies by product and finish. Ask for manufacturer information and compare samples for the intended poolside use; no surface should be treated as slip-proof.',
     },
     {
       q: 'How long does a pool deck renovation take?',
-      a: 'Most pool deck projects take about 1 to 2 weeks, depending on deck size, coping work and whether demolition of an old concrete deck is needed.',
+      a: 'The schedule depends on deck size, demolition, coping, access, material availability and site conditions. Ask for a project-specific timeline after the scope is reviewed.',
     },
   ],
   fire: (city) => [
     {
       q: `Do you build outdoor fireplaces and fire pits in ${city}?`,
-      a: `Yes. We build wood-burning and gas fireplaces, fire pits and fire tables with natural stone or veneer finishes, usually as part of a new patio or outdoor living space in ${city}.`,
+      a: `AGS lists outdoor fireplaces and fire features among its masonry services in the ${city} area. Share your preferred fuel, location and whether the feature is part of a larger patio project when requesting an estimate.`,
     },
     {
       q: 'Gas or wood-burning — which is better?',
-      a: 'Gas is instant and clean with no smoke; wood gives the classic crackle and smell. Local codes, HOA rules and your gas line location also play a role, and we walk you through the options on site.',
+      a: 'Gas and wood features differ in operation, utility needs, upkeep and local requirements. Review manufacturer guidance and check local rules and HOA restrictions before choosing.',
     },
     {
       q: 'Does an outdoor fireplace need a foundation?',
-      a: 'Yes. A masonry fireplace is heavy, so we pour a reinforced concrete footing sized to the structure to prevent settling or cracking.',
+      a: 'A masonry fireplace needs support designed for its weight and site conditions. The footing and any approvals should be determined as part of the project plan.',
     },
     {
       q: 'How long does it take to build an outdoor fireplace?',
-      a: 'A custom masonry fireplace typically takes 1 to 2 weeks from footing to final stone work. Fire pits are often completed in a few days.',
+      a: 'Timing depends on the feature, foundation, materials, utility work, weather and approvals. Request a schedule estimate after the full scope is discussed.',
     },
   ],
   deck: (city) => [
     {
       q: `Do you build composite decks in ${city}?`,
-      a: 'Yes. We build composite and wood decks and often combine them with a paver patio below or beside the deck for a multi-level outdoor space.',
+      a: 'AGS lists deck construction among its services. Share the proposed location, height, material preference and any connection to a patio when requesting an estimate.',
     },
     {
       q: 'Composite or wood decking?',
-      a: 'Composite costs more up front but does not need staining or sealing and resists rot and splintering. Pressure-treated wood is more budget-friendly but needs regular maintenance.',
+      a: 'Compare purchase cost, appearance, maintenance, warranties and the manufacturer’s installation requirements. Conditions at your property and how you use the deck can help guide the choice.',
     },
     {
       q: 'Do I need a permit for a new deck?',
-      a: 'Most attached and elevated decks require a building permit. We handle the permit and inspections as part of the project.',
+      a: 'Permit and inspection requirements vary by jurisdiction and project details. Confirm current requirements with your city or county before construction.',
     },
     {
       q: 'Can you connect a new deck to a stone patio?',
-      a: 'Yes. Deck-to-patio transitions with stone steps are one of our most requested designs.',
+      a: 'A deck and patio can be planned as connected areas. The layout should account for elevation changes, steps, drainage, access and the materials selected.',
     },
   ],
   veneer: (city) => [
     {
       q: 'What is stone veneer?',
-      a: 'Stone veneer is a thin layer of natural or manufactured stone applied over a structural wall. It gives the look of full masonry at a lower weight and cost.',
+      a: 'Stone veneer is a facing layer of natural or manufactured stone installed over a suitable substrate. Product requirements vary, so the wall assembly and manufacturer guidance matter.',
     },
     {
       q: `Can you add stone veneer to my house exterior in ${city}?`,
-      a: `Yes. We install stone veneer on facades, columns, foundations, chimneys and outdoor kitchen islands, with proper moisture barriers and lath behind the stone.`,
+      a: `AGS installs stone veneer for exterior and outdoor features in the ${city} area. The existing wall, substrate, moisture management and selected product should be reviewed before work is scoped.`,
     },
     {
       q: 'How long does stone veneer last?',
-      a: 'Installed correctly with a weather-resistant barrier and a drainage plane, stone veneer lasts for decades with very little maintenance.',
+      a: 'Service life depends on product, substrate, installation details, exposure and maintenance. Follow the manufacturer’s care guidance and ask what preparation the specific wall assembly needs.',
     },
     {
       q: 'Natural or manufactured stone veneer?',
-      a: 'Natural stone has unmatched texture and durability; manufactured veneer is lighter and more uniform. We bring samples of both to your consultation.',
+      a: 'Natural and manufactured veneers offer different textures, color variation, weight and care needs. Compare samples and review installation requirements for each product.',
     },
   ],
   design: (city) => [
     {
-      q: 'Do you offer 3D landscape and hardscape design?',
-      a: 'Yes. We create 3D renderings of your yard so you can review the layout, materials and elevations before construction begins.',
+      q: 'Can I discuss layout and materials before construction?',
+      a: 'Yes. Share your goals, dimensions, photos and material ideas when requesting an estimate. Ask which planning or design steps are included for your project.',
     },
     {
       q: 'Is the design fee credited toward construction?',
-      a: 'Design details and any credits are explained in your proposal. Ask about it during your free consultation.',
+      a: 'Design services and fees depend on the requested work. Confirm what is included and whether any design fee applies before proceeding.',
     },
     {
       q: `How long does the design process take for a ${city} project?`,
-      a: 'Most designs are ready within 1 to 2 weeks after the site survey, depending on the size of the project and the number of revisions.',
+      a: 'Timing depends on the information available, site complexity and the scope of planning requested. Ask for an expected schedule when discussing the project.',
     },
     {
       q: 'Do you also build what you design?',
-      a: 'Yes. Our in-house crews build the patios, walls, driveways and outdoor kitchens we design, so nothing gets lost between the drawing and the job site.',
+      a: 'Ask whether construction is included in the planning proposal and what team will be responsible for each part of the work.',
     },
   ],
   hardscape: (city, county) => [
     {
       q: `What does a hardscape contractor do in ${city}?`,
-      a: 'Hardscaping covers the built, non-plant parts of a landscape: paver driveways and patios, retaining walls, steps, walkways, outdoor kitchens, fire features and drainage. We design and build all of them with our own crews.',
+      a: 'Hardscaping generally includes built outdoor features such as paver driveways and patios, retaining walls, steps, walkways, outdoor kitchens and fire features. AGS lists these services for Metro Atlanta homeowners.',
     },
     {
       q: `How do you deal with slopes and drainage in ${county}?`,
-      a: 'We start with a site evaluation, then combine grading, retaining walls, drain pipes and permeable or properly pitched surfaces so water moves away from your home and your hardscape.',
+      a: `The right approach depends on the slope, existing drainage, soil, nearby structures and local requirements in ${county}. A site review helps identify options and what approvals may be needed.`,
     },
     {
       q: 'How much does a hardscape project cost?',
-      a: 'Scope drives price: materials, square footage, wall heights, site access and drainage needs. We provide a free on-site consultation and a detailed written estimate.',
+      a: 'Cost depends on dimensions, materials, site access, demolition, grading, drainage and any required engineering or approvals. Request an estimate with your city and project details.',
     },
     {
-      q: 'Do you use subcontractors?',
-      a: 'No. Our own in-house crews handle excavation, base work and installation, which keeps quality and the schedule under our control.',
+      q: 'What happens during an estimate discussion?',
+      a: 'Share the project goal, property location and any known site concerns. The next steps depend on the work, access and information needed to define a useful scope.',
     },
   ],
 };

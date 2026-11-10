@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, ThumbsUp, Loader2, Tag, Check, ChevronDown } from 'lucide-react';
+import { ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, Loader2, Check, ChevronDown } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   // Removed refs and scroll listeners to free up the main thread
@@ -70,27 +70,22 @@ export const Hero: React.FC = () => {
   ];
 
   const badges = [
-    { icon: <Award />, title: "20+ Years", sub: "Master Experience" },
-    { icon: <CheckCircle2 />, title: "ICPI Certified", sub: "Expert Installers" },
-    { icon: <ThumbsUp />, title: "100% Satisfaction", sub: "Guaranteed Work" },
-    { icon: <ShieldCheck />, title: "Fully Licensed", sub: "& Fully Insured" },
-    { icon: <Tag />, title: "Price Match", sub: "Competitive Rates" },
+    { icon: <ShieldCheck />, title: "Licensed & Insured", sub: "Georgia hardscape contractor" },
+    { icon: <Award />, title: "In-House Crews", sub: "A consistent team on your project" },
+    { icon: <CheckCircle2 />, title: "Free Estimates", sub: "Start with a project conversation" },
   ];
 
   return (
     <section className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-28 md:pt-32 pb-28 md:pb-32 overflow-hidden bg-brand-dark">
-      {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
+      {/* Locally hosted, responsive hero image keeps the first screen reliable and light. */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
-          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-60" // Lowered opacity for better text contrast
-        >
-          <source src="https://storage.googleapis.com/msgsndr/W0sXUj5H01T944bIuY1n/media/680a5a6f1eba4b32d1925215.mp4" type="video/mp4" />
-        </video>
+        <img
+          src="/images/service-hero-patio.webp"
+          alt="Stone paver patio outside a brick home in Metro Atlanta"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
         
         {/* Simplified dual-layer gradient overlay for better performance */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
@@ -103,7 +98,7 @@ export const Hero: React.FC = () => {
             <div className="w-full lg:w-1/2 text-center lg:text-left animate-[fadeIn_1s_ease-out]">
                 <div className="inline-flex items-center gap-2 bg-brand-dark/80 backdrop-blur-md border border-brand-gold/50 px-4 py-2 rounded-full mb-6 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span className="text-white text-xs font-bold uppercase tracking-wider">Top Rated in Atlanta, GA</span>
+                    <span className="text-white text-xs font-bold uppercase tracking-wider">Duluth based · Serving Metro Atlanta</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white leading-[1.1] mb-6 drop-shadow-lg tracking-tight">
@@ -111,7 +106,7 @@ export const Hero: React.FC = () => {
                 </h1>
                 
                 <p className="text-base md:text-xl text-gray-100 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-md">
-                    Premium driveway pavers, luxury patios, and expert hardscaping crafted by local master masons.
+                    Driveways, patios, retaining walls and outdoor spaces, planned for your home and built for Georgia conditions.
                 </p>
 
                 {/* TRUST BADGES - glass pills, wrap on small screens */}
@@ -150,7 +145,7 @@ export const Hero: React.FC = () => {
                   ) : (
                      <>
                         <h3 className="text-2xl font-serif font-bold text-white mb-2 tracking-tight">Get Your Free Estimate</h3>
-                        <p className="text-gray-200 text-sm mb-5 font-medium">Lock in this month's special pricing.</p>
+                        <p className="text-gray-200 text-sm mb-5 font-medium">Tell us what you’re planning. We’ll follow up to discuss the project.</p>
                         
                         <form onSubmit={handleSubmit} className="space-y-3">
                            <div className="grid grid-cols-2 gap-3">
@@ -238,22 +233,9 @@ export const Hero: React.FC = () => {
           </div>
       </div>
 
-      {/* INFINITE SCROLL MARQUEE */}
-      <div className="absolute bottom-0 w-full bg-white/10 backdrop-blur-md border-t border-white/20 z-30 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
-        <div className="py-4 overflow-hidden relative group">
-            <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
-               {[...badges, ...badges, ...badges, ...badges, ...badges, ...badges].map((b, i) => (
-                  <div key={i} className="flex items-center gap-3 mx-6 md:mx-12 min-w-max">
-                     <div className="text-brand-gold p-1.5 md:p-2 bg-white/10 rounded-full border border-white/20">
-                        {React.cloneElement(b.icon as React.ReactElement<any>, { className: "w-4 h-4 md:w-5 md:h-5" })}
-                     </div>
-                     <div className="flex flex-col">
-                        <span className="text-white text-xs md:text-sm font-bold uppercase tracking-wider drop-shadow-sm">{b.title}</span>
-                        <span className="hidden md:block text-gray-200 text-[10px] drop-shadow-sm">{b.sub}</span>
-                     </div>
-                  </div>
-               ))}
-            </div>
+      <div className="absolute bottom-0 w-full bg-brand-dark/70 backdrop-blur-sm border-t border-white/15 z-30">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-2">
+          {badges.map((b) => <div key={b.title} className="flex items-center gap-2 text-white text-xs sm:text-sm"><span className="text-brand-gold">{React.cloneElement(b.icon as React.ReactElement<any>, { className: "w-4 h-4" })}</span><span>{b.title}</span></div>)}
         </div>
       </div>
     </section>

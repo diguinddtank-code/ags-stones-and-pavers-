@@ -68,7 +68,7 @@ export const DayNightSlider: React.FC = () => {
                   {/* NIGHT IMAGE (Base Layer) */}
                   <div className="absolute inset-0 bg-[#050505]">
                       <img 
-                         src="https://i.imgur.com/skbC8RZ.png"
+                         src="/images/service-hero-outdoor-kitchen.webp"
                          alt="Patio Night"
                          className="w-full h-full object-cover grayscale-[10%] brightness-110 contrast-125 transition-transform duration-[2000ms] ease-out"
                          style={{ transform: isNight ? 'scale(1.05)' : 'scale(1)' }}
@@ -80,7 +80,7 @@ export const DayNightSlider: React.FC = () => {
                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isNight ? 'opacity-0' : 'opacity-100'}`}
                   >
                       <img 
-                        src="https://i.imgur.com/lCsQQavh.webp" 
+                        src="/images/service-hero-patio.webp" 
                         alt="Patio Day" 
                         className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out"
                         style={{ transform: !isNight ? 'scale(1.05)' : 'scale(1)' }}

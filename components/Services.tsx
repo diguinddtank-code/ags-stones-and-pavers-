@@ -8,14 +8,13 @@ const services: ServiceItem[] = [
   {
     id: 'driveway-pavers',
     title: 'Driveway Pavers',
-    description: 'Expert driveway installation contractors near you. We replace concrete with premium interlocking pavers.',
+    description: 'Interlocking paver driveways planned around your home, vehicle use and site conditions.',
     icon: <LayoutGrid className="w-5 h-5" />,
     image: 'https://i.imgur.com/by6FzIkl.webp',
     benefits: [
-      'Best Driveway Contractors Near Me',
-      'High-Load Bearing Installation',
-      'Permeable & Standard Paver Options',
-      'Wide Range of Premium Stone Options'
+      'Vehicle-ready base planning',
+      'Permeable and standard paver options',
+      'Patterns, borders and color choices'
     ],
     localLinks: [
       { name: 'Alpharetta', url: '/pavers-alpharetta-ga' },
@@ -25,13 +24,13 @@ const services: ServiceItem[] = [
   {
     id: 'outdoor-patio-builders',
     title: 'Outdoor Patio Builders',
-    description: 'Leading patio contractors in your area. We design and build custom stone patios for luxury outdoor living.',
+    description: 'Paver and natural stone patios planned for dining, relaxing and everyday outdoor use.',
     icon: <Utensils className="w-5 h-5" />,
     image: 'https://i.imgur.com/SIBIdiFl.webp',
     benefits: [
-      'Custom Outdoor Kitchen Builders',
-      'Patio Paver Companies Near Me',
-      'Granite & Stone Fabrication'
+      'Outdoor dining layouts',
+      'Paver and natural stone choices',
+      'Steps, borders and transitions'
     ],
     localLinks: [
       { name: 'Johns Creek', url: '/patio-installation-johns-creek' },
@@ -41,13 +40,13 @@ const services: ServiceItem[] = [
   {
     id: 'retaining-wall-installation',
     title: 'Retaining Wall Installation',
-    description: 'Certified retaining wall contractors near you. We fix erosion and level yards with engineered stone walls.',
+    description: 'Retaining wall projects planned with attention to grade, drainage, access and how the yard needs to work.',
     icon: <Layers className="w-5 h-5" />,
     image: 'https://i.imgur.com/dZstK86l.webp',
     benefits: [
-      'Structural Masonry Contractors',
-      'Landscape Wall Installation',
-      'Drainage & Erosion Solutions'
+      'Slope and grade planning',
+      'Wall system options',
+      'Drainage considerations'
     ],
     localLinks: [
       { name: 'Atlanta', url: '/retaining-walls-atlanta' },
@@ -57,13 +56,13 @@ const services: ServiceItem[] = [
   {
     id: 'masonry-fireplaces',
     title: 'Masonry & Fireplaces',
-    description: 'Skilled stone work contractors near you. Custom stone masonry for fire pits, columns, and veneers.',
+    description: 'Stonework for outdoor kitchens, fireplaces, fire features, columns and architectural details.',
     icon: <Flame className="w-5 h-5" />,
     image: 'https://i.imgur.com/G2N5Chsl.webp',
     benefits: [
-      'Outdoor Fireplace Builders',
-      'Stone Masonry Company',
-      'Veneer & Natural Stone'
+      'Outdoor fire features',
+      'Stone veneer and masonry',
+      'Outdoor kitchen layouts'
     ],
     localLinks: [
       { name: 'Alpharetta', url: '/stone-patio-contractors-alpharetta-ga' },
@@ -73,13 +72,13 @@ const services: ServiceItem[] = [
   {
     id: 'deck-builders',
     title: 'Deck Builders',
-    description: 'Professional deck builders near me. Composite and wood decking integrated with stone hardscapes.',
+    description: 'Decks designed to connect with patios, steps and the rest of your outdoor space.',
     icon: <Hammer className="w-5 h-5" />,
     image: 'https://i.imgur.com/6f4H9fLl.webp',
     benefits: [
-      'Composite & Wood Decking',
-      'Structural Framing',
-      'Under-Deck Drainage Systems'
+      'Wood and composite options',
+      'Deck and patio transitions',
+      'Layout for your yard'
     ],
     localLinks: [
       { name: 'Duluth', url: '/paver-patio-duluth-ga' },
@@ -89,13 +88,13 @@ const services: ServiceItem[] = [
   {
     id: 'pool-deck-pavers',
     title: 'Pool Deck Pavers',
-    description: 'Specialized pavers for pool decks. Slip-resistant coping and resort-style hardscapes.',
+    description: 'Paver and natural stone pool surrounds with coordinated coping and clear transitions.',
     icon: <Waves className="w-5 h-5" />,
     image: 'https://i.imgur.com/vEHS8LGl.webp',
     benefits: [
-      'Slip-Resistant Travertine',
-      'Pool Coping Installation',
-      'Cool-Touch Technology'
+      'Paver and stone options',
+      'Pool coping choices',
+      'Drainage and edge details'
     ],
     localLinks: [
       { name: 'Atlanta', url: '/pool-deck-pavers-atlanta' },
@@ -105,13 +104,13 @@ const services: ServiceItem[] = [
   {
     id: 'stone-veneer',
     title: 'Stone Veneer',
-    description: 'Enhance your home with stone veneer. The best local masonry companies for architectural facing.',
+    description: 'Stone veneer for exterior facades, entry columns, fireplaces and other architectural features.',
     icon: <Mountain className="w-5 h-5" />,
     image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
     benefits: [
-      'House Facing & Columns',
-      'Stone Work Contractors',
-      'Polymer Modified Mortar'
+      'Exterior accents and columns',
+      'Stone style and finish choices',
+      'Installation details'
     ],
     localLinks: [
       { name: 'Alpharetta', url: '/pavers-alpharetta-ga' },
@@ -121,13 +120,13 @@ const services: ServiceItem[] = [
   {
     id: 'landscape-design',
     title: 'Landscape Design',
-    description: 'Advanced landscape services and 3D design. We visualize your hardscape before we build.',
+    description: 'Plan hardscape layout, materials and site relationships before installation begins.',
     icon: <Ruler className="w-5 h-5" />,
     image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg',
     benefits: [
-      '3D Hardscape Design',
-      'Landscapers Near Me',
-      'Full Project Planning'
+      'Layout planning',
+      'Material coordination',
+      'Site and access review'
     ],
     localLinks: [
       { name: 'Atlanta', url: '/hardscape-installation-atlanta' },
@@ -188,8 +187,6 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
       
       {/* GLASSMORPHISM BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
-         {/* Subtle Concrete Texture */}
-         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
          {/* Soft Gradient Orbs */}
          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none"></div>
          <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -203,10 +200,10 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">Metro Atlanta Hardscapes</span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
-              Services Near You
+              Hardscape Services
             </h2>
             <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-               Craftsmanship that defines luxury. Select a category below to explore our "paver installation" and design capabilities.
+               Explore the types of work AGS Stones and Pavers takes on across Duluth and Metro Atlanta.
             </p>
         </div>
 
@@ -250,8 +247,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
                   {/* Badge */}
                   <div className="absolute top-4 left-4">
-                     <span className="bg-brand-gold text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md">
-                        <ShieldCheck size={12} /> 1-Yr Warranty
+                     <span className="bg-brand-dark/75 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                        <ShieldCheck size={12} /> Paver &amp; Stone
                      </span>
                   </div>
 
@@ -290,7 +287,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 
                 {/* VALUE BADGE - DESKTOP */}
                 <div className="absolute top-6 left-6 z-30 bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 border border-white/50">
-                    <ShieldCheck size={12} className="text-brand-gold" /> Warranty Protected
+                    <ShieldCheck size={12} className="text-brand-gold" /> Paver &amp; Stone
                 </div>
 
                 {/* Background Image */}

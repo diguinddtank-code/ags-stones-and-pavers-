@@ -29,7 +29,7 @@ if (!template.includes('<!--app-head-->') || !template.includes('<!--app-html-->
 
 // The hero video poster preload only helps pages that actually show it.
 const HERO_PRELOAD = /\s*<!-- PRELOAD HERO LCP POSTER -->\s*<link rel="preload" as="image"[^>]*>/;
-const PAGES_WITH_HERO_VIDEO = new Set(['/', '/quote']);
+const PAGES_WITH_PRELOADED_HERO = new Set(['/', '/quote']);
 
 // React 19 emits hoistable tags (<title>, <meta>, <link>) at the start of the
 // render output. Move that leading run into <head>; the rest is the body.
@@ -54,7 +54,7 @@ async function renderPage(route) {
   const html = await render(route);
   const { head, body } = splitHead(html);
   let page = template.replace('<!--app-head-->', head).replace('<!--app-html-->', body);
-  if (!PAGES_WITH_HERO_VIDEO.has(route)) page = page.replace(HERO_PRELOAD, '');
+  if (!PAGES_WITH_PRELOADED_HERO.has(route)) page = page.replace(HERO_PRELOAD, '');
   return { page, head, body };
 }
 

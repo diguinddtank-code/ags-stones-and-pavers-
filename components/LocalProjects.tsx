@@ -1,273 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { MapPin, Tag, ArrowRight, Calendar, Ruler, Box } from 'lucide-react';
+import { serviceHeroImages } from '../lib/serviceHeroImages';
 
-const projects = [
-  {
-    id: 1,
-    title: 'Luxury Travertine Pool Deck',
-    location: 'Alpharetta, GA',
-    date: 'January 2026',
-    material: 'Premium Turkish Travertine',
-    size: '1,850 Sq. Ft.',
-    category: 'Pool Decks',
-    image: 'https://i.imgur.com/uDiqFSl.jpeg', 
-    tags: ['#FrenchPattern', '#PoolCoping', '#CoolTouchStone', '#OutdoorLiving'],
-    description: 'Complete excavation of cracked concrete. Installed a permeable base system followed by cool-touch Ivory Travertine in a French Pattern with remodeling coping.'
-  },
-  {
-    id: 2,
-    title: 'Structural Retaining Wall',
-    location: 'Roswell, GA',
-    date: 'January 2026',
-    material: 'Allan Block System',
-    size: '120 Linear Ft.',
-    category: 'Retaining Walls',
-    image: 'https://i.imgur.com/dZstK86l.webp', 
-    tags: ['#EngineeredWall', '#ErosionControl', '#GeoGrid', '#DrainageSystems'],
-    description: 'Construction of a 6ft tiered engineered wall to solve severe erosion. Included hydro-static pressure relief drainage and compacted gravel backfill.'
-  },
-  {
-    id: 3,
-    title: 'Modern Paver Driveway',
-    location: 'Duluth, GA',
-    date: 'November 2025',
-    material: 'Belgard Dublin Cobble',
-    size: '2,200 Sq. Ft.',
-    category: 'Driveways',
-    image: 'https://www.belgard.com/wp-content/uploads/2024/05/PearmeableCategoryPage_AltBox_Image1.webp', 
-    tags: ['#PaverDriveway', '#ConcreteReplacement', '#CurbAppeal', '#InterlockingPavers'],
-    description: 'Demolition of failing asphalt. Installed a heavy-duty road base foundation and 80mm pavers tailored for heavy vehicle loads (RV parking ready).'
-  },
-  {
-    id: 4,
-    title: 'Outdoor Kitchen & Fire Pit',
-    location: 'Johns Creek, GA',
-    date: 'October 2025',
-    material: 'Stacked Stone Veneer',
-    size: '450 Sq. Ft. Patio',
-    category: 'Patios',
-    image: 'https://i.imgur.com/h3NCvta.jpeg', 
-    tags: ['#OutdoorKitchen', '#StoneMasonry', '#FireFeature', '#BuiltInGrill'],
-    description: 'Design and build of a custom L-shaped masonry kitchen with granite countertops, integrated Summerset grill, and a gas-ignited stone fire pit.'
-  },
-  {
-    id: 5,
-    title: 'Flagstone Walkway',
-    location: 'Marietta, GA',
-    date: 'August 2025',
-    material: 'Pennsylvania Bluestone',
-    size: '350 Sq. Ft.',
-    category: 'Walkways',
-    image: 'https://i.imgur.com/7OGGsuS.jpeg', 
-    tags: ['#NaturalStone', '#WalkwayIdeas', '#LandscapeDesign', '#CurbAppeal'],
-    description: 'Installation of organic irregular flagstone set on a concrete base with polymeric sand joints to prevent weed growth and ant hills.'
-  },
-  {
-    id: 6,
-    title: 'Terraced Backyard Makeover',
-    location: 'Suwanee, GA',
-    date: 'June 2025',
-    material: 'Modular Block & Sod',
-    size: 'Multi-Level',
-    category: 'Retaining Walls',
-    image: 'https://i.imgur.com/lR45oIm.jpeg', 
-    tags: ['#Landscaping', '#TerracedWalls', '#SodInstallation', '#Grading'],
-    description: 'Complete backyard grading to create usable flat tiers. Integrated a modular block retaining wall system with Zeon Zoysia sod installation.'
-  }
+const inspiration = [
+  { title: 'A more welcoming arrival', description: 'Compare paver styles and edge details for a driveway that fits the home.', image: serviceHeroImages.driveway, alt: 'Paver driveway design inspiration', path: '/service/driveway-pavers', label: 'Driveways' },
+  { title: 'Room to gather outside', description: 'Plan the patio size, layout and transitions around how your family uses the yard.', image: serviceHeroImages.patio, alt: 'Outdoor patio design inspiration', path: '/service/outdoor-patio-builders', label: 'Patios' },
+  { title: 'A yard that works with its slope', description: 'Explore wall and drainage options for challenging grades and runoff.', image: serviceHeroImages.wall, alt: 'Retaining wall design inspiration', path: '/service/retaining-wall-installation', label: 'Retaining walls' },
 ];
 
-const filters = ['All', 'Alpharetta', 'Duluth', 'Roswell', 'Marietta', 'Johns Creek', 'Suwanee'];
-
-const urlMap: Record<number, string> = {
-  1: '/pool-deck-pavers-atlanta',
-  2: '/retaining-walls-atlanta',
-  3: '/service/driveway-pavers',
-  4: '/outdoor-kitchen-johns-creek-ga',
-  5: '/service/outdoor-patio-builders',
-  6: '/retaining-walls-atlanta'
-};
-
-export const LocalProjects: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
-    : projects.filter(p => p.location.includes(activeFilter));
-
-  // Local Observer to trigger animations
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    if (sectionRef.current) {
-        sectionRef.current.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-    }
-
-    return () => observer.disconnect();
-  }, [filteredProjects]);
-
-  // Dynamic Schema Generation (Updated with Dates)
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": `Hardscape Projects in ${activeFilter === 'All' ? 'Atlanta' : activeFilter}`,
-    "itemListElement": filteredProjects.map((project, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "CreativeWork",
-        "name": project.title,
-        "headline": `${project.title} - ${project.material}`,
-        "dateCreated": project.date,
-        "description": project.description,
-        "contentLocation": {
-          "@type": "Place",
-          "name": project.location
-        },
-        "image": project.image
-      }
-    }))
-  };
-
-  return (
-    <section ref={sectionRef} id="local-projects" className="pt-10 pb-24 bg-white relative">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-12 fade-in-section">
-          <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm">Case Studies</span>
-          <h2 className="mt-2 font-serif text-4xl md:text-5xl font-bold text-brand-dark">Our Work in Your Neighborhood</h2>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
-            Real results from recent months. Browse our portfolio of "paver installations" and "retaining walls" completed across Metro Atlanta.
-          </p>
-        </div>
-
-        {/* City Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 fade-in-section" role="group" aria-label="Filter projects by city">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              aria-pressed={activeFilter === filter}
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 border focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-offset-2 ${
-                activeFilter === filter
-                  ? 'bg-brand-dark text-white border-brand-dark shadow-lg scale-105'
-                  : 'bg-white text-gray-500 border-gray-200 hover:border-brand-gold hover:text-brand-gold'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div 
-              key={project.id} 
-              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 fade-in-section flex flex-col h-full"
-            >
-              {/* Image Header */}
-              <div className="relative h-64 overflow-hidden bg-gray-100 flex-shrink-0">
-                <img 
-                  src={project.image} 
-                  alt={`${project.title} installation in ${project.location}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                
-                {/* Floating Location Badge */}
-                <div className="absolute top-4 left-4 bg-brand-dark/90 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg border border-white/10">
-                  <MapPin size={10} className="text-brand-gold" /> {project.location}
-                </div>
-
-                {/* Date Badge (New) */}
-                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
-                   <Calendar size={10} className="text-brand-gold" /> {project.date}
-                </div>
-
-                <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-300"></div>
-              </div>
-
-              {/* Content Body */}
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2">
-                  {project.category}
-                </div>
-                <h3 className="font-serif text-xl font-bold text-brand-dark mb-3 leading-tight group-hover:text-brand-gold transition-colors">
-                  {project.title}
-                </h3>
-                
-                {/* Tech Specs Grid (New SEO Rich Area) */}
-                <div className="grid grid-cols-2 gap-2 mb-4 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                    <div>
-                        <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase text-gray-400 tracking-wider mb-1">
-                            <Box size={10} /> Material
-                        </span>
-                        <span className="text-xs font-semibold text-brand-dark leading-tight block">
-                            {project.material}
-                        </span>
-                    </div>
-                    <div>
-                        <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase text-gray-400 tracking-wider mb-1">
-                            <Ruler size={10} /> Scope
-                        </span>
-                        <span className="text-xs font-semibold text-brand-dark leading-tight block">
-                            {project.size}
-                        </span>
-                    </div>
-                </div>
-
-                <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-                
-                {/* Keyword Tags */}
-                <div className="flex flex-wrap gap-2 mb-4 mt-auto" aria-label="Project Tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="text-[10px] font-medium text-gray-400 bg-white px-2 py-1 rounded-md border border-gray-200">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Local SEO Contextual Handshake Link */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-100">
-                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-sans">Local Area Case:</span>
-                  <Link 
-                    to={urlMap[project.id] || '/'} 
-                    className="text-xs font-bold text-brand-gold hover:underline flex items-center gap-1 group/link animate-pulse duration-1000"
-                  >
-                    View Local Service Guide
-                    <ArrowRight size={12} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-
-                <a href="tel:6784287630" className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-widest text-white bg-brand-dark py-3 px-4 rounded-lg group-hover:bg-brand-gold transition-all" aria-label={`Get quote for ${project.title}`}>
-                  <span>Replicate this Project</span> 
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12 text-gray-400 italic">
-            Select "All" to view our complete portfolio across Metro Atlanta.
-          </div>
-        )}
-
+/** Illustrative categories, not presented as a record of completed client jobs. */
+export const LocalProjects: React.FC = () => (
+  <section id="portfolio" className="bg-[#f7f6f3] py-20 md:py-28">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8">
+      <div className="max-w-2xl mb-10 md:mb-14">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9a7b31] mb-3">Hardscape ideas</p>
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-[#20252a] leading-tight">Start with the right plan for your property.</h2>
+        <p className="mt-4 text-slate-600 leading-relaxed">See the types of outdoor work AGS can help plan around Metro Atlanta homes. Final materials and layout depend on your site and goals.</p>
       </div>
-    </section>
-  );
-};
+      <div className="grid md:grid-cols-3 gap-5 md:gap-7">
+        {inspiration.map((item) => <article key={item.title} className="bg-white border border-black/5 group">
+          <Link to={item.path} className="block overflow-hidden" aria-label={`Explore ${item.label}`}>
+            <img src={item.image} alt={item.alt} className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy" decoding="async" />
+          </Link>
+          <div className="p-5 md:p-6">
+            <p className="text-[11px] uppercase tracking-[0.16em] text-[#9a7b31] font-semibold">{item.label}</p>
+            <h3 className="mt-2 font-serif text-xl md:text-2xl text-[#20252a]">{item.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
+            <Link to={item.path} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#20252a] hover:text-[#9a7b31]">Explore service <ArrowUpRight size={16} /></Link>
+          </div>
+        </article>)}
+      </div>
+      <div className="mt-9 flex justify-center"><Link to="/quote" className="inline-flex items-center gap-2 bg-[#20252a] text-white px-6 py-3.5 font-semibold hover:bg-[#9a7b31] transition-colors">Discuss your project <ArrowRight size={17} /></Link></div>
+    </div>
+  </section>
+);

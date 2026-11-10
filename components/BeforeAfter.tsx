@@ -1,115 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { MoveHorizontal, ArrowRight, ArrowLeft } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { serviceHeroImages } from '../lib/serviceHeroImages';
 
-export const BeforeAfter: React.FC = () => {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const isDragging = useRef(false);
-
-  // Observer local para ativar animações (fade-in) já que o componente é Lazy Loaded
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    if (sectionRef.current) {
-        sectionRef.current.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleMove = (clientX: number) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-      const percentage = (x / rect.width) * 100;
-      setSliderPosition(percentage);
-    }
-  };
-
-  const handleMouseDown = () => { isDragging.current = true; };
-  const handleMouseUp = () => { isDragging.current = false; };
-  const handleMouseMove = (e: React.MouseEvent) => { if (isDragging.current) handleMove(e.clientX); };
-  const handleTouchMove = (e: React.TouchEvent) => { handleMove(e.touches[0].clientX); };
-
-  useEffect(() => {
-    const handleGlobalMouseUp = () => { isDragging.current = false; };
-    window.addEventListener('mouseup', handleGlobalMouseUp);
-    return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
-  }, []);
-
-  return (
-    <section ref={sectionRef} id="portfolio" className="pt-32 pb-20 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-12 items-center">
-          
-          <div className="md:col-span-1 fade-in-section">
-            <h2 className="font-serif text-4xl font-bold text-brand-dark mb-6">Visual Proof of Excellence</h2>
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              We specialize in taking undefined, unusable yards and turning them into architectural masterpieces. Drag the slider to witness the AGS transformation power.
-            </p>
-            <div className="flex items-center gap-2 text-brand-gold font-bold uppercase tracking-widest text-xs animate-pulse">
-               <ArrowLeft size={16} /> Drag to Compare <ArrowRight size={16} />
-            </div>
-          </div>
-
-          <div className="md:col-span-2 relative h-[500px] rounded-3xl overflow-hidden shadow-2xl select-none fade-in-section group">
-            <div 
-              ref={containerRef}
-              className="relative w-full h-full cursor-ew-resize bg-gray-200"
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onTouchMove={handleTouchMove}
-            >
-              {/* After Image - OPTIMIZED: Imgur 'h' (huge 1024px) + .webp */}
-              <div className="absolute inset-0">
-                 <img 
-                   src="https://i.imgur.com/KPsOHF5h.webp" 
-                   alt="After transformation" 
-                   className="w-full h-full object-cover"
-                   draggable={false}
-                   loading="lazy"
-                 />
-                 <div className="absolute top-6 right-6 bg-brand-gold text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">After</div>
-              </div>
-
-              {/* Before Image - OPTIMIZED: Imgur 'h' (huge 1024px) + .webp */}
-              <div 
-                className="absolute inset-0 overflow-hidden border-r-4 border-white"
-                style={{ width: `${sliderPosition}%` }}
-              >
-                <img 
-                  src="https://i.imgur.com/ajYqmx2h.webp" 
-                  alt="Before transformation" 
-                  className="w-full h-full object-cover max-w-none grayscale"
-                  style={{ width: containerRef.current?.offsetWidth || '100%' }}
-                  draggable={false}
-                  loading="lazy"
-                />
-                <div className="absolute top-6 left-6 bg-brand-dark/80 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Before</div>
-              </div>
-
-              {/* Slider Handle */}
-              <div 
-                className="absolute top-0 bottom-0 w-0 z-20"
-                style={{ left: `${sliderPosition}%` }}
-              >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full shadow-[0_0_30px_rgba(0,0,0,0.3)] flex items-center justify-center text-brand-dark transform transition-transform group-hover:scale-110">
-                  <MoveHorizontal size={24} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+export const BeforeAfter: React.FC = () => (
+  <section className="bg-white py-16 md:py-24">
+    <div className="max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-9 md:gap-16 items-center">
+      <div className="relative">
+        <img src={serviceHeroImages.driveway} alt="Driveway paver layout inspiration" className="w-full aspect-[4/3] object-cover" loading="lazy" decoding="async" />
+        <div className="absolute left-4 bottom-4 bg-white/95 px-4 py-3 shadow-lg"><span className="block text-[10px] uppercase tracking-[0.16em] text-[#9a7b31] font-semibold">The result starts underneath</span><span className="block text-sm text-[#20252a] mt-1">Base · drainage · paver pattern</span></div>
       </div>
-    </section>
-  );
-};
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9a7b31] mb-3">Built for Georgia conditions</p>
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#20252a] leading-tight">A good hardscape begins below the surface.</h2>
+        <p className="mt-5 text-slate-600 leading-relaxed">North Georgia’s clay soils and changing weather make site preparation a key part of a paver project. The right base, grading and drainage plan depend on the surface, soil and water flow at your property.</p>
+        <ul className="mt-6 space-y-3 text-sm text-slate-700">
+          {['Review slope and existing drainage', 'Plan a suitable base for the intended use', 'Choose pavers, pattern and edge details together'].map((item) => <li key={item} className="flex gap-3"><CheckCircle2 size={18} className="text-[#9a7b31] shrink-0" />{item}</li>)}
+        </ul>
+        <Link to="/service/driveway-pavers" className="mt-7 inline-flex items-center gap-2 font-semibold text-[#20252a] hover:text-[#9a7b31]">Learn about driveway pavers <ArrowRight size={17} /></Link>
+      </div>
+    </div>
+  </section>
+);

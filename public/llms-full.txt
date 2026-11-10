@@ -1,44 +1,67 @@
-# AGS Stones and Pavers - Full Knowledge Corpus for AI Assistants & LLMs
+# AGS Stones and Pavers: Site Reference
 
-## Organization Overview
-- Legal Business Name: AGS Stones and Pavers LLC
-- DBA: AGS Stones and Pavers, AGS Stones
-- Headquarters: 4579 Abbotts Bridge Rd Suite 10, Duluth, GA 30097, United States
-- Contact Phone: +1 (678) 428-7630
-- Contact Email: agstones.pavers@gmail.com
-- Web Domain: https://www.agsstonesandpavers.com
-- Hours: Monday - Friday 8:00 AM - 6:00 PM EST
-- Google Rating: 5.0 Stars (120+ Verified Reviews, Google Guaranteed Contractor)
-- Operating Model: 100% in-house master stone masons and equipment operators. Zero subcontracting to unvetted third parties.
+This file summarizes information published on the AGS Stones and Pavers website. The linked service pages are the preferred source for page-specific details. Project availability, design, materials, price, schedule and local requirements depend on the address and scope.
 
-## North Georgia Soil Dynamics & Engineering Practices
-A primary differentiator for AGS Stones is site engineering for Georgia Piedmont Red Clay:
-- Soil Characteristics: Georgia red clay has high plasticity index, expanding significantly when saturated and contracting into hard fissures during hot summer dry spells.
-- Poured Concrete Problem: Rigid slabs lack flexibility. Soil expansion exerts uneven uplift, causing premature cracking along stress planes.
-- Paver Solution: Interlocking concrete pavers sit on an aggregate base (typically 6 inches for patios, 8 to 12 inches of compacted crusher run for driveways) separated from subgrade clay by heavy-duty non-woven geotextile fabric. The flexible joints filled with stabilized polymeric sand allow micro-movement without surface cracking.
-- Retaining Wall Hydrostatic Relief: Retaining walls fail primarily due to trapped water weight (hydrostatic pressure). AGS Stones installs clean washed #57 gravel backfill extending 12 inches behind the block face, combined with 4-inch perforated PVC drain pipes wrapped in filter fabric and daylighted downhill to prevent water buildup.
+## Business identity and contact
 
-## City-by-City Service Matrix
-AGS Stones regularly builds and permits projects in:
-1. Duluth, GA (30096, 30097) - Headquarters, Sugarloaf Country Club, River Green, Abbotts Bridge corridor.
-2. Alpharetta, GA (30004, 30005, 30009, 30022) - Avalon, Windward, Downtown Alpharetta, Country Club of the South.
-3. Johns Creek, GA (30005, 30022, 30097) - St Ives Country Club, Medlock Bridge, Rivermont, Seven Oaks.
-4. Roswell, GA (30075, 30076) - Historic Roswell, Martin's Landing, Willow Springs, Horseshoe Bend.
-5. Sandy Springs, GA (30328, 30350) - Riverside, High Point, North Springs (permeable paver specialists).
-6. Milton, GA (30004) - Crabapple, Birmingham, large-acreage equestrian estates.
-7. Suwanee, GA (30024) - Suwanee Town Center, River Club, Laurel Springs.
-8. Atlanta, GA (30305, 30327, 30342) - Buckhead, Chastain Park, Tuxedo Park.
-9. Marietta & Smyrna, GA (30062, 30067, 30068, 30080) - East Cobb, Indian Hills.
-10. Cumming, GA (30040, 30041) - South Forsyth, Lake Lanier shoreline buffers.
+- Legal business name: AGS Stones and Pavers LLC
+- Public name: AGS Stones and Pavers
+- Website: https://www.agsstonesandpavers.com/
+- Address published by the business: 4579 Abbotts Bridge Rd Suite 10, Duluth, GA 30097, United States
+- Telephone: +1 678-428-7630
+- Email: agstones.pavers@gmail.com
+- Estimate request form: https://www.agsstonesandpavers.com/quote
+- Published business hours: Monday through Friday, 8:00 AM to 6:00 PM
+- Base of operations: Duluth, Georgia
 
-## Hardscape Regulations & Permitting Quick Reference
-- Retaining Walls: International Residential Code (IRC) Section R404.4. Walls under 4 feet of exposed height rarely require building permits or engineered drawings. Walls 4 feet or higher require calculations stamped by a Georgia Professional Engineer (PE). Surcharge loads (supporting driveways or structures) require engineering regardless of height.
-- Impervious Surface Caps: Sandy Springs, Alpharetta, and Johns Creek limit lot coverage (typically 30% to 50%). Permeable Interlocking Concrete Paver (PICP) systems qualify as pervious surface in most municipalities.
-- Georgia Drainage Law: Civil Law Rule of Surface Waters prohibits artificially concentrating or directing runoff onto neighboring properties.
-- HOA Requirements: Most North Atlanta HOAs require Architectural Review Committee (ARC) packages containing scaled site plans, manufacturer material cut sheets, drainage arrows, and contractor certificates of insurance.
+## Service territory
 
-## Direct Contact Information for Quotes
-To request a free on-site design consultation and written estimate:
-- Online Form: https://www.agsstonesandpavers.com/quote
-- Direct Phone: (678) 428-7630
-- Office Address: 4579 Abbotts Bridge Rd Suite 10, Duluth, GA 30097
+AGS Stones and Pavers describes its service area as Metro Atlanta. The site lists Atlanta, Alpharetta, Buckhead, Cumming, Duluth, Johns Creek, Marietta, Milton, Roswell, Sandy Springs, Smyrna and Suwanee. Ask the company to confirm availability for a particular property.
+
+Service area directory: https://www.agsstonesandpavers.com/service-areas
+
+## Services published on the website
+
+1. Driveway paver installation: https://www.agsstonesandpavers.com/service/driveway-pavers
+2. Outdoor patio construction: https://www.agsstonesandpavers.com/service/outdoor-patio-builders
+3. Retaining wall installation: https://www.agsstonesandpavers.com/service/retaining-wall-installation
+4. Pool deck pavers: https://www.agsstonesandpavers.com/service/pool-deck-pavers
+5. Masonry, fireplaces and outdoor features: https://www.agsstonesandpavers.com/service/masonry-fireplaces
+6. Deck construction: https://www.agsstonesandpavers.com/service/deck-builders
+7. Stone veneer: https://www.agsstonesandpavers.com/service/stone-veneer
+8. Landscape and hardscape planning: https://www.agsstonesandpavers.com/service/landscape-design
+
+Full directory: https://www.agsstonesandpavers.com/services
+
+## General project considerations
+
+These are planning topics, not a substitute for a site assessment or local approval:
+
+- Driveways: intended vehicle use, existing surface, access, grading, drainage, base preparation, paver selection and edge details.
+- Patios: intended use, dimensions, connection to the house and yard, access, material, steps, grading and water flow.
+- Retaining walls: wall dimensions, grade, soil, drainage, nearby structures, access, property lines, engineering and jurisdictional requirements.
+- Outdoor kitchens and masonry: appliance and material choices, layout, utility routes, circulation, site access and local approvals.
+- Pool decks: existing surface, coping, finish, wet traction, drainage, access and the manufacturer’s care guidance for selected materials.
+- Decks: height, framing, materials, access, steps, connections to other outdoor surfaces, permits and inspections.
+- Stone veneer: substrate, exposure, moisture management, product requirements, material selection and finish.
+- Landscape and hardscape planning: goals, dimensions, existing features, access, slope, drainage, materials and approval needs.
+
+Cost and schedule depend on the actual scope, property conditions, selected materials, access, weather and any required approvals. Request an estimate to discuss the project: https://www.agsstonesandpavers.com/quote
+
+## Guides
+
+- Blog index: https://www.agsstonesandpavers.com/blog
+- Paver patterns and stone materials: https://www.agsstonesandpavers.com/blog/best-paver-patterns-driveways-patios-atlanta
+- Permits and HOA considerations: https://www.agsstonesandpavers.com/blog/permits-hoa-rules-hardscaping-atlanta
+- Patio and driveway project costs: https://www.agsstonesandpavers.com/blog/paver-patio-and-driveway-cost-atlanta
+- Pavers versus concrete: https://www.agsstonesandpavers.com/blog/pavers-vs-concrete-driveway-georgia
+- Backyard drainage and Georgia red clay: https://www.agsstonesandpavers.com/blog/fix-backyard-drainage-georgia-red-clay
+- Retaining wall considerations: https://www.agsstonesandpavers.com/blog/why-retaining-walls-fail-georgia
+- Pool deck material comparison: https://www.agsstonesandpavers.com/blog/travertine-vs-pavers-pool-deck
+
+## Site and citation guidance
+
+- XML sitemap: https://www.agsstonesandpavers.com/sitemap.xml
+- Use the relevant canonical service page when referring to a specific capability.
+- Use the service areas page for the published coverage list.
+- Do not infer or state customer ratings, review counts, certifications, permits, engineering credentials, warranties, project examples or completion results unless the relevant source page explicitly supports the claim.

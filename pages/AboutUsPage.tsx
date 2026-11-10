@@ -36,8 +36,8 @@ export const AboutUsPage: React.FC = () => {
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 min-h-screen flex flex-col overflow-hidden">
       <SEO 
-        title="About AGS Stones | Atlanta's Premier Hardscaping Company" 
-        description="Learn about AGS Stones, the leading hardscaping and paver installation experts in Atlanta. Family-owned, structurally focused, and built to outlast."
+        title="About AGS Stones and Pavers | Duluth, GA"
+        description="Learn about AGS Stones and Pavers, a Duluth hardscape contractor serving homeowners across Metro Atlanta with paver, stone and masonry projects."
         breadcrumbs={[{ name: "About Us", path: "/about-us" }]}
         schema={[{ "@type": "AboutPage", "@id": "https://www.agsstonesandpavers.com/about-us#about", url: "https://www.agsstonesandpavers.com/about-us", name: "About AGS Stones and Pavers", about: { "@id": "https://www.agsstonesandpavers.com/#business" } }]}
       />
@@ -54,7 +54,7 @@ export const AboutUsPage: React.FC = () => {
              <div className="absolute inset-0 bg-black/60 z-10" />
              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent opacity-90 z-10" />
              <img 
-               src="https://i.imgur.com/G2N5Chsl.webp" 
+               src="/images/service-hero-patio.webp" 
                alt="AGS Stones Craftsmanship" 
                className="w-full h-full object-cover scale-105"
              />
@@ -74,7 +74,7 @@ export const AboutUsPage: React.FC = () => {
                   <span className="text-brand-gold">Integrity.</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light mb-10 leading-relaxed shadow-sm">
-                  We engineer premium outdoor spaces across Metro Atlanta. Extreme structural integrity meets breathtaking architectural masonry.
+                  AGS Stones and Pavers works with homeowners across Metro Atlanta on paver, stone and masonry projects for outdoor spaces.
                 </p>
                 <div className="flex justify-center">
                    <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-brand-gold to-transparent"></div>
@@ -98,8 +98,8 @@ export const AboutUsPage: React.FC = () => {
                  >
                     <div className="aspect-[4/3] sm:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
                        <img 
-                          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
-                          alt="Premium Driveway Pavers Installation" 
+                          src="/images/service-hero-driveway.webp" 
+                          alt="Driveway paver design inspiration" 
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
                        />
                        <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors duration-700"></div>
@@ -110,28 +110,28 @@ export const AboutUsPage: React.FC = () => {
                         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
                         className="absolute -bottom-6 -right-2 md:-bottom-10 md:-right-10 bg-white text-brand-dark p-5 md:p-8 rounded-2xl shadow-2xl border-4 md:border-[8px] border-brand-dark"
                      >
-                        <div className="text-3xl md:text-5xl font-bold font-serif mb-1 text-brand-gold">15+</div>
-                        <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/80">Years of Mastery</div>
+                        <div className="text-2xl md:text-3xl font-bold font-serif mb-1 text-brand-gold">Duluth</div>
+                        <div className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-brand-dark/80">Serving Metro Atlanta</div>
                      </motion.div>
                   </motion.div>
                  
                  <div className="lg:pr-10">
-                    <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-6 block flex items-center gap-3">
+                       <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-6 block flex items-center gap-3">
                        <div className="w-12 h-[1px] bg-brand-gold/50"></div>
-                       The Atlanta Standard
+                       Based in Duluth, Georgia
                     </span>
                     <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8 leading-tight">
-                       Why we refused to be "just another" landscaping company.
+                       Hardscaping planned around your home and site.
                     </h2>
                     <div className="space-y-6 text-gray-400 text-lg font-light leading-relaxed">
                        <p>
-                          Years ago, we noticed a disturbing trend in Metro Atlanta's neighborhoods. Beautifully designed driveways and retaining walls were failing within 3-4 years. Concrete was cracking, pavers were sinking, and walls were leaning.
+                          A successful hardscape is more than its visible surface. Existing grades, drainage, soil and how the space will be used all matter when planning a driveway, patio or retaining wall.
                        </p>
                        <p>
-                          The problem wasn't the materials—it was the foundation. Contractors were cutting corners underground to save money and win bids fast.
+                          AGS Stones and Pavers works with homeowners in Duluth and across Metro Atlanta to consider those site conditions alongside material, layout and budget.
                        </p>
                        <p className="text-white font-medium border-l-2 border-brand-gold pl-6 py-2 my-8">
-                          "We built AGS Stones on a simple premise: Engineer the base to withstand exceptional weight and water flow, and the surface will remain flawless for decades."
+                          "Start with a clear scope, understand the site, then choose a surface that fits the way you plan to use it."
                        </p>
                     </div>
                  </div>
@@ -144,7 +144,7 @@ export const AboutUsPage: React.FC = () => {
            <div className="max-w-7xl mx-auto">
               <div className="text-center mb-20">
                  <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-brand-dark">Our Engineering Philosophy</h2>
-                 <p className="text-gray-500 max-w-2xl mx-auto text-lg">Four non-negotiable principles that dictate every project we accept.</p>
+                 <p className="text-gray-500 max-w-2xl mx-auto text-lg">Practical considerations that shape a durable, good-looking hardscape.</p>
               </div>
               
               <div 
@@ -153,10 +153,10 @@ export const AboutUsPage: React.FC = () => {
                  className="flex overflow-x-auto md:grid md:grid-cols-2 gap-6 md:gap-x-8 md:gap-y-12 pb-8 md:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 md:mx-0 md:px-0"
               >
                  {[
-                   { icon: <Shield size={28}/>, title: "Over-Engineered Bases", text: "We excavate deeper, use geo-textile stabilization fabrics, and layer multiple grades of crushed aggregate, compacting every 2 inches. This guarantees zero settling." },
-                   { icon: <HardHat size={28}/>, title: "In-House Master Artisans", text: "Unlike most firms that act as middlemen, we do not sub-contract our masonry. Every stone is cut, leveled, and laid by our own vetted AGS-certified crews." },
-                   { icon: <Award size={28}/>, title: "The 5-Year Structural Warranty", text: "We are so confident in our compaction and drainage techniques that we offer an industry-leading 5-year structural warranty against shifting, settling, and cracking." },
-                   { icon: <Users size={28}/>, title: "White-Glove Communication", text: "Your home is your sanctuary. We maintain pristine jobsites, provide daily progress updates, and execute projects with total transparency from blueprint to final walkthrough." }
+                   { icon: <Shield size={28}/>, title: "Base and drainage", text: "Excavation depth, base material, compaction and water flow should match the site and the intended use of the surface." },
+                   { icon: <HardHat size={28}/>, title: "Material selection", text: "Pavers and natural stone each offer different colors, textures, formats and care requirements. Compare options before settling on a look." },
+                   { icon: <Award size={28}/>, title: "Scope before schedule", text: "A clear estimate helps you understand the work, material choices and site needs before you decide how to proceed." },
+                   { icon: <Users size={28}/>, title: "Communication", text: "Questions about access, grading, drainage or the project sequence are easier to address before installation begins." }
                  ].map((item, idx) => (
                     <motion.div 
                        key={idx}

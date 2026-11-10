@@ -4,23 +4,23 @@ import { Plus, Minus, HelpCircle } from 'lucide-react';
 const faqs = [
   {
     question: "Do you offer warranties on your installation?",
-    answer: "Yes, we stand firmly behind our work. AGS Stones provides a 1-Year Craftsmanship Warranty on all hardscape installations. This covers any issues related to settlement or workmanship. Material warranties vary by manufacturer (e.g., Belgard, Techo-Bloc) and often carry lifetime guarantees."
+    answer: "Ask us to explain the installation coverage that applies to your project and any separate manufacturer warranty for selected materials. Warranty terms can vary by scope and product."
   },
   {
     question: "Do I need a permit for my patio or retaining wall?",
-    answer: "It depends on the scope and location. Generally, retaining walls over 4 feet tall and large impervious surface additions require permits in cities like Duluth, Alpharetta, and Roswell. AGS Stones handles the entire permitting process for you, ensuring your project is 100% code-compliant."
+    answer: "Permit and review requirements depend on the project and the local jurisdiction. Check with your city or county before work begins; the estimate discussion can help identify questions to resolve for your scope."
   },
   {
     question: "How long does a typical project take?",
-    answer: "Most standard patio or driveway projects are completed within 3-5 days. Larger outdoor living projects involving kitchens, fire features, and extensive landscaping may take 2-3 weeks. We provide a detailed timeline during your consultation and stick to it."
+    answer: "Timing depends on the size and complexity of the work, material availability, site access, weather and any required approvals. Ask for the expected schedule when reviewing your project scope."
   },
   {
     question: "What areas of Atlanta do you serve?",
-    answer: "We are based in Duluth and primarily serve the North Metro Atlanta area, including Alpharetta, Johns Creek, Suwanee, Roswell, Milton, Cumming, Sandy Springs, and Marietta."
+    answer: "AGS Stones and Pavers is based in Duluth and serves homeowners across Metro Atlanta. Visit the service areas page or contact us with your city and project details to confirm availability."
   },
   {
-    question: "Can you provide a 3D design before we start?",
-    answer: "Absolutely. We believe you should see it before you build it. We offer professional 3D renderings that show exactly how the hardscape, plants, and lighting will look in your specific yard. This service is often credited back towards the project cost upon contract signing."
+    question: "What should I include when requesting an estimate?",
+    answer: "Share your city, the type of work you have in mind, approximate dimensions if known, and any concerns such as slope, drainage or access. Photos can help start the conversation; the next step depends on the project."
   }
 ];
 
@@ -70,7 +70,6 @@ export const FAQ: React.FC = () => {
       
       {/* BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
-         <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/concrete-seamless.png")` }}></div>
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
       </div>
 
