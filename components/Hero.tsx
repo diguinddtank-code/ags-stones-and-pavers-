@@ -109,19 +109,19 @@ export const Hero: React.FC = () => {
                     Driveways, patios, retaining walls and outdoor spaces, planned for your home and built for Georgia conditions.
                 </p>
 
-                {/* TRUST BADGES - glass pills, wrap on small screens */}
-                <ul className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-8 lg:mb-0 max-w-md sm:max-w-none mx-auto lg:mx-0">
+                {/* Open trust strip keeps all three points aligned on narrow screens. */}
+                <ul className="mx-auto mb-8 grid w-full max-w-xl grid-cols-3 divide-x divide-white/20 border-y border-white/20 lg:mx-0 lg:mb-0">
                     {heroBadges.map((b) => (
                       <li
                         key={b.label}
-                        className="flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 pl-1.5 pr-3 sm:pr-4 py-1.5 rounded-full shadow-2xl"
+                        className="flex min-w-0 flex-col items-center justify-center gap-1.5 px-1 py-3 text-center sm:flex-row sm:gap-2 sm:px-3 sm:text-left"
                       >
-                        <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold/90 text-brand-dark flex items-center justify-center shrink-0">
-                          {React.cloneElement(b.icon as React.ReactElement<any>, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4" })}
+                        <span className="flex shrink-0 items-center justify-center text-brand-gold">
+                          {React.cloneElement(b.icon as React.ReactElement<any>, { className: "h-[18px] w-[18px] sm:h-4 sm:w-4" })}
                         </span>
-                        <span className="text-left leading-tight">
-                          <span className="block text-white font-bold text-[11px] sm:text-xs uppercase tracking-wider drop-shadow-md">{b.label}</span>
-                          <span className="hidden sm:block text-[10px] text-gray-200 drop-shadow-md">{b.sub}</span>
+                        <span className="min-w-0 leading-tight">
+                          <span className="block break-words text-[10px] font-bold uppercase leading-[1.15] tracking-[0.02em] text-white drop-shadow-md sm:text-[11px] sm:tracking-[0.04em] md:text-xs">{b.label}</span>
+                          <span className="mt-1 hidden text-[10px] leading-snug text-gray-200 drop-shadow-md md:block">{b.sub}</span>
                         </span>
                       </li>
                     ))}

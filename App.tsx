@@ -8,7 +8,7 @@ import { SEO } from './components/SEO';
 const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
 
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
-const Testimonials = React.lazy(() => import('./components/Testimonials').then(module => ({ default: module.Testimonials })));
+const HomeProcess = React.lazy(() => import('./components/HomeProcess').then(module => ({ default: module.HomeProcess })));
 const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
 
 const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-slate-50" />}>
                  <Services onModalChange={setIsServiceModalOpen} />
-                 <Testimonials />
+                 <HomeProcess />
                  <WhyChooseUs />
               </Suspense>
            </ErrorBoundary>
