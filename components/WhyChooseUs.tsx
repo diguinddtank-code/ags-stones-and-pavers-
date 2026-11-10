@@ -21,9 +21,6 @@ export const WhyChooseUs: React.FC = () => (
             decoding="async"
           />
         </div>
-        <figcaption className="mt-2 text-xs leading-5 text-white/55">
-          Representative fieldwork image, not a completed AGS project.
-        </figcaption>
       </figure>
 
       <div className="lg:py-8">

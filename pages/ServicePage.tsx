@@ -15,6 +15,7 @@ import { BUSINESS_ID, Crumb, absoluteUrl, faqSchema, toMetaDescription } from '.
 import { serviceHeroImages } from '../lib/serviceHeroImages';
 import { getServiceCopy } from '../lib/serviceCopy';
 import { ServicePlanningGuide } from '../components/ServicePlanningGuide';
+import { ServiceFieldworkSection } from '../components/ServiceFieldworkSection';
 
 const coreTitles: Record<string, string> = {
   'driveway-pavers': 'Driveway Paver Installation in Atlanta, GA',
@@ -164,6 +165,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
       <main className="flex-grow">
         <ServiceDynamicContent
           data={{ ...data, ...pageCopy, heroImage }}
+          fieldworkSection={<ServiceFieldworkSection kind={kind} />}
           extraSections={
             <>
               <ServicePlanningGuide kind={kind} serviceName={displayName} />

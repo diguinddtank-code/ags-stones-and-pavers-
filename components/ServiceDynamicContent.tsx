@@ -4,8 +4,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import {
   Phone,
   CheckCircle2,
-  Shield,
-  Star,
   ArrowRight,
   MapPin,
   ShieldCheck,
@@ -91,6 +89,8 @@ export interface ServiceData {
 
 interface Props {
   data: ServiceData;
+  /** Service-specific jobsite gallery shown after the overview. */
+  fieldworkSection?: React.ReactNode;
   /** Rendered before the final CTA (FAQ, local links, guides). */
   extraSections?: React.ReactNode;
 }
@@ -146,7 +146,7 @@ const renderParagraphWithLinks = (text: string) => {
   return parts.length > 0 ? parts : text;
 };
 
-export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) => {
+export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection, extraSections }) => {
   const { scrollY } = useScroll();
   const heroFormRef = useRef<HTMLDivElement>(null);
   const [showFlyButton, setShowFlyButton] = useState(false);
@@ -628,24 +628,11 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) 
             className="flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10"
          >
             <div className="md:w-5/12 space-y-6">
-               <motion.div 
-                 initial={{ opacity: 0, x: -20 }}
-                 whileInView={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.2 }}
-                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-xs font-bold uppercase tracking-widest text-brand-dark"
-               >
-                  <Star className="w-4 h-4 text-brand-gold fill-brand-gold" /> Premium Service
-               </motion.div>
+               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold">Service overview</p>
                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-dark font-medium leading-[1.1] tracking-tight">
                   {data.overviewHeading}
                </h2>
                
-               <div className="hidden md:block pt-8">
-                  <div className="flex items-center gap-4">
-                     <div className="w-16 h-[1px] bg-brand-gold"></div>
-                     <span className="text-sm font-bold uppercase tracking-widest text-[#8c98a4]">Atlanta's Choice</span>
-                  </div>
-               </div>
             </div>
             
             <div className="md:w-7/12 space-y-6 text-lg md:text-xl text-[#4a5568] font-sans leading-relaxed md:pt-14 relative">
@@ -677,33 +664,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) 
          </motion.div>
       </section>
 
-      {/* WHY CHOOSE US / TRUST SECTION */}
-      <section className="py-24 px-6 md:px-12 bg-white relative overflow-hidden">
-         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 md:gap-16">
-            {[
-              { icon: Shield, title: "In-House Crews", desc: "Our own crews carry the project through installation, keeping communication close to the work." },
-              { icon: Star, title: "Material Choices", desc: "Compare paver, natural stone and wall options for appearance, use and care." },
-              { icon: CheckCircle2, title: "Attention to Site Details", desc: "Base, slope, drainage and edge details all contribute to how a finished hardscape performs." }
-            ].map((trust, idx) => (
-               <motion.div 
-                 key={idx}
-                 initial={{ opacity: 0, y: 30 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 0.8, delay: 0.15 * idx }}
-                 className="flex flex-col items-start space-y-5 relative group"
-               >
-                  <div className="w-16 h-16 bg-[#f8f9fa] rounded-2xl flex items-center justify-center text-brand-gold mb-2 group-hover:bg-brand-gold group-hover:text-white transition-colors duration-500">
-                     <trust.icon size={28} />
-                  </div>
-                  <h4 className="font-bold text-brand-dark text-2xl group-hover:text-brand-gold transition-colors duration-300">{trust.title}</h4>
-                  <p className="text-[#4a5568] leading-relaxed text-base md:text-lg">
-                     {trust.desc}
-                  </p>
-               </motion.div>
-            ))}
-         </div>
-      </section>
+      {fieldworkSection}
 
       {/* A compact image and message break, without a tall parallax scroll gap. */}
       <section className="relative min-h-[280px] md:min-h-[360px] w-full overflow-hidden flex items-center justify-center px-5 py-16 bg-brand-dark">
@@ -738,8 +699,8 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) 
                viewport={{ once: true }}
                className="text-center mb-16 md:mb-28"
             >
-               <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Proven Methodology</span>
-               <h2 className="font-serif text-4xl md:text-6xl text-brand-dark font-medium mb-6">Our Process</h2>
+               <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block">From site review to final details</span>
+               <h2 className="font-serif text-4xl md:text-6xl text-brand-dark font-medium mb-6">How the work takes shape</h2>
                <p className="text-[#8c98a4] max-w-2xl mx-auto text-lg md:text-xl">
                   We review the site, define the scope and discuss material options before installation begins.
                </p>
@@ -789,10 +750,10 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, extraSections }) 
         >
            <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12 text-brand-gold mx-auto mb-8 opacity-90" />
            <h2 className="font-serif text-3xl md:text-5xl text-white font-medium mb-6 leading-[1.2]">
-             Quality takes time. Our schedule is filling up fast.
+             Start with the details of your property.
            </h2>
            <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed font-sans max-w-2xl mx-auto">
-             We handle every project with our own in-house crews and never sub-contract your installation. Because we refuse to cut corners, our calendar books quickly. Secure your spot today and let's get started.
+             Tell us where the project is, what you want to build and what matters most to you. We can review the site and discuss a clear scope and next steps.
            </p>
 
            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

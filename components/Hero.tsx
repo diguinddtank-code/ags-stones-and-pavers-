@@ -233,9 +233,15 @@ export const Hero: React.FC = () => {
           </div>
       </div>
 
-      <div className="absolute bottom-0 w-full bg-brand-dark/70 backdrop-blur-sm border-t border-white/15 z-30">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-2">
-          {badges.map((b) => <div key={b.title} className="flex items-center gap-2 text-white text-xs sm:text-sm"><span className="text-brand-gold">{React.cloneElement(b.icon as React.ReactElement<any>, { className: "w-4 h-4" })}</span><span>{b.title}</span></div>)}
+      <div className="absolute bottom-0 z-30 w-full border-t border-white/10 bg-[#141619]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.2)] backdrop-blur-md">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent" />
+        <div className="mx-auto grid max-w-5xl grid-cols-3 divide-x divide-white/10 px-4 md:px-8">
+          {badges.map((b) => (
+            <div key={b.title} className="flex min-w-0 flex-col items-center justify-center gap-1.5 px-1 py-3 text-center sm:flex-row sm:gap-2.5 sm:px-4 sm:py-4 sm:text-left">
+              <span className="shrink-0 text-brand-gold">{React.cloneElement(b.icon as React.ReactElement<any>, { className: "h-[18px] w-[18px] sm:h-4 sm:w-4" })}</span>
+              <span className="text-[10px] font-medium leading-tight text-white/90 sm:text-xs md:text-sm">{b.title}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
