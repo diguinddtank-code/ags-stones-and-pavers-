@@ -96,6 +96,186 @@ const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'outdoor-fireplace-vs-fire-pit-atlanta',
+    title: 'Outdoor Fireplace vs. Fire Pit: Costs, HOA Rules & Gas vs. Wood in Atlanta',
+    badge: 'Fire Feature Guide',
+    category: 'Planning',
+    datePublished: '2026-11-11',
+    dateModified: '2026-11-11',
+    readTime: '9 min read',
+    image: '/images/outdoor-fireplace-vs-fire-pit-atlanta.jpg',
+    alt: 'Technical architectural comparison diagram of a custom stone outdoor fireplace and circular fire pit with footings, flue liner, spark arrestor, gas line connection, and setback measurements in Georgia',
+    excerpt:
+      'Debating between a custom stone outdoor fireplace and a paver fire pit for your North Atlanta backyard? Compare actual construction costs, 360-degree vs directional heating, wood vs natural gas, Fulton and Gwinnett fire codes, and HOA setback requirements before you build.',
+    keyTakeaways: [
+      'Outdoor fireplaces deliver directional radiant heat and act as a monumental privacy wall, while fire pits offer 360-degree social campfire gathering for larger groups.',
+      'A custom stone fireplace requires a deep reinforced concrete footing (24+ inches into Georgia clay) to support 6,000 to 12,000 lbs of masonry, costing $12,000 to $28,000+.',
+      'Circular or square stone fire pits can be built directly over an aggregate gravel base on a new or existing paver patio for $2,500 to $6,500.',
+      'Natural gas eliminates smoke, burning embers, and firewood storage, making it the preferred fuel choice for close-proximity subdivisions in Alpharetta and Johns Creek.',
+      'Most North Atlanta HOAs enforce a strict 15-foot to 25-foot property line setback and require spark arrestor chimney caps for wood-burning masonry structures.',
+    ],
+    faqs: [
+      {
+        q: 'Does an outdoor fireplace keep you warmer than a fire pit?',
+        a: 'An outdoor fireplace directs radiant heat forward like a reflector, creating an intimate, wind-sheltered heat zone for 4 to 6 people seated directly in front of the firebox. A fire pit radiates heat in a 360-degree circle, warming 8 to 12 people comfortably, though wind can blow heat away.',
+      },
+      {
+        q: 'Do I need a permit or HOA approval to build an outdoor fireplace in North Metro Atlanta?',
+        a: 'Yes. Because a stone fireplace exceeds 4 feet in height and involves heavy structural masonry, building departments in Fulton County, Gwinnett County, Alpharetta, and Johns Creek require a building permit. Additionally, almost all local HOAs require an Architectural Review Committee (ARC) submission verifying property line setbacks (typically 15 to 25 feet) and spark arrestor chimney caps.',
+      },
+      {
+        q: 'Can I add an outdoor fire pit to an existing paver patio?',
+        a: 'Yes, provided the base beneath the pavers is structurally sound. For wood-burning fire pits, a steel insert ring and heat-resistant firebrick liner are essential to protect the decorative concrete pavers from heat cracking. For gas fire pits, an underground gas trench can be fed under or through the patio perimeter.',
+      },
+      {
+        q: 'How much does a custom stone fireplace cost compared to a fire pit in Atlanta?',
+        a: 'A turnkey custom stone fire pit typically costs $2,500 to $6,500 depending on size, natural stone veneer, and gas burner kit. A full-scale masonry fireplace with a poured concrete footing, cinder block core, flue liner, stone veneer, and hearth ranges from $12,000 to $28,000+.',
+      },
+      {
+        q: 'Is wood-burning or natural gas better for North Atlanta subdivisions?',
+        a: 'Natural gas is increasingly favored in suburban neighborhoods like Windward, Sugarloaf, and St Ives because it starts instantly with a key valve, produces zero smoke or sparks, and prevents neighbor complaints during Atlanta burn bans. Wood-burning remains the choice for acreage properties in Milton or Cumming seeking authentic campfire aroma and crackle.',
+      },
+    ],
+    relatedServices: [
+      { name: 'Masonry & Custom Fireplaces', path: '/service/masonry-fireplaces' },
+      { name: 'Outdoor Patio Builders', path: '/service/outdoor-patio-builders' },
+      { name: '3D Hardscape & Landscape Design', path: '/service/landscape-design' },
+      { name: 'Driveway Paver Installation', path: '/service/driveway-pavers' },
+    ],
+    content: (
+      <>
+        <P>
+          As crisp autumn and winter evenings settle over North Metro Atlanta, nothing extends outdoor living quite like an authentic fire feature. But when homeowners sit down with our design team in Duluth, Alpharetta, or Johns Creek, one fundamental debate always takes center stage: should we build an architectural outdoor stone fireplace or a casual paver fire pit?
+        </P>
+        <P>
+          Both options add warmth, ambiance, and substantial resale value to your home. However, they serve completely different social functions, have vastly different structural requirements on Georgia red clay, and represent two separate price tiers.
+        </P>
+        <P>
+          Here is a master mason guide to choosing the ideal fire feature for your lifestyle, lot topography, and HOA guidelines.
+        </P>
+
+        <H2>1. Architectural Statement vs. Casual Social Gathering</H2>
+        <P>
+          Before looking at stone samples, consider how your family and guests actually relax in your backyard.
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>The Outdoor Fireplace (Intimate & Structured):</strong> A stone fireplace creates a commanding focal point, functioning as an outdoor living room wall. Because seating is positioned strictly in front of the hearth, it is best suited for couples, families, and small gatherings of 4 to 6 people. It also serves as an effective privacy barrier against neighboring two-story homes in subdivisions like Country Club of the South or Avalon.
+            </>,
+            <>
+              <strong>The Fire Pit (360-Degree Campfire Energy):</strong> A fire pit naturally draws larger crowds. Guests can pull up Adirondack chairs, sit along an integrated curved stone seat wall, or roast marshmallows with kids. Because you can circulate all the way around the flame, a 42-inch fire pit comfortably accommodates 8 to 14 guests simultaneously.
+            </>,
+          ]}
+        />
+
+        <Callout title="Wind & Smoke Direction">
+          If your patio experiences crosswinds from an open golf course or lake, a traditional wood fire pit can blow smoke directly into guests faces. An outdoor fireplace channels 95% of smoke straight up through its chimney flue, keeping seating areas clear.
+        </Callout>
+
+        <H2>2. Heat Performance: Directional Radiant Wall vs. Circular Glow</H2>
+        <P>
+          Do not assume both features heat an outdoor space equally. The physics of how they radiate warmth are completely distinct.
+        </P>
+        <P>
+          An <L to="/service/masonry-fireplaces">outdoor masonry fireplace</L> utilizes a refractory firebrick firebox that absorbs intense BTUs and reflects that thermal energy forward into the seating zone. Even on a 40-degree Georgia winter evening, sitting four to eight feet in front of a stoked fireplace feels as toasty as an indoor living room.
+        </P>
+        <P>
+          A fire pit radiates heat upwards in a funnel shape. While people sitting close to the perimeter feel pleasant radiant warmth on their legs and hands, heat disperses rapidly into the open sky. For maximum comfort with a fire pit, building an 18-inch high stone seat wall around one hemisphere helps deflect chilly breezes and trap ground-level warmth.
+        </P>
+
+        <H2>3. Engineering & Footings: Why Georgia Clay Dictates Fireplace Foundations</H2>
+        <P>
+          The most critical structural difference between the two features is what lies underneath the dirt.
+        </P>
+        <Steps
+          items={[
+            {
+              title: 'Fireplace Concrete Footing (6,000 to 12,000 Lbs)',
+              text: 'A full-scale 12 to 14-foot stone fireplace weighs several tons. On Georgia Piedmont red clay, you cannot build this on gravel or pavers. Our crews excavate down 20 to 24 inches (well below Georgia 12-inch frost line), tie a structural #4 rebar grid, and pour a monolithically reinforced 3,000+ PSI concrete foundation footing to prevent tilting or structural cracking over time.',
+            },
+            {
+              title: 'Cinder Block Core & True Flue Liner',
+              text: 'Behind the gorgeous North Georgia fieldstone or stacked veneer sits an engineered CMU (concrete masonry unit) core filled with high-strength mortar, lined with true yellow split firebrick and a clay or stainless steel chimney flue with an engineered smoke shelf to ensure proper updraft.',
+            },
+            {
+              title: 'Fire Pit Aggregate Base (Simple & Resilient)',
+              text: 'In contrast, a custom paver fire pit weighs roughly 800 to 1,500 lbs. It can be installed directly onto an 8-inch compacted crushed granite base or seamlessly integrated into a new paver patio system with a heavy-gauge steel interior liner that insulates outer stones from direct heat contact.',
+            },
+          ]}
+        />
+
+        <H2>4. Fuel Choice: Wood-Burning vs. Natural Gas in North Atlanta</H2>
+        <P>
+          Your fuel choice impacts daily convenience, fire safety, and city permitting:
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>Natural Gas (Push-Button Convenience):</strong> Tapping into your home natural gas line provides instant flame with zero ash cleanup, zero sparks, and zero lingering smoke smell on clothes. It is the premier choice for busy homeowners in Alpharetta, Johns Creek, and Sandy Springs who want 20 minutes of relaxation on a weeknight without tending coals.
+            </>,
+            <>
+              <strong>Wood-Burning (Aroma & Raw Heat):</strong> Nothing matches the crackle of Georgia oak or hickory. Wood fires burn significantly hotter than standard gas burners, creating a true campfire experience. However, wood features require dry log storage, routine chimney sweep maintenance, and spark screens.
+            </>,
+            <>
+              <strong>Gas Log Lighter Hybrid (Best of Both Worlds):</strong> For wood-burning fireplaces, we frequently install a gas assist pipe inside the firebox. You stack real logs, turn a key valve, and light the gas burner for 5 minutes until the hardwood catches, then shut off the gas. No newspaper, kindling, or lighter fluid required.
+            </>,
+          ]}
+        />
+
+        <H2>5. Cost Comparison: Fire Pit vs. Custom Masonry Fireplace</H2>
+        <P>
+          Because of footing depth, masonry labor, chimney scaffolding, and flue engineering, costs vary significantly:
+        </P>
+
+        <Table
+          head={['Feature Type', 'Average Investment', 'Footing Required?', 'Seating Capacity', 'Installation Timeline']}
+          rows={[
+            ['Turnkey Paver Fire Pit (Wood)', '$2,500 – $4,500', 'Compacted Gravel Base', '8 – 12 People (360°)', '1 – 2 Days'],
+            ['Gas Paver Fire Pit (With Trenching)', '$4,500 – $7,500', 'Compacted Gravel Base', '8 – 12 People (360°)', '2 – 3 Days'],
+            ['Modular Pre-Cast Stone Fireplace', '$9,000 – $14,000', 'Poured Concrete Pad', '4 – 6 People (Front)', '3 – 5 Days'],
+            ['Custom Masonry Stone Fireplace', '$14,000 – $28,000+', 'Deep Rebar Footing (24")', '4 – 8 People (Front)', '1 – 2 Weeks'],
+            ['Fireplace with Wood Boxes & TV Wall', '$20,000 – $35,000+', 'Engineered PE Footing', 'Living Room Suite', '2 – 3 Weeks'],
+          ]}
+        />
+
+        <H2>6. HOA Rules, Setbacks & Municipal Fire Codes</H2>
+        <P>
+          Before breaking ground on any fire feature in Fulton, Gwinnett, Cobb, or Forsyth counties, verify these four regulatory checkpoints:
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>Property Line Setbacks:</strong> Most HOAs enforce a minimum 15 to 25-foot setback from rear and side property lines for vertical masonry structures. While low fire pits often receive waivers, 14-foot fireplace chimneys are strictly evaluated by ARC boards.
+            </>,
+            <>
+              <strong>Spark Arrestor Chimney Caps:</strong> Under International Residential Code (IRC) Section R1003, wood-burning chimneys require stainless steel or copper spark arrestor mesh (maximum 1/2-inch openings) to prevent airborne embers from drifting onto tree canopies or cedar shake roofs.
+            </>,
+            <>
+              <strong>Clearance to Combustibles:</strong> Underwriters Laboratories (UL) and local codes require open fire pits to sit at least 15 to 25 feet away from wooden decks, house overhangs, and wooden fences.
+            </>,
+            <>
+              <strong>Seasonal Burn Bans:</strong> Georgia Environmental Protection Division (EPD) enforces seasonal open burning bans during summer months for air quality. However, residential outdoor fireplaces and recreational fire pits with contained embers are generally exempt under state recreational burning provisions.
+            </>,
+          ]}
+        />
+
+        <Callout title="How 3D Hardscape Design Eliminates Guesswork">
+          Unsure whether an 8-foot wide stone fireplace will overpower your patio, or if a fire pit with an 18-inch seat wall leaves enough room for a dining table? Our 3D architectural rendering service models your exact house dimensions, patio layout, and fire feature before any shovel touches the ground.
+        </Callout>
+
+        <H2>Turn Your Backyard Into a Year-Round Destination</H2>
+        <P>
+          Whether you envision a low-maintenance gas fire pit for family s’mores nights or a hand-chiseled stone outdoor fireplace complete with hearth benches and firewood storage boxes, AGS Stones and Pavers delivers 100% in-house master craftsmanship.
+        </P>
+        <P>
+          Contact our Duluth office at <strong className="text-brand-dark">(678) 428-7630</strong> or{' '}
+          <L to="/quote">schedule your free on-site design consultation and estimate today</L>.
+        </P>
+      </>
+    ),
+  },
+  {
     slug: 'best-paver-patterns-driveways-patios-atlanta',
     title: 'Best Paver Patterns & Stone Materials for Driveways, Patios & Pool Decks in Metro Atlanta',
     badge: 'Pattern & Material Guide',
