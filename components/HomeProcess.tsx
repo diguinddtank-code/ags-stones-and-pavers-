@@ -51,9 +51,6 @@ export const HomeProcess: React.FC = () => (
                 decoding="async"
               />
             </div>
-            <figcaption className="mt-2 text-xs leading-5 text-slate-500">
-              Illustrative jobsite scene. It is not a photo of a specific AGS project.
-            </figcaption>
           </figure>
         </div>
 
