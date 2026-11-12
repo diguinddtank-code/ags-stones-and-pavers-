@@ -268,7 +268,6 @@ function PatioFurniture({ y }: { y: number }) {
         <>
           <Model url={MODELS.planter} position={[-3.2, y, -7.4]} scale={1} rotation-y={0.5} />
           <Model url={MODELS.planter} position={[6.4, y, -7.4]} scale={1} rotation-y={-0.5} />
-          <Model url={MODELS.lounger} position={[5.6, y, -10.2]} rotation-y={-2.4} />
         </>
       )}
     </>
@@ -459,9 +458,6 @@ function PoolDeck({ layout, finish }: { layout: string; finish: Finish }) {
     <ZoneGroup id="poolDeck">
       <Paved zone="poolDeck" outline={DECK_OUTER[layout] ?? DECK_OUTER.freeform} holes={[deckHole]} finish={finish} />
       <PoolBody layout={layout} />
-      {[[5.2, -22.2], [7.6, -22.2], [10, -22.2]].map(([x, z]) => (
-        <Model key={x} url={MODELS.lounger} position={[x, 0.08, z]} />
-      ))}
       <Model url={MODELS.pot} position={[2, 0.08, -14.6]} scale={1.3} />
       <Model url={MODELS.pot} position={[14.4, 0.08, -14.6]} scale={1.3} />
       {active === 'poolDeck' && (
@@ -583,16 +579,12 @@ function FireArea({ layout, finish }: { layout: string; finish: Finish }) {
           <Masonry footprint={FIRE.seat} height={0.48} finish={STONE} y={0.08} />
           <Model url={MODELS.firePit} position={[-9, 0.08, -18]} scale={1.15} />
           <Flame position={[-9, 0.35, -18]} />
-          <Model url={MODELS.lounger} position={[-11.4, 0.08, -15.9]} rotation-y={Math.PI * 0.78} />
-          <Model url={MODELS.lounger} position={[-6.6, 0.08, -15.9]} rotation-y={-Math.PI * 0.78} />
         </>
       )}
       {layout === 'fireplace' && (
         <>
           <Paved zone="firePit" outline={FIRE.square} finish={finish} border={ring} />
           <Fireplace />
-          <Model url={MODELS.lounger} position={[-10.4, 0.08, -17]} rotation-y={Math.PI} />
-          <Model url={MODELS.lounger} position={[-7.6, 0.08, -17]} rotation-y={Math.PI} />
           <Model url={MODELS.pot} position={[-12, 0.08, -21.6]} scale={1.4} />
           <Model url={MODELS.pot} position={[-6, 0.08, -21.6]} scale={1.4} />
         </>

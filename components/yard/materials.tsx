@@ -76,7 +76,6 @@ export const MODELS = {
   shrubC: '/yard/models/shrub_03.glb',
   fern: '/yard/models/fern_02.glb',
   dining: '/yard/models/outdoor_table_chair_set_01.glb',
-  lounger: '/yard/models/mid_century_lounge_chair.glb',
   firePit: '/yard/models/stone_fire_pit.glb',
   planter: '/yard/models/planter_box_01.glb',
   pot: '/yard/models/potted_plant_04.glb',
