@@ -95,24 +95,7 @@ const LazyBlock: React.FC<{ children: React.ReactNode, minHeight?: string }> = (
 const Home: React.FC = () => {
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
 
-  // GLOBAL CONVERSION TRACKING LISTENER
-  // This intercepts any click on a "tel:" link across the entire app
-  // and fires the Google Ads conversion event.
-  useEffect(() => {
-    const handleTelClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest('a');
-      if (target && target.href.startsWith('tel:')) {
-        const gtagReport = (window as any).gtag_report_conversion;
-        if (typeof gtagReport === 'function') {
-          // Default browser behavior for tel: is fine, just report
-          gtagReport(target.href);
-        }
-      }
-    };
-
-    document.addEventListener('click', handleTelClick);
-    return () => document.removeEventListener('click', handleTelClick);
-  }, []);
+  // tel: click conversions are tracked once, app-wide, by the listener in <App />.
 
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
