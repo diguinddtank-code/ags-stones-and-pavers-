@@ -49,3 +49,12 @@ html.lenis, html.lenis body { height: auto; }
   .hero-word, .hero-in, .hero-photo, .hero-glow, .hero-cue-line, .ribbon-track { animation: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* 3D studio: title card while the camera flies into an area */
+@keyframes yardVeil { 0% { opacity: .85; } 100% { opacity: 0; } }
+@keyframes yardTitle { 0% { opacity: 0; transform: translateY(18px); letter-spacing: .02em; } 25% { opacity: 1; transform: none; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+.yard-enter { animation: yardVeil 1.6s ease-out forwards; }
+.yard-enter-veil { animation: yardVeil 1.1s cubic-bezier(.65, 0, .35, 1) forwards; }
+.yard-enter-title { animation: yardTitle 1.6s cubic-bezier(.16, 1, .3, 1) forwards; }
+.yard-enter-title p { text-shadow: 0 2px 20px rgba(0, 0, 0, .5); }
+@media (prefers-reduced-motion: reduce) { .yard-enter, .yard-enter-veil, .yard-enter-title { animation-duration: .01s; } }

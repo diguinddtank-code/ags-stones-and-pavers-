@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { SEO } from './components/SEO';
 import { MotionShell } from './components/motion/MotionShell';
+import { RouteMotion } from './components/motion/RouteMotion';
 
 // --- COMPONENT CHUNKS ---
 const ServiceRibbon = React.lazy(() => import('./components/ServiceRibbon').then(module => ({ default: module.ServiceRibbon })));
@@ -14,6 +15,7 @@ const HomeProcess = React.lazy(() => import('./components/HomeProcess').then(mod
 const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
 
 const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
+const YardStudioTeaser = React.lazy(() => import('./components/YardStudioTeaser').then(module => ({ default: module.YardStudioTeaser })));
 const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
 
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
@@ -135,6 +137,7 @@ const Home: React.FC = () => {
               <Suspense fallback={<div className="h-96 w-full bg-white" />}>
                  <BeforeAfter />
                  <LocalProjects />
+                 <YardStudioTeaser />
               </Suspense>
            </ErrorBoundary>
         </LazyBlock>
@@ -170,6 +173,7 @@ const LocationsPage = React.lazy(() => import('./pages/LocationsPage').then(modu
 const BlogIndexPage = React.lazy(() => import('./pages/BlogIndexPage').then(module => ({ default: module.BlogIndexPage })));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage').then(module => ({ default: module.BlogPostPage })));
 const LegalPage = React.lazy(() => import('./pages/LegalPage').then(module => ({ default: module.LegalPage })));
+const YardStudioPage = React.lazy(() => import('./pages/YardStudioPage').then(module => ({ default: module.YardStudioPage })));
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 const App: React.FC = () => {
@@ -207,6 +211,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quote" element={<QuotePage />} />
+          <Route path="/design-your-yard" element={<YardStudioPage />} />
           <Route path="/services" element={<ServicesIndexPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/privacy-policy" element={<LegalPage type="privacy" />} />
@@ -224,6 +229,7 @@ const App: React.FC = () => {
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <RouteMotion />
       </Suspense>
     </ErrorBoundary>
   );

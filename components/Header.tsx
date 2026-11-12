@@ -55,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
     { name: 'About', href: '/about-us', isRoute: true },
     { name: 'Locations', href: '/service-areas', isRoute: true },
     { name: 'Portfolio', href: '/#portfolio', isRoute: false },
+    { name: '3D Studio', href: '/design-your-yard', isRoute: true },
     { name: 'Blog', href: '/blog', isRoute: true },
     { name: 'Contact', href: '/quote', isRoute: true },
   ];
@@ -90,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8 items-center">
+          <nav className="hidden md:flex space-x-5 lg:space-x-8 items-center">
             {navLinks.map((link) => (
               link.isRoute ? (
                 <Link

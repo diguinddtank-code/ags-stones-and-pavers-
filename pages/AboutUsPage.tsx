@@ -90,7 +90,6 @@ export const AboutUsPage: React.FC = () => {
                   Call (678) 428-7630
                 </a>
               </div>
-              <p className="mt-5 text-xs text-white/60">Illustrative field scene, not a photo of a specific AGS project.</p>
             </div>
           </div>
         </section>
@@ -123,7 +122,6 @@ export const AboutUsPage: React.FC = () => {
                   decoding="async"
                 />
               </div>
-              <figcaption className="mt-2 text-xs leading-5 text-slate-500">Representative fieldwork image; actual homes, crews and equipment vary by project.</figcaption>
             </figure>
           </div>
         </section>
@@ -142,7 +140,6 @@ export const AboutUsPage: React.FC = () => {
               </p>
             </div>
 
-            <p className="mb-5 text-xs leading-5 text-slate-500">Illustrative, AI-generated field scenes. They are not photos of completed AGS projects.</p>
             <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-12">
               <div className="min-w-0">
                 <div className="relative overflow-hidden bg-[#dedbd4]">

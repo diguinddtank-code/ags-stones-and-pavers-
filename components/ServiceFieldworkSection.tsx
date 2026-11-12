@@ -126,7 +126,6 @@ export const ServiceFieldworkSection: React.FC<Props> = ({ kind }) => {
           </div>
           <div>
             <p className="max-w-xl leading-relaxed text-white/75">{fieldwork.description}</p>
-            <p className="mt-3 text-[11px] leading-5 text-white/45">AI-generated illustrative jobsite scenes, not photos of AGS projects.</p>
           </div>
         </div>
 
