@@ -1,9 +1,9 @@
-import React, { Suspense, useCallback, useEffect, useState, useTransition } from 'react';
+import React, { Suspense, useCallback, useEffect, useRef, useState, useTransition } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useProgress } from '@react-three/drei';
 import * as THREE from 'three';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, Moon, MousePointerClick, RotateCcw, Sparkles, Sun } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Moon, MousePointerClick, RotateCcw, Sparkles, Sun, X } from 'lucide-react';
 import { YardScene } from './YardScene';
 import {
   DEFAULT_SELECTION, STYLES, ZONES, findFinish, findLayout, getZone, thumbUrl, type Selection, type ZoneId,
@@ -49,6 +49,92 @@ function EnterCard({ zone }: { zone: ZoneId }) {
   );
 }
 
+/**
+ * Phones: style + material pickers docked inside the 3D view, so every change
+ * is visible immediately without scrolling between the scene and the panel.
+ */
+function MobileDock({
+  zoneId,
+  selection,
+  onChange,
+  onClose,
+}: {
+  zoneId: ZoneId;
+  selection: Selection;
+  onChange: (patch: Partial<Selection[ZoneId]>) => void;
+  onClose: () => void;
+}) {
+  const zone = getZone(zoneId);
+  const [tab, setTab] = useState<'style' | 'material'>('style');
+  const current = selection[zoneId];
+  return (
+    <div className="absolute inset-x-2 bottom-2 z-10 rounded-3xl border border-white/10 bg-brand-dark/85 p-3 text-white shadow-2xl backdrop-blur-xl lg:hidden">
+      <div className="flex items-center gap-2">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-[10px] font-bold uppercase tracking-[0.18em] text-brand-gold">{zone.service}</p>
+          <p className="truncate font-serif text-lg leading-tight">{zone.name}</p>
+        </div>
+        <div className="flex rounded-full bg-white/10 p-1 text-[11px] font-bold">
+          {(['style', 'material'] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setTab(t)}
+              className={`rounded-full px-3 py-1.5 capitalize transition-colors ${tab === t ? 'bg-brand-gold text-brand-dark' : 'text-white/70'}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+        <button type="button" onClick={onClose} aria-label="Back to the whole property" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10">
+          <X size={16} />
+        </button>
+      </div>
+
+      <div className="no-scrollbar -mx-3 mt-3 flex snap-x gap-2 overflow-x-auto px-3 pb-1">
+        {tab === 'style'
+          ? zone.layouts.map((l) => {
+              const on = current.layout === l.id;
+              return (
+                <button
+                  key={l.id}
+                  type="button"
+                  onClick={() => onChange({ layout: l.id })}
+                  aria-pressed={on}
+                  className={`w-[46%] shrink-0 snap-start rounded-2xl border px-3 py-2.5 text-left transition-colors ${
+                    on ? 'border-brand-gold bg-brand-gold/15' : 'border-white/15 bg-white/5'
+                  }`}
+                >
+                  <span className="flex items-center gap-1.5 text-[13px] font-semibold leading-tight">
+                    {on && <Check size={13} strokeWidth={3} className="shrink-0 text-brand-gold" />}
+                    {l.name}
+                  </span>
+                  <span className="mt-0.5 line-clamp-2 block text-[11px] leading-snug text-white/55">{l.detail}</span>
+                </button>
+              );
+            })
+          : zone.finishes.map((f) => {
+              const on = current.finish === f.id;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => onChange({ finish: f.id })}
+                  aria-pressed={on}
+                  className={`w-[30%] shrink-0 snap-start overflow-hidden rounded-2xl border text-left ${
+                    on ? 'border-brand-gold ring-2 ring-brand-gold/50' : 'border-white/15'
+                  }`}
+                >
+                  <img src={swatch(zoneId, f.id)} alt="" className="aspect-[4/3] w-full object-cover" />
+                  <span className="block truncate px-2 py-1.5 text-[11px] font-semibold">{f.name}</span>
+                </button>
+              );
+            })}
+      </div>
+    </div>
+  );
+}
+
 const hasWebGL = () => {
   try {
     const c = document.createElement('canvas');
@@ -69,6 +155,16 @@ const YardStudio: React.FC = () => {
     window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches ? 'high' : 'low'
   );
   const zone = active ? getZone(active) : null;
+  const viewportRef = useRef<HTMLDivElement>(null);
+
+  /** Opening an area from the list below the scene brings the scene back into view on phones. */
+  const openArea = (id: ZoneId) => {
+    setActive(id);
+    const el = viewportRef.current;
+    if (el && window.matchMedia('(max-width: 1023px)').matches) {
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => () => void (document.body.style.cursor = ''), []);
   const select = useCallback((id: ZoneId | null) => setActive(id), []);
@@ -78,6 +174,34 @@ const YardStudio: React.FC = () => {
     startTransition(() => setSelection((s) => ({ ...s, [zoneId]: { ...s[zoneId], ...patch } })));
     setStyleId(null);
   };
+
+  const overview = (
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">Open an area</p>
+            <h3 className="mt-1 font-serif text-3xl">Your design</h3>
+            <p className="mt-2 text-sm text-white/60">Pick an area to step inside it, then change its style and stone.</p>
+            <ul className="mt-5 divide-y divide-white/10 border-y border-white/10">
+              {ZONES.map((z) => {
+                const f = findFinish(z.id, selection[z.id].finish);
+                const l = findLayout(z.id, selection[z.id].layout);
+                return (
+                  <li key={z.id}>
+                    <button type="button" onClick={() => openArea(z.id)} className="group flex w-full items-center gap-3 py-3 text-left">
+                      <img src={swatch(z.id, f.id)} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold">{z.name}</span>
+                        <span className="block truncate text-xs text-white/55">
+                          {l.name} · {f.name}
+                        </span>
+                      </span>
+                      <ArrowRight size={16} className="text-white/40 transition-transform group-hover:translate-x-1 group-hover:text-brand-gold" />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+  );
 
   if (!webgl) {
     return (
@@ -95,8 +219,9 @@ const YardStudio: React.FC = () => {
     <div className="grid gap-5 lg:grid-cols-[1fr_400px]">
       {/* 3D viewport */}
       <div
+        ref={viewportRef}
         data-lenis-prevent
-        className="relative h-[64svh] min-h-[460px] overflow-hidden rounded-[28px] border border-white/10 bg-[#15181d] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:h-[80svh] lg:min-h-[640px]"
+        className="relative h-[72svh] min-h-[480px] overflow-hidden rounded-[28px] border border-white/10 bg-[#15181d] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:h-[80svh] lg:min-h-[640px]"
       >
         <Canvas
           shadows
@@ -144,7 +269,11 @@ const YardStudio: React.FC = () => {
           </button>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-center justify-between gap-3 p-3 sm:p-4">
+        {active && (
+          <MobileDock zoneId={active} selection={selection} onChange={(patch) => update(active, patch)} onClose={() => setActive(null)} />
+        )}
+
+        <div className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 items-center justify-between gap-3 p-3 sm:p-4 ${active ? 'hidden lg:flex' : 'flex'}`}>
           <p className="hidden items-center gap-2 rounded-full bg-brand-dark/70 px-3 py-2 text-[11px] text-white/80 backdrop-blur-md sm:inline-flex">
             <MousePointerClick size={14} className="text-brand-gold" />
             {active ? 'Drag to look around · scroll to move closer' : 'Click an area to open it · drag to orbit · scroll to zoom'}
@@ -163,8 +292,9 @@ const YardStudio: React.FC = () => {
 
       {/* control panel */}
       <aside className="flex flex-col rounded-[28px] border border-white/10 bg-white/[0.04] p-5 text-white backdrop-blur-xl sm:p-6 lg:max-h-[80svh] lg:overflow-y-auto" data-lenis-prevent>
+        {zone && <div className="lg:hidden">{overview}</div>}
         {zone ? (
-          <div key={zone.id} className="animate-fade-up">
+          <div key={zone.id} className="hidden animate-fade-up lg:block">
             <button
               type="button"
               onClick={() => setActive(null)}
@@ -242,31 +372,7 @@ const YardStudio: React.FC = () => {
             </Link>
           </div>
         ) : (
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">Open an area</p>
-            <h3 className="mt-1 font-serif text-3xl">Your design</h3>
-            <p className="mt-2 text-sm text-white/60">Pick an area to step inside it, then change its style and stone.</p>
-            <ul className="mt-5 divide-y divide-white/10 border-y border-white/10">
-              {ZONES.map((z) => {
-                const f = findFinish(z.id, selection[z.id].finish);
-                const l = findLayout(z.id, selection[z.id].layout);
-                return (
-                  <li key={z.id}>
-                    <button type="button" onClick={() => setActive(z.id)} className="group flex w-full items-center gap-3 py-3 text-left">
-                      <img src={swatch(z.id, f.id)} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover" />
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-semibold">{z.name}</span>
-                        <span className="block truncate text-xs text-white/55">
-                          {l.name} · {f.name}
-                        </span>
-                      </span>
-                      <ArrowRight size={16} className="text-white/40 transition-transform group-hover:translate-x-1 group-hover:text-brand-gold" />
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          overview
         )}
 
         <div className="mt-auto pt-6">
