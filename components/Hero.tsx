@@ -28,7 +28,7 @@ export const Hero: React.FC = () => {
     const pick = () =>
       setVideoSrc(
         window.matchMedia('(max-width: 767px)').matches
-          ? { mp4: '/videos/home-hero-540.mp4' }
+          ? { webm: '/videos/home-hero-mobile.webm', mp4: '/videos/home-hero-mobile.mp4' }
           : { webm: '/videos/home-hero-1080.webm', mp4: '/videos/home-hero-1080.mp4' }
       );
     if (document.readyState === 'complete') {
@@ -51,7 +51,9 @@ export const Hero: React.FC = () => {
       const ctx = gsap.context(() => {
         gsap.matchMedia().add(MOTION_OK, () => {
           const st = { trigger: el, start: 'top top', end: 'bottom top', scrub: true };
-          gsap.to('[data-hero-photo]', { yPercent: 18, scale: 1.08, ease: 'none', scrollTrigger: st });
+          // No extra zoom on phones: the portrait clip is already framed tight.
+          const wide = window.matchMedia('(min-width: 768px)').matches;
+          gsap.to('[data-hero-photo]', { yPercent: wide ? 18 : 10, scale: wide ? 1.08 : 1, ease: 'none', scrollTrigger: st });
           gsap.to('[data-hero-copy]', { yPercent: -14, autoAlpha: 0.15, ease: 'none', scrollTrigger: st });
           gsap.to('[data-hero-cue]', { autoAlpha: 0, ease: 'none', scrollTrigger: { ...st, end: '15% top' } });
         });
@@ -135,18 +137,22 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-28 md:pt-32 pb-28 md:pb-32 overflow-hidden bg-brand-dark">
+    <section ref={sectionRef} className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-24 md:pt-32 pb-10 md:pb-32 overflow-hidden bg-brand-dark">
       {/* Locally hosted, responsive hero image keeps the first screen reliable and light. */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div data-hero-photo className="absolute inset-0 will-change-transform">
-        <Img
-          src="/images/home-hero-poster.webp"
-          alt="Stone paver patio with steps, stone veneer and landscaped lawn"
-          fetchPriority="high"
-          loading="eager"
-          sizes="100vw"
-          className="hero-photo absolute inset-0 w-full h-full object-cover object-center"
-        />
+        {/* Portrait crop for phones, landscape for everything wider. */}
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/images/home-hero-poster-mobile.webp" />
+          <Img
+            src="/images/home-hero-poster.webp"
+            alt="Stone paver patio with steps, stone veneer and landscaped lawn"
+            fetchPriority="high"
+            loading="eager"
+            sizes="100vw"
+            className="hero-photo absolute inset-0 w-full h-full object-cover object-center"
+          />
+        </picture>
         {videoSrc && (
           <video
             className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1.2s] ease-out ${videoReady ? 'opacity-100' : 'opacity-0'}`}
@@ -155,7 +161,7 @@ export const Hero: React.FC = () => {
             loop
             playsInline
             preload="auto"
-            poster="/images/opt/home-hero-poster-1200.webp"
+            poster={videoSrc.mp4.includes('mobile') ? '/images/home-hero-poster-mobile.webp' : '/images/opt/home-hero-poster-1200.webp'}
             aria-hidden="true"
             tabIndex={-1}
             onPlaying={() => setVideoReady(true)}
@@ -175,21 +181,22 @@ export const Hero: React.FC = () => {
         </div>
         
         {/* Simplified dual-layer gradient overlay for better performance */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent"></div>
-        <div className="hero-glow pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full bg-brand-gold/20 blur-[140px]"></div>
+        {/* Phones: even top-to-bottom shade so centered copy stays readable. Desktop: shade from the left. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/75 via-brand-dark/55 to-brand-dark/95 md:bg-gradient-to-r md:from-brand-dark/95 md:via-brand-dark/80 md:to-transparent"></div>
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent md:block"></div>
+        <div className="hero-glow pointer-events-none absolute -left-40 top-1/3 hidden h-[520px] w-[520px] rounded-full bg-brand-gold/10 blur-[140px] lg:block"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-8">
             {/* Left Content Column */}
             <div data-hero-copy className="w-full lg:w-1/2 text-center lg:text-left">
-                <div style={{ '--d': '0.1s' } as React.CSSProperties} className="hero-in inline-flex items-center gap-2 bg-brand-dark/80 backdrop-blur-md border border-brand-gold/50 px-4 py-2 rounded-full mb-6 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span className="text-white text-xs font-bold uppercase tracking-wider">Duluth based · Serving Metro Atlanta</span>
+                <div style={{ '--d': '0.1s' } as React.CSSProperties} className="hero-in inline-flex items-center gap-2 bg-brand-dark/60 backdrop-blur-md border border-white/20 px-3.5 py-1.5 md:px-4 md:py-2 rounded-full mb-5 md:mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                    <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.14em]">Duluth based · Serving Metro Atlanta</span>
                 </div>
                 
-                <h1 className="text-[2.6rem] sm:text-5xl lg:text-6xl xl:text-7xl font-serif font-extrabold text-white leading-[1.05] mb-6 drop-shadow-lg tracking-tight">
+                <h1 className="text-[2.35rem] sm:text-5xl lg:text-6xl xl:text-7xl font-serif font-extrabold text-white leading-[1.06] mb-5 md:mb-6 tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.35)]">
                     {HEADLINE.map((w, i) => (
                       <React.Fragment key={i}>
                         <span className="hero-mask">
@@ -204,12 +211,12 @@ export const Hero: React.FC = () => {
                     ))}
                 </h1>
                 
-                <p style={{ '--d': '0.75s' } as React.CSSProperties} className="hero-in text-base md:text-xl text-gray-100 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-md">
+                <p style={{ '--d': '0.75s' } as React.CSSProperties} className="hero-in text-[15px] md:text-xl text-white/85 mb-7 md:mb-8 max-w-md md:max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
                     Driveways, patios, retaining walls and outdoor spaces, planned for your home and built for Georgia conditions.
                 </p>
 
                 {/* Open trust strip keeps all three points aligned on narrow screens. */}
-                <ul style={{ '--d': '0.9s' } as React.CSSProperties} className="hero-in mx-auto mb-8 grid w-full max-w-xl grid-cols-3 divide-x divide-white/20 border-y border-white/20 lg:mx-0 lg:mb-0">
+                <ul style={{ '--d': '0.9s' } as React.CSSProperties} className="hero-in mx-auto mb-2 grid w-full max-w-xl grid-cols-3 divide-x divide-white/15 rounded-2xl border border-white/15 bg-brand-dark/40 backdrop-blur-md md:mb-8 md:rounded-none md:border-x-0 md:bg-transparent md:backdrop-blur-0 lg:mx-0 lg:mb-0">
                     {heroBadges.map((b) => (
                       <li
                         key={b.label}
@@ -219,8 +226,8 @@ export const Hero: React.FC = () => {
                           {React.cloneElement(b.icon as React.ReactElement<any>, { className: "h-[18px] w-[18px] sm:h-4 sm:w-4" })}
                         </span>
                         <span className="min-w-0 leading-tight">
-                          <span className="block break-words text-[10px] font-bold uppercase leading-[1.15] tracking-[0.02em] text-white drop-shadow-md sm:text-[11px] sm:tracking-[0.04em] md:text-xs">{b.label}</span>
-                          <span className="mt-1 hidden text-[10px] leading-snug text-gray-200 drop-shadow-md md:block">{b.sub}</span>
+                          <span className="block break-words text-[10px] font-bold uppercase leading-[1.15] tracking-[0.02em] text-white sm:text-[11px] sm:tracking-[0.04em] md:text-xs">{b.label}</span>
+                          <span className="mt-1 hidden text-[10px] leading-snug text-gray-200 md:block">{b.sub}</span>
                         </span>
                       </li>
                     ))}
@@ -229,7 +236,7 @@ export const Hero: React.FC = () => {
 
             {/* Right Form Column */}
             <div style={{ '--d': '0.45s' } as React.CSSProperties} className="hero-in hero-in--card w-full lg:w-1/2 max-w-md mx-auto lg:mr-0">
-               <div className="bg-black/60 backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20 relative overflow-hidden">
+               <div className="bg-black/55 backdrop-blur-xl p-5 md:p-8 rounded-3xl md:rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] border border-white/15 relative overflow-hidden">
                   {/* Glass highlight effect */}
                   <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
                   
@@ -344,7 +351,7 @@ export const Hero: React.FC = () => {
         </span>
       </a>
 
-      <div className="absolute bottom-0 z-30 w-full border-t border-white/10 bg-[#141619]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.2)] backdrop-blur-md">
+      <div className="absolute bottom-0 z-30 hidden w-full border-t md:block border-white/10 bg-[#141619]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.2)] backdrop-blur-md">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent" />
         <div className="mx-auto grid max-w-5xl grid-cols-3 divide-x divide-white/10 px-4 md:px-8">
           {badges.map((b) => (

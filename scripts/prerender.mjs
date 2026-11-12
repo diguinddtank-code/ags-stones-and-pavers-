@@ -28,7 +28,7 @@ if (!template.includes('<!--app-head-->') || !template.includes('<!--app-html-->
 }
 
 // The hero video poster preload only helps pages that actually show it.
-const HERO_PRELOAD = /\s*<!-- PRELOAD HERO LCP POSTER -->\s*<link rel="preload" as="image"[^>]*>/;
+const HERO_PRELOAD = /\s*<!-- PRELOAD HERO LCP POSTER -->(?:\s*<link rel="preload" as="image"[^>]*>)+/;
 const PAGES_WITH_PRELOADED_HERO = new Set(['/', '/quote']);
 
 // React 19 emits hoistable tags (<title>, <meta>, <link>) at the start of the
