@@ -1,7 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Layers, Flame, Utensils, LayoutGrid, ShieldCheck, Plus, Hammer, Waves, Mountain, Ruler } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ServiceItem } from '../types';
+import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from '../lib/motion';
+import { Img } from './ui/Img';
 
 // Updated Service Titles to match Keyword List: [driveway installation], [patio builders], [retaining wall installation]
 const services: ServiceItem[] = [
@@ -142,48 +144,17 @@ interface ServicesProps {
 export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
   const navigate = useNavigate();
   const gridRef = useRef<HTMLDivElement>(null);
+  const trackWrapRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Dedicated Observer for Fluid Card Animation AND Section Header
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.target.classList.contains('service-card-anim')) {
-             entry.target.classList.remove('opacity-0', 'translate-y-12', 'scale-95');
-             entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
-          } else if (entry.target.classList.contains('fade-in-section')) {
-             entry.target.classList.add('is-visible');
-          }
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { 
-      threshold: 0.15, // Trigger when 15% visible
-      rootMargin: '50px' // Start slightly before
-    });
-
-    // Observe Header
-    if (sectionRef.current) {
-        const fadeEls = sectionRef.current.querySelectorAll('.fade-in-section');
-        fadeEls.forEach(el => observer.observe(el));
-    }
-
-    // Observe Cards
-    if (gridRef.current) {
-      const cards = gridRef.current.querySelectorAll('.service-card-anim');
-      cards.forEach(card => observer.observe(card));
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  useServiceMotion(sectionRef, gridRef);
 
   const openService = (service: ServiceItem) => {
     navigate(`/service/${service.id}`);
   };
 
   return (
-    <section ref={sectionRef} id="services" className="pt-24 pb-10 relative z-20 overflow-hidden">
+    <section ref={sectionRef} id="services" className="relative z-20 overflow-hidden pt-24 pb-14 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-16">
       
       {/* GLASSMORPHISM BACKGROUND TEXTURE */}
       <div className="absolute inset-0 bg-[#f8f9fa]">
@@ -194,31 +165,38 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="text-center mb-16 fade-in-section">
+        <div data-services-head className="mb-14 text-center lg:mb-10 lg:flex lg:items-end lg:justify-between lg:gap-16 lg:text-left">
+          <div>
             <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md mb-6 shadow-sm">
                <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
                <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">Metro Atlanta Hardscapes</span>
             </div>
             <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
-              Hardscape Services
+              Hardscape <span className="italic text-brand-gold">Services</span>
             </h2>
-            <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+          </div>
+          <div className="lg:max-w-sm lg:pb-2">
+            <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed lg:mt-0">
                Explore the types of work AGS Stones and Pavers takes on across Duluth and Metro Atlanta.
             </p>
+            <div className="mt-6 hidden items-center gap-4 lg:flex" aria-hidden="true">
+              <span className="text-xs font-bold tracking-widest text-brand-dark">01</span>
+              <span className="relative h-px flex-1 bg-brand-dark/15">
+                <span data-services-progress className="absolute inset-0 origin-left scale-x-0 bg-brand-gold" />
+              </span>
+              <span className="text-xs font-bold tracking-widest text-brand-dark/40">0{services.length}</span>
+            </div>
+          </div>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" role="list">
+        <div ref={trackWrapRef} className="lg:-mr-[max(2rem,calc((100vw-1400px)/2+2rem))]">
+        <div ref={gridRef} className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:flex lg:w-max lg:gap-7 lg:pr-[10vw] will-change-transform" role="list">
           {services.map((service, index) => (
             <article 
               key={service.id}
               onClick={() => openService(service)}
               // Initial state: Invisible, shifted down, slightly scaled down
-              className="service-card-anim group cursor-pointer opacity-0 translate-y-12 scale-95 transition-all duration-1000 ease-[cubic-bezier(0.2,1,0.3,1)]"
-              // Staggered Delay for fluid wave effect
-              style={{ 
-                transitionDelay: `${index * 120}ms`,
-                willChange: 'opacity, transform' 
-              }}
+              className="service-card group cursor-pointer lg:w-[clamp(300px,25vw,380px)] lg:shrink-0"
               itemScope
               itemType="https://schema.org/Service"
               role="listitem"
@@ -227,7 +205,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
               {/* MOBILE LAYOUT: Vertical Immersive Card with Extra Rounding */}
               <div className="md:hidden relative h-[380px] rounded-3xl overflow-hidden shadow-lg border border-white/40 active:scale-[0.98] transition-transform duration-300">
                   {/* Image Background */}
-                  <img 
+                  <Img 
                     src={service.image} 
                     alt={service.title} 
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -283,7 +261,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
 
 
               {/* DESKTOP LAYOUT: "Immersive Vertical Glass" with Extra Rounding */}
-              <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2 border border-white/5">
+              <div className="hidden md:block relative h-[500px] lg:h-[min(520px,60vh)] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-brand-dark transform hover:-translate-y-2 border border-white/5">
                 
                 {/* VALUE BADGE - DESKTOP */}
                 <div className="absolute top-6 left-6 z-30 bg-white/80 backdrop-blur-md text-brand-dark px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-1.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100 border border-white/50">
@@ -291,8 +269,8 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                 </div>
 
                 {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img 
+                <div data-card-photo className="absolute inset-0 lg:-inset-x-[14%]">
+                  <Img 
                     src={service.image} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-90" 
@@ -354,9 +332,91 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
           ))}
         </div>
         
-      {/* CLOSED THE MISSING CONTAINER DIV HERE */}
-      </div> 
+ </div>
+      </div>
 
     </section>
   );
 };
+
+/**
+ * Mobile/tablet: cards rise in as they enter.
+ * Desktop: the section pins and the cards travel sideways with the scroll,
+ * each photo drifting inside its frame.
+ */
+function useServiceMotion(
+  sectionRef: React.RefObject<HTMLElement | null>,
+  gridRef: React.RefObject<HTMLDivElement | null>
+) {
+  useGSAP(
+    () => {
+      const section = sectionRef.current;
+      const track = gridRef.current;
+      if (!section || !track) return;
+      const mm = gsap.matchMedia();
+
+      mm.add(MOTION_OK, () => {
+        gsap.from('[data-services-head] > *', {
+          y: 50,
+          autoAlpha: 0,
+          duration: 1.1,
+          ease: 'expo.out',
+          stagger: 0.12,
+          scrollTrigger: { trigger: section, start: 'top 80%', once: true },
+        });
+      });
+
+      mm.add(`${MOTION_OK} and (max-width: 1023px)`, () => {
+        gsap.set('.service-card', { autoAlpha: 0, y: 60 });
+        ScrollTrigger.batch('.service-card', {
+          start: 'top 92%',
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.1, overwrite: true }),
+        });
+      });
+
+      mm.add(`${MOTION_OK} and (min-width: 1024px) and (min-height: 640px)`, () => {
+        const distance = () => Math.max(0, track.scrollWidth - track.parentElement!.clientWidth + 32);
+        const slide = gsap.to(track, {
+          x: () => -distance(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${distance()}`,
+            pin: true,
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+          },
+        });
+        gsap.fromTo(
+          '[data-services-progress]',
+          { scaleX: 0 },
+          { scaleX: 1, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: () => `+=${distance()}`, scrub: true } }
+        );
+        gsap.utils.toArray<HTMLElement>('[data-card-photo]').forEach((photo) => {
+          gsap.fromTo(
+            photo,
+            { xPercent: 9 },
+            {
+              xPercent: -9,
+              ease: 'none',
+              scrollTrigger: { trigger: photo, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true },
+            }
+          );
+        });
+        gsap.from('.service-card', {
+          x: 160,
+          autoAlpha: 0,
+          duration: 1.2,
+          ease: 'expo.out',
+          stagger: 0.08,
+          scrollTrigger: { trigger: section, start: 'top 70%', once: true },
+        });
+      });
+    },
+    { scope: sectionRef }
+  );
+}

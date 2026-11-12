@@ -8,6 +8,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, Layers, HardHat, Compass } from 'lucide-react';
 import { serviceDataDb, CORE_SERVICE_IDS } from '../lib/serviceData';
 import { absoluteUrl, BUSINESS_ID } from '../lib/business';
+import { Img } from '../components/ui/Img';
 
 const servicesItemList = {
   '@type': 'ItemList',
@@ -54,7 +55,7 @@ export const ServicesIndexPage: React.FC = () => {
           >
              <div className="absolute inset-0 bg-black/60 z-10" />
              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent opacity-100 z-10" />
-             <img 
+             <Img 
                src="/images/service-hero-patio.webp" 
                alt="Luxury Outdoor Living Solutions" 
                className="w-full h-full object-cover scale-105"

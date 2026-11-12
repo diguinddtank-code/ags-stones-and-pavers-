@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
 import { blogPosts, BlogPost, formatDate } from '../lib/blogData';
 import { BUSINESS_ID, absoluteUrl } from '../lib/business';
+import { Img } from '../components/ui/Img';
 
 const categories: ('All Guides' | BlogPost['category'])[] = ['All Guides', 'Cost Guides', 'Comparisons', 'Maintenance', 'Planning'];
 
@@ -98,7 +99,7 @@ export const BlogIndexPage: React.FC = () => {
                 className="group flex flex-col bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
               >
                 <Link to={`/blog/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden bg-gray-100">
-                  <img
+                  <Img
                     src={post.image}
                     alt={post.alt}
                     loading={i < 3 ? 'eager' : 'lazy'}

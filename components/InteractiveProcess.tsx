@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, PenTool, Hammer, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Img } from './ui/Img';
 
 const steps = [
   {
@@ -67,7 +68,7 @@ export const InteractiveProcess: React.FC = () => {
           >
             {/* Background Image */}
             <div className="absolute inset-0">
-               <img 
+               <Img 
                  src={step.image} 
                  alt={step.title} 
                  className={`w-full h-full object-cover transition-transform duration-1000 ${

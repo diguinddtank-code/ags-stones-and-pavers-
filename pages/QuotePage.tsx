@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, Lock, ShieldCheck } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { Img } from '../components/ui/Img';
 
 const servicesOptions = [
   { id: 'driveway', label: 'Driveway Pavers' },
@@ -75,7 +76,7 @@ export const QuotePage: React.FC = () => {
 
       {/* BACKGROUND VIDEO LAYER - Static, no parallax to save GPU */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img src="/images/service-hero-patio.webp" alt="Paver patio project inspiration" className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high" />
+        <Img src="/images/service-hero-patio.webp" alt="Paver patio project inspiration" className="absolute inset-0 w-full h-full object-cover object-center" fetchPriority="high" />
         
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
       </div>

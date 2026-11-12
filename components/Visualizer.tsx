@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Loader2, Image as ImageIcon, Wand2 } from 'lucide-react';
 import { generateDesignConcept } from '../services/geminiService';
 import { LoadingState } from '../types';
+import { Img } from './ui/Img';
 
 export const Visualizer: React.FC = () => {
   const [prompt, setPrompt] = useState('');
@@ -93,7 +94,7 @@ export const Visualizer: React.FC = () => {
           <div className="lg:col-span-3 relative fade-in-section delay-200 h-full min-h-[400px]">
              <div className="h-full aspect-video md:aspect-auto w-full bg-white rounded-3xl border border-gray-200 overflow-hidden flex items-center justify-center relative shadow-2xl">
                 {generatedImage ? (
-                  <img 
+                  <Img 
                     src={generatedImage} 
                     alt="AI Generated Design" 
                     className="w-full h-full object-cover animate-in fade-in zoom-in duration-700"

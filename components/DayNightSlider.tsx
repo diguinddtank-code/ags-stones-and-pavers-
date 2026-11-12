@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sun, Moon, Lightbulb } from 'lucide-react';
+import { Img } from './ui/Img';
 
 export const DayNightSlider: React.FC = () => {
   const [isNight, setIsNight] = useState(false);
@@ -67,7 +68,7 @@ export const DayNightSlider: React.FC = () => {
                   
                   {/* NIGHT IMAGE (Base Layer) */}
                   <div className="absolute inset-0 bg-[#050505]">
-                      <img 
+                      <Img 
                          src="/images/service-hero-outdoor-kitchen.webp"
                          alt="Patio Night"
                          className="w-full h-full object-cover grayscale-[10%] brightness-110 contrast-125 transition-transform duration-[2000ms] ease-out"
@@ -79,7 +80,7 @@ export const DayNightSlider: React.FC = () => {
                   <div 
                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isNight ? 'opacity-0' : 'opacity-100'}`}
                   >
-                      <img 
+                      <Img 
                         src="/images/service-hero-patio.webp" 
                         alt="Patio Day" 
                         className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out"

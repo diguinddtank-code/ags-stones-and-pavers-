@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ServiceKind } from '../lib/serviceFaqs';
+import { Img } from './ui/Img';
 
 interface FieldScene {
   image: string;
@@ -135,7 +136,7 @@ export const ServiceFieldworkSection: React.FC<Props> = ({ kind }) => {
               key={`${kind}-${scene.image}`}
               className={`${index === 0 && !isTwoSceneLayout ? 'col-span-2 md:col-span-1' : ''} group relative min-w-0 overflow-hidden bg-white/5`}
             >
-              <img
+              <Img
                 src={scene.image}
                 alt={scene.alt}
                 className={`w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] ${index === 0 ? 'aspect-[16/10]' : 'aspect-[4/3] md:aspect-[16/10]'}`}

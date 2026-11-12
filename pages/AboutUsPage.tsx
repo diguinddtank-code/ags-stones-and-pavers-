@@ -6,6 +6,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
 import { Contact } from '../components/Contact';
+import { Img } from '../components/ui/Img';
 
 const fieldScenes = [
   {
@@ -62,7 +63,7 @@ export const AboutUsPage: React.FC = () => {
 
       <main className="flex-grow">
         <section className="relative isolate flex min-h-[600px] items-end overflow-hidden bg-[#20252a] pb-16 pt-36 md:min-h-[700px] md:pb-20">
-          <img
+          <Img
             src="/images/fieldwork-retaining-wall.jpg"
             alt="Illustrative retaining wall installation on a wooded, sloped backyard"
             className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
@@ -114,7 +115,7 @@ export const AboutUsPage: React.FC = () => {
 
             <figure>
               <div className="overflow-hidden bg-[#e5e1d8]">
-                <img
+                <Img
                   src="/images/fieldwork-paver-cutting.jpg"
                   alt="Illustrative installer trimming a paver to fit the edge of an outdoor patio"
                   className="aspect-[4/3] w-full object-cover"
@@ -153,7 +154,7 @@ export const AboutUsPage: React.FC = () => {
                       exit={reduceMotion ? undefined : { opacity: 0, scale: 0.99 }}
                       transition={{ duration: reduceMotion ? 0 : 0.38, ease: 'easeOut' }}
                     >
-                      <img
+                      <Img
                         src={fieldScenes[activeScene].image}
                         alt={fieldScenes[activeScene].alt}
                         className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Layers, Check, Info } from 'lucide-react';
+import { Img } from './ui/Img';
 
 interface Material {
   id: string;
@@ -102,7 +103,7 @@ export const MaterialShowroom: React.FC = () => {
              <div className="relative aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl bg-black border border-white/10">
                 {/* Image Transition Wrapper */}
                 <div key={activeMaterial.id} className="absolute inset-0 animate-[fadeIn_0.5s_ease-out]">
-                   <img 
+                   <Img 
                      src={activeMaterial.image} 
                      alt={activeMaterial.name} 
                      className="w-full h-full object-cover opacity-80"

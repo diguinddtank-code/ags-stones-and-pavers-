@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
@@ -13,13 +13,34 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  const [isTucked, setIsTucked] = useState(false);
+  const progressRef = useRef<HTMLSpanElement>(null);
+
+  // One rAF-throttled passive listener: solid state, hide-on-scroll-down /
+  // show-on-scroll-up, and the gold reading-progress line (written straight to the DOM).
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 50); // Threshold to trigger sticky header
+    let lastY = window.scrollY;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      setIsScrolled(y > 50);
+      if (Math.abs(y - lastY) > 6) {
+        setIsTucked(y > lastY && y > 480);
+        lastY = y;
+      }
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
   // Close mobile menu on route change
@@ -42,7 +63,11 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
     <>
       <header 
         className={`fixed w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          isHidden ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+          isHidden
+            ? '-translate-y-full opacity-0 pointer-events-none'
+            : isTucked && !isMobileMenuOpen
+              ? '-translate-y-full'
+              : 'translate-y-0 opacity-100'
         } ${
           solidState
             ? 'bg-white/90 backdrop-blur-xl shadow-lg py-3 border-b border-white/20' 
@@ -135,6 +160,10 @@ export const Header: React.FC<HeaderProps> = ({ isHidden = false, forceSolid = f
               </button>
           </div>
         </div>
+
+        <span aria-hidden="true" className={`pointer-events-none absolute inset-x-0 bottom-0 h-[2px] transition-opacity duration-300 ${solidState ? 'opacity-100' : 'opacity-0'}`}>
+          <span ref={progressRef} className="block h-full origin-left scale-x-0 bg-gradient-to-r from-brand-gold/40 via-brand-gold to-brand-gold" />
+        </span>
 
         {/* Mobile Nav Dropdown */}
         <div 

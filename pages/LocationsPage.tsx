@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { MapPin, ArrowRight, ShieldCheck, HardHat, Compass, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { localPageUrl } from '../lib/localPages';
+import { Img } from '../components/ui/Img';
 
 const locations = [
   { id: 'alpharetta', name: 'Alpharetta, GA', lat: '34.0754', lng: '-84.2941', desc: 'Driveway pavers, patios, retaining walls and outdoor kitchens.' },
@@ -60,7 +61,7 @@ export const LocationsPage: React.FC = () => {
           >
              <div className="absolute inset-0 bg-black/60 z-10" />
              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-100 z-10" />
-             <img 
+             <Img 
                src="/images/service-hero-outdoor-kitchen.webp" 
                alt="AGS Stones Local Projects" 
                className="w-full h-full object-cover scale-105"

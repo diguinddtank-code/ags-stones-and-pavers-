@@ -1,9 +1,68 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, ShieldCheck, Award, CheckCircle2, Loader2, Check, ChevronDown } from 'lucide-react';
+import { Img } from './ui/Img';
+
+const HEADLINE: { text: string; gold?: boolean }[] = [
+  { text: 'Transform' },
+  { text: 'Your' },
+  { text: 'Outdoor', gold: true },
+  { text: 'Space', gold: true },
+  { text: 'with' },
+  { text: 'Expert' },
+  { text: 'Hardscaping.' },
+];
 
 export const Hero: React.FC = () => {
-  // Removed refs and scroll listeners to free up the main thread
+  const sectionRef = useRef<HTMLElement>(null);
+  const [videoSrc, setVideoSrc] = useState<{ webm?: string; mp4: string } | null>(null);
+  const [videoReady, setVideoReady] = useState(false);
+
+  // Background video: never competes with the first paint. The poster photo is
+  // the LCP image; the clip is requested only after the page has loaded, and
+  // skipped for reduced-motion and data-saver users.
+  useEffect(() => {
+    const conn = (navigator as any).connection;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (conn?.saveData || /(^|-)2g$/.test(conn?.effectiveType || '')) return;
+    const pick = () =>
+      setVideoSrc(
+        window.matchMedia('(max-width: 767px)').matches
+          ? { mp4: '/videos/home-hero-540.mp4' }
+          : { webm: '/videos/home-hero-1080.webm', mp4: '/videos/home-hero-1080.mp4' }
+      );
+    if (document.readyState === 'complete') {
+      const t = window.setTimeout(pick, 400);
+      return () => window.clearTimeout(t);
+    }
+    const onLoad = () => window.setTimeout(pick, 400);
+    window.addEventListener('load', onLoad, { once: true });
+    return () => window.removeEventListener('load', onLoad);
+  }, []);
+
+  // Scroll choreography loads after first paint (GSAP is not in the main chunk):
+  // the photo drifts slower than the page and the copy lifts away as you leave.
+  useEffect(() => {
+    let revert = () => {};
+    let cancelled = false;
+    import('../lib/motion').then(({ gsap, MOTION_OK }) => {
+      const el = sectionRef.current;
+      if (cancelled || !el) return;
+      const ctx = gsap.context(() => {
+        gsap.matchMedia().add(MOTION_OK, () => {
+          const st = { trigger: el, start: 'top top', end: 'bottom top', scrub: true };
+          gsap.to('[data-hero-photo]', { yPercent: 18, scale: 1.08, ease: 'none', scrollTrigger: st });
+          gsap.to('[data-hero-copy]', { yPercent: -14, autoAlpha: 0.15, ease: 'none', scrollTrigger: st });
+          gsap.to('[data-hero-cue]', { autoAlpha: 0, ease: 'none', scrollTrigger: { ...st, end: '15% top' } });
+        });
+      }, el);
+      revert = () => ctx.revert();
+    });
+    return () => {
+      cancelled = true;
+      revert();
+    };
+  }, []);
   
   // Form State
   const [formStatus, setFormStatus] = useState<'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR'>('IDLE');
@@ -76,41 +135,81 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-28 md:pt-32 pb-28 md:pb-32 overflow-hidden bg-brand-dark">
+    <section ref={sectionRef} className="relative w-full min-h-[100svh] lg:h-[100svh] lg:min-h-[650px] flex items-center pt-28 md:pt-32 pb-28 md:pb-32 overflow-hidden bg-brand-dark">
       {/* Locally hosted, responsive hero image keeps the first screen reliable and light. */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img
-          src="/images/service-hero-patio.webp"
-          alt="Stone paver patio outside a brick home in Metro Atlanta"
+        <div data-hero-photo className="absolute inset-0 will-change-transform">
+        <Img
+          src="/images/home-hero-poster.webp"
+          alt="Stone paver patio with steps, stone veneer and landscaped lawn"
           fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+          sizes="100vw"
+          className="hero-photo absolute inset-0 w-full h-full object-cover object-center"
         />
+        {videoSrc && (
+          <video
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1.2s] ease-out ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/images/opt/home-hero-poster-1200.webp"
+            aria-hidden="true"
+            tabIndex={-1}
+            onPlaying={() => setVideoReady(true)}
+            ref={(el) => {
+              // React sets `muted` as a property only; iOS needs the attribute to autoplay.
+              if (el && !el.hasAttribute('muted')) {
+                el.muted = true;
+                el.setAttribute('muted', '');
+                el.play().catch(() => {});
+              }
+            }}
+          >
+            {videoSrc.webm && <source src={videoSrc.webm} type="video/webm" />}
+            <source src={videoSrc.mp4} type="video/mp4" />
+          </video>
+        )}
+        </div>
         
         {/* Simplified dual-layer gradient overlay for better performance */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-transparent to-transparent"></div>
+        <div className="hero-glow pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full bg-brand-gold/20 blur-[140px]"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
             {/* Left Content Column */}
-            <div className="w-full lg:w-1/2 text-center lg:text-left animate-[fadeIn_1s_ease-out]">
-                <div className="inline-flex items-center gap-2 bg-brand-dark/80 backdrop-blur-md border border-brand-gold/50 px-4 py-2 rounded-full mb-6 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+            <div data-hero-copy className="w-full lg:w-1/2 text-center lg:text-left">
+                <div style={{ '--d': '0.1s' } as React.CSSProperties} className="hero-in inline-flex items-center gap-2 bg-brand-dark/80 backdrop-blur-md border border-brand-gold/50 px-4 py-2 rounded-full mb-6 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                     <span className="text-white text-xs font-bold uppercase tracking-wider">Duluth based · Serving Metro Atlanta</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-extrabold text-white leading-[1.1] mb-6 drop-shadow-lg tracking-tight">
-                    Transform Your <span className="text-brand-gold italic pr-2">Outdoor Space</span> with Expert Hardscaping.
+                <h1 className="text-[2.6rem] sm:text-5xl lg:text-6xl xl:text-7xl font-serif font-extrabold text-white leading-[1.05] mb-6 drop-shadow-lg tracking-tight">
+                    {HEADLINE.map((w, i) => (
+                      <React.Fragment key={i}>
+                        <span className="hero-mask">
+                          <span
+                            className={`hero-word${w.gold ? ' text-brand-gold italic pr-1' : ''}`}
+                            style={{ '--d': `${0.18 + i * 0.07}s` } as React.CSSProperties}
+                          >
+                            {w.text}
+                          </span>
+                        </span>{i < HEADLINE.length - 1 ? ' ' : ''}
+                      </React.Fragment>
+                    ))}
                 </h1>
                 
-                <p className="text-base md:text-xl text-gray-100 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-md">
+                <p style={{ '--d': '0.75s' } as React.CSSProperties} className="hero-in text-base md:text-xl text-gray-100 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-md">
                     Driveways, patios, retaining walls and outdoor spaces, planned for your home and built for Georgia conditions.
                 </p>
 
                 {/* Open trust strip keeps all three points aligned on narrow screens. */}
-                <ul className="mx-auto mb-8 grid w-full max-w-xl grid-cols-3 divide-x divide-white/20 border-y border-white/20 lg:mx-0 lg:mb-0">
+                <ul style={{ '--d': '0.9s' } as React.CSSProperties} className="hero-in mx-auto mb-8 grid w-full max-w-xl grid-cols-3 divide-x divide-white/20 border-y border-white/20 lg:mx-0 lg:mb-0">
                     {heroBadges.map((b) => (
                       <li
                         key={b.label}
@@ -129,7 +228,7 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Right Form Column */}
-            <div className="w-full lg:w-1/2 max-w-md mx-auto lg:mr-0 animate-[fadeIn_1.2s_ease-out]">
+            <div style={{ '--d': '0.45s' } as React.CSSProperties} className="hero-in hero-in--card w-full lg:w-1/2 max-w-md mx-auto lg:mr-0">
                <div className="bg-black/60 backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20 relative overflow-hidden">
                   {/* Glass highlight effect */}
                   <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
@@ -232,6 +331,18 @@ export const Hero: React.FC = () => {
             </div>
           </div>
       </div>
+
+      <a
+        href="#services"
+        data-hero-cue
+        aria-label="Scroll to services"
+        className="hero-cue absolute bottom-[5.5rem] left-1/2 z-20 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 transition-colors hover:text-brand-gold md:bottom-24 lg:[@media(min-height:960px)]:flex"
+      >
+        Scroll
+        <span className="relative block h-10 w-px overflow-hidden bg-white/20">
+          <span className="hero-cue-line absolute inset-x-0 top-0 h-1/2 bg-brand-gold" />
+        </span>
+      </a>
 
       <div className="absolute bottom-0 z-30 w-full border-t border-white/10 bg-[#141619]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.2)] backdrop-blur-md">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-gold/70 to-transparent" />

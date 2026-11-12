@@ -3,8 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { SEO } from './components/SEO';
+import { MotionShell } from './components/motion/MotionShell';
 
 // --- COMPONENT CHUNKS ---
+const ServiceRibbon = React.lazy(() => import('./components/ServiceRibbon').then(module => ({ default: module.ServiceRibbon })));
 const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
 
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
@@ -128,6 +130,7 @@ const Home: React.FC = () => {
         {/* PRIORITY 1: Immediate Below Fold */}
         <ErrorBoundary>
           <Suspense fallback={<div className="h-[100vh] bg-[#0f1115] w-full" />}>
+             <ServiceRibbon />
              <ZParallaxShowcase />
           </Suspense>
         </ErrorBoundary>
@@ -216,6 +219,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
+      <MotionShell />
       <Suspense fallback={<div className="h-screen w-full bg-slate-50 flex items-center justify-center">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />

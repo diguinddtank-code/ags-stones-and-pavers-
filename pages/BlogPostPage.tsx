@@ -9,6 +9,7 @@ import { blogPosts, blogPostBySlug, formatDate } from '../lib/blogData';
 import { cities } from '../lib/cities';
 import { localPageUrl } from '../lib/localPages';
 import { BUSINESS, BUSINESS_ID, absoluteUrl, faqSchema } from '../lib/business';
+import { Img } from '../components/ui/Img';
 
 const coreServices = [
   { name: 'Driveway Pavers', path: '/service/driveway-pavers' },
@@ -106,7 +107,7 @@ export const BlogPostPage: React.FC = () => {
           </header>
 
           <div className="w-full aspect-[16/9] rounded-3xl overflow-hidden mb-10 shadow-xl bg-gray-100">
-            <img src={post.image} alt={post.alt} className="w-full h-full object-cover" fetchPriority="high" />
+            <Img src={post.image} alt={post.alt} className="w-full h-full object-cover" fetchPriority="high" />
           </div>
 
           <section className="bg-white border border-brand-gold/30 rounded-3xl p-6 sm:p-8 mb-10 shadow-sm">
@@ -220,7 +221,7 @@ export const BlogPostPage: React.FC = () => {
               {related.map((r) => (
                 <Link key={r.slug} to={`/blog/${r.slug}`} className="group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col">
                   <div className="aspect-[16/10] overflow-hidden bg-gray-100">
-                    <img src={r.image} alt={r.alt} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <Img src={r.image} alt={r.alt} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-6">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">{r.badge}</span>

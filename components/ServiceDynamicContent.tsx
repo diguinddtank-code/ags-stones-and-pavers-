@@ -11,6 +11,7 @@ import {
   Check,
   ChevronDown,
 } from 'lucide-react';
+import { Img } from './ui/Img';
 
 const GOOGLE_CONVERSION_ID = 'AW-16885125181/Au3NCM3fmugbEL2guvM-';
 
@@ -283,7 +284,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
           style={{ y: yHero }}
           className="absolute inset-0 z-0 origin-top pointer-events-none"
         >
-           <img 
+           <Img 
               src={data.heroImage} 
               alt={data.name} 
               className="w-full h-full object-cover brightness-[0.7] contrast-[1.05] scale-105"
@@ -668,7 +669,7 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
 
       {/* A compact image and message break, without a tall parallax scroll gap. */}
       <section className="relative min-h-[280px] md:min-h-[360px] w-full overflow-hidden flex items-center justify-center px-5 py-16 bg-brand-dark">
-         <img
+         <Img
             src={data.heroImage}
             alt="Completed hardscape detail for this service"
             className="absolute inset-0 w-full h-full object-cover brightness-[0.42]"
