@@ -96,6 +96,179 @@ const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'raised-paver-patio-vs-wood-composite-deck-atlanta',
+    title: 'Raised Paver Patio vs. Wood or Composite Deck in Atlanta: Cost, Lifespan & Maintenance',
+    badge: 'Deck vs. Patio Guide',
+    category: 'Comparisons',
+    datePublished: '2026-11-16',
+    dateModified: '2026-11-16',
+    readTime: '9 min read',
+    image: '/images/raised-paver-patio-vs-wood-composite-deck-atlanta.jpg',
+    alt: 'Technical architectural cutaway comparison diagram showing a raised interlocking paver patio built with retaining wall blocks, #57 drainage stone, and stone steps versus a composite deck with frost-line concrete footings and metal ledger flashing',
+    excerpt:
+      'Replacing an aging backyard wood deck in North Metro Atlanta? Find out when a raised interlocking paver patio outlasts both pressure-treated pine and composite decking, how Georgia humidity affects long-term maintenance, and what each option actually costs.',
+    keyTakeaways: [
+      'If your back door sits 1 to 4 feet above yard grade, converting a rotting wood deck into a raised interlocking paver patio eliminates staining, splinters, ledger rot, and under-deck critter habitats.',
+      'Pressure-treated pine decks in Metro Atlanta typically last 10 to 15 years due to Georgia summer humidity and heavy spring pollen, requiring power washing and sealing every 2 to 3 years.',
+      'Raised paver patios built inside structural retaining wall blocks backfilled with #57 stone easily last 35 to 50+ years with minimal maintenance.',
+      'For second-story walkouts and steep walk-out basement lots (over 4 to 5 feet off grade), a custom composite deck paired with a ground-level paver patio underneath is the most cost-effective layout.',
+      'Under Georgia Residential Code (IRC), patios or decks elevated 30 inches or more above finished grade require code-compliant safety railings, while lower raised patios can use wide wrap-around stone steps or an 18-inch sitting wall.',
+    ],
+    faqs: [
+      {
+        q: 'Is it cheaper to build a raised paver patio or a composite deck in Atlanta?',
+        a: 'For ground-level or low-elevation layouts (1 to 3 feet off the ground), a raised paver patio and a mid-tier composite deck often fall in a very similar price bracket ($35 to $55 per square foot installed). However, pavers win handily on 20-year cost of ownership because they never need board replacements, fastener tightening, or structural framing repairs.',
+      },
+      {
+        q: 'How high off the ground can you build a raised paver patio?',
+        a: 'In residential backyards across Alpharetta, Roswell, and Duluth, most raised paver patios sit between 12 inches and 42 inches above lawn grade. Once a raised patio exceeds 4 feet in height, the cost of structural retaining walls, engineered geogrid reinforcement, clean #57 stone backfill, and safety railings usually makes an elevated composite or pressure-treated deck more economical.',
+      },
+      {
+        q: 'Why do so many wood decks fail early in North Georgia?',
+        a: 'Metro Atlanta combines 70%+ summer humidity, torrential spring rainstorms, and thick tree shade with yellow pine pollen. When moisture gets trapped between deck boards and joists, rot sets in around joist hangers and house ledger boards. Ground-level decks built close to damp red clay also suffer from poor underside airflow, accelerating structural decay.',
+      },
+      {
+        q: 'Do I need a railing on a raised paver patio?',
+        a: 'Under International Residential Code (IRC) rules adopted across Fulton, Gwinnett, Cobb, and Forsyth counties, any walking surface 30 inches or more above the adjacent grade within 36 inches of the edge requires a 36-inch-tall guardrail. A smart design trick for patios between 20 and 29 inches high is building an 18-inch stone sitting wall or cascading wrap-around steps along the perimeter.',
+      },
+      {
+        q: 'Can you replace an old wood deck with a raised patio and keep the existing steps or stone columns?',
+        a: 'Usually we demolish the decaying wood framing completely so your new hardscape rests on undisturbed subgrade and compacted stone rather than rotting posts. If you have sound concrete porch piers or brick foundation walls, we can dress them up with natural stone veneer so the entire rear elevation looks custom-built.',
+      },
+    ],
+    relatedServices: [
+      { name: 'Outdoor Patio Builders', path: '/service/outdoor-patio-builders' },
+      { name: 'Custom Deck Builders', path: '/service/deck-builders' },
+      { name: 'Retaining Wall Installation', path: '/service/retaining-wall-installation' },
+      { name: 'Natural & Cultured Stone Veneer', path: '/service/stone-veneer' },
+    ],
+    content: (
+      <>
+        <P>
+          Drive through neighborhoods built in the late 1990s or 2000s across Duluth, Suwanee, Alpharetta, and East Cobb, and you will notice the exact same backyard headache: a graying, splintering pressure-treated wood deck hovering just two or three feet above the lawn.
+        </P>
+        <P>
+          When those joists turn spongy or the railing starts wobbling, most homeowners naturally call for quotes on a straight deck rebuild or an upgrade to composite decking like Trex or TimberTech. Yet more and more North Atlanta families are tearing the wood out completely and replacing it with a{' '}
+          <L to="/service/outdoor-patio-builders">raised interlocking paver patio</L>.
+        </P>
+        <P>
+          So which one actually makes sense for your lot, your home architecture, and your budget? Let us break down the real-world engineering, costs, and long-term maintenance of a raised paver patio versus a wood or composite deck in Metro Atlanta.
+        </P>
+
+        <H2>1. The Height Rule: When Elevation Decides for You</H2>
+        <P>
+          The single biggest factor is how far your back door sits above your backyard soil grade.
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>1 to 3.5 Feet Above Grade (Paver Patio Sweet Spot):</strong> If your rear threshold is low to the ground, low-clearance wood decks trap humid air underneath, creating a damp breeding ground for carpenter bees, mosquitoes, copperheads, and wood rot. A raised paver patio eliminates that hollow void completely, giving you solid masonry right up to your back steps.
+            </>,
+            <>
+              <strong>4 Feet and Higher / Walk-Out Basements (Deck Territory):</strong> On steep sloped lots in Roswell, Sandy Springs, or Country Club of the South where the main level sits 8 to 12 feet above a walk-out basement, filling that volume with retaining blocks and gravel is rarely practical. That is where our{' '}
+              <L to="/service/deck-builders">custom deck builders</L> construct an elevated composite or timber deck above, paired with a dry paver patio tucked underneath at basement level.
+            </>,
+          ]}
+        />
+
+        <Callout title="Watch Out for Ledger Board Water Damage">
+          One hidden advantage of a raised paver patio is that it does not bolt a heavy wood ledger board onto your house framing. Improperly flashed deck ledgers are one of the leading causes of hidden sill plate rot behind brick and siding homes across Metro Atlanta.
+        </Callout>
+
+        <H2>2. How a Raised Paver Patio Is Actually Engineered</H2>
+        <P>
+          A raised patio is not just pavers sitting on a pile of dirt. If a contractor dumps Georgia red clay inside a block box and lays pavers on top, the whole patio will sink unevenly within two rainy seasons.
+        </P>
+        <Steps
+          items={[
+            {
+              title: 'Build the Structural Retaining Block Perimeter',
+              text: 'We excavate a trench around the perimeter, set a compacted crushed stone leveling pad, and stack heavy-duty interlocking retaining wall blocks (with natural stone veneer facing if desired) pinned or adhesive-locked to hold lateral pressure.',
+            },
+            {
+              title: 'Fill With Clean #57 Drainage Stone (Not Clay)',
+              text: 'Instead of reusing backyard dirt that holds water and settles, we line the cavity with non-woven geotextile fabric and backfill in lifts using clean washed #57 angular granite stone. Angular gravel locks together tightly, never rots, and allows rainwater to drain freely through weeping weep-holes.',
+            },
+            {
+              title: 'Compact Base, Bedding Sand & Interlocking Pavers',
+              text: 'On top of the #57 stone, we compact graded crusher run, screed a crisp 1-inch layer of concrete sand, lay the patio pavers and border soldier course, and sweep polymeric sand into every joint before finishing with wide solid stone steps down to the grass.',
+            },
+          ]}
+        />
+
+        <H2>3. Atlanta Humidity, Pollen & 20-Year Maintenance Reality</H2>
+        <P>
+          North Georgia weather is unforgiving on horizontal outdoor surfaces. Between April yellow pine pollen, summer thunderstorm humidity, and dense oak tree canopy shade in areas like Milton, Johns Creek, and Marietta, maintenance hours add up fast.
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>Pressure-Treated Pine Deck:</strong> Needs chemical stripping or careful pressure washing, brightening, and oil or semi-transparent staining every 2 to 3 years just to keep boards from cupping and checking. Even with diligent care, horizontal deck boards rarely clear 12 to 15 years before splinters and loose nails force replacement.
+            </>,
+            <>
+              <strong>Capped Composite Decking (Trex, TimberTech, Azek):</strong> Eliminates staining and splinters, though dark composite boards get noticeably hot in direct Georgia afternoon sun and still require periodic soap-and-water scrubbing to keep pollen algae out of the wood-grain texture. Crucially, the pressure-treated framing underneath still lasts roughly 20 to 25 years unless protected with joist flashing tape.
+            </>,
+            <>
+              <strong>Raised Interlocking Paver Patio:</strong> Zero rot, zero insect damage, zero warped boards, and safe clearance for heavy masonry grills, fire pits, or outdoor pizza ovens. Blow off leaves, rinse away spring pollen with a garden hose, and re-seal every 3 to 5 years if you want enhanced color depth and stain protection.
+            </>,
+          ]}
+        />
+
+        <Table
+          head={['Feature', 'Pressure-Treated Wood Deck', 'Capped Composite Deck', 'Raised Paver Patio']}
+          rows={[
+            ['Typical Installed Cost (Sq Ft)', '$28 – $42', '$45 – $70+', '$32 – $55'],
+            ['Expected Lifespan in GA', '10 – 15 Years', '25 – 35 Years', '40 – 50+ Years'],
+            ['Maintenance Frequency', 'Stain Every 2 – 3 Years', 'Wash Annually (No Stain)', 'Hose Off; Optional Seal 3–5 Yrs'],
+            ['Supports Stone Kitchen / Fire Pit?', 'No (Weight & Heat Limits)', 'No (Heat & Melting Risk)', 'Yes (Unlimited Load Rating)'],
+            ['Under-Deck Pest / Critter Risk', 'High on Low Decks', 'High on Low Decks', 'Zero (Solid Aggregate Fill)'],
+            ['HOA Approval Speed (North ATL)', 'Moderate', 'Fast', 'Fast (Especially with Veneer)'],
+          ]}
+        />
+
+        <H2>4. Georgia Code Check: Railings, Sitting Walls & Stone Veneer</H2>
+        <P>
+          Before tearing down an old deck in Alpharetta, Johns Creek, Sandy Springs, or Buckhead, pay close attention to the <strong>30-inch guardrail rule</strong> under the International Residential Code (IRC):
+        </P>
+        <P>
+          Any outdoor platform 30 inches or higher above adjacent finished grade requires a continuous 36-inch guardrail with balusters spaced so a 4-inch sphere cannot pass through. On a wood or composite deck, railings are mandatory once you cross that mark, which often blocks your view of the backyard.
+        </P>
+        <P>
+          With a raised paver patio sitting between 16 and 28 inches above grade, you can skip vertical railings completely! Instead, homeowners in Windward and St Ives often opt for:
+        </P>
+        <UL
+          items={[
+            <>
+              <strong>Cascading Wrap-Around Stone Steps:</strong> Extra-wide 6-foot to 10-foot granite or bluestone treads soften the drop to the lawn and make entertaining flow naturally into the yard.
+            </>,
+            <>
+              <strong>Perimeter Sitting Walls (18 to 20 Inches High):</strong> Built using matching <L to="/service/retaining-wall-installation">segmental retaining wall blocks</L> topped with bullnose limestone caps, seat walls frame the patio edge safely while adding permanent seating for 10+ guests.
+            </>,
+            <>
+              <strong>Matching Stone Veneer Accents:</strong> Wrapping the outer patio retaining wall and nearby porch columns with <L to="/service/stone-veneer">natural stacked stone veneer</L> ties the patio directly into existing brick or craftsman home exteriors.
+            </>,
+          ]}
+        />
+
+        <Callout title="What About Property Taxes & Resale Appeal?">
+          Home appraisers and luxury buyers across North Fulton and Gwinnett consistently assign higher perceived longevity to stone patios, masonry steps, and architectural hardscapes than to aging timber decks that show visible wear within five years.
+        </Callout>
+
+        <H2>Not Sure Which Option Fits Your Backyard Elevation?</H2>
+        <P>
+          Sometimes the smartest answer is not all deck or all patio, but a smart transition between the two: removing an awkward low deck to build a raised travertine or paver terrace, or keeping an upper composite deck while installing an interlocking stone patio below.
+        </P>
+        <P>
+          Our Duluth design team builds both custom decks and engineered paver patios completely in-house with zero subcontracting. We will measure your exact door elevation, evaluate your red clay drainage, and walk you through clear side-by-side numbers.
+        </P>
+        <P>
+          Call our office at <strong className="text-brand-dark">(678) 428-7630</strong> or{' '}
+          <L to="/quote">request your free on-site consultation and written estimate today</L>.
+        </P>
+      </>
+    ),
+  },
+  {
     slug: 'outdoor-fireplace-vs-fire-pit-atlanta',
     title: 'Outdoor Fireplace vs. Fire Pit: Costs, HOA Rules & Gas vs. Wood in Atlanta',
     badge: 'Fire Feature Guide',
