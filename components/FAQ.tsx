@@ -69,17 +69,15 @@ export const FAQ: React.FC = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
       
       {/* BACKGROUND TEXTURE */}
-      <div className="absolute inset-0 bg-[#f8f9fa]">
-         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
-      </div>
+      <div className="absolute inset-0 bg-white" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 fade-in-section">
-           <div className="inline-flex items-center justify-center w-12 h-12 bg-white/60 backdrop-blur-md border border-white/50 rounded-full mb-4 text-brand-gold shadow-sm">
+           <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-dark rounded-lg mb-4 text-brand-gold">
               <HelpCircle size={24} />
            </div>
-           <h2 className="font-serif text-4xl font-bold text-brand-dark mb-4">Frequently Asked Questions</h2>
-           <p className="text-gray-500">Everything you need to know about your hardscape project.</p>
+           <h2 className="font-display text-5xl font-bold uppercase leading-[0.95] text-brand-dark mb-4 md:text-6xl">Paver project questions</h2>
+           <p className="text-lg text-slate-600">Straight answers before you book your free estimate.</p>
         </div>
 
         <div className="space-y-4 fade-in-section">
@@ -88,23 +86,23 @@ export const FAQ: React.FC = () => {
             return (
               <div 
                 key={index} 
-                className={`border rounded-2xl transition-all duration-300 backdrop-blur-md ${
-                  isOpen ? 'border-brand-gold bg-white/70 shadow-lg' : 'border-white/50 bg-white/40 hover:border-brand-gold/30 hover:bg-white/60'
+                className={`border rounded-xl transition-all duration-300 ${
+                  isOpen ? 'border-brand-gold bg-white shadow-lg' : 'border-slate-200 bg-[#f5f2ec] hover:border-brand-gold/50'
                 }`}
               >
                 <h3>
                   <button 
                     onClick={() => toggleFAQ(index)}
-                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-inset rounded-2xl cursor-pointer select-none"
+                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none focus:ring-2 focus:ring-brand-gold focus:ring-inset rounded-xl cursor-pointer select-none"
                     aria-expanded={isOpen}
                     aria-controls={`faq-answer-${index}`}
                     id={`faq-question-${index}`}
                   >
-                    <span className={`font-serif text-lg font-bold ${isOpen ? 'text-brand-dark' : 'text-gray-700'}`}>
+                    <span className={`font-display text-xl font-bold ${isOpen ? 'text-brand-dark' : 'text-gray-700'}`}>
                       {faq.question}
                     </span>
                     <span className={`flex-shrink-0 ml-4 p-1 rounded-full border transition-colors ${
-                       isOpen ? 'bg-brand-gold text-white border-brand-gold' : 'border-gray-400 text-gray-400'
+                       isOpen ? 'bg-brand-gold text-brand-dark border-brand-gold' : 'border-slate-400 text-slate-500'
                     }`}>
                        {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                     </span>

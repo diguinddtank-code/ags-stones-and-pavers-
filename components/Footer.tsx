@@ -1,21 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, MapPin } from 'lucide-react';
+import { Instagram, Facebook, MapPin, Phone, ArrowRight, ShieldCheck } from 'lucide-react';
 import { BUSINESS } from '../lib/business';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
+    <footer className="bg-brand-dark text-white pb-10" role="contentinfo">
+      <div className="bg-brand-gold text-brand-dark">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-4 py-8 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
+          <div>
+            <p className="font-display text-3xl font-bold uppercase leading-none md:text-4xl">Free on-site estimates</p>
+            <p className="mt-1 font-medium text-brand-dark/80">Licensed &amp; insured paver contractor · {BUSINESS.hours.display}</p>
+          </div>
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <a href={BUSINESS.phoneHref} className="flex items-center justify-center gap-2 rounded-md bg-brand-dark px-6 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-white transition-colors hover:bg-black"><Phone size={17} className="text-brand-gold" /> {BUSINESS.phoneDisplay}</a>
+            <Link to="/quote" className="flex items-center justify-center gap-2 rounded-md border-2 border-brand-dark px-6 py-3 font-display text-lg font-bold uppercase tracking-wide transition-colors hover:bg-brand-dark hover:text-white">Get a quote <ArrowRight size={17} /></Link>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 mb-16 sm:grid-cols-2 lg:grid-cols-4">
           
           {/* Brand Column */}
-          <div className="col-span-1 md:col-span-1">
-            <h3 className="font-serif text-2xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-brand-gold">AGS</span> STONES
-            </h3>
+          <div>
+            <img src="https://i.imgur.com/DkMxLum.png" alt="AGS Stones and Pavers" width={140} height={56} loading="lazy" className="mb-6 h-14 w-auto brightness-0 invert" />
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Hardscape and stone work from a Duluth contractor serving homeowners across Metro Atlanta.
+              Paver driveways, patios, retaining walls and outdoor living, built by our own crews for homeowners across Metro Atlanta.</p>
+            <p className="mb-6 flex items-center gap-2 text-sm font-semibold text-white/80"><ShieldCheck size={16} className="text-brand-gold" /> Licensed &amp; insured in Georgia
             </p>
             <div className="flex gap-4">
               <a 
@@ -43,7 +54,7 @@ export const Footer: React.FC = () => {
 
           {/* Services Links (SEO Silo) */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-brand-gold">Company & Services</h4>
+            <h4 className="font-display text-xl font-bold uppercase tracking-wide mb-6 text-brand-gold">Company & Services</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
               <li><Link to="/about-us" className="hover:text-white transition-colors">About Us</Link></li>
@@ -58,7 +69,7 @@ export const Footer: React.FC = () => {
 
           {/* Helpful service shortcuts */}
           <div>
-             <h4 className="font-bold text-lg mb-6 text-brand-gold">Explore Services</h4>
+             <h4 className="font-display text-xl font-bold uppercase tracking-wide mb-6 text-brand-gold">Explore Services</h4>
              <ul className="space-y-2 text-gray-400 text-sm">
                 <li><Link to="/service/driveway-pavers" className="hover:text-brand-gold transition-colors block">Driveways</Link></li>
                 <li><Link to="/service/outdoor-patio-builders" className="hover:text-brand-gold transition-colors block">Patios</Link></li>
@@ -77,7 +88,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Info (Schema Consistency) */}
           <div>
-            <h4 className="font-bold text-lg mb-6 text-brand-gold">Contact Us</h4>
+            <h4 className="font-display text-xl font-bold uppercase tracking-wide mb-6 text-brand-gold">Contact Us</h4>
             <address className="not-italic text-gray-400 text-sm space-y-4">
               <p className="flex items-start gap-3">
                  <MapPin size={16} className="text-brand-gold mt-1 flex-shrink-0" />

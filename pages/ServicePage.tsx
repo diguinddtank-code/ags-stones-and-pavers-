@@ -18,12 +18,12 @@ import { ServicePlanningGuide } from '../components/ServicePlanningGuide';
 import { ServiceFieldworkSection } from '../components/ServiceFieldworkSection';
 
 const coreTitles: Record<string, string> = {
-  'driveway-pavers': 'Driveway Paver Installation in Atlanta, GA',
-  'outdoor-patio-builders': 'Outdoor Patio Builders in Atlanta, GA',
-  'retaining-wall-installation': 'Retaining Wall Installation in Atlanta, GA',
-  'masonry-fireplaces': 'Outdoor Fireplaces & Stone Masonry in Atlanta, GA',
+  'driveway-pavers': 'Driveway Pavers Atlanta | Paver Driveway Installers',
+  'outdoor-patio-builders': 'Patio Installation Atlanta | Stone & Paver Patios',
+  'retaining-wall-installation': 'Retaining Wall Installation & Contractors Atlanta',
+  'masonry-fireplaces': 'Outdoor Fireplaces & Fire Pits Atlanta | Masonry',
   'deck-builders': 'Deck Builders in Atlanta, GA',
-  'pool-deck-pavers': 'Pool Deck Pavers & Travertine in Atlanta, GA',
+  'pool-deck-pavers': 'Pool Deck Pavers Atlanta | Travertine Pool Decks',
   'stone-veneer': 'Stone Veneer Installation in Atlanta, GA',
   'landscape-design': '3D Landscape & Hardscape Design in Atlanta, GA',
 };
@@ -100,7 +100,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ idOverride, scope = 'r
   const displayName = data.name.replace(/\s+GA$/, '');
   const title = isCore
     ? `${coreTitles[data.id] ?? displayName} | AGS Stones`
-    : `${displayName}${city ? ', GA' : ''} | Free Estimates | AGS Stones and Pavers`;
+    : `${displayName}${city ? ', GA' : ''} | Free Estimates | AGS Stones`;
   const description = toMetaDescription(data.overviewParagraphs[0]);
   const url = absoluteUrl(path);
 

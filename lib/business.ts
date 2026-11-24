@@ -53,6 +53,31 @@ export const BUSINESS = {
   ],
 };
 
+/**
+ * Platforms shown in the homepage logo strip. Only list a platform where the
+ * business really has a profile (`listed: true`). Yelp, Nextdoor and Thumbtack
+ * profiles exist under the pre-rebrand name, so they show without a link; add
+ * the `url` once they carry the AGS name and it also goes into the schema sameAs.
+ */
+export interface Platform {
+  id: 'google' | 'yelp' | 'nextdoor' | 'thumbtack' | 'houzz' | 'facebook' | 'instagram';
+  name: string;
+  listed: boolean;
+  url: string;
+}
+
+export const PLATFORMS: Platform[] = [
+  { id: 'google', name: 'Google', listed: true, url: BUSINESS.sameAs[0] },
+  { id: 'yelp', name: 'Yelp', listed: true, url: '' },
+  { id: 'nextdoor', name: 'Nextdoor', listed: true, url: '' },
+  { id: 'thumbtack', name: 'Thumbtack', listed: true, url: '' },
+  { id: 'houzz', name: 'Houzz', listed: false, url: '' },
+  { id: 'facebook', name: 'Facebook', listed: true, url: BUSINESS.sameAs[2] },
+  { id: 'instagram', name: 'Instagram', listed: true, url: BUSINESS.sameAs[1] },
+];
+
+export const activePlatforms = () => PLATFORMS.filter((p) => p.listed);
+
 export const BUSINESS_ID = `${SITE_URL}/#business`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
@@ -136,7 +161,7 @@ export const businessSchema = () => ({
       name: `${c.name}, GA`,
     })),
   ],
-  sameAs: BUSINESS.sameAs,
+  sameAs: Array.from(new Set([...BUSINESS.sameAs, ...PLATFORMS.filter((p) => p.url).map((p) => p.url)])),
 });
 
 export const websiteSchema = () => ({

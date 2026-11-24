@@ -84,7 +84,7 @@ export const MODELS = {
 
 /* ---------------- interaction feedback ---------------- */
 
-const GOLD = new THREE.Color('#d4af37');
+const GOLD = new THREE.Color('#e2a33a');
 
 export function ActiveOutline({ geometry, show }: { geometry: THREE.BufferGeometry; show: boolean }) {
   const edges = useMemo(() => new THREE.EdgesGeometry(geometry, 35), [geometry]);

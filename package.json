@@ -24,6 +24,7 @@
     "react-dom": "^19.2.3",
     "react-helmet-async": "^3.0.0",
     "react-router-dom": "^7.15.1",
+    "simple-icons": "^15.22.0",
     "three": "^0.187.0"
   },
   "devDependencies": {

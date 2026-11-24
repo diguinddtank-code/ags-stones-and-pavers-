@@ -17,6 +17,14 @@
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 }
 
+/* Display type: condensed, solid weights. In the components layer so any explicit
+   font-weight utility on an element still wins. */
+@layer components {
+  .font-serif, .font-display { font-weight: 700; letter-spacing: -0.005em; }
+  .font-serif.italic, .font-display.italic, .font-serif .italic { font-style: normal; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em]; }
+}
+
 /* ---------- Motion layer ---------- */
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -38,6 +46,15 @@ html.lenis, html.lenis body { height: auto; }
 .hero-photo { animation: heroPhoto 2.4s cubic-bezier(.16, 1, .3, 1) both; }
 .hero-glow { animation: heroGlow 12s ease-in-out infinite; }
 .hero-cue-line { animation: cueLine 1.8s cubic-bezier(.65, 0, .35, 1) infinite; }
+@keyframes heroStep { from { opacity: 0; transform: translate3d(18px, 0, 0); } to { opacity: 1; transform: none; } }
+.hero-step { animation: heroStep .5s cubic-bezier(.16, 1, .3, 1) both; }
+
+/* Mobile action bar */
+.action-bar { transition: transform .45s cubic-bezier(.16, 1, .3, 1), opacity .3s ease; }
+
+/* Gallery lightbox */
+@keyframes lbIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+.lb-in { animation: lbIn .45s cubic-bezier(.16, 1, .3, 1) both; }
 
 /* Infinite service ribbon */
 @keyframes ribbon { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
@@ -46,7 +63,7 @@ html.lenis, html.lenis body { height: auto; }
 .text-outline { -webkit-text-stroke: 1px currentColor; color: transparent; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-word, .hero-in, .hero-photo, .hero-glow, .hero-cue-line, .ribbon-track { animation: none !important; }
+  .hero-word, .hero-in, .hero-photo, .hero-glow, .hero-cue-line, .ribbon-track, .hero-step, .lb-in { animation: none !important; }
   html { scroll-behavior: auto; }
 }
 

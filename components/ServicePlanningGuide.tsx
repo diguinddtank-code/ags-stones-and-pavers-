@@ -17,7 +17,7 @@ export const ServicePlanningGuide: React.FC<Props> = ({ kind, serviceName }) => 
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
         <div className="flex flex-col">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#987d3e]">A better estimate starts with a clear plan</p>
-          <h2 id="service-planning-title" className="max-w-xl font-serif text-3xl font-medium leading-tight text-brand-dark md:text-5xl">
+          <h2 id="service-planning-title" className="max-w-xl font-display text-4xl font-bold uppercase leading-[0.95] text-brand-dark md:text-5xl">
             {insight.title}
           </h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 md:text-lg md:leading-8">
@@ -25,7 +25,7 @@ export const ServicePlanningGuide: React.FC<Props> = ({ kind, serviceName }) => 
           </p>
 
           <div className="mt-9 border-t border-brand-dark/15 pt-6">
-            <h3 className="font-serif text-xl text-brand-dark md:text-2xl">{insight.checklistTitle}</h3>
+            <h3 className="font-display text-2xl font-bold uppercase text-brand-dark">{insight.checklistTitle}</h3>
             <ul className="mt-4 divide-y divide-brand-dark/10">
               {insight.checklist.map((item) => (
                 <li key={item} className="flex items-start gap-3 py-3 text-sm leading-6 text-slate-600">
@@ -47,7 +47,7 @@ export const ServicePlanningGuide: React.FC<Props> = ({ kind, serviceName }) => 
               <span aria-hidden="true" className="row-span-2 font-serif text-2xl text-[#987d3e] md:row-span-1 md:text-3xl">0{index + 1}</span>
               <span className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#987d3e] md:mb-0 md:pt-1">{decision.label}</span>
               <div>
-                <h3 className="font-serif text-xl text-brand-dark md:text-2xl">{decision.title}</h3>
+                <h3 className="font-display text-2xl font-bold uppercase text-brand-dark">{decision.title}</h3>
                 <p className="mt-2 max-w-xl text-sm leading-6 text-slate-600 md:text-base">{decision.detail}</p>
               </div>
             </article>

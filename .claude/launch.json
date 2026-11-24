@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "ags-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3010
+    },
+    {
       "name": "ags-prod",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["start"],

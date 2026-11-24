@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Search } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
+import { CtaBand } from '../components/CtaBand';
 import { blogPosts, BlogPost, formatDate } from '../lib/blogData';
 import { BUSINESS_ID, absoluteUrl } from '../lib/business';
 import { Img } from '../components/ui/Img';
@@ -26,6 +27,12 @@ const blogSchema = {
   })),
 };
 
+const Badge: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="inline-block rounded bg-[#1c2024] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-brand-gold">
+    {children}
+  </span>
+);
+
 export const BlogIndexPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>('All Guides');
   const [query, setQuery] = useState('');
@@ -40,132 +47,177 @@ export const BlogIndexPage: React.FC = () => {
       (activeCategory === 'All Guides' || p.category === activeCategory) &&
       (!q || p.title.toLowerCase().includes(q) || p.excerpt.toLowerCase().includes(q))
   );
+  // Unfiltered view leads with one featured guide.
+  const showFeatured = activeCategory === 'All Guides' && !q && filtered.length > 0;
+  const featured = showFeatured ? filtered[0] : null;
+  const grid = showFeatured ? filtered.slice(1) : filtered;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-brand-dark">
+    <div className="min-h-screen flex flex-col bg-[#f5f2ec] font-sans text-brand-dark">
       <SEO
-        title="Hardscape Guides & Blog | Pavers, Patios & Retaining Walls | AGS Stones"
-        description="Cost guides, material comparisons and step-by-step maintenance tips for pavers, patios, retaining walls and pool decks from Metro Atlanta hardscape pros."
+        title="Paver & Hardscape Guides for Atlanta Homeowners | AGS Stones"
+        description="Cost guides, material comparisons and maintenance tips for pavers, patios, retaining walls and pool decks from a Duluth, GA paver contractor."
         breadcrumbs={[{ name: 'Blog', path: '/blog' }]}
         schema={[blogSchema]}
       />
       <Header forceSolid={true} />
 
-      <main className="flex-grow pt-32 md:pt-40 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Homeowner Knowledge Hub</span>
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-brand-dark mb-6 leading-tight">
-              Hardscape Guides & How-Tos
-            </h1>
-            <p className="text-gray-500 text-lg leading-relaxed">
-              Straight answers on pricing, materials and maintenance from the crews who build driveways, patios and retaining
-              walls across North Metro Atlanta every week.
-            </p>
+      <main className="flex-grow">
+        {/* Intro */}
+        <section className="relative overflow-hidden bg-brand-dark pb-14 pt-28 text-white md:pb-20 md:pt-36 lg:pt-44">
+          <div className="absolute inset-0" aria-hidden="true">
+            <Img src="/images/fieldwork-paver-setting.jpg" alt="" sizes="100vw" loading="eager" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/85 to-brand-dark/60" />
+          </div>
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <p className="eyebrow mb-4 flex items-center gap-3 text-brand-gold">
+                <span className="block h-0.5 w-8 bg-brand-gold" aria-hidden="true" /> Homeowner guides
+              </p>
+              <h1 className="font-display text-[2.6rem] font-bold uppercase leading-[0.95] tracking-[-0.01em] sm:text-6xl lg:text-7xl">
+                Paver &amp; hardscape guides
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
+                Straight answers on pricing, materials and maintenance from the crews who build driveways, patios and retaining
+                walls across North Metro Atlanta.
+              </p>
 
-            <div className="mt-8 relative max-w-xl mx-auto">
-              <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search guides (e.g. cost, retaining wall, travertine)..."
-                aria-label="Search guides"
-                className="w-full pl-11 pr-4 py-3.5 bg-white border border-gray-200 rounded-full text-sm text-brand-dark placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold shadow-sm"
-              />
+              <div className="relative mt-8 max-w-xl">
+                <Search size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search guides (cost, retaining wall, travertine...)"
+                  aria-label="Search guides"
+                  className="w-full rounded-lg border border-white/10 bg-white py-3.5 pl-11 pr-4 text-[15px] font-medium text-brand-dark placeholder-slate-400 outline-none transition-all focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/40"
+                />
+              </div>
             </div>
           </div>
+        </section>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors ${
-                  activeCategory === cat
-                    ? 'bg-brand-dark text-white shadow-md'
-                    : 'bg-white text-gray-500 border border-gray-200 hover:border-brand-gold hover:text-brand-dark'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+        <section className="py-12 md:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* Category filter: scrolls sideways on phones instead of wrapping into a wall of buttons */}
+            <div className="-mx-4 mb-10 overflow-x-auto px-4 sm:mx-0 sm:px-0" role="group" aria-label="Filter guides by category">
+              <div className="flex w-max gap-2 sm:w-auto sm:flex-wrap">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    aria-pressed={activeCategory === cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`min-h-[44px] whitespace-nowrap rounded-md border-2 px-4 font-display text-[15px] font-bold uppercase tracking-wide transition-colors ${
+                      activeCategory === cat
+                        ? 'border-[#1c2024] bg-[#1c2024] text-white'
+                        : 'border-[#1c2024]/15 bg-white text-[#1c2024] hover:border-[#1c2024]'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((post, i) => (
-              <article
-                key={post.slug}
-                className="group flex flex-col bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
-              >
-                <Link to={`/blog/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden bg-gray-100">
+            {featured && (
+              <article className="group mb-8 grid overflow-hidden rounded-xl bg-white shadow-[0_20px_40px_-30px_rgba(15,17,21,0.35)] transition-shadow hover:shadow-[0_30px_60px_-30px_rgba(15,17,21,0.45)] lg:grid-cols-[1.15fr_1fr]">
+                <Link to={`/blog/${featured.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-slate-200 lg:aspect-auto lg:min-h-[380px]" tabIndex={-1} aria-hidden="true">
                   <Img
-                    src={post.image}
-                    alt={post.alt}
-                    loading={i < 3 ? 'eager' : 'lazy'}
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src={featured.image}
+                    alt={featured.alt}
+                    loading="eager"
+                    sizes="(min-width: 1024px) 55vw, 100vw"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </Link>
-                <div className="p-7 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-brand-gold/10 text-brand-goldHover border border-brand-gold/20">
-                      {post.badge}
-                    </span>
-                    <time dateTime={post.datePublished} className="text-xs text-gray-400">
-                      {formatDate(post.datePublished)}
+                <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+                  <div className="mb-4 flex flex-wrap items-center gap-3">
+                    <Badge>{featured.badge}</Badge>
+                    <time dateTime={featured.datePublished} className="text-xs font-medium text-slate-500">
+                      {formatDate(featured.datePublished)} · {featured.readTime}
                     </time>
                   </div>
-                  <h2 className="font-serif text-2xl font-bold text-brand-dark group-hover:text-brand-gold transition-colors leading-snug mb-3">
-                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                  <h2 className="font-display text-3xl font-bold uppercase leading-[0.95] text-[#1c2024] transition-colors group-hover:text-[#a8661f] md:text-4xl">
+                    <Link to={`/blog/${featured.slug}`}>{featured.title}</Link>
                   </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow">{post.excerpt}</p>
-                  <div className="pt-4 border-t border-gray-100">
-                    <Link
-                      to={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-dark hover:text-brand-gold transition-colors"
-                    >
-                      Read Guide <ArrowRight size={14} className="text-brand-gold" />
-                    </Link>
-                  </div>
+                  <p className="mt-4 leading-relaxed text-slate-600">{featured.excerpt}</p>
+                  <Link
+                    to={`/blog/${featured.slug}`}
+                    className="mt-6 inline-flex min-h-[44px] items-center gap-2 self-start font-display text-base font-bold uppercase tracking-wide text-[#1c2024] transition-colors hover:text-[#a8661f]"
+                  >
+                    Read the guide <ArrowRight size={16} className="text-[#a8661f] transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </div>
               </article>
-            ))}
-          </div>
+            )}
 
-          {filtered.length === 0 && (
-            <div className="text-center py-20 bg-white rounded-3xl border border-gray-100 max-w-xl mx-auto p-8 shadow-sm">
-              <BookOpen size={48} className="mx-auto text-gray-300 mb-4" />
-              <h2 className="font-serif text-2xl font-bold text-brand-dark mb-2">No matching guides</h2>
-              <p className="text-gray-500 text-sm mb-6">Try &quot;cost&quot;, &quot;driveway&quot; or &quot;retaining wall&quot;.</p>
-              <button
-                onClick={() => {
-                  setQuery('');
-                  setActiveCategory('All Guides');
-                }}
-                className="bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full hover:bg-brand-gold transition-colors"
-              >
-                Reset Filters
-              </button>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {grid.map((post, i) => (
+                <article
+                  key={post.slug}
+                  className="group flex flex-col overflow-hidden rounded-xl bg-white shadow-[0_20px_40px_-30px_rgba(15,17,21,0.35)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(15,17,21,0.45)]"
+                >
+                  <Link to={`/blog/${post.slug}`} className="relative block aspect-[16/10] overflow-hidden bg-slate-200" tabIndex={-1} aria-hidden="true">
+                    <Img
+                      src={post.image}
+                      alt={post.alt}
+                      loading={i < 3 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+                  <div className="flex flex-grow flex-col p-6">
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                      <Badge>{post.badge}</Badge>
+                      <time dateTime={post.datePublished} className="text-xs font-medium text-slate-500">
+                        {formatDate(post.datePublished)}
+                      </time>
+                    </div>
+                    <h2 className="mb-3 font-display text-2xl font-bold uppercase leading-[0.98] text-[#1c2024] transition-colors group-hover:text-[#a8661f]">
+                      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                    </h2>
+                    <p className="mb-5 flex-grow text-[15px] leading-relaxed text-slate-600">{post.excerpt}</p>
+                    <div className="border-t border-slate-100 pt-3">
+                      <Link
+                        to={`/blog/${post.slug}`}
+                        className="inline-flex min-h-[44px] items-center gap-2 font-display text-base font-bold uppercase tracking-wide text-[#1c2024] transition-colors hover:text-[#a8661f]"
+                      >
+                        Read guide <ArrowRight size={16} className="text-[#a8661f] transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
-          )}
 
-          <div className="mt-20 bg-brand-dark text-white rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="max-w-2xl text-center md:text-left">
-              <span className="text-brand-gold text-xs font-bold uppercase tracking-widest mb-2 block">Ready to Build?</span>
-              <h2 className="font-serif text-2xl sm:text-3xl font-medium mb-3">Get a Free On-Site Estimate</h2>
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                We measure, check drainage and give you a written, line-item quote for your driveway, patio, wall or pool deck.
-              </p>
-            </div>
-            <Link
-              to="/quote"
-              className="inline-flex items-center gap-2 bg-brand-gold text-white font-bold uppercase tracking-widest text-xs px-8 py-4 hover:bg-white hover:text-brand-dark transition-colors shrink-0"
-            >
-              Request Free Quote <ArrowRight size={16} />
-            </Link>
+            {filtered.length === 0 && (
+              <div className="mx-auto max-w-xl rounded-xl bg-white p-8 py-16 text-center shadow-sm">
+                <BookOpen size={44} className="mx-auto mb-4 text-slate-300" />
+                <h2 className="mb-2 font-display text-3xl font-bold uppercase text-[#1c2024]">No matching guides</h2>
+                <p className="mb-6 text-slate-600">Try &quot;cost&quot;, &quot;driveway&quot; or &quot;retaining wall&quot;.</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery('');
+                    setActiveCategory('All Guides');
+                  }}
+                  className="inline-flex min-h-[44px] items-center rounded-md border-2 border-[#1c2024] px-6 font-display text-base font-bold uppercase tracking-wide text-[#1c2024] transition-colors hover:bg-[#1c2024] hover:text-white"
+                >
+                  Reset filters
+                </button>
+              </div>
+            )}
+
           </div>
-        </div>
+        </section>
+
+        <CtaBand
+          title="Ready to build it?"
+          text="We measure, check drainage and give you a written quote for your driveway, patio, retaining wall or pool deck. Free and no obligation."
+          image="/images/service-hero-driveway.webp"
+        />
       </main>
 
       <Footer />

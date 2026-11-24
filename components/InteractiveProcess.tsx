@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, PenTool, Hammer, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Search, PenTool, Hammer, CheckCircle2, ArrowRight, Compass } from 'lucide-react';
 import { Img } from './ui/Img';
 
 const steps = [
@@ -45,7 +45,7 @@ export const InteractiveProcess: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 flex flex-col md:flex-row justify-between items-end gap-6 fade-in-section">
         <div>
            <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm flex items-center gap-2">
-             <Sparkles size={14} /> The Journey
+             <Compass size={14} /> The Journey
            </span>
            <h2 className="mt-2 font-serif text-4xl md:text-5xl font-bold text-brand-dark">From Vision to Reality</h2>
         </div>

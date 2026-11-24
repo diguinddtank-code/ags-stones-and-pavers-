@@ -38,7 +38,7 @@ export const YardStudioTeaser: React.FC = () => {
           <p data-reveal className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-white/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-gold" /> New · Interactive 3D
           </p>
-          <h2 data-split className="font-serif text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+          <h2 data-split className="font-display text-5xl font-bold uppercase leading-[0.95] lg:text-6xl">
             Design your yard before we break ground.
           </h2>
           <p data-reveal className="mt-6 max-w-lg text-base leading-relaxed text-white/65 md:text-lg">

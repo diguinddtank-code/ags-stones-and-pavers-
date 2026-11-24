@@ -13,16 +13,17 @@ export default {
         '3xl': '1920px',
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Barlow Condensed"', '"Arial Narrow"', 'sans-serif'],
+        sans: ['Barlow', 'system-ui', 'sans-serif'],
+        display: ['"Barlow Condensed"', '"Arial Narrow"', 'sans-serif'],
       },
       colors: {
         brand: {
-          dark: '#0f1115', 
-          gold: '#d4af37', 
-          goldHover: '#b59021',
+          dark: '#15181c',
+          gold: '#e2a33a',
+          goldHover: '#c98a24',
           slate: '#1e293b',
-          light: '#f4f4f5',
+          light: '#f5f2ec',
           accent: '#233329',
         }
       },

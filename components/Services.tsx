@@ -108,7 +108,7 @@ const services: ServiceItem[] = [
     title: 'Stone Veneer',
     description: 'Stone veneer for exterior facades, entry columns, fireplaces and other architectural features.',
     icon: <Mountain className="w-5 h-5" />,
-    image: 'https://i.pinimg.com/474x/7b/78/34/7b783454796659d0078c289f3308445f.jpg',
+    image: '/images/service-hero-stone-veneer.webp',
     benefits: [
       'Exterior accents and columns',
       'Stone style and finish choices',
@@ -124,7 +124,7 @@ const services: ServiceItem[] = [
     title: 'Landscape Design',
     description: 'Plan hardscape layout, materials and site relationships before installation begins.',
     icon: <Ruler className="w-5 h-5" />,
-    image: 'https://i.ytimg.com/vi/3QhK363_d4A/hq720.jpg',
+    image: '/images/service-hero-landscape-design.webp',
     benefits: [
       'Layout planning',
       'Material coordination',
@@ -163,21 +163,21 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
          <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-[100px] pointer-events-none"></div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
         
-        <div data-services-head className="mb-14 text-center lg:mb-10 lg:flex lg:items-end lg:justify-between lg:gap-16 lg:text-left">
+        <div data-services-head className="mb-14 text-center lg:mb-10 lg:flex lg:items-end lg:justify-between lg:gap-12 lg:text-left">
           <div>
             <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md mb-6 shadow-sm">
                <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
-               <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">Metro Atlanta Hardscapes</span>
+               <span className="text-brand-dark font-bold uppercase tracking-[0.2em] text-xs">What we build</span>
             </div>
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-brand-dark leading-none">
-              Hardscape <span className="italic text-brand-gold">Services</span>
+            <h2 className="font-display uppercase text-5xl md:text-6xl xl:text-7xl font-bold text-brand-dark leading-[0.95]">
+              Paver &amp; Hardscape <span className="text-brand-gold">Services</span>
             </h2>
           </div>
-          <div className="lg:max-w-sm lg:pb-2">
+          <div className="lg:w-80 lg:shrink-0 lg:pb-2">
             <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg font-light leading-relaxed lg:mt-0">
-               Explore the types of work AGS Stones and Pavers takes on across Duluth and Metro Atlanta.
+               Driveways, patios, walls, pool decks and outdoor living, installed by our own crews across Duluth and Metro Atlanta.
             </p>
             <div className="mt-6 hidden items-center gap-4 lg:flex" aria-hidden="true">
               <span className="text-xs font-bold tracking-widest text-brand-dark">01</span>
@@ -233,7 +233,7 @@ export const Services: React.FC<ServicesProps> = ({ onModalChange }) => {
                   {/* Bottom Content */}
                   <div className="absolute bottom-0 left-0 w-full p-6 text-white">
                       <div className="flex items-center gap-2 mb-2 opacity-80">
-                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] border-l-2 border-brand-gold pl-2">Premium Series</span>
+                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] border-l-2 border-brand-gold pl-2">Free estimate</span>
                       </div>
                       
                       <h3 className="font-serif text-3xl font-bold leading-none mb-3 drop-shadow-md">

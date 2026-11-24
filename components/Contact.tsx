@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, Phone, Mail, ArrowRight, Navigation, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Navigation, Loader2, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 import { BUSINESS } from '../lib/business';
+import { trackLead } from '../lib/tracking';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -76,6 +77,7 @@ export const Contact: React.FC = () => {
 
       if (response.ok && (data.success === "true" || data.success === true)) {
         setStatus('SUCCESS');
+        trackLead('contact-section');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', details: '' });
         setTimeout(() => setStatus('IDLE'), 5000);
       } else {
@@ -92,25 +94,24 @@ export const Contact: React.FC = () => {
   return (
     <section ref={sectionRef} id="contact" className="py-24 relative overflow-hidden">
       {/* Background Texture */}
-      <div className="absolute inset-0 bg-[#f8f9fa]">
-         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-gold/5 skew-x-12 pointer-events-none"></div>
-      </div>
+      <div className="absolute inset-0 bg-[#f5f2ec]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div className="mb-12 text-center md:text-left fade-in-section">
-            <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm">Start Your Project</span>
-            <h2 className="font-serif text-4xl md:text-6xl font-bold text-brand-dark mt-2">Let's Build Your Vision</h2>
+            <span className="eyebrow text-[#a8661f]">Free on-site estimate</span>
+            <h2 className="font-display text-5xl font-bold uppercase leading-[0.95] text-brand-dark mt-3 md:text-6xl">Tell us about your project</h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-600">Send the details below or call <a href={BUSINESS.phoneHref} className="font-bold text-brand-dark underline decoration-brand-gold underline-offset-4">{BUSINESS.phoneDisplay}</a>. We will set up a time to look at the property and give you a written quote.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           
           {/* Enhanced Glass Form */}
           <div className="fade-in-section">
-            <div className="bg-white/60 backdrop-blur-xl p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] border border-white/60 relative overflow-hidden">
+            <div data-lead-form className="relative overflow-hidden rounded-xl border-t-4 border-brand-gold bg-white p-6 shadow-[0_30px_60px_-30px_rgba(15,17,21,0.35)] sm:p-8 md:p-10">
                 
                 {status === 'SUCCESS' ? (
-                  <div className="absolute inset-0 bg-white/80 backdrop-blur-xl z-20 flex flex-col items-center justify-center text-center p-8 animate-[fadeIn_0.5s_ease-out]">
+                  <div className="absolute inset-0 bg-white z-20 flex flex-col items-center justify-center text-center p-8 animate-[fadeIn_0.5s_ease-out]">
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                       <CheckCircle2 className="w-8 h-8 text-green-600" />
                     </div>
@@ -127,9 +128,9 @@ export const Contact: React.FC = () => {
                   </div>
                 ) : (
                   <>
-                    <h3 className="font-serif text-2xl font-bold text-brand-dark mb-6">Request a Consultation</h3>
+                    <h3 className="font-display text-3xl font-bold uppercase text-brand-dark mb-6">Request a free estimate</h3>
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                           <div className="space-y-2">
                             <label htmlFor="firstName" className="text-xs font-bold text-brand-dark uppercase tracking-widest">First Name</label>
                             <input 
@@ -139,7 +140,7 @@ export const Contact: React.FC = () => {
                               required
                               value={formData.firstName}
                               onChange={handleChange}
-                              className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-[15px] focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all placeholder-slate-400" 
                               placeholder="John" 
                             />
                           </div>
@@ -152,7 +153,7 @@ export const Contact: React.FC = () => {
                               required
                               value={formData.lastName}
                               onChange={handleChange}
-                              className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
+                              className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-[15px] focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all placeholder-slate-400" 
                               placeholder="Doe" 
                             />
                           </div>
@@ -167,7 +168,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-[15px] focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all placeholder-slate-400" 
                             placeholder="john@example.com" 
                           />
                       </div>
@@ -181,7 +182,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 backdrop-blur-sm" 
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-[15px] focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all placeholder-slate-400" 
                             placeholder="(555) 000-0000" 
                           />
                       </div>
@@ -195,7 +196,7 @@ export const Contact: React.FC = () => {
                             required
                             value={formData.details}
                             onChange={handleChange}
-                            className="w-full bg-white/50 border border-gray-200/60 rounded-lg p-4 focus:bg-white focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-all placeholder-gray-400 resize-none backdrop-blur-sm" 
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-4 text-[15px] focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all placeholder-slate-400 resize-none" 
                             placeholder="I'm interested in a paver patio with a fire pit..."
                           ></textarea>
                       </div>
@@ -215,7 +216,7 @@ export const Contact: React.FC = () => {
                       <button 
                         type="submit"
                         disabled={status === 'LOADING'}
-                        className="w-full group bg-brand-dark text-white py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-brand-gold transition-all shadow-lg flex items-center justify-center gap-3 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full group bg-brand-gold text-brand-dark py-4 rounded-md font-display text-lg font-bold uppercase tracking-wide hover:bg-brand-goldHover transition-all shadow-lg flex items-center justify-center gap-3 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                           {status === 'LOADING' ? (
                             <>
@@ -224,7 +225,7 @@ export const Contact: React.FC = () => {
                             </>
                           ) : (
                             <>
-                              <span>Submit Request</span>
+                              <span>Get my free estimate</span>
                               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </>
                           )}
@@ -239,7 +240,7 @@ export const Contact: React.FC = () => {
           <div className="fade-in-section delay-200 flex flex-col gap-6">
              
              {/* Map Container - Full Width in this column */}
-             <div ref={mapContainerRef} className="relative w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/50 group bg-gray-100">
+             <div ref={mapContainerRef} className="relative w-full h-[320px] md:h-[400px] rounded-xl overflow-hidden shadow-xl border border-black/5 group bg-gray-100">
                 {loadMap ? (
                   <iframe 
                     title="AGS Stones - Driveway Pavers & Retaining Wall Contractor in Duluth, GA"
@@ -263,22 +264,26 @@ export const Contact: React.FC = () => {
              </div>
 
              {/* SEO Location List - Glass */}
-             <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-sm">
-                 <h4 className="font-serif font-bold text-xl text-brand-dark mb-4 flex items-center gap-2">
+             <div className="rounded-xl bg-brand-dark p-6 text-white shadow-xl md:p-7">
+                 <div className="mb-6 grid gap-3 border-b border-white/10 pb-6 sm:grid-cols-2">
+                   <a href={BUSINESS.phoneHref} className="flex items-center justify-center gap-2 rounded-md bg-brand-gold py-3.5 font-display text-lg font-bold uppercase tracking-wide text-brand-dark transition-colors hover:bg-white"><Phone size={17} /> {BUSINESS.phoneDisplay}</a>
+                   <span className="flex items-center justify-center gap-2 text-sm text-white/70"><Clock size={15} className="text-brand-gold" /> {BUSINESS.hours.display}</span>
+                 </div>
+                 <h4 className="font-display font-bold uppercase text-2xl text-white mb-4 flex items-center gap-2">
                     <MapPin className="text-brand-gold" size={24} /> Service Areas
                  </h4>
                  <div className="grid grid-cols-2 md:grid-cols-2 gap-y-3 gap-x-4">
                     {BUSINESS.areaServed.map(({ name: city }, index) => (
                        <div key={index} className="flex items-center gap-2 group cursor-default">
-                          <MapPin size={14} className="text-red-600 flex-shrink-0 group-hover:scale-125 transition-transform" fill="currentColor" />
-                          <span className="text-sm font-bold text-brand-dark underline decoration-gray-300 underline-offset-4 decoration-1 group-hover:decoration-brand-gold transition-all">
+                          <MapPin size={14} className="text-brand-gold flex-shrink-0" />
+                          <span className="text-sm font-semibold text-white/85">
                              {city}, GA
                           </span>
                        </div>
                     ))}
                  </div>
-                 <p className="mt-6 text-xs text-gray-400 border-t border-gray-200/50 pt-3">
-                    Proudly serving Metro Atlanta and surrounding communities.
+                 <p className="mt-6 text-xs text-white/50 border-t border-white/10 pt-3">
+                    Based at {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.region}.
                  </p>
              </div>
 

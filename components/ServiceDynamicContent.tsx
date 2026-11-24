@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Phone,
   CheckCircle2,
@@ -10,55 +10,18 @@ import {
   Loader2,
   Check,
   ChevronDown,
+  HardHat,
+  ClipboardCheck,
 } from 'lucide-react';
+import { BUSINESS } from '../lib/business';
+import { CtaBand } from './CtaBand';
+import { trackLead } from '../lib/tracking';
 import { Img } from './ui/Img';
 
-const GOOGLE_CONVERSION_ID = 'AW-16885125181/Au3NCM3fmugbEL2guvM-';
-
-// Analytics tracking helpers
-const trackCallClick = () => {
-  if (typeof window !== 'undefined') {
-    const gtagReport = (window as any).gtag_report_conversion;
-    if (typeof gtagReport === 'function') {
-      gtagReport('tel:6784287630');
-    } else if ((window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        send_to: GOOGLE_CONVERSION_ID,
-        event_category: 'Contact',
-        event_label: 'Call Click',
-      });
-    }
-    if ((window as any).fbq) {
-      (window as any).fbq('track', 'Contact');
-    }
-  }
-};
-
-const triggerConversionEvents = (leadData: {
-  fullName: string;
-  phone: string;
-  zipOrCity: string;
-  serviceOrMaterial: string;
-}) => {
-  if (typeof window !== 'undefined') {
-    // 1. Google Tag / Google Ads conversion event
-    if ((window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        send_to: GOOGLE_CONVERSION_ID,
-      });
-    }
-
-    // 2. Meta Pixel Track Lead
-    if ((window as any).fbq) {
-      (window as any).fbq('track', 'Lead', {
-        content_name: leadData.serviceOrMaterial,
-        content_category: 'Service Quote',
-        value: 5000.0,
-        currency: 'USD',
-      });
-    }
-  }
-};
+// Call clicks are tracked once, app-wide, by the tel: listener in <App />.
+// Lead conversions go through lib/tracking.ts.
+const triggerConversionEvents = (leadData: { serviceOrMaterial: string }) =>
+  trackLead('service-page', leadData.serviceOrMaterial);
 
 const formatPhoneNumber = (value: string) => {
   if (!value) return value;
@@ -117,10 +80,9 @@ const renderParagraphWithLinks = (text: string) => {
         <a 
           key={matchIndex} 
           href={url} 
-          onClick={url.startsWith('tel:') ? trackCallClick : undefined}
           target={url.startsWith('tel:') ? undefined : "_blank"}
           rel={url.startsWith('tel:') ? undefined : "noopener noreferrer"}
-          className="text-brand-gold hover:underline font-semibold"
+          className="font-semibold text-[#a8661f] underline decoration-[#a8661f]/30 underline-offset-4 hover:decoration-[#a8661f]"
         >
           {anchorText}
         </a>
@@ -130,7 +92,7 @@ const renderParagraphWithLinks = (text: string) => {
         <Link 
           key={matchIndex} 
           to={url} 
-          className="text-brand-gold hover:underline font-semibold"
+          className="font-semibold text-[#a8661f] underline decoration-[#a8661f]/30 underline-offset-4 hover:decoration-[#a8661f]"
         >
           {anchorText}
         </Link>
@@ -149,8 +111,6 @@ const renderParagraphWithLinks = (text: string) => {
 
 export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection, extraSections }) => {
   const { scrollY } = useScroll();
-  const heroFormRef = useRef<HTMLDivElement>(null);
-  const [showFlyButton, setShowFlyButton] = useState(false);
 
   // Parallax calculations
   const yHero = useTransform(scrollY, [0, 1000], [0, 260]);
@@ -175,29 +135,6 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
       }));
     }
   }, [data?.name]);
-
-  // Mobile Sticky Fly Button: monitor when hero form exits the viewport
-  useEffect(() => {
-    const target = heroFormRef.current;
-    if (!target) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Show fly button when user scrolls down and hero form exits viewport
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          setShowFlyButton(true);
-        } else {
-          setShowFlyButton(false);
-        }
-      },
-      {
-        threshold: 0.05,
-      }
-    );
-
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
 
   const scrollToForm = () => {
     const formEl = document.getElementById('hero-service-form');
@@ -275,142 +212,80 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
     show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } }
   };
 
+  const shortName = data.name.replace(/\s+GA$/, '');
+  const inputCls =
+    'w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3.5 text-[15px] font-medium text-brand-dark placeholder-slate-400 outline-none transition-all focus:border-brand-gold focus:bg-white focus:ring-2 focus:ring-brand-gold/30';
+  const labelCls = 'mb-1 block text-xs font-bold uppercase tracking-wider text-slate-600';
+
   return (
     <div className="bg-white overflow-hidden selection:bg-brand-gold selection:text-white">
-      {/* 1. HERO SECTION (SPLIT GRID DE ALTA CONVERSÃO) */}
-      <section className="relative min-h-[100svh] w-full flex items-center justify-center pt-28 sm:pt-32 lg:pt-32 pb-12 sm:pb-16 md:pb-24 overflow-hidden bg-brand-dark">
-        {/* Background Image Layer with Parallax */}
-        <motion.div 
-          style={{ y: yHero }}
-          className="absolute inset-0 z-0 origin-top pointer-events-none"
-        >
-           <Img 
-              src={data.heroImage} 
-              alt={data.name} 
-              className="w-full h-full object-cover brightness-[0.7] contrast-[1.05] scale-105"
-           />
+      {/* 1. HERO: offer on the left, estimate form on the right (stacked on phones) */}
+      <section className="relative w-full overflow-hidden bg-brand-dark pb-12 pt-28 sm:pb-16 sm:pt-32 lg:min-h-[100svh] lg:pt-40 lg:pb-24 lg:flex lg:items-center">
+        <motion.div style={{ y: yHero }} className="pointer-events-none absolute inset-0 z-0 origin-top">
+          <Img src={data.heroImage} alt={data.name} loading="eager" fetchPriority="high" className="h-full w-full scale-105 object-cover" />
         </motion.div>
-        
-        {/* Soft, balanced gradient overlays - much lighter so the hardscape work is clearly visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/75 via-brand-dark/45 to-black/25 z-0 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-black/35 z-0 pointer-events-none"></div>
+        <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/70 to-brand-dark/95 lg:bg-gradient-to-r lg:from-brand-dark/95 lg:via-brand-dark/75 lg:to-brand-dark/30" />
 
-        {/* CONTAINER WITH SCREEN LIMITS (max-w-7xl, 2xl:max-w-[98rem], 3xl:max-w-[110rem]) */}
-        <div className="relative z-10 w-full max-w-7xl 2xl:max-w-[98rem] 3xl:max-w-[110rem] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 xl:gap-16 items-center">
-            
-            {/* Service overview, estimate form and direct contact */}
-            <motion.div 
-              variants={staggerContainer}
-              initial="hidden"
-              animate="show"
-              className="lg:col-span-7 text-center lg:text-left"
-            >
-              {/* Authority Badge (Compact on mobile) */}
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-black/60 backdrop-blur-md border border-brand-gold/50 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span className="text-white text-[11px] sm:text-xs font-bold tracking-wider uppercase">
-                  Duluth based · Serving Metro Atlanta
-                </span>
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+            <motion.div variants={staggerContainer} initial="hidden" animate="show" className="text-center lg:col-span-7 lg:text-left">
+              <motion.div variants={fadeUp} className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-brand-dark/60 px-3.5 py-1.5">
+                <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-70" /><span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" /></span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-white sm:text-xs">Free on-site estimates · Metro Atlanta</span>
               </motion.div>
 
-              {/* Dynamic Subtitle */}
               {data.heroSubtitle && (
-                <motion.p variants={fadeUp} className="text-brand-gold uppercase tracking-[0.2em] text-xs sm:text-sm font-bold mb-2 sm:mb-3">
-                  {data.heroSubtitle}
-                </motion.p>
+                <motion.p variants={fadeUp} className="eyebrow mb-3 text-brand-gold">{data.heroSubtitle}</motion.p>
               )}
 
-              {/* H1 Headline (Monumental, bold and impactful) */}
-              <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white font-black leading-[1.06] mb-4 sm:mb-6 tracking-tight drop-shadow-2xl">
+              <motion.h1 variants={fadeUp} className="mb-5 font-display text-[2.6rem] font-bold uppercase leading-[0.95] tracking-[-0.01em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.35)] sm:text-6xl lg:text-[clamp(2.9rem,min(4.8vw,8.5vh),5rem)]">
                 {data.name}
               </motion.h1>
 
-              {/* 3 Value Bullets (Compact and readable) */}
-              <motion.div variants={fadeUp} className="space-y-2.5 sm:space-y-3 mb-5 sm:mb-6 max-w-2xl mx-auto lg:mx-0 text-left">
-                <div className="flex items-start gap-2.5 sm:gap-3">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-brand-gold/20 border border-brand-gold flex items-center justify-center shrink-0 mt-0.5 text-brand-gold shadow-sm">
-                    <CheckCircle2 size={13} className="text-brand-gold stroke-[2.5]" />
-                  </div>
-                  <div>
-                    <span className="text-white font-bold text-sm sm:text-base block leading-snug drop-shadow-sm">
-                      Licensed & Insured
-                    </span>
-                    <span className="text-gray-300 text-xs sm:text-sm block">
-                      Fully covered in Georgia with general liability and workers' comp.
-                    </span>
-                  </div>
-                </div>
+              <motion.p variants={fadeUp} className="mx-auto mb-6 max-w-xl text-base font-medium leading-relaxed text-white/85 md:text-lg lg:mx-0">
+                Planned, prepped and installed by AGS, a licensed paver contractor based in Duluth. Get a clear written quote before any work starts.
+              </motion.p>
 
-                <div className="flex items-start gap-2.5 sm:gap-3">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-brand-gold/20 border border-brand-gold flex items-center justify-center shrink-0 mt-0.5 text-brand-gold shadow-sm">
-                    <CheckCircle2 size={13} className="text-brand-gold stroke-[2.5]" />
-                  </div>
-                  <div>
-                    <span className="text-white font-bold text-sm sm:text-base block leading-snug drop-shadow-sm">
-                      Material Options
-                    </span>
-                    <span className="text-gray-300 text-xs sm:text-sm block">
-                      Review paver and wall materials that fit the project scope.
-                    </span>
-                  </div>
-                </div>
+              <motion.ul variants={fadeUp} className="mx-auto mb-7 max-w-md space-y-2.5 text-left lg:mx-0">
+                {['Licensed & insured in Georgia', 'In-house crews, no subcontractors', 'Free on-site estimate and written quote'].map((p) => (
+                  <li key={p} className="flex items-center gap-3 text-[15px] font-semibold text-white md:text-base">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-brand-dark"><Check size={14} strokeWidth={3} /></span>
+                    {p}
+                  </li>
+                ))}
+              </motion.ul>
 
-                <div className="flex items-start gap-2.5 sm:gap-3">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-brand-gold/20 border border-brand-gold flex items-center justify-center shrink-0 mt-0.5 text-brand-gold shadow-sm">
-                    <CheckCircle2 size={13} className="text-brand-gold stroke-[2.5]" />
-                  </div>
-                  <div>
-                    <span className="text-white font-bold text-sm sm:text-base block leading-snug drop-shadow-sm">
-                      In-House Crews
-                    </span>
-                    <span className="text-gray-300 text-xs sm:text-sm block">
-                      Work with the AGS team throughout the installation.
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Direct contact option */}
-              <motion.div variants={fadeUp} className="flex flex-col items-center lg:items-start gap-3 mb-6 lg:mb-0">
-                {/* Compact, elegant Call Button (NOT huge) */}
-                <a 
-                  href="tel:6784287630" 
-                  onClick={trackCallClick}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-brand-gold hover:bg-white text-brand-dark font-extrabold text-xs sm:text-sm tracking-wide transition-all duration-300 shadow-lg active:scale-95 group"
+              <motion.div variants={fadeUp} className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                <a
+                  href={BUSINESS.phoneHref}
+                  className="inline-flex w-full items-center justify-center gap-2.5 rounded-md bg-brand-gold px-7 py-4 font-display text-lg font-bold uppercase tracking-wide text-brand-dark shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white active:scale-95 sm:w-auto"
                 >
-                  <Phone size={15} className="stroke-[2.5]" />
-                  <span>Call (678) 428-7630</span>
+                  <Phone size={19} /> Call {BUSINESS.phoneDisplay}
                 </a>
-
+                <span className="text-sm font-medium text-white/70">{BUSINESS.hours.display}</span>
               </motion.div>
             </motion.div>
 
-            {/* RIGHT COLUMN: Floating Form Card */}
-            <motion.div 
-              ref={heroFormRef}
+            {/* Estimate form */}
+            <motion.div
               id="hero-service-form"
+              data-lead-form
               initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-5 w-full max-w-lg mx-auto lg:mr-0 scroll-mt-28"
+              className="mx-auto w-full max-w-lg scroll-mt-28 lg:col-span-5 lg:mr-0"
             >
-              <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-5 sm:p-7 md:p-8 border border-white/60 text-brand-dark relative overflow-hidden">
-                {/* Gold top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold"></div>
-
+              <div className="relative overflow-hidden rounded-xl border-t-4 border-brand-gold bg-white p-5 text-brand-dark shadow-[0_30px_70px_-20px_rgba(0,0,0,0.7)] sm:p-7 md:p-8">
                 {formStatus === 'SUCCESS' ? (
-                  <div className="py-10 text-center animate-fadeIn">
-                    <div className="w-16 h-16 bg-emerald-100 border-2 border-emerald-500 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <div className="animate-fadeIn py-10 text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-emerald-500 bg-emerald-100 text-emerald-600 shadow-lg">
                       <Check size={32} className="stroke-[3]" />
                     </div>
-                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mb-2">
-                      Estimate Request Received!
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed">
-                      Thank you! One of our hardscaping estimators will call or text you shortly with your free estimate.
+                    <h3 className="mb-2 font-display text-3xl font-bold uppercase text-brand-dark">Request received!</h3>
+                    <p className="mb-6 text-sm leading-relaxed text-slate-600 sm:text-base">
+                      Thank you. We will call or text you to set up your free estimate.
                     </p>
-                    <div className="bg-slate-50 p-4 rounded-xl border border-gray-200 mb-6 text-left text-xs sm:text-sm space-y-1">
+                    <div className="mb-6 space-y-1 rounded-lg border border-slate-200 bg-slate-50 p-4 text-left text-xs sm:text-sm">
                       <p><strong>Name:</strong> {formData.fullName}</p>
                       <p><strong>Phone:</strong> {formData.phone}</p>
                       <p><strong>Service:</strong> {formData.serviceOrMaterial}</p>
@@ -427,90 +302,46 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
                           notes: '',
                         });
                       }}
-                      className="text-xs uppercase tracking-wider font-bold text-brand-gold hover:underline"
+                      className="text-xs font-bold uppercase tracking-wider text-[#a8661f] hover:underline"
                     >
                       Submit another project request
                     </button>
                   </div>
                 ) : (
                   <>
-                    {/* Form Header */}
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-brand-dark tracking-tight">
-                        Get Your Free Estimate
-                      </h3>
-                      <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 border border-amber-300/80 text-[11px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0 shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping"></span>
-                        Quick Response
+                    <div className="mb-1 flex items-center justify-between gap-2">
+                      <h2 className="font-display text-[1.75rem] font-bold uppercase leading-none tracking-tight text-brand-dark sm:text-3xl">
+                        Get your free estimate
+                      </h2>
+                      <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-700 ring-1 ring-emerald-200">
+                        No obligation
                       </span>
                     </div>
-                    <p className="text-gray-600 text-xs sm:text-sm mb-5 font-medium leading-relaxed">
-                      Share a few details about the property and what you have in mind.
+                    <p className="mb-5 text-sm font-medium leading-relaxed text-slate-600">
+                      Tell us about the property. We will reach out to schedule a visit.
                     </p>
 
                     <form onSubmit={handleSubmit} className="space-y-3.5">
-                      {/* Full Name */}
                       <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                          Full Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="John Smith"
-                          value={formData.fullName}
-                          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          className="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-3 text-brand-dark text-sm placeholder-gray-400 focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all font-medium"
-                        />
+                        <label htmlFor="svc-name" className={labelCls}>Full name <span className="text-red-500">*</span></label>
+                        <input id="svc-name" type="text" required autoComplete="name" placeholder="John Smith" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className={inputCls} />
                       </div>
 
-                      {/* Phone + ZIP/City */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                         <div>
-                          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                            Phone Number <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            required
-                            placeholder="(678) 000-0000"
-                            value={formData.phone}
-                            onChange={(e) =>
-                              setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })
-                            }
-                            className="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-3 text-brand-dark text-sm placeholder-gray-400 focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all font-medium"
-                          />
+                          <label htmlFor="svc-phone" className={labelCls}>Phone <span className="text-red-500">*</span></label>
+                          <input id="svc-phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="(678) 000-0000" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: formatPhoneNumber(e.target.value) })} className={inputCls} />
                         </div>
-
                         <div>
-                          <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                            ZIP Code or City <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. 30096 or Atlanta, GA"
-                            value={formData.zipOrCity}
-                            onChange={(e) => setFormData({ ...formData, zipOrCity: e.target.value })}
-                            className="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-3 text-brand-dark text-sm placeholder-gray-400 focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all font-medium"
-                          />
+                          <label htmlFor="svc-zip" className={labelCls}>ZIP or city <span className="text-red-500">*</span></label>
+                          <input id="svc-zip" type="text" required autoComplete="postal-code" placeholder="30097 or Duluth" value={formData.zipOrCity} onChange={(e) => setFormData({ ...formData, zipOrCity: e.target.value })} className={inputCls} />
                         </div>
                       </div>
 
-                      {/* Service / Material Selection */}
-                      <div className="relative">
-                        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                          Service Needed <span className="text-red-500">*</span>
-                        </label>
+                      <div>
+                        <label htmlFor="svc-service" className={labelCls}>Service needed <span className="text-red-500">*</span></label>
                         <div className="relative">
-                          <select
-                            required
-                            value={formData.serviceOrMaterial}
-                            onChange={(e) =>
-                              setFormData({ ...formData, serviceOrMaterial: e.target.value })
-                            }
-                            className="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-3 text-brand-dark text-sm focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all appearance-none cursor-pointer font-medium pr-10"
-                          >
+                          <select id="svc-service" required value={formData.serviceOrMaterial} onChange={(e) => setFormData({ ...formData, serviceOrMaterial: e.target.value })} className={`${inputCls} cursor-pointer appearance-none pr-10`}>
                             <option value={data.name}>{data.name} (Featured Service)</option>
                             <option value="Driveway Paver Installation">Driveway Paver Installation</option>
                             <option value="Outdoor Patio Builders">Outdoor Patio & Living Spaces</option>
@@ -522,52 +353,33 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
                             <option value="3D Landscape & Hardscape Design">3D Landscape & Hardscape Design</option>
                             <option value="Other Custom Hardscaping">Other Custom Hardscaping Project</option>
                           </select>
-                          <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none w-4 h-4" />
+                          <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
                         </div>
                       </div>
 
-                      {/* Optional Project Details */}
                       <div>
-                        <label className="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-1">
-                          Project Details <span className="text-gray-400 font-normal">(Optional)</span>
-                        </label>
-                        <textarea
-                          rows={2}
-                          placeholder="Approximate size, timeline, or any specific ideas you have in mind..."
-                          value={formData.notes}
-                          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                          className="w-full bg-slate-50 border border-gray-300 rounded-xl px-4 py-2.5 text-brand-dark text-sm placeholder-gray-400 focus:bg-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition-all resize-none font-medium"
-                        />
+                        <label htmlFor="svc-notes" className={labelCls}>Project details <span className="font-normal normal-case text-slate-400">(optional)</span></label>
+                        <textarea id="svc-notes" rows={2} placeholder="Approximate size, timeline or ideas..." value={formData.notes} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} className={`${inputCls} resize-none py-3`} />
                       </div>
 
-                      {/* Submit Button */}
                       <button
                         type="submit"
                         disabled={formStatus === 'LOADING'}
-                        className="w-full bg-brand-gold hover:bg-brand-goldHover text-brand-dark font-black py-4 px-6 rounded-xl shadow-xl uppercase tracking-wider text-sm transition-all transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2 mt-2 disabled:opacity-75 disabled:cursor-not-allowed group"
+                        className="group mt-1 flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-6 py-4 font-display text-lg font-bold uppercase tracking-wide text-brand-dark shadow-lg transition-all hover:-translate-y-0.5 hover:bg-brand-goldHover active:scale-95 disabled:cursor-not-allowed disabled:opacity-75"
                       >
                         {formStatus === 'LOADING' ? (
-                          <>
-                            <Loader2 className="animate-spin" size={18} />
-                            <span>Sending Request...</span>
-                          </>
+                          <><Loader2 className="animate-spin" size={18} /> Sending...</>
                         ) : (
-                          <>
-                            <span>Request Free Estimate</span>
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                          </>
+                          <>Request free estimate <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" /></>
                         )}
                       </button>
 
-                      {/* Privacy Badge */}
-                      <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 pt-1 text-center">
-                        <ShieldCheck size={15} className="text-emerald-600 shrink-0" />
-                        <span>100% Privacy Protected. We never sell or share your info.</span>
-                      </div>
+                      <p className="flex items-center justify-center gap-1.5 pt-1 text-center text-xs text-slate-500">
+                        <ShieldCheck size={15} className="shrink-0 text-emerald-600" /> We never sell or share your info.
+                      </p>
 
-                      {/* Error Message */}
                       {formStatus === 'ERROR' && (
-                        <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-start gap-2">
+                        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-700">
                           <p className="font-medium leading-relaxed">{formErrorMsg}</p>
                         </div>
                       )}
@@ -576,199 +388,109 @@ export const ServiceDynamicContent: React.FC<Props> = ({ data, fieldworkSection,
                 )}
               </div>
             </motion.div>
-
           </div>
         </div>
       </section>
 
-      {/* 2. MOBILE STICKY FLY BUTTON (ACTIVATES ONLY AFTER SCROLLING PAST HERO FORM) */}
-      <AnimatePresence>
-        {showFlyButton && (
-          <motion.div
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="fixed bottom-4 left-4 right-4 z-50 md:hidden"
-          >
-            <div className="bg-brand-dark/95 backdrop-blur-xl border border-brand-gold/50 rounded-2xl p-2 shadow-[0_10px_35px_rgba(0,0,0,0.6)] flex items-center gap-2">
-              {/* Button 1: "Call Now" with phone icon */}
-              <a
-                href="tel:6784287630"
-                onClick={trackCallClick}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-2 bg-brand-gold hover:bg-brand-goldHover text-brand-dark font-black rounded-xl text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 text-center"
-              >
-                <Phone size={15} className="stroke-[2.5]" />
-                <span>Call Now</span>
-              </a>
+      {/* 2. TRUST BAR */}
+      <section className="border-b border-slate-200 bg-white">
+        <ul className="mx-auto grid max-w-7xl grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: ShieldCheck, title: 'Licensed & insured', text: 'Georgia hardscape contractor' },
+            { icon: HardHat, title: 'In-house crews', text: 'No subcontractors' },
+            { icon: ClipboardCheck, title: 'Free written estimate', text: 'On-site, no obligation' },
+            { icon: MapPin, title: 'Based in Duluth', text: 'Serving North Metro Atlanta' },
+          ].map(({ icon: Icon, title, text }, i) => (
+            <li key={title} className={`flex items-center gap-3 px-4 py-5 sm:px-6 md:py-6 ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b lg:border-b-0' : ''} ${i === 1 ? 'lg:border-r' : ''} border-slate-200`}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-dark text-brand-gold"><Icon size={20} /></span>
+              <span className="min-w-0 leading-tight">
+                <span className="block font-display text-base font-bold uppercase text-brand-dark sm:text-lg">{title}</span>
+                <span className="block text-xs text-slate-500 sm:text-sm">{text}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-              {/* Button 2: "Get Free Quote" with smooth scroll to form */}
-              <button
-                type="button"
-                onClick={scrollToForm}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 px-2 bg-white text-brand-dark hover:bg-gray-100 font-black rounded-xl text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 text-center"
-              >
-                <ArrowRight size={15} className="stroke-[2.5] text-brand-gold" />
-                <span>Get Free Quote</span>
-              </button>
+      {/* 3. OVERVIEW with a sticky estimate card on desktop */}
+      <section className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
+        <div className="grid gap-12 lg:grid-cols-[1fr_340px] lg:gap-16">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.8, ease: 'easeOut' }}>
+            <p className="eyebrow mb-4 flex items-center gap-3 text-[#a8661f]"><span className="block h-0.5 w-10 bg-[#a8661f]" /> Service overview</p>
+            <h2 className="mb-8 font-display text-4xl font-bold uppercase leading-[0.95] text-brand-dark md:text-5xl lg:text-6xl">
+              {data.overviewHeading}
+            </h2>
+            <div className="space-y-5 text-lg leading-relaxed text-slate-600">
+              {data.overviewParagraphs.map((p, idx) => (
+                <p key={idx}>{renderParagraphWithLinks(p)}</p>
+              ))}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* OVERVIEW SECTION (Negative Space & Typography) */}
-      <section className="py-24 md:py-40 px-6 max-w-7xl mx-auto border-b border-gray-100 relative overflow-hidden">
-         {/* Decorative background element */}
-         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-         <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col md:flex-row gap-12 lg:gap-24 relative z-10"
-         >
-            <div className="md:w-5/12 space-y-6">
-               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold">Service overview</p>
-               <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-dark font-medium leading-[1.1] tracking-tight">
-                  {data.overviewHeading}
-               </h2>
-               
+          <aside className="lg:sticky lg:top-28 lg:self-start">
+            <div className="rounded-xl bg-brand-dark p-6 text-white shadow-xl md:p-7">
+              <p className="eyebrow mb-2 text-brand-gold">Free estimate</p>
+              <h3 className="font-display text-3xl font-bold uppercase leading-none">Price out your project</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">We measure, review the site and give you a written quote. No pressure.</p>
+              <button type="button" onClick={scrollToForm} className="mt-5 flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold py-3.5 font-display text-lg font-bold uppercase tracking-wide text-brand-dark transition-colors hover:bg-white">
+                Get my estimate <ArrowRight size={18} />
+              </button>
+              <a href={BUSINESS.phoneHref} className="mt-3 flex w-full items-center justify-center gap-2 rounded-md border border-white/25 py-3.5 font-display text-lg font-bold uppercase tracking-wide text-white transition-colors hover:border-brand-gold hover:text-brand-gold">
+                <Phone size={17} /> {BUSINESS.phoneDisplay}
+              </a>
+              <p className="mt-4 text-center text-xs text-white/50">{BUSINESS.hours.display}</p>
             </div>
-            
-            <div className="md:w-7/12 space-y-6 text-lg md:text-xl text-[#4a5568] font-sans leading-relaxed md:pt-14 relative">
-               {/* Vertical decorative line */}
-               <div className="hidden md:block absolute left-[-3rem] top-14 bottom-0 w-[1px] bg-gradient-to-b from-brand-gold/50 to-transparent"></div>
-               
-               {data.overviewParagraphs.map((p, idx) => (
-                 <motion.p 
-                   key={idx}
-                   initial={{ opacity: 0, y: 20 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   transition={{ delay: 0.3 + (idx * 0.1) }}
-                 >
-                   {renderParagraphWithLinks(p)}
-                 </motion.p>
-               ))}
-               <motion.div 
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ delay: 0.6 }}
-                 className="pt-8"
-               >
-                 <Link to="/quote" className="inline-flex items-center gap-3 font-bold text-brand-dark uppercase tracking-widest text-sm hover:text-brand-gold transition-colors group">
-                    <span className="border-b border-brand-dark group-hover:border-brand-gold pb-1 transition-colors">Schedule a Consultation</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform text-brand-gold" />
-                 </Link>
-               </motion.div>
-            </div>
-         </motion.div>
+          </aside>
+        </div>
       </section>
 
       {fieldworkSection}
 
-      {/* A compact image and message break, without a tall parallax scroll gap. */}
-      <section className="relative min-h-[280px] md:min-h-[360px] w-full overflow-hidden flex items-center justify-center px-5 py-16 bg-brand-dark">
-         <Img
-            src={data.heroImage}
-            alt="Completed hardscape detail for this service"
-            className="absolute inset-0 w-full h-full object-cover brightness-[0.42]"
-            loading="lazy"
-            decoding="async"
-         />
-         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/60 via-brand-dark/35 to-brand-dark/60" />
-         <motion.div
-           initial={{ opacity: 0, y: 16 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.45, ease: "easeOut" }}
-           className="relative z-10 max-w-3xl mx-auto text-center"
-         >
-           <p className="text-brand-gold text-xs font-semibold uppercase tracking-[0.2em] mb-4">Built for your property</p>
-           <h3 className="font-serif text-2xl md:text-4xl text-white leading-tight font-medium max-w-3xl mx-auto">
-             {data.parallaxQuote}
-           </h3>
-         </motion.div>
-      </section>
-
-      {/* TIMELINE / PROCESS */}
-      <section id="process" className="py-24 md:py-40 px-6 bg-gray-50 overflow-hidden relative">
-         <div className="max-w-7xl mx-auto relative z-10">
-            <motion.div 
-               initial={{ opacity: 0, y: 30 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               className="text-center mb-16 md:mb-28"
-            >
-               <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block">From site review to final details</span>
-               <h2 className="font-serif text-4xl md:text-6xl text-brand-dark font-medium mb-6">How the work takes shape</h2>
-               <p className="text-[#8c98a4] max-w-2xl mx-auto text-lg md:text-xl">
-                  We review the site, define the scope and discuss material options before installation begins.
-               </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-4 gap-8 md:gap-12 relative">
-               {/* Connecting Line */}
-               <div className="hidden md:block absolute top-[45px] left-[12%] right-[12%] h-[2px] bg-brand-gold/20 z-0"></div>
-
-               {data.process.map((step, idx) => (
-                 <motion.div 
-                   key={idx}
-                   initial={{ opacity: 0, y: 40 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true, margin: "-100px" }}
-                   transition={{ duration: 0.8, delay: idx * 0.2 }}
-                   className="relative z-10 flex flex-col items-center text-center group"
-                 >
-                    <div aria-label={`Step ${idx + 1}`} className="w-24 h-24 bg-white shadow-xl rounded-full flex items-center justify-center text-brand-gold font-bold font-serif text-4xl mb-8 relative transition-transform duration-500 group-hover:-translate-y-2 border border-[#eef0f2]">
-                       <span aria-hidden="true" className="relative z-10">{String(idx + 1).padStart(2, '0')}</span>
-                       {/* Hover ripple */}
-                       <div className="absolute inset-0 rounded-full border-2 border-brand-gold/40 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700"></div>
-                    </div>
-                    <h4 className="font-bold text-brand-dark text-xl md:text-2xl mb-4 group-hover:text-brand-gold transition-colors">{step.title}</h4>
-                    <p className="text-[#4a5568] text-base leading-relaxed max-w-[280px]">{step.description}</p>
-                 </motion.div>
-               ))}
-            </div>
-         </div>
-      </section>
-
-      {/* Relevant service areas and guides are rendered from the page metadata below. */}
-
-            {extraSections}
-
-      {/* FINAL SCARCITY CTA */}
-      <section className="bg-brand-dark py-24 md:py-32 px-6 relative overflow-hidden">
-        {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-gold opacity-[0.03] blur-[120px] rounded-full pointer-events-none"></div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-3xl mx-auto text-center"
-        >
-           <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12 text-brand-gold mx-auto mb-8 opacity-90" />
-           <h2 className="font-serif text-3xl md:text-5xl text-white font-medium mb-6 leading-[1.2]">
-             Start with the details of your property.
-           </h2>
-           <p className="text-gray-400 text-lg md:text-xl mb-10 leading-relaxed font-sans max-w-2xl mx-auto">
-             Tell us where the project is, what you want to build and what matters most to you. We can review the site and discuss a clear scope and next steps.
-           </p>
-
-           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-             <Link to="/quote" className="w-full sm:w-auto px-10 py-5 bg-brand-gold text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-dark transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-               Request Free Quote
-             </Link>
-             <a href="tel:6784287630" onClick={trackCallClick} className="w-full sm:w-auto px-10 py-5 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-colors duration-300 flex items-center justify-center gap-2">
-               <Phone size={18} /> Call Us Direct
-             </a>
-           </div>
+      {/* 4. Message break */}
+      <section className="relative flex min-h-[280px] w-full items-center justify-center overflow-hidden bg-brand-dark px-5 py-20 md:min-h-[360px]">
+        <Img src={data.heroImage} alt="" className="absolute inset-0 h-full w-full object-cover brightness-[0.4]" loading="lazy" decoding="async" />
+        <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, ease: 'easeOut' }} className="relative z-10 mx-auto max-w-4xl text-center">
+          <p className="eyebrow mb-4 text-brand-gold">Built for your property</p>
+          <h3 className="font-display text-3xl font-bold uppercase leading-[1.02] text-white md:text-5xl">{data.parallaxQuote}</h3>
         </motion.div>
       </section>
 
+      {/* 5. PROCESS */}
+      <section id="process" className="relative overflow-hidden bg-[#f5f2ec] px-5 py-20 sm:px-8 md:py-28">
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 max-w-2xl md:mb-16">
+            <p className="eyebrow mb-4 text-[#a8661f]">How it works</p>
+            <h2 className="font-display text-4xl font-bold uppercase leading-[0.95] text-brand-dark md:text-6xl">From free estimate to finished job</h2>
+            <p className="mt-4 text-lg text-slate-600">We review the site, define the scope and go over materials with you before installation begins.</p>
+          </motion.div>
+
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {data.process.map((step, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.7, delay: idx * 0.12 }}
+                className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-[0_20px_40px_-30px_rgba(15,17,21,0.4)] md:p-7"
+              >
+                <span aria-hidden="true" className="font-display text-6xl font-bold leading-none text-brand-gold">{String(idx + 1).padStart(2, '0')}</span>
+                <h4 className="mt-4 font-display text-2xl font-bold uppercase leading-tight text-brand-dark">{step.title}</h4>
+                <p className="mt-2 leading-relaxed text-slate-600">{step.description}</p>
+                <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-brand-gold transition-transform duration-500 group-hover:scale-x-100" />
+              </motion.li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {extraSections}
+
+      <CtaBand
+        title="Get a free estimate for your project"
+        text={`Tell us where the property is and what you want to build. We will come out, measure and put a clear quote for your ${shortName.toLowerCase()} project in writing.`}
+        image={data.heroImage}
+      />
     </div>
   );
 };
-

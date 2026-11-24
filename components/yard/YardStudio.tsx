@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { useProgress } from '@react-three/drei';
 import * as THREE from 'three';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, Moon, MousePointerClick, RotateCcw, Sparkles, Sun, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Moon, MousePointerClick, RotateCcw, Palette, Sun, X } from 'lucide-react';
 import { YardScene } from './YardScene';
 import {
   DEFAULT_SELECTION, STYLES, ZONES, findFinish, findLayout, getZone, thumbUrl, type Selection, type ZoneId,
@@ -240,7 +240,7 @@ const YardStudio: React.FC = () => {
         <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-2 p-3 sm:p-4">
           <div className="flex flex-wrap items-center gap-2">
             <span className="pointer-events-auto hidden items-center gap-1.5 rounded-full bg-brand-dark/80 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-gold backdrop-blur-md sm:inline-flex">
-              <Sparkles size={13} /> Complete looks
+              <Palette size={13} /> Complete looks
             </span>
             {STYLES.map((s) => (
               <button

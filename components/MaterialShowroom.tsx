@@ -51,8 +51,6 @@ export const MaterialShowroom: React.FC = () => {
 
   return (
     <section id="materials" className="py-24 bg-brand-dark text-white relative overflow-hidden">
-      {/* Background Texture */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

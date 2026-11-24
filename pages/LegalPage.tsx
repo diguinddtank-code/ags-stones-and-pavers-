@@ -12,11 +12,11 @@ interface LegalPageProps {
 const LAST_UPDATED = 'September 26, 2026';
 
 const H2: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <h2 className="text-2xl font-semibold text-brand-dark mt-8 mb-4">{children}</h2>
+  <h2 className="font-display text-2xl md:text-3xl font-bold uppercase leading-tight text-[#1c2024] mt-10 mb-4">{children}</h2>
 );
-const P: React.FC<{ children: React.ReactNode }> = ({ children }) => <p className="mb-6">{children}</p>;
+const P: React.FC<{ children: React.ReactNode }> = ({ children }) => <p className="mb-6 leading-relaxed">{children}</p>;
 const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
-  <ul className="mb-6 list-disc pl-6 space-y-2">
+  <ul className="mb-6 list-disc pl-6 space-y-2 leading-relaxed marker:text-[#a8661f]">
     {items.map((it, i) => (
       <li key={i}>{it}</li>
     ))}
@@ -24,16 +24,16 @@ const UL: React.FC<{ items: React.ReactNode[] }> = ({ items }) => (
 );
 
 const ContactBlock: React.FC = () => (
-  <address className="not-italic mb-6 bg-slate-50 border border-gray-100 rounded-2xl p-6">
+  <address className="not-italic mb-6 bg-[#f5f2ec] border-l-4 border-brand-gold rounded-lg p-6 leading-relaxed">
     <strong className="text-brand-dark">{BUSINESS.legalName}</strong>
     <br />
     {BUSINESS.address.street}
     <br />
     {BUSINESS.address.city}, {BUSINESS.address.region} {BUSINESS.address.postalCode}
     <br />
-    Phone: <a href={BUSINESS.phoneHref} className="text-brand-gold hover:underline">{BUSINESS.phoneDisplay}</a>
+    Phone: <a href={BUSINESS.phoneHref} className="text-[#a8661f] font-semibold underline-offset-2 hover:underline">{BUSINESS.phoneDisplay}</a>
     <br />
-    Email: <a href={`mailto:${BUSINESS.email}`} className="text-brand-gold hover:underline">{BUSINESS.email}</a>
+    Email: <a href={`mailto:${BUSINESS.email}`} className="text-[#a8661f] font-semibold underline-offset-2 hover:underline">{BUSINESS.email}</a>
   </address>
 );
 
@@ -94,7 +94,7 @@ const PrivacyContent: React.FC = () => (
     </P>
     <P>
       You can block or delete cookies in your browser settings, and you can manage ad personalization at{' '}
-      <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-gold hover:underline">
+      <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-[#a8661f] font-semibold underline-offset-2 hover:underline">
         Google Ad Settings
       </a>
       . Blocking cookies may affect how some parts of the website work.
@@ -150,7 +150,7 @@ const PrivacyContent: React.FC = () => (
     <P>Questions about this policy or your information can be sent to:</P>
     <ContactBlock />
     <P>
-      See also our <Link to="/terms-of-service" className="text-brand-gold hover:underline">Terms of Service</Link>.
+      See also our <Link to="/terms-of-service" className="text-[#a8661f] font-semibold underline-offset-2 hover:underline">Terms of Service</Link>.
     </P>
   </>
 );
@@ -223,7 +223,7 @@ const TermsContent: React.FC = () => (
     <P>
       By submitting a form or calling us, you agree that we may contact you by phone, email or text about your request. You
       can opt out of text messages at any time by replying STOP. See our{' '}
-      <Link to="/privacy-policy" className="text-brand-gold hover:underline">Privacy Policy</Link> for details.
+      <Link to="/privacy-policy" className="text-[#a8661f] font-semibold underline-offset-2 hover:underline">Privacy Policy</Link> for details.
     </P>
 
     <H2>10. Disclaimer and Limitation of Liability</H2>
@@ -257,7 +257,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
   const title = isPrivacy ? 'Privacy Policy' : 'Terms of Service';
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 font-sans text-brand-dark">
+    <div className="min-h-screen flex flex-col bg-[#f5f2ec] font-sans text-brand-dark">
       <SEO
         title={`${title} | AGS Stones and Pavers`}
         description={
@@ -268,11 +268,12 @@ export const LegalPage: React.FC<LegalPageProps> = ({ type }) => {
         breadcrumbs={[{ name: title, path: isPrivacy ? '/privacy-policy' : '/terms-of-service' }]}
       />
       <Header forceSolid={true} />
-      <main className="flex-grow pt-32 pb-20 px-4">
-        <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-8">{title}</h1>
-          <div className="prose prose-lg max-w-none text-gray-700">
-            <p className="mb-6">Last updated: {LAST_UPDATED}</p>
+      <main className="flex-grow pt-28 md:pt-36 lg:pt-44 pb-16 md:pb-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto bg-white p-6 sm:p-10 md:p-12 rounded-xl border-t-4 border-brand-gold shadow-[0_20px_40px_-30px_rgba(15,17,21,0.35)]">
+          <p className="eyebrow mb-3 text-[#a8661f]">Legal</p>
+          <h1 className="font-display text-[2.5rem] sm:text-5xl md:text-6xl font-bold uppercase leading-[0.95] text-[#1c2024] mb-8">{title}</h1>
+          <div className="max-w-[70ch] text-base md:text-[17px] text-slate-700 break-words">
+            <p className="mb-8 text-sm font-semibold text-slate-500">Last updated: {LAST_UPDATED}</p>
             {isPrivacy ? <PrivacyContent /> : <TermsContent />}
           </div>
         </div>

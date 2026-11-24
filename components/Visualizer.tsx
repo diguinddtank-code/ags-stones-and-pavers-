@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Loader2, Image as ImageIcon, Wand2 } from 'lucide-react';
+import { Ruler, Loader2, Image as ImageIcon, ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { generateDesignConcept } from '../services/geminiService';
 import { LoadingState } from '../types';
 import { Img } from './ui/Img';
@@ -32,7 +32,7 @@ export const Visualizer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 fade-in-section">
            <div className="inline-flex items-center gap-2 border border-brand-gold/30 px-3 py-1 rounded-full bg-white mb-6 shadow-sm">
-              <Sparkles className="w-4 h-4 text-brand-gold" />
+              <Ruler className="w-4 h-4 text-brand-gold" />
               <span className="text-brand-gold text-xs font-bold uppercase tracking-widest">Beta Feature</span>
            </div>
            <h2 className="font-serif text-5xl font-bold mb-4 text-brand-dark">Imagine the Impossible</h2>
@@ -45,7 +45,7 @@ export const Visualizer: React.FC = () => {
           
           <div className="lg:col-span-2 bg-white border border-gray-200 rounded-3xl p-8 shadow-xl fade-in-section">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-brand-dark">
-               <Wand2 className="text-brand-gold" /> Design Controls
+               <SlidersHorizontal className="text-brand-gold" /> Design Controls
             </h3>
             
             <form onSubmit={handleGenerate} className="space-y-6">
@@ -77,7 +77,7 @@ export const Visualizer: React.FC = () => {
                   ) : (
                     <>
                       Generate Concept
-                      <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </button>

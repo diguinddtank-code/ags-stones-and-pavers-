@@ -1,22 +1,25 @@
 import React, { Component, useEffect, useState, useRef, Suspense, ReactNode, ErrorInfo } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
+import { trackCallClick, trackPageView } from './lib/tracking';
 import { Hero } from './components/Hero';
 import { SEO } from './components/SEO';
 import { MotionShell } from './components/motion/MotionShell';
 import { RouteMotion } from './components/motion/RouteMotion';
+import { MobileActionBar } from './components/MobileActionBar';
 
 // --- COMPONENT CHUNKS ---
 const ServiceRibbon = React.lazy(() => import('./components/ServiceRibbon').then(module => ({ default: module.ServiceRibbon })));
-const ZParallaxShowcase = React.lazy(() => import('./components/ZParallaxShowcase').then(module => ({ default: module.ZParallaxShowcase })));
+const WhyAgs = React.lazy(() => import('./components/WhyAgs').then(module => ({ default: module.WhyAgs })));
+const ServiceAreasStrip = React.lazy(() => import('./components/ServiceAreasStrip').then(module => ({ default: module.ServiceAreasStrip })));
+const CtaBand = React.lazy(() => import('./components/CtaBand').then(module => ({ default: module.CtaBand })));
 
 const Services = React.lazy(() => import('./components/Services').then(module => ({ default: module.Services })));
 const HomeProcess = React.lazy(() => import('./components/HomeProcess').then(module => ({ default: module.HomeProcess })));
-const WhyChooseUs = React.lazy(() => import('./components/WhyChooseUs').then(module => ({ default: module.WhyChooseUs })));
 
 const BeforeAfter = React.lazy(() => import('./components/BeforeAfter').then(module => ({ default: module.BeforeAfter })));
 const YardStudioTeaser = React.lazy(() => import('./components/YardStudioTeaser').then(module => ({ default: module.YardStudioTeaser })));
-const LocalProjects = React.lazy(() => import('./components/LocalProjects').then(module => ({ default: module.LocalProjects })));
+const ProjectGallery = React.lazy(() => import('./components/ProjectGallery').then(module => ({ default: module.ProjectGallery })));
 
 const FAQ = React.lazy(() => import('./components/FAQ').then(module => ({ default: module.FAQ })));
 const Contact = React.lazy(() => import('./components/Contact').then(module => ({ default: module.Contact })));
@@ -102,8 +105,8 @@ const Home: React.FC = () => {
   return (
     <div className="font-sans antialiased text-brand-dark bg-slate-50 pb-24 md:pb-0">
       <SEO
-        title="Paver Installation, Retaining Walls & Patio Contractors in Atlanta | AGS Stones"
-        description="Duluth-based hardscape contractor for driveway pavers, paver patios, retaining walls, pool decks and outdoor kitchens across Atlanta, Alpharetta, Johns Creek and Roswell. Free estimates."
+        title="Paver Contractor Atlanta | Driveways, Patios & Retaining Walls | AGS Stones"
+        description="Licensed paver contractor based in Duluth, serving Metro Atlanta. Paver driveways, patio installation, retaining walls, pool decks and outdoor kitchens by in-house crews. Free on-site estimates."
         canonicalPath="/"
       />
       <Header isHidden={isServiceModalOpen} />
@@ -116,7 +119,6 @@ const Home: React.FC = () => {
         <ErrorBoundary>
           <Suspense fallback={<div className="h-[100vh] bg-[#0f1115] w-full" />}>
              <ServiceRibbon />
-             <ZParallaxShowcase />
           </Suspense>
         </ErrorBoundary>
 
@@ -125,8 +127,8 @@ const Home: React.FC = () => {
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-slate-50" />}>
                  <Services onModalChange={setIsServiceModalOpen} />
+                 <WhyAgs />
                  <HomeProcess />
-                 <WhyChooseUs />
               </Suspense>
            </ErrorBoundary>
         </LazyBlock>
@@ -135,9 +137,11 @@ const Home: React.FC = () => {
         <LazyBlock minHeight="1200px">
            <ErrorBoundary>
               <Suspense fallback={<div className="h-96 w-full bg-white" />}>
+                 <ProjectGallery />
                  <BeforeAfter />
-                 <LocalProjects />
+                 <ServiceAreasStrip />
                  <YardStudioTeaser />
+                 <CtaBand />
               </Suspense>
            </ErrorBoundary>
         </LazyBlock>
@@ -177,36 +181,36 @@ const YardStudioPage = React.lazy(() => import('./pages/YardStudioPage').then(mo
 const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 
 const App: React.FC = () => {
-  // GLOBAL CONVERSION TRACKING LISTENER
-  // Intercepts any click on a "tel:" link across the entire app
-  // and fires the Google Ads + Meta Pixel conversion events.
+  // Call tracking: one app-wide listener for every tel: link, so each call click
+  // is counted exactly once. The link itself opens the dialer (no redirect here).
   useEffect(() => {
     const handleTelClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest('a');
-      if (target && target.href.startsWith('tel:')) {
-        const gtagReport = (window as any).gtag_report_conversion;
-        if (typeof gtagReport === 'function') {
-          gtagReport(target.href);
-        } else if ((window as any).gtag) {
-          (window as any).gtag('event', 'conversion', {
-            send_to: 'AW-16885125181/Au3NCM3fmugbEL2guvM-',
-            event_category: 'Contact',
-            event_label: 'Call Click',
-          });
-        }
-        if ((window as any).fbq) {
-          (window as any).fbq('track', 'Contact');
-        }
+      const target = (e.target as HTMLElement | null)?.closest?.('a');
+      if (target && target.getAttribute('href')?.startsWith('tel:')) {
+        trackCallClick(target.getAttribute('href')!);
       }
     };
-
     document.addEventListener('click', handleTelClick);
     return () => document.removeEventListener('click', handleTelClick);
   }, []);
 
+  // In-app navigation page views (the first one is sent by gtag('config')).
+  const { pathname } = useLocation();
+  const firstView = useRef(true);
+  useEffect(() => {
+    if (firstView.current) {
+      firstView.current = false;
+      return;
+    }
+    // Wait a tick so the new page's <title> is in place.
+    const t = window.setTimeout(() => trackPageView(pathname), 300);
+    return () => window.clearTimeout(t);
+  }, [pathname]);
+
   return (
     <ErrorBoundary>
       <MotionShell />
+      <MobileActionBar />
       <Suspense fallback={<div className="h-screen w-full bg-slate-50 flex items-center justify-center">Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />

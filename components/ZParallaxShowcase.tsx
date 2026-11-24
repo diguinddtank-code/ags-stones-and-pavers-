@@ -16,18 +16,18 @@ export const ZParallaxShowcase: React.FC = () => {
       <div
         aria-hidden="true"
         data-parallax="-0.6"
-        className="pointer-events-none absolute -right-10 top-10 select-none font-serif text-[22vw] font-bold italic leading-none text-[#20252a]/[0.035] lg:top-0"
+        className="pointer-events-none absolute -right-10 top-10 select-none font-serif text-[22vw] font-bold italic leading-none text-[#1c2024]/[0.035] lg:top-0"
       >
         Stone
       </div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
         <div className="max-w-2xl">
-          <p data-reveal className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#9a7b31]">
-            <span data-draw="x" className="block h-px w-10 origin-left bg-[#9a7b31]" />
+          <p data-reveal className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#a8661f]">
+            <span data-draw="x" className="block h-px w-10 origin-left bg-[#a8661f]" />
             Hardscaping in Duluth and Metro Atlanta
           </p>
-          <h2 data-split className="font-serif text-4xl leading-[1.05] text-[#20252a] sm:text-5xl lg:text-6xl">
+          <h2 data-split className="font-serif text-4xl leading-[1.05] text-[#1c2024] sm:text-5xl lg:text-6xl">
             Make more of the space around your home.
           </h2>
           <p data-reveal className="mt-6 text-base leading-relaxed text-slate-600 md:text-lg">
@@ -37,14 +37,14 @@ export const ZParallaxShowcase: React.FC = () => {
             <Link
               data-magnetic
               to="/quote"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#20252a] px-7 py-4 font-semibold text-white transition-colors hover:bg-[#9a7b31]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#1c2024] px-7 py-4 font-semibold text-white transition-colors hover:bg-[#a8661f]"
             >
               Talk through your project
               <ArrowRight size={17} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <a
               href={BUSINESS.phoneHref}
-              className="inline-flex items-center justify-center rounded-full border border-slate-300 px-7 py-4 font-semibold text-[#20252a] transition-colors hover:border-[#9a7b31] hover:text-[#9a7b31]"
+              className="inline-flex items-center justify-center rounded-full border border-slate-300 px-7 py-4 font-semibold text-[#1c2024] transition-colors hover:border-[#a8661f] hover:text-[#a8661f]"
             >
               Call {BUSINESS.phoneDisplay}
             </a>
@@ -67,11 +67,11 @@ export const ZParallaxShowcase: React.FC = () => {
             data-delay="0.3"
             className="absolute -bottom-2 left-4 right-4 rounded-2xl border border-black/5 bg-white/90 p-5 shadow-[0_30px_60px_-20px_rgba(15,17,21,0.35)] backdrop-blur-xl sm:left-8 sm:right-8 sm:p-6"
           >
-            <p className="mb-3 text-sm font-semibold text-[#20252a]">A clear place to start</p>
+            <p className="mb-3 text-sm font-semibold text-[#1c2024]">A clear place to start</p>
             <ul className="grid gap-3 text-xs text-slate-600 sm:grid-cols-3 sm:text-sm">
               {['Share your goals', 'Review site needs', 'Get a written estimate'].map((step, i) => (
                 <li key={step} className="flex items-start gap-2">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#9a7b31] text-[10px] font-bold text-white">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#a8661f] text-[10px] font-bold text-white">
                     {i + 1}
                   </span>
                   {step}

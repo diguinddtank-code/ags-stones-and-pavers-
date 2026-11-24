@@ -26,8 +26,8 @@ export const ServiceSeoExtras: React.FC<Props> = ({ faqs, faqHeading, areaHeadin
           <div className="inline-flex items-center justify-center w-12 h-12 bg-white border border-gray-200 rounded-full mb-4 text-brand-gold shadow-sm">
             <HelpCircle size={24} />
           </div>
-          <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block">FAQ</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-brand-dark font-medium">{faqHeading}</h2>
+          <span className="text-[#a8661f] font-bold tracking-[0.2em] uppercase text-sm mb-4 block">FAQ</span>
+          <h2 className="font-display text-4xl md:text-5xl text-brand-dark font-bold uppercase leading-[0.95]">{faqHeading}</h2>
         </div>
         <div className="space-y-4">
           {faqs.map((faq) => (
@@ -51,10 +51,10 @@ export const ServiceSeoExtras: React.FC<Props> = ({ faqs, faqHeading, areaHeadin
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20">
           {areaLinks.length > 0 && (
             <div>
-              <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-3 flex items-center gap-2">
+              <span className="text-[#a8661f] font-bold tracking-[0.2em] uppercase text-xs mb-3 flex items-center gap-2">
                 <MapPin size={14} /> Local Service Pages
               </span>
-              <h2 className="font-serif text-3xl md:text-4xl text-brand-dark font-medium mb-8">{areaHeading}</h2>
+              <h2 className="font-display text-3xl md:text-4xl text-brand-dark font-bold uppercase mb-8">{areaHeading}</h2>
               <ul className="grid sm:grid-cols-2 gap-3">
                 {areaLinks.map((l) => (
                   <li key={l.path}>
@@ -72,10 +72,10 @@ export const ServiceSeoExtras: React.FC<Props> = ({ faqs, faqHeading, areaHeadin
           )}
           {guides.length > 0 && (
             <div>
-              <span className="text-brand-gold font-bold tracking-[0.2em] uppercase text-xs mb-3 flex items-center gap-2">
+              <span className="text-[#a8661f] font-bold tracking-[0.2em] uppercase text-xs mb-3 flex items-center gap-2">
                 <BookOpen size={14} /> Homeowner Guides
               </span>
-              <h2 className="font-serif text-3xl md:text-4xl text-brand-dark font-medium mb-8">Plan Your Project</h2>
+              <h2 className="font-display text-3xl md:text-4xl text-brand-dark font-bold uppercase mb-8">Plan Your Project</h2>
               <ul className="space-y-3">
                 {guides.map((g) => (
                   <li key={g.path}>

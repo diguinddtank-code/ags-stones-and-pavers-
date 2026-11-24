@@ -115,12 +115,12 @@ export const ServiceFieldworkSection: React.FC<Props> = ({ kind }) => {
   const isTwoSceneLayout = fieldwork.scenes.length === 2;
 
   return (
-    <section className="bg-[#20252a] px-5 py-16 text-white sm:px-8 md:py-24" aria-labelledby="service-fieldwork-heading">
+    <section className="bg-[#1c2024] px-5 py-16 text-white sm:px-8 md:py-24" aria-labelledby="service-fieldwork-heading">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 grid gap-5 md:mb-12 md:grid-cols-[1fr_0.7fr] md:items-end md:gap-12">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#d4bd77]">During the work</p>
-            <h2 id="service-fieldwork-heading" className="max-w-2xl font-serif text-3xl leading-tight sm:text-4xl md:text-5xl">
+            <h2 id="service-fieldwork-heading" className="max-w-2xl font-display text-4xl font-bold uppercase leading-[0.95] md:text-5xl">
               {fieldwork.title}
             </h2>
           </div>
